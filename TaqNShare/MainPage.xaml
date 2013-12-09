@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:facebookControls="clr-namespace:Facebook.Client.Controls;assembly=Facebook.Client"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -20,15 +21,66 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--TitlePanel contient le nom de l'application et le titre de la page-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="TAQ'N SHARE" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
-            <TextBlock Text="Accueil" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
+
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"/>
-    
+        <phone:Panorama HorizontalAlignment="Left" Height="758" Title="TAQ'N SHARE" VerticalAlignment="Top" Width="468"
+                        Grid.Row="1" Grid.RowSpan="1" FontWeight="Bold" FontFamily="Times New Roman">
+            <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Jouer" Height="437">
+                <phone:PanoramaItem.RenderTransform>
+                    <TranslateTransform/>
+                </phone:PanoramaItem.RenderTransform>
+                <Button x:Name="BoutonPrendrePhoto" Content="Prendre une nouvelle photo" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Click="BoutonPrendrePhoto_Click"/>
+            </phone:PanoramaItem>
+            <phone:PanoramaItem CacheMode="{x:Null}" Header="Classement">
+                <phone:PanoramaItem.RenderTransform>
+                    <TranslateTransform/>
+                </phone:PanoramaItem.RenderTransform>
+                <Grid/>
+            </phone:PanoramaItem>
+            <phone:PanoramaItem CacheMode="{x:Null}" Header="Défis">
+                <phone:PanoramaItem.RenderTransform>
+                    <TranslateTransform/>
+                </phone:PanoramaItem.RenderTransform>
+                <Grid/>
+            </phone:PanoramaItem>
+            <phone:PanoramaItem CacheMode="{x:Null}" Header="Paramètres">
+                <phone:PanoramaItem.RenderTransform>
+                    <TranslateTransform/>
+                </phone:PanoramaItem.RenderTransform>
+                <Grid/>
+            </phone:PanoramaItem>
+        </phone:Panorama>
+
+        <StackPanel 
+            Grid.Row="1" 
+            Orientation="Horizontal" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Bottom"
+            Margin="5">
+            <facebookControls:ProfilePicture 
+                x:Name="ProfilePicture"
+                Width="60"
+                Height="60" 
+                CropMode="Original" 
+                ProfileId="{Binding CurrentSession.FacebookId, ElementName=LoginButton}" />
+            <TextBlock 
+                Margin="10,0,0,0"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"
+                Text="{Binding CurrentUser.Name, ElementName=LoginButton}"  />
+        </StackPanel>
+        
+        <facebookControls:LoginButton
+            Grid.Row="1" x:Name="LoginButton"
+            Margin="5"
+            HorizontalAlignment="Right" 
+            VerticalAlignment="Bottom"
+            ApplicationId="552340608180135" SessionStateChanged="OnSessionStateChanged" RenderTransformOrigin="0.821,1.42" 
+            />
+        
+
     </Grid>
 
 </phone:PhoneApplicationPage>
