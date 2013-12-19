@@ -1,0 +1,86 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="TaqNShare.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:facebookControls="clr-namespace:Facebook.Client.Controls;assembly=Facebook.Client"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+
+        <!--ContentPanel - placez tout contenu supplémentaire ici-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"/>
+        <phone:Panorama HorizontalAlignment="Left" Title="TAQ'N SHARE" Width="468"
+                        Grid.Row="1" Grid.RowSpan="1" FontWeight="Bold" FontFamily="Times New Roman" Margin="0,0,0,-5">
+            <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Jouer" Height="512">
+                <phone:PanoramaItem.RenderTransform>
+                    <TranslateTransform/>
+                </phone:PanoramaItem.RenderTransform>
+                <Grid HorizontalAlignment="Left" Height="435" Margin="-6,-49,0,0" VerticalAlignment="Top" Width="408">
+                    <Button x:Name="ButtonPrendrePhoto" Content="Prendre une nouvelle photo" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="31,53,29,310" Tap="ButtonPrendrePhoto_Tap"/>
+                    <Button x:Name="BoutonSelectPhoto" Content="Sélectionner une photo" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="54,130,55,233" Tap="BoutonSelectPhoto_Tap"/>
+                </Grid>
+            </phone:PanoramaItem>
+            <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Défis" Height="512">
+                <phone:PanoramaItem.RenderTransform>
+                    <TranslateTransform/>
+                </phone:PanoramaItem.RenderTransform>
+                <Grid HorizontalAlignment="Left" Height="435" Margin="-6,-49,0,0" VerticalAlignment="Top" Width="408">
+                </Grid>
+            </phone:PanoramaItem>
+            <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Classement" Height="512">
+                <phone:PanoramaItem.RenderTransform>
+                    <TranslateTransform/>
+                </phone:PanoramaItem.RenderTransform>
+                <Grid HorizontalAlignment="Left" Height="435" Margin="-6,-49,0,0" VerticalAlignment="Top" Width="408">
+                </Grid>
+            </phone:PanoramaItem>
+            <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Paramètres" Height="512">
+                <phone:PanoramaItem.RenderTransform>
+                    <TranslateTransform/>
+                </phone:PanoramaItem.RenderTransform>
+                <Grid HorizontalAlignment="Left" Height="435" Margin="-6,-49,0,0" VerticalAlignment="Top" Width="408">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="401*"/>
+                        <ColumnDefinition Width="7*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Left" Margin="12,10,0,400" TextWrapping="Wrap" Text="Nombre de découpages : " RenderTransformOrigin="0.341,0.44"/>
+                    <toolkit:ListPicker Grid.Row="0" Grid.Column="0" x:Name="ListPickerDecoupage" SelectionChanged="ListPickerDecoupage_change" ItemsSource="{Binding Decoupages}" SelectedIndex="{Binding UserDecoupage, Mode=TwoWay}" Margin="12,30,5,236">
+                        <toolkit:ListPicker.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="20 0 0 0" Text="{Binding Valeur}" />
+                            </DataTemplate>
+                        </toolkit:ListPicker.ItemTemplate>
+                    </toolkit:ListPicker>
+                    <TextBlock Grid.Column="0" HorizontalAlignment="Left" Margin="10,223,0,182" TextWrapping="Wrap" Text="Nombre de filtres : "/>
+                    <toolkit:ListPicker Grid.Row="0" Grid.Column="0" x:Name="ListPickerFiltre" SelectionChanged="ListPickerFiltre_change" ItemsSource="{Binding Filtres}" SelectedIndex="{Binding UserFiltre, Mode=TwoWay}" Margin="14,253,3,9">
+                        <toolkit:ListPicker.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="20 0 0 0" Text="{Binding Valeur}" />
+                            </DataTemplate>
+                        </toolkit:ListPicker.ItemTemplate>
+                    </toolkit:ListPicker>
+                </Grid>
+            </phone:PanoramaItem>
+        </phone:Panorama>
+        <Button Content="Connection avec Facebook" HorizontalAlignment="Left" Margin="161,702,-8,-77" Grid.Row="1" VerticalAlignment="Top" Width="327"/>
+
+    </Grid>
+
+</phone:PhoneApplicationPage>
