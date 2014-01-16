@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using TaqNShare.Data;
 
 namespace TaqNShare.Views
 {
+    /// <summary>
+    /// Page permettant la validation de la photo prise :
+    ///     - Si ok passage a la page de Jeu
+    ///     - Si non retour accueil
+    /// </summary>
     public partial class ValidationPhotoPage : PhoneApplicationPage
     {
         public ValidationPhotoPage()
@@ -18,10 +18,10 @@ namespace TaqNShare.Views
             InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            BitmapImage imageSelectionne = (BitmapImage)PhoneApplicationService.Current.State["image"];
-            ImageSelectionne.Source = imageSelectionne;
+            Photo photo = (Photo)PhoneApplicationService.Current.State["photo"];
+            ImageSelectionne.Source = photo.PhotoSelectionne;
             base.OnNavigatedTo(e);
         }
 
@@ -35,6 +35,11 @@ namespace TaqNShare.Views
         {
             PhoneApplicationService.Current.State.Clear();
             NavigationService.GoBack();
+        }
+
+        private void BoutonLancerJeu_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Views/JeuPage.xaml", UriKind.Relative));
         }
     }
 }

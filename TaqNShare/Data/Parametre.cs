@@ -4,11 +4,13 @@
     {
         public int Id { get; set; }
         public int Valeur { get; set; }
+        public int TailleGrille { get; set; }
 
-        public Parametre(int id, int valeur)
+        public Parametre(int id, int valeur, int tailleGrille)
         {
-            this.Id = id;
-            this.Valeur = valeur;
+            Id = id;
+            Valeur = valeur;
+            TailleGrille = tailleGrille;
         }
     }
 }

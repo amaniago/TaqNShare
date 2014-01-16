@@ -30,27 +30,27 @@ namespace TaqNShare.Views
 
             List<Parametre> p = new List<Parametre>
             {
-                new Parametre(0, 9),
-                new Parametre(1, 16),
-                new Parametre(2, 25)
+                new Parametre(0, 9, 3),
+                new Parametre(1, 16, 4),
+                new Parametre(2, 25, 5)
             };
 
             Decoupages = p;
 
             int userDecoupage = 0;
-            IsolatedStorageSettings.ApplicationSettings.TryGetValue("Decoupage", out userDecoupage);
+            IsolatedStorageSettings.ApplicationSettings.TryGetValue("IndexDecoupage", out userDecoupage);
             UserDecoupage = userDecoupage;
 
 
             Filtres = new List<Parametre>
             {
-                new Parametre(0, 1),
-                new Parametre(1, 2),
-                new Parametre(2, 4)
+                new Parametre(0, 1, 0),
+                new Parametre(1, 2, 0),
+                new Parametre(2, 4, 0)
             };
 
             int userFiltre = 0;
-            IsolatedStorageSettings.ApplicationSettings.TryGetValue("Filtre", out userFiltre);
+            IsolatedStorageSettings.ApplicationSettings.TryGetValue("IndexFiltre", out userFiltre);
             UserFiltre = userFiltre;
 
             _camera = new CameraCaptureTask();
@@ -70,42 +70,48 @@ namespace TaqNShare.Views
             _galerie.Show();
         }
 
-        void choixPhoto_Completed(object sender, PhotoResult e)
+        private void choixPhoto_Completed(object sender, PhotoResult e)
         {
             if (e.TaskResult == TaskResult.OK)
-            {          
-                BitmapImage bmp = new BitmapImage();
-                bmp.SetSource(e.ChosenPhoto);
-                PhoneApplicationService.Current.State["image"] = bmp;
+            {
+                WriteableBitmap imageSelectionne = BitmapFactory.New(1, 1).FromStream(e.ChosenPhoto);
+                imageSelectionne = imageSelectionne.Resize(450, 750, WriteableBitmapExtensions.Interpolation.Bilinear);
+                Photo photo = new Photo(imageSelectionne);
+                PhoneApplicationService.Current.State["photo"] = photo;
                 NavigationService.Navigate(new Uri("/Views/ValidationPhotoPage.xaml", UriKind.Relative));
             }
         }
 
         private void ListPickerDecoupage_change(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            SaveSettings("Decoupage", ListPickerDecoupage);
+            SaveSettings("IndexDecoupage", ListPickerDecoupage, true);
+            SaveSettings("TailleGrille", ListPickerDecoupage, false);
         }
 
         private void ListPickerFiltre_change(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            SaveSettings("Filtre", ListPickerFiltre);
+            SaveSettings("IndexFiltre", ListPickerFiltre, true);
         }
 
-        private void SaveSettings(String key, ListPicker liste)
+        private void SaveSettings(String key, ListPicker liste, bool casStock)
         {
             Parametre p = (Parametre)liste.SelectedItem;
             IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
 
             if (!settings.Contains(key))
             {
-                settings.Add(key, p.Id);
+                settings.Add(key, casStock ? p.Id : p.TailleGrille);
             }
             else
             {
-                settings[key] = p.Id;
+                if (casStock)
+                    settings[key] = p.Id;
+                else
+                    settings[key] = p.TailleGrille;
+
             }
             settings.Save();
         }
-        
+
     }
 }

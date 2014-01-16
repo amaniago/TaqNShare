@@ -1,11 +1,12 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="TaqNShare.Views.ValidationPhotoPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" xmlns:ec="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
+    x:Class="TaqNShare.Views.ValidationPhotoPage"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -22,8 +23,18 @@
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Image x:Name="ImageSelectionne" HorizontalAlignment="Left" Height="537" Margin="10,10,0,0" VerticalAlignment="Top" Width="436"/>
-            <Button x:Name="BoutonLancerJeu" Content="Jouer avec cette photo" HorizontalAlignment="Left" Margin="96,602,0,0" VerticalAlignment="Top"/>
+            <Image x:Name="ImageSelectionne" HorizontalAlignment="Center" Height="537" Margin="0,10,0,0" VerticalAlignment="Top" Width="436">
+                <Image.RenderTransform>
+                    <TranslateTransform x:Name="transimage"/>
+                </Image.RenderTransform>
+            </Image>
+            <Button x:Name="BoutonLancerJeu" Content="Jouer avec cette photo" HorizontalAlignment="Left" Margin="96,602,0,0" VerticalAlignment="Top" Tap="BoutonLancerJeu_Tap">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <ec:NavigateToPageAction TargetPage="/Views/JeuPage.xaml"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
             <Button x:Name="BoutonAccueil" Content="Accueil" HorizontalAlignment="Left" Margin="174,679,0,0" VerticalAlignment="Top" Tap="BoutonAccueil_Tap"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,552,0,0" TextWrapping="Wrap" Text="Êtes-vous sur de vouloir jouer avec cette photo ?" VerticalAlignment="Top" Width="446"/>
         </Grid>
