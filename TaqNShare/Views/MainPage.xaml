@@ -33,8 +33,8 @@
                     <TranslateTransform/>
                 </phone:PanoramaItem.RenderTransform>
                 <Grid HorizontalAlignment="Left" Height="435" Margin="-6,-49,0,0" VerticalAlignment="Top" Width="408">
-                    <Button x:Name="ButtonPrendrePhoto" Content="Prendre une nouvelle photo" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="31,53,29,310" Tap="ButtonPrendrePhoto_Tap"/>
-                    <Button x:Name="BoutonSelectPhoto" Content="Sélectionner une photo" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="54,130,55,233" Tap="BoutonSelectPhoto_Tap"/>
+                    <Button x:Name="ButtonPrendrePhoto" Content="Prendre une nouvelle photo" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="31,53,29,310" Tap="ButtonPrendrePhotoTap"/>
+                    <Button x:Name="BoutonSelectPhoto" Content="Sélectionner une photo" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="54,130,55,233" Tap="BoutonSelectPhotoTap"/>
                 </Grid>
             </phone:PanoramaItem>
             <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Défis" Height="512">
@@ -61,7 +61,7 @@
                         <ColumnDefinition Width="7*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Left" Margin="12,10,0,400" TextWrapping="Wrap" Text="Nombre de découpages : " RenderTransformOrigin="0.341,0.44"/>
-                    <toolkit:ListPicker Grid.Row="0" Grid.Column="0" x:Name="ListPickerDecoupage" SelectionChanged="ListPickerDecoupage_change" ItemsSource="{Binding Decoupages}" SelectedIndex="{Binding UserDecoupage, Mode=TwoWay}" Margin="12,30,5,236">
+                    <toolkit:ListPicker Grid.Row="0" Grid.Column="0" x:Name="ListPickerDecoupage" SelectionChanged="ListPickerDecoupageChange" ItemsSource="{Binding Decoupages}" SelectedIndex="{Binding UserDecoupage, Mode=TwoWay}" Margin="12,30,5,236">
                         <toolkit:ListPicker.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Margin="20 0 0 0" Text="{Binding Valeur}" />
@@ -69,7 +69,7 @@
                         </toolkit:ListPicker.ItemTemplate>
                     </toolkit:ListPicker>
                     <TextBlock Grid.Column="0" HorizontalAlignment="Left" Margin="10,223,0,182" TextWrapping="Wrap" Text="Nombre de filtres : "/>
-                    <toolkit:ListPicker Grid.Row="0" Grid.Column="0" x:Name="ListPickerFiltre" SelectionChanged="ListPickerFiltre_change" ItemsSource="{Binding Filtres}" SelectedIndex="{Binding UserFiltre, Mode=TwoWay}" Margin="14,253,3,9">
+                    <toolkit:ListPicker Grid.Row="0" Grid.Column="0" x:Name="ListPickerFiltre" SelectionChanged="ListPickerFiltreChange" ItemsSource="{Binding Filtres}" SelectedIndex="{Binding UserFiltre, Mode=TwoWay}" Margin="14,253,3,9">
                         <toolkit:ListPicker.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Margin="20 0 0 0" Text="{Binding Valeur}" />
