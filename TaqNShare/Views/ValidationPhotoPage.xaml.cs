@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Navigation;
-using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TaqNShare.Data;
 
@@ -11,7 +10,7 @@ namespace TaqNShare.Views
     ///     - Si ok passage a la page de Jeu
     ///     - Si non retour accueil
     /// </summary>
-    public partial class ValidationPhotoPage : PhoneApplicationPage
+    public partial class ValidationPhotoPage
     {
         public ValidationPhotoPage()
         {
@@ -31,13 +30,13 @@ namespace TaqNShare.Views
             base.OnBackKeyPress(e);
         }
 
-        private void BoutonAccueil_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void BoutonAccueilTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             PhoneApplicationService.Current.State.Clear();
             NavigationService.GoBack();
         }
 
-        private void BoutonLancerJeu_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void BoutonLancerJeuTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Views/JeuPage.xaml", UriKind.Relative));
         }

@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO.IsolatedStorage;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Media.Imaging;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using TaqNShare.Data;
 using Facebook;
+using System.Windows;
 
 namespace TaqNShare.Views
 {
@@ -41,7 +40,7 @@ namespace TaqNShare.Views
 
             Decoupages = p;
 
-            int userDecoupage = 0;
+            int userDecoupage;
             IsolatedStorageSettings.ApplicationSettings.TryGetValue("IndexDecoupage", out userDecoupage);
             UserDecoupage = userDecoupage;
 
@@ -53,28 +52,28 @@ namespace TaqNShare.Views
                 new Parametre(2, 4, 0)
             };
 
-            int userFiltre = 0;
+            int userFiltre;
             IsolatedStorageSettings.ApplicationSettings.TryGetValue("IndexFiltre", out userFiltre);
             UserFiltre = userFiltre;
 
             _camera = new CameraCaptureTask();
-            _camera.Completed += new EventHandler<PhotoResult>(choixPhoto_Completed);
+            _camera.Completed += ChoixPhotoCompleted;
 
             _galerie = new PhotoChooserTask();
-            _galerie.Completed += new EventHandler<PhotoResult>(choixPhoto_Completed);
+            _galerie.Completed += ChoixPhotoCompleted;
         }
 
-        private void ButtonPrendrePhoto_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void ButtonPrendrePhotoTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             _camera.Show();
         }
 
-        private void BoutonSelectPhoto_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void BoutonSelectPhotoTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             _galerie.Show();
         }
 
-        private void choixPhoto_Completed(object sender, PhotoResult e)
+        private void ChoixPhotoCompleted(object sender, PhotoResult e)
         {
             if (e.TaskResult == TaskResult.OK)
             {
@@ -86,18 +85,18 @@ namespace TaqNShare.Views
             }
         }
 
-        private void ListPickerDecoupage_change(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void ListPickerDecoupageChange(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             SaveSettings("IndexDecoupage", ListPickerDecoupage, true);
             SaveSettings("TailleGrille", ListPickerDecoupage, false);
         }
 
-        private void ListPickerFiltre_change(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void ListPickerFiltreChange(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             SaveSettings("IndexFiltre", ListPickerFiltre, true);
         }
 
-        private void SaveSettings(String key, ListPicker liste, bool casStock)
+        private static void SaveSettings(String key, ListPicker liste, bool casStock)
         {
             Parametre p = (Parametre)liste.SelectedItem;
             IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;

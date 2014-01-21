@@ -28,14 +28,14 @@
                     <TranslateTransform x:Name="transimage"/>
                 </Image.RenderTransform>
             </Image>
-            <Button x:Name="BoutonLancerJeu" Content="Jouer avec cette photo" HorizontalAlignment="Left" Margin="96,602,0,0" VerticalAlignment="Top" Tap="BoutonLancerJeu_Tap">
+            <Button x:Name="BoutonLancerJeu" Content="Jouer avec cette photo" HorizontalAlignment="Left" Margin="96,602,0,0" VerticalAlignment="Top" Tap="BoutonLancerJeuTap">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <ec:NavigateToPageAction TargetPage="/Views/JeuPage.xaml"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-            <Button x:Name="BoutonAccueil" Content="Accueil" HorizontalAlignment="Left" Margin="174,679,0,0" VerticalAlignment="Top" Tap="BoutonAccueil_Tap"/>
+            <Button x:Name="BoutonAccueil" Content="Accueil" HorizontalAlignment="Left" Margin="174,679,0,0" VerticalAlignment="Top" Tap="BoutonAccueilTap"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,552,0,0" TextWrapping="Wrap" Text="Êtes-vous sur de vouloir jouer avec cette photo ?" VerticalAlignment="Top" Width="446"/>
         </Grid>
     </Grid>

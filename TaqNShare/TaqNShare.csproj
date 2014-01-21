@@ -163,6 +163,8 @@
     <Content Include="Assets\Tiles\IconicTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="SplashScreenImage.jpg" />
+    <Content Include="TaqNShare.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
@@ -204,10 +206,10 @@
     </Reference>
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="WriteableBitmapExWinPhone">
-      <HintPath>..\packages\WriteableBitmapEx.1.0.8.0\lib\WindowsPhone8\WriteableBitmapExWinPhone.dll</HintPath>
+      <HintPath>..\packages\WriteableBitmapEx.1.0.9.0\lib\WindowsPhone8\WriteableBitmapExWinPhone.dll</HintPath>
     </Reference>
     <Reference Include="WriteableBitmapExWinPhoneXnaDependant">
-      <HintPath>..\packages\WriteableBitmapEx.1.0.8.0\lib\WindowsPhone8\WriteableBitmapExWinPhoneXnaDependant.dll</HintPath>
+      <HintPath>..\packages\WriteableBitmapEx.1.0.9.0\lib\WindowsPhone8\WriteableBitmapExWinPhoneXnaDependant.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

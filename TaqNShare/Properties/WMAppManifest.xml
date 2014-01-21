@@ -2,7 +2,7 @@
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="fr-FR" />
   <App xmlns="" ProductID="{9f6b5b3f-510d-4d6f-9866-e32a0c8a0a0a}" Title="TaqNShare" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="TaqNShare author" Description="Sample description" Publisher="TaqNShare" PublisherID="{07aaaac9-a37d-4a10-a6af-a848fe625be7}">
-    <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
+    <IconPath IsRelative="true" IsResource="false">TaqNShare.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
       <Capability Name="ID_CAP_MEDIALIB_AUDIO" />
@@ -17,10 +17,11 @@
     <Tokens>
       <PrimaryToken TokenID="TaqNShareToken" TaskName="_default">
         <TemplateFlip>
-          <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
+          <SmallImageURI IsRelative="true" IsResource="false">TaqNShare.png</SmallImageURI>
           <Count>0</Count>
-          <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
-          <Title>TaqNShare</Title>
+          <BackgroundImageURI IsRelative="true" IsResource="false">TaqNShare.png</BackgroundImageURI>
+          <Title>
+          </Title>
           <BackContent>
           </BackContent>
           <BackBackgroundImageURI>
