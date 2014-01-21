@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO.IsolatedStorage;
-using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using TaqNShare.Data;
+using Facebook;
 
 namespace TaqNShare.Views
 {
-    public partial class MainPage : PhoneApplicationPage
+    public partial class MainPage
     {
         readonly CameraCaptureTask _camera;
         readonly PhotoChooserTask _galerie;
@@ -26,6 +27,9 @@ namespace TaqNShare.Views
         public MainPage()
         {
             InitializeComponent();
+
+            FacebookConnexion();
+
             DataContext = this;
 
             List<Parametre> p = new List<Parametre>
@@ -113,5 +117,66 @@ namespace TaqNShare.Views
             settings.Save();
         }
 
+        private void ConnexionFacebookBouton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Views/FacebookLoginPage.xaml", UriKind.Relative));
+        }
+
+        private void FacebookConnexion ()
+        {
+            if (App.isAuthenticated)
+            {
+                ConnexionFacebookBouton.Visibility = Visibility.Collapsed;
+                DeConnexionFacebookBouton.Visibility = Visibility.Visible;
+                MyName.Visibility = Visibility.Visible;
+                MyImage.Visibility = Visibility.Visible;
+                LoadUserInfo();
+            }
+            else
+            {
+                ConnexionFacebookBouton.Visibility = Visibility.Visible;
+                DeConnexionFacebookBouton.Visibility = Visibility.Collapsed;
+                MyName.Visibility = Visibility.Collapsed;
+                MyImage.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void LoadUserInfo()
+        {
+            var fb = new FacebookClient(App.AccessToken);
+
+            fb.GetCompleted += (o, e) =>
+            {
+                if (e.Error != null)
+                {
+                    Dispatcher.BeginInvoke(() => MessageBox.Show(e.Error.Message));
+                    return;
+                }
+
+                var result = (IDictionary<string, object>)e.GetResultData();
+
+                Dispatcher.BeginInvoke(() =>
+                {
+                    var profilePictureUrl = string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", App.FacebookId, "square", App.AccessToken);
+
+                    MyImage.Source = new BitmapImage(new Uri(profilePictureUrl));
+                    if (MyName != null)
+                        MyName.Text = String.Format("{0} {1}", result["first_name"], result["last_name"]);
+                });
+            };
+            fb.GetTaskAsync("me");
+        }
+
+        private void DeConnexionFacebookBouton_Click(object sender, RoutedEventArgs e)
+        {
+            App.isAuthenticated = false;
+            FacebookConnexion();
+            /*App.FacebookId = null;
+            App.AccessToken = null;*/
+            //App.FacebookSessionClient.Logout();
+            //App.FacebookSessionClient.CurrentSession.AccessToken = String.Empty;
+            //App.FacebookSessionClient.CurrentSession.FacebookId = String.Empty;
+            //App.FacebookSessionClient = new FacebookSessionClient("552340608180135");
+        }
     }
 }
