@@ -21,7 +21,10 @@
         </Grid.RowDefinitions>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
-        <Grid x:Name="JeuGrid" HorizontalAlignment="Center" Height="750" Margin="0,0,0,0" Grid.RowSpan="2" VerticalAlignment="Center" Width="450" ShowGridLines="True"/>
+        <Grid x:Name="JeuGrid" HorizontalAlignment="Center" Height="732" Margin="15,9,15,42" Grid.RowSpan="2" VerticalAlignment="Center" Width="450" ShowGridLines="True"/>
+        <TextBlock  x:Name="TempsResolutionTextBlock" HorizontalAlignment="Left" Margin="15,738,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding TimeElapsed}" VerticalAlignment="Top" Width="222" />
+        <TextBlock HorizontalAlignment="Left" Margin="217,738,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Déplacements : " VerticalAlignment="Top"/>
+        <TextBlock  x:Name="DeplacementTextBlock" HorizontalAlignment="Left" Margin="377,738,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding NombreDeplacement}" VerticalAlignment="Top" Width="88" />
     </Grid>
 
 </phone:PhoneApplicationPage>

@@ -4,9 +4,9 @@ namespace TaqNShare.Data
 {
     public class ListeAmis
     {
-        private static readonly ObservableCollection<Amis> friends = new ObservableCollection<Amis>();
+        private static readonly ObservableCollection<UtilisateurFacebook> friends = new ObservableCollection<UtilisateurFacebook>();
 
-        public static ObservableCollection<Amis> Friends
+        public static ObservableCollection<UtilisateurFacebook> Friends
         {
             get
             {
@@ -14,9 +14,9 @@ namespace TaqNShare.Data
             }
         }
 
-        private static readonly ObservableCollection<Amis> selectedFriends = new ObservableCollection<Amis>();
+        private static readonly ObservableCollection<UtilisateurFacebook> selectedFriends = new ObservableCollection<UtilisateurFacebook>();
 
-        public static ObservableCollection<Amis> SelectedFriends
+        public static ObservableCollection<UtilisateurFacebook> SelectedFriends
         {
             get
             {

@@ -18,38 +18,52 @@ namespace TaqNShare.Views
     /// </summary>
     public partial class JeuPage
     {
-        private int _tailleGrille;
+        private Partie _partieEnCours;
 
         public JeuPage()
         {
             InitializeComponent();
+            Loaded += JeuPageChargement;
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        /// <summary>
+        /// Méthode appelée lors du chargement de la page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void JeuPageChargement(object sender, RoutedEventArgs e)
         {
-            IsolatedStorageSettings.ApplicationSettings.TryGetValue("TailleGrille", out _tailleGrille);
+            //Création de la partie
+            _partieEnCours = new Partie();
+            //Spécification du dataContext pour le Binding
+            DataContext = _partieEnCours;
+
+            //Récupération de la taille de la grille dans les paramètres
+            int tailleGrille;
+            IsolatedStorageSettings.ApplicationSettings.TryGetValue("TailleGrille", out tailleGrille);
+            _partieEnCours.TailleGrille = tailleGrille;
+
             PreparerImage();
-            base.OnNavigatedTo(e);
         }
 
         private void PreparerImage()
         {
-            int hauteurPiece = 250;
+            int hauteurPiece = 244;
             int largeurPiece = 150;
 
-            switch (_tailleGrille)
+            switch (_partieEnCours.TailleGrille)
             {
                 case 0:
-                    _tailleGrille = 3;
+                    _partieEnCours.TailleGrille = 3;
                     break;
 
                 case 4:
-                    hauteurPiece = 187;
+                    hauteurPiece = 183;
                     largeurPiece = 112;
                     break;
 
                 case 5:
-                    hauteurPiece = 150;
+                    hauteurPiece = 146;
                     largeurPiece = 90;
                     break;
             }
@@ -60,38 +74,38 @@ namespace TaqNShare.Views
 
             //Découpage de la photo
             List<WriteableBitmap> listPiece = new List<WriteableBitmap>();
-            for (int i = 0; i < _tailleGrille; i++)
+            for (int i = 0; i < _partieEnCours.TailleGrille; i++)
             {
                 var cropped = imageSelectionne.Crop(i * largeurPiece, 0, largeurPiece, hauteurPiece);
                 listPiece.Add(cropped);
-                for (int j = 1; j < _tailleGrille; j++)
+                for (int j = 1; j < _partieEnCours.TailleGrille; j++)
                 {
                     var cropped2 = imageSelectionne.Crop(i * largeurPiece, j * hauteurPiece, largeurPiece, hauteurPiece);
-                    if (!(i == _tailleGrille - 1 && j == _tailleGrille - 1))
+                    if (!(i == _partieEnCours.TailleGrille - 1 && j == _partieEnCours.TailleGrille - 1))
                         listPiece.Add(cropped2);
                 }
 
             }
 
             //Création des colonnes de la grille
-            for (int i = 0; i < _tailleGrille; i++)
+            for (int i = 0; i < _partieEnCours.TailleGrille; i++)
             {
                 JeuGrid.ColumnDefinitions.Add(new ColumnDefinition());
             }
 
             // Create des lignes de la grille
-            for (int i = 0; i < _tailleGrille; i++)
+            for (int i = 0; i < _partieEnCours.TailleGrille; i++)
             {
                 JeuGrid.RowDefinitions.Add(new RowDefinition());
             }
 
 
             int compteur = 0;
-            for (int i = 0; i < _tailleGrille; i++)
+            for (int i = 0; i < _partieEnCours.TailleGrille; i++)
             {
-                for (int j = 0; j < _tailleGrille; j++)
+                for (int j = 0; j < _partieEnCours.TailleGrille; j++)
                 {
-                    if (!(i == _tailleGrille - 1 && j == _tailleGrille - 1))
+                    if (!(i == _partieEnCours.TailleGrille - 1 && j == _partieEnCours.TailleGrille - 1))
                     {
                         Image image = new Image { Name = "image" + compteur, Source = listPiece[compteur] };
                         image.Tap += ImageTap;
@@ -189,19 +203,31 @@ namespace TaqNShare.Views
         {
             if (haut)
                 if (!(ElementPresent(positionImageCliquee.Ligne - 1, positionImageCliquee.Colonne)))
+                {
                     Grid.SetRow(imageCliquee, positionImageCliquee.Ligne - 1);
+                    _partieEnCours.NombreDeplacement++;
+                }
 
             if (bas)
                 if (!(ElementPresent(positionImageCliquee.Ligne + 1, positionImageCliquee.Colonne)))
+                {
                     Grid.SetRow(imageCliquee, positionImageCliquee.Ligne + 1);
+                    _partieEnCours.NombreDeplacement++;
+                }
 
             if (gauche)
                 if (!(ElementPresent(positionImageCliquee.Ligne, positionImageCliquee.Colonne - 1)))
+                {
                     Grid.SetColumn(imageCliquee, positionImageCliquee.Colonne - 1);
+                    _partieEnCours.NombreDeplacement++;
+                }
 
             if (droite)
                 if (!(ElementPresent(positionImageCliquee.Ligne, positionImageCliquee.Colonne + 1)))
+                {
                     Grid.SetColumn(imageCliquee, positionImageCliquee.Colonne + 1);
+                    _partieEnCours.NombreDeplacement++;
+                }
         }
 
         /// <summary>
@@ -211,7 +237,7 @@ namespace TaqNShare.Views
         /// <returns></returns>
         private bool EstSurBordHaut(PositionElement positionImageCliquee)
         {
-            return (positionImageCliquee.Ligne == 0) && (positionImageCliquee.Colonne != 0) && (positionImageCliquee.Colonne != _tailleGrille - 1);
+            return (positionImageCliquee.Ligne == 0) && (positionImageCliquee.Colonne != 0) && (positionImageCliquee.Colonne != _partieEnCours.TailleGrille - 1);
         }
 
         /// <summary>
@@ -221,7 +247,7 @@ namespace TaqNShare.Views
         /// <returns></returns>
         private bool EstSurBordBas(PositionElement positionImageCliquee)
         {
-            return (positionImageCliquee.Ligne == _tailleGrille - 1) && (positionImageCliquee.Colonne != 0) && (positionImageCliquee.Colonne != _tailleGrille - 1);
+            return (positionImageCliquee.Ligne == _partieEnCours.TailleGrille - 1) && (positionImageCliquee.Colonne != 0) && (positionImageCliquee.Colonne != _partieEnCours.TailleGrille - 1);
         }
 
         /// <summary>
@@ -231,7 +257,7 @@ namespace TaqNShare.Views
         /// <returns></returns>
         private bool EstSurBordGauche(PositionElement positionImageCliquee)
         {
-            return (positionImageCliquee.Colonne == 0) && (positionImageCliquee.Ligne != 0) && (positionImageCliquee.Ligne != _tailleGrille - 1);
+            return (positionImageCliquee.Colonne == 0) && (positionImageCliquee.Ligne != 0) && (positionImageCliquee.Ligne != _partieEnCours.TailleGrille - 1);
         }
 
         /// <summary>
@@ -241,7 +267,7 @@ namespace TaqNShare.Views
         /// <returns></returns>
         private bool EstSurBordDroit(PositionElement positionImageCliquee)
         {
-            return (positionImageCliquee.Colonne == _tailleGrille - 1) && (positionImageCliquee.Ligne != 0) && (positionImageCliquee.Ligne != _tailleGrille - 1);
+            return (positionImageCliquee.Colonne == _partieEnCours.TailleGrille - 1) && (positionImageCliquee.Ligne != 0) && (positionImageCliquee.Ligne != _partieEnCours.TailleGrille - 1);
         }
 
         private bool EstSurCoinHautGauche(PositionElement positionImageCliquee)
@@ -251,17 +277,17 @@ namespace TaqNShare.Views
 
         private bool EstSurCoinHautDroit(PositionElement positionImageCliquee)
         {
-            return (positionImageCliquee.Colonne == _tailleGrille - 1) && (positionImageCliquee.Ligne == 0);
+            return (positionImageCliquee.Colonne == _partieEnCours.TailleGrille - 1) && (positionImageCliquee.Ligne == 0);
         }
 
         private bool EstSurCoinBasGauche(PositionElement positionImageCliquee)
         {
-            return (positionImageCliquee.Colonne == 0) && (positionImageCliquee.Ligne == _tailleGrille - 1);
+            return (positionImageCliquee.Colonne == 0) && (positionImageCliquee.Ligne == _partieEnCours.TailleGrille - 1);
         }
 
         private bool EstSurCoinBasDroit(PositionElement positionImageCliquee)
         {
-            return (positionImageCliquee.Colonne == _tailleGrille - 1) && (positionImageCliquee.Ligne == _tailleGrille - 1);
+            return (positionImageCliquee.Colonne == _partieEnCours.TailleGrille - 1) && (positionImageCliquee.Ligne == _partieEnCours.TailleGrille - 1);
         }
 
         /// <summary>

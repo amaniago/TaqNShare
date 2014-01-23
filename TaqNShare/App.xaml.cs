@@ -16,7 +16,7 @@ namespace TaqNShare
         internal static string AccessToken = String.Empty;
         internal static string FacebookId = String.Empty;
         public static bool isAuthenticated = false;
-        public static FacebookSessionClient FacebookSessionClient = new FacebookSessionClient("552340608180135");
+        public static readonly FacebookSessionClient FacebookSessionClient = new FacebookSessionClient("552340608180135");
         /// <summary>
         /// Permet d'accéder facilement au frame racine de l'application téléphonique.
         /// </summary>

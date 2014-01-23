@@ -7,7 +7,7 @@ namespace TaqNShare.Views
 {
     public partial class FriendSelector
     {
-        public ObservableCollection<Amis> UtilisateurList { get; set; }
+        public ObservableCollection<UtilisateurFacebook> UtilisateurList { get; set; }
 
         public FriendSelector()
         {

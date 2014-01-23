@@ -25,7 +25,6 @@ namespace TaqNShare.Views
         private FacebookSession _session;
         private async Task Authenticate()
         {
-            string message;
             try
             {
                 _session = await App.FacebookSessionClient.LoginAsync("user_about_me,read_stream");
@@ -36,8 +35,7 @@ namespace TaqNShare.Views
             }
             catch (InvalidOperationException e)
             {
-                message = "Login failed! Exception details: " + e.Message;
-                MessageBox.Show(message);
+                MessageBox.Show("Login failed! Exception details: " + e.Message);
             }
         }
     }

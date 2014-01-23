@@ -78,7 +78,7 @@ namespace TaqNShare.Views
             if (e.TaskResult == TaskResult.OK)
             {
                 WriteableBitmap imageSelectionne = BitmapFactory.New(1, 1).FromStream(e.ChosenPhoto);
-                imageSelectionne = imageSelectionne.Resize(450, 750, WriteableBitmapExtensions.Interpolation.Bilinear);
+                imageSelectionne = imageSelectionne.Resize(450, 732, WriteableBitmapExtensions.Interpolation.Bilinear);
                 Photo photo = new Photo(imageSelectionne);
                 PhoneApplicationService.Current.State["photo"] = photo;
                 NavigationService.Navigate(new Uri("/Views/ValidationPhotoPage.xaml", UriKind.Relative));
@@ -166,16 +166,23 @@ namespace TaqNShare.Views
             fb.GetTaskAsync("me");
         }
 
-        private void DeConnexionFacebookBouton_Click(object sender, RoutedEventArgs e)
+        private async void DeConnexionFacebookBouton_Click(object sender, RoutedEventArgs e)
         {
             App.isAuthenticated = false;
-            FacebookConnexion();
+            
             /*App.FacebookId = null;
             App.AccessToken = null;*/
             //App.FacebookSessionClient.Logout();
             //App.FacebookSessionClient.CurrentSession.AccessToken = String.Empty;
             //App.FacebookSessionClient.CurrentSession.FacebookId = String.Empty;
             //App.FacebookSessionClient = new FacebookSessionClient("552340608180135");
+
+            WebBrowser FacebookWebBrowser = new WebBrowser();
+
+            FacebookWebBrowser.Navigate(new Uri(String.Format("https://www.facebook.com/logout.php?next={0}&access_token={1}", "http://www.facebook.com", App.AccessToken)));
+            await FacebookWebBrowser.ClearCookiesAsync();
+            FacebookConnexion();
+            
         }
     }
 }

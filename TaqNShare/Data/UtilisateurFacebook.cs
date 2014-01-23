@@ -2,7 +2,7 @@
 
 namespace TaqNShare.Data
 {
-    public class Amis
+    public class UtilisateurFacebook
     {
         public string Id { get; set; }
 

@@ -67,7 +67,7 @@ namespace TaqNShare.Views
                     {
                         var friend = (IDictionary<string, object>)item;
 
-                        ListeAmis.Friends.Add(new Amis { Nom = (string)friend["name"], Id = (string)friend["id"], Image = new Uri(string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", friend["id"], "square", App.AccessToken)) });
+                        ListeAmis.Friends.Add(new UtilisateurFacebook { Nom = (string)friend["name"], Id = (string)friend["id"], Image = new Uri(string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", friend["id"], "square", App.AccessToken)) });
                     }
 
                     NavigationService.Navigate(new Uri("/Views/FriendSelector.xaml", UriKind.Relative));
