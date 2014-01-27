@@ -1,13 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
 namespace TaqNShare.Data
 {
     sealed class Partie : INotifyPropertyChanged
     {
+
+        public List<Image> ListePieces { get; private set; }
+        public Photo PhotoSelectionne { get; set; }
+
         public int TailleGrille { get; set; }
 
         private int _nombreDeplacement = 0;
@@ -40,7 +47,7 @@ namespace TaqNShare.Data
         /// <summary>
         /// Contructeur
         /// </summary>
-        public Partie()
+        public Partie(int tailleGrille)
         {
             _timer = new DispatcherTimer();
             _timer.Tick += new EventHandler(delegate
@@ -50,6 +57,9 @@ namespace TaqNShare.Data
             });
             _timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
             _stopWatch = new Stopwatch();
+
+            TailleGrille = tailleGrille;
+            ListePieces = new List<Image>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
