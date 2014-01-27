@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO.IsolatedStorage;
 using System.Linq;
@@ -38,8 +39,8 @@ namespace TaqNShare.Views
             PreparerImage();
             base.OnNavigatedTo(e);
         }
-   
-        
+
+
 
         private void PreparerImage()
         {
@@ -66,8 +67,7 @@ namespace TaqNShare.Views
             //Récupération de la photo
             Photo photo = (Photo)PhoneApplicationService.Current.State["photo"];
             WriteableBitmap imageSelectionne = photo.PhotoSelectionne;
-
-
+            
             //Création des colonnes de la grille
             for (int i = 0; i < _partieEnCours.TailleGrille; i++)
             {
@@ -84,7 +84,6 @@ namespace TaqNShare.Views
             int compteur = 0;
             for (int i = 0; i < _partieEnCours.TailleGrille; i++)
             {
-
                 for (int j = 0; j < _partieEnCours.TailleGrille; j++)
                 {
                     if (!(i == _partieEnCours.TailleGrille - 1 && j == _partieEnCours.TailleGrille - 1))
@@ -99,7 +98,8 @@ namespace TaqNShare.Views
                         Grid.SetColumn(image, i);
                         JeuGrid.Children.Add(image);
                         compteur++;
-                        _partieEnCours.ListePieces.Add(image);
+                        Piece piece = new Piece(image);
+                        _partieEnCours.ListePieces.Add(piece);
                     }
                 }
             }
@@ -112,90 +112,99 @@ namespace TaqNShare.Views
         {
             Random random = new Random();
 
-            //Début boucle
-            for (int i = 0; i < 1000; i++)
+            //Début boucle pour effectuer 500 déplacements
+            for (int i = 0; i < 500; i++)
             {
-                int indexRandom = random.Next(_partieEnCours.ListePieces.Count);
+                //Récupération des pièces déplacables
+                List<Piece> listePiecesDeplacables = _partieEnCours.ListePieces.Where(EstDeplacable).ToList();
 
-                //Prise d'une pièce au hasard dans la liste
-                var piece = _partieEnCours.ListePieces[indexRandom];
+                //Prise d'une pièce au hasard dans la liste des pièces déplacables
+                int indexRandom = random.Next(listePiecesDeplacables.Count);
+                var pieceADeplacer = listePiecesDeplacables[indexRandom];
 
-                CoordonneeElement coordonneeImageCliquee = new CoordonneeElement(piece);
+                DeplacementSuivantPosition(pieceADeplacer);
 
-                //Si l'image est sur le bord en haut de la grille
-                if (EstSurBordHaut(coordonneeImageCliquee))
-                    //Déplacement haut, gauche ou droit possible
-                    DeplacementSuivantPosition(piece, coordonneeImageCliquee, false, true, true, true);
+                pieceADeplacer.Ajuster();
 
-                    //Si l'image est sur le bord en bas de la grille
-                else if (EstSurBordBas(coordonneeImageCliquee))
-                    //Déplacement bas, gauche ou droit possible
-                    DeplacementSuivantPosition(piece, coordonneeImageCliquee, true, false, true, true);
+                foreach (var piece in _partieEnCours.ListePieces)
+                {
+                    if (piece.Equals(pieceADeplacer))
+                    {
+                        _partieEnCours.ListePieces.Remove(piece);
+                        _partieEnCours.ListePieces.Add(piece);
+                    }
+                }
 
-                    //Si l'image est sur le bord à gauche de la grille
-                else if (EstSurBordGauche(coordonneeImageCliquee))
-                    //Déplacement haut, bas ou droit possible
-                    DeplacementSuivantPosition(piece, coordonneeImageCliquee, true, true, false, true);
+            }//Fin boucle           
+        }
+        
+        private bool EstDeplacable(Piece piece)
+        {
+            if (piece.DeplacementHaut)
+                if (!(PiecePresente(piece.Coordonnee.Ligne - 1, piece.Coordonnee.Colonne)))
+                    return true;
 
-                    //Si l'image est sur le bord à droite de la grille
-                else if (EstSurBordDroit(coordonneeImageCliquee))
-                    //Déplacement haut, bas ou gauche possible
-                    DeplacementSuivantPosition(piece, coordonneeImageCliquee, true, true, true, false);
+            if (piece.DeplacementBas)
+                if (!(PiecePresente(piece.Coordonnee.Ligne + 1, piece.Coordonnee.Colonne)))
+                    return true;
 
-                    //Si l'image est dans le coin en haut à gauche de la grille
-                else if (EstSurCoinHautGauche(coordonneeImageCliquee))
-                    //Déplacement bas ou droite possible
-                    DeplacementSuivantPosition(piece, coordonneeImageCliquee, false, true, false, true);
+            if (piece.DeplacementGauche)
+                if (!(PiecePresente(piece.Coordonnee.Ligne, piece.Coordonnee.Colonne - 1)))
+                    return true;
 
-                    //Si l'image est dans le coin en haut à droite de la grille
-                else if (EstSurCoinHautDroit(coordonneeImageCliquee))
-                    //Déplacement bas ou gauche possible
-                    DeplacementSuivantPosition(piece, coordonneeImageCliquee, false, true, true, false);
+            if (piece.DeplacementDroite)
+                if (!(PiecePresente(piece.Coordonnee.Ligne, piece.Coordonnee.Colonne + 1)))
+                    return true;
 
-                    //Si l'image est dans le coin en bas à gauche de la grille
-                else if (EstSurCoinBasGauche(coordonneeImageCliquee))
-                    //Déplacement haut ou droite possible
-                    DeplacementSuivantPosition(piece, coordonneeImageCliquee, true, false, false, true);
-
-                    //Si l'image est dans le coin en bas à droite de la grille
-                else if (EstSurCoinBasDroit(coordonneeImageCliquee))
-                    //Déplacement haut ou gauche possible
-                    DeplacementSuivantPosition(piece, coordonneeImageCliquee, true, false, true, false);
-
-                    //Si l'image au milieu dans la grille
-                else
-                    //Tous les déplacements possibles
-                    DeplacementSuivantPosition(piece, coordonneeImageCliquee, true, true, true, true);
-
-            }
-
-            //Déterminer si elle est déplacable
-            //Stocker toutes les pièces déplacables
-            //Random sur la liste.
-            //Déplacement de la pièce choisie
-            //Fin boucle
+            return false;
         }
 
-        //TODO : Faire fonction de détermination de la position
-        private string DeterminerPositionElement(CoordonneeElement coordonneeImageCliquee)
+        /// <summary>
+        /// Méthode permettant de déplacer l'image
+        /// </summary>
+        /// <param name="piece"></param>
+        private void DeplacementSuivantPosition(Piece piece)
         {
-            string position = "";
+            if (piece.DeplacementHaut)
+                if (!(PiecePresente(piece.Coordonnee.Ligne - 1, piece.Coordonnee.Colonne)))
+                {
+                    Grid.SetRow(piece.Image, piece.Coordonnee.Ligne - 1);
+                    
+                }
 
+            if (piece.DeplacementBas)
+                if (!(PiecePresente(piece.Coordonnee.Ligne + 1, piece.Coordonnee.Colonne)))
+                {
+                    Grid.SetRow(piece.Image, piece.Coordonnee.Ligne + 1);
+                    
+                }
 
-            return position;
+            if (piece.DeplacementGauche)
+                if (!(PiecePresente(piece.Coordonnee.Ligne, piece.Coordonnee.Colonne - 1)))
+                {
+                    Grid.SetColumn(piece.Image, piece.Coordonnee.Colonne - 1);
+                   
+                }
+
+            if (piece.DeplacementDroite)
+                if (!(PiecePresente(piece.Coordonnee.Ligne, piece.Coordonnee.Colonne + 1)))
+                {
+                    Grid.SetColumn(piece.Image, piece.Coordonnee.Colonne + 1);
+                    
+                }
         }
 
-        private struct CoordonneeElement
+        /// <summary>
+        /// Méthode permettant de tester s'il y a un élement dans la grille à la position demandée
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="column"></param>
+        /// <returns></returns>
+        private bool PiecePresente(int row, int column)
         {
-            public int Ligne { get; private set; }
-            public int Colonne { get; private set; }
-
-            public CoordonneeElement(FrameworkElement imageCliquee)
-                : this()
-            {
-                Ligne = Grid.GetRow(imageCliquee);
-                Colonne = Grid.GetColumn(imageCliquee);
-            }
+            return
+                JeuGrid.Children.Cast<FrameworkElement>()
+                    .Any(element => (Grid.GetRow(element) == row) && (Grid.GetColumn(element) == column));
         }
 
         /// <summary>
@@ -205,9 +214,10 @@ namespace TaqNShare.Views
         /// <param name="e"></param>
         private void ImageTap(object sender, GestureEventArgs e)
         {
+            /*
             Image imageCliquee = sender as Image;
-            CoordonneeElement coordonneeImageCliquee = new CoordonneeElement(imageCliquee);
-            string positionElementGrille = DeterminerPositionElement(coordonneeImageCliquee);
+            CoordonneePiece coordonneeImageCliquee = new CoordonneePiece(imageCliquee);
+            string positionElementGrille = DeterminerPositionPiece(coordonneeImageCliquee);
             //Si l'image est sur le bord en haut de la grille
             if (EstSurBordHaut(coordonneeImageCliquee))
                 //Déplacement haut, gauche ou droit possible
@@ -252,132 +262,73 @@ namespace TaqNShare.Views
             else
                 //Tous les déplacements possibles
                 DeplacementSuivantPosition(imageCliquee, coordonneeImageCliquee, true, true, true, true);
-
+            */
         }
 
-        /// <summary>
-        /// Méthode permettant de déplacer l'image
-        /// </summary>
-        /// <param name="imageCliquee"></param>
-        /// <param name="coordonneeImageCliquee"></param>
-        /// <param name="haut"></param>
-        /// <param name="bas"></param>
-        /// <param name="gauche"></param>
-        /// <param name="droite"></param>
-        private void DeplacementSuivantPosition(FrameworkElement imageCliquee, CoordonneeElement coordonneeImageCliquee,
-            bool haut, bool bas, bool gauche, bool droite)
-        {
-            if (haut)
-                if (!(ElementPresent(coordonneeImageCliquee.Ligne - 1, coordonneeImageCliquee.Colonne)))
-                {
-                    Grid.SetRow(imageCliquee, coordonneeImageCliquee.Ligne - 1);
-                    _partieEnCours.NombreDeplacement++;
-                }
-
-            if (bas)
-                if (!(ElementPresent(coordonneeImageCliquee.Ligne + 1, coordonneeImageCliquee.Colonne)))
-                {
-                    Grid.SetRow(imageCliquee, coordonneeImageCliquee.Ligne + 1);
-                    _partieEnCours.NombreDeplacement++;
-                }
-
-            if (gauche)
-                if (!(ElementPresent(coordonneeImageCliquee.Ligne, coordonneeImageCliquee.Colonne - 1)))
-                {
-                    Grid.SetColumn(imageCliquee, coordonneeImageCliquee.Colonne - 1);
-                    _partieEnCours.NombreDeplacement++;
-                }
-
-            if (droite)
-                if (!(ElementPresent(coordonneeImageCliquee.Ligne, coordonneeImageCliquee.Colonne + 1)))
-                {
-                    Grid.SetColumn(imageCliquee, coordonneeImageCliquee.Colonne + 1);
-                    _partieEnCours.NombreDeplacement++;
-                }
-        }
-
-        /// <summary>
-        /// Méthode permettant de dire si l'image cliquée est sur le bord haut de la grille
-        /// </summary>
-        /// <param name="coordonneeImageCliquee"></param>
-        /// <returns></returns>
-        private bool EstSurBordHaut(CoordonneeElement coordonneeImageCliquee)
+        
+        
+        private bool EstSurBordHaut(CoordonneePiece coordonneeImageCliquee)
         {
             return (coordonneeImageCliquee.Ligne == 0) && (coordonneeImageCliquee.Colonne != 0) &&
                    (coordonneeImageCliquee.Colonne != _partieEnCours.TailleGrille - 1);
         }
 
-        /// <summary>
-        /// Méthode permettant de dire si l'image cliquée est sur le bord bas de la grille
-        /// </summary>
-        /// <param name="coordonneeImageCliquee"></param>
-        /// <returns></returns>
-        private bool EstSurBordBas(CoordonneeElement coordonneeImageCliquee)
+       private bool EstSurBordBas(CoordonneePiece coordonneeImageCliquee)
         {
             return (coordonneeImageCliquee.Ligne == _partieEnCours.TailleGrille - 1) &&
                    (coordonneeImageCliquee.Colonne != 0) &&
                    (coordonneeImageCliquee.Colonne != _partieEnCours.TailleGrille - 1);
         }
 
-        /// <summary>
-        /// Méthode permettant de dire si l'image cliquée est sur le bord gauche de la grille
-        /// </summary>
-        /// <param name="coordonneeImageCliquee"></param>
-        /// <returns></returns>
-        private bool EstSurBordGauche(CoordonneeElement coordonneeImageCliquee)
+        private bool EstSurBordGauche(CoordonneePiece coordonneeImageCliquee)
         {
             return (coordonneeImageCliquee.Colonne == 0) && (coordonneeImageCliquee.Ligne != 0) &&
                    (coordonneeImageCliquee.Ligne != _partieEnCours.TailleGrille - 1);
         }
 
-        /// <summary>
-        /// Méthode permettant de dire si l'image cliquée est sur le bord droit de la grille
-        /// </summary>
-        /// <param name="coordonneeImageCliquee"></param>
-        /// <returns></returns>
-        private bool EstSurBordDroit(CoordonneeElement coordonneeImageCliquee)
+        private bool EstSurBordDroit(CoordonneePiece coordonneeImageCliquee)
         {
             return (coordonneeImageCliquee.Colonne == _partieEnCours.TailleGrille - 1) &&
                    (coordonneeImageCliquee.Ligne != 0) && (coordonneeImageCliquee.Ligne != _partieEnCours.TailleGrille - 1);
         }
 
-        private bool EstSurCoinHautGauche(CoordonneeElement coordonneeImageCliquee)
+        private bool EstSurCoinHautGauche(CoordonneePiece coordonneeImageCliquee)
         {
             return (coordonneeImageCliquee.Colonne == 0) && (coordonneeImageCliquee.Ligne == 0);
         }
 
-        private bool EstSurCoinHautDroit(CoordonneeElement coordonneeImageCliquee)
+        private bool EstSurCoinHautDroit(CoordonneePiece coordonneeImageCliquee)
         {
             return (coordonneeImageCliquee.Colonne == _partieEnCours.TailleGrille - 1) &&
                    (coordonneeImageCliquee.Ligne == 0);
         }
 
-        private bool EstSurCoinBasGauche(CoordonneeElement coordonneeImageCliquee)
+        private bool EstSurCoinBasGauche(CoordonneePiece coordonneeImageCliquee)
         {
             return (coordonneeImageCliquee.Colonne == 0) &&
                    (coordonneeImageCliquee.Ligne == _partieEnCours.TailleGrille - 1);
         }
 
-        private bool EstSurCoinBasDroit(CoordonneeElement coordonneeImageCliquee)
+        private bool EstSurCoinBasDroit(CoordonneePiece coordonneeImageCliquee)
         {
             return (coordonneeImageCliquee.Colonne == _partieEnCours.TailleGrille - 1) &&
                    (coordonneeImageCliquee.Ligne == _partieEnCours.TailleGrille - 1);
         }
 
         /// <summary>
-        /// Méthode permettant de tester s'il y a un élement dans la grille à la position demandée
+        /// Structure permettant de stocker les cooordonnées d'une pièce
         /// </summary>
-        /// <param name="row"></param>
-        /// <param name="column"></param>
-        /// <returns></returns>
-        private bool ElementPresent(int row, int column)
+        private struct CoordonneePiece
         {
-            return
-                JeuGrid.Children.Cast<FrameworkElement>()
-                    .Any(element => (Grid.GetRow(element) == row) && (Grid.GetColumn(element) == column));
+            public int Ligne { get; private set; }
+            public int Colonne { get; private set; }
+
+            public CoordonneePiece(FrameworkElement imageCliquee)
+                : this()
+            {
+                Ligne = Grid.GetRow(imageCliquee);
+                Colonne = Grid.GetColumn(imageCliquee);
+            }
         }
-
-
-
     }
 }

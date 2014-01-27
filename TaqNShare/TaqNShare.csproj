@@ -75,6 +75,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\Partie.cs" />
+    <Compile Include="Data\Piece.cs" />
     <Compile Include="Data\UtilisateurFacebook.cs" />
     <Compile Include="Data\ListeAmis.cs" />
     <Compile Include="Data\Parametre.cs" />

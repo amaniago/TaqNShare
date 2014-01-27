@@ -12,7 +12,7 @@ namespace TaqNShare.Data
     sealed class Partie : INotifyPropertyChanged
     {
 
-        public List<Image> ListePieces { get; private set; }
+        public List<Piece> ListePieces { get; private set; }
         public Photo PhotoSelectionne { get; set; }
 
         public int TailleGrille { get; set; }
@@ -59,7 +59,7 @@ namespace TaqNShare.Data
             _stopWatch = new Stopwatch();
 
             TailleGrille = tailleGrille;
-            ListePieces = new List<Image>();
+            ListePieces = new List<Piece>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
