@@ -67,7 +67,7 @@ namespace TaqNShare.Views
             //Récupération de la photo
             Photo photo = (Photo)PhoneApplicationService.Current.State["photo"];
             WriteableBitmap imageSelectionne = photo.PhotoSelectionne;
-            
+
             //Création des colonnes de la grille
             for (int i = 0; i < _partieEnCours.TailleGrille; i++)
             {
@@ -122,22 +122,54 @@ namespace TaqNShare.Views
                 int indexRandom = random.Next(listePiecesDeplacables.Count);
                 var pieceADeplacer = listePiecesDeplacables[indexRandom];
 
-                DeplacementSuivantPosition(pieceADeplacer);
-
-                pieceADeplacer.Ajuster();
-
-                foreach (var piece in _partieEnCours.ListePieces)
+                int tailleListe = _partieEnCours.ListePieces.Count;
+                for (int index = 0; index < tailleListe; index++)
                 {
+                    var piece = _partieEnCours.ListePieces[index];
                     if (piece.Equals(pieceADeplacer))
                     {
                         _partieEnCours.ListePieces.Remove(piece);
-                        _partieEnCours.ListePieces.Add(piece);
+                        tailleListe--;
                     }
                 }
+
+                DeplacementSuivantPosition(pieceADeplacer, true);
+
+                pieceADeplacer.Ajuster();
+
+                _partieEnCours.ListePieces.Add(pieceADeplacer);
 
             }//Fin boucle           
         }
         
+        /// <summary>
+        /// Méthode permettant l'appel de la fonction de déplacement suivant 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImageTap(object sender, GestureEventArgs e)
+        {
+            int tailleListe = _partieEnCours.ListePieces.Count;
+            Piece piececlique = new Piece();
+
+            for (int index = 0; index < tailleListe; index++)
+            {
+                var piece = _partieEnCours.ListePieces[index];
+                if (piece.Image.Equals(sender as Image))
+                {
+                    piececlique = piece;
+                    tailleListe--;
+                }
+            }
+
+            DeplacementSuivantPosition(piececlique, false);
+
+            piececlique.Ajuster();
+
+            _partieEnCours.ListePieces.Add(piececlique);
+
+        }
+
         private bool EstDeplacable(Piece piece)
         {
             if (piece.DeplacementHaut)
@@ -163,34 +195,39 @@ namespace TaqNShare.Views
         /// Méthode permettant de déplacer l'image
         /// </summary>
         /// <param name="piece"></param>
-        private void DeplacementSuivantPosition(Piece piece)
+        /// <param name="casMelange"></param>
+        private void DeplacementSuivantPosition(Piece piece, bool casMelange)
         {
             if (piece.DeplacementHaut)
                 if (!(PiecePresente(piece.Coordonnee.Ligne - 1, piece.Coordonnee.Colonne)))
                 {
                     Grid.SetRow(piece.Image, piece.Coordonnee.Ligne - 1);
-                    
+                    if (!casMelange)
+                        _partieEnCours.NombreDeplacement++;
                 }
 
             if (piece.DeplacementBas)
                 if (!(PiecePresente(piece.Coordonnee.Ligne + 1, piece.Coordonnee.Colonne)))
                 {
                     Grid.SetRow(piece.Image, piece.Coordonnee.Ligne + 1);
-                    
+                    if (!casMelange)
+                        _partieEnCours.NombreDeplacement++;
                 }
 
             if (piece.DeplacementGauche)
                 if (!(PiecePresente(piece.Coordonnee.Ligne, piece.Coordonnee.Colonne - 1)))
                 {
                     Grid.SetColumn(piece.Image, piece.Coordonnee.Colonne - 1);
-                   
+                    if (!casMelange)
+                        _partieEnCours.NombreDeplacement++;
                 }
 
             if (piece.DeplacementDroite)
                 if (!(PiecePresente(piece.Coordonnee.Ligne, piece.Coordonnee.Colonne + 1)))
                 {
                     Grid.SetColumn(piece.Image, piece.Coordonnee.Colonne + 1);
-                    
+                    if (!casMelange)
+                        _partieEnCours.NombreDeplacement++;
                 }
         }
 
@@ -205,130 +242,6 @@ namespace TaqNShare.Views
             return
                 JeuGrid.Children.Cast<FrameworkElement>()
                     .Any(element => (Grid.GetRow(element) == row) && (Grid.GetColumn(element) == column));
-        }
-
-        /// <summary>
-        /// Méthode permettant l'appel de la fonction de déplacement suivant 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ImageTap(object sender, GestureEventArgs e)
-        {
-            /*
-            Image imageCliquee = sender as Image;
-            CoordonneePiece coordonneeImageCliquee = new CoordonneePiece(imageCliquee);
-            string positionElementGrille = DeterminerPositionPiece(coordonneeImageCliquee);
-            //Si l'image est sur le bord en haut de la grille
-            if (EstSurBordHaut(coordonneeImageCliquee))
-                //Déplacement haut, gauche ou droit possible
-                DeplacementSuivantPosition(imageCliquee, coordonneeImageCliquee, false, true, true, true);
-
-                //Si l'image est sur le bord en bas de la grille
-            else if (EstSurBordBas(coordonneeImageCliquee))
-                //Déplacement bas, gauche ou droit possible
-                DeplacementSuivantPosition(imageCliquee, coordonneeImageCliquee, true, false, true, true);
-
-                //Si l'image est sur le bord à gauche de la grille
-            else if (EstSurBordGauche(coordonneeImageCliquee))
-                //Déplacement haut, bas ou droit possible
-                DeplacementSuivantPosition(imageCliquee, coordonneeImageCliquee, true, true, false, true);
-
-                //Si l'image est sur le bord à droite de la grille
-            else if (EstSurBordDroit(coordonneeImageCliquee))
-                //Déplacement haut, bas ou gauche possible
-                DeplacementSuivantPosition(imageCliquee, coordonneeImageCliquee, true, true, true, false);
-
-                //Si l'image est dans le coin en haut à gauche de la grille
-            else if (EstSurCoinHautGauche(coordonneeImageCliquee))
-                //Déplacement bas ou droite possible
-                DeplacementSuivantPosition(imageCliquee, coordonneeImageCliquee, false, true, false, true);
-
-                //Si l'image est dans le coin en haut à droite de la grille
-            else if (EstSurCoinHautDroit(coordonneeImageCliquee))
-                //Déplacement bas ou gauche possible
-                DeplacementSuivantPosition(imageCliquee, coordonneeImageCliquee, false, true, true, false);
-
-                //Si l'image est dans le coin en bas à gauche de la grille
-            else if (EstSurCoinBasGauche(coordonneeImageCliquee))
-                //Déplacement haut ou droite possible
-                DeplacementSuivantPosition(imageCliquee, coordonneeImageCliquee, true, false, false, true);
-
-                //Si l'image est dans le coin en bas à droite de la grille
-            else if (EstSurCoinBasDroit(coordonneeImageCliquee))
-                //Déplacement haut ou gauche possible
-                DeplacementSuivantPosition(imageCliquee, coordonneeImageCliquee, true, false, true, false);
-
-                //Si l'image au milieu dans la grille
-            else
-                //Tous les déplacements possibles
-                DeplacementSuivantPosition(imageCliquee, coordonneeImageCliquee, true, true, true, true);
-            */
-        }
-
-        
-        
-        private bool EstSurBordHaut(CoordonneePiece coordonneeImageCliquee)
-        {
-            return (coordonneeImageCliquee.Ligne == 0) && (coordonneeImageCliquee.Colonne != 0) &&
-                   (coordonneeImageCliquee.Colonne != _partieEnCours.TailleGrille - 1);
-        }
-
-       private bool EstSurBordBas(CoordonneePiece coordonneeImageCliquee)
-        {
-            return (coordonneeImageCliquee.Ligne == _partieEnCours.TailleGrille - 1) &&
-                   (coordonneeImageCliquee.Colonne != 0) &&
-                   (coordonneeImageCliquee.Colonne != _partieEnCours.TailleGrille - 1);
-        }
-
-        private bool EstSurBordGauche(CoordonneePiece coordonneeImageCliquee)
-        {
-            return (coordonneeImageCliquee.Colonne == 0) && (coordonneeImageCliquee.Ligne != 0) &&
-                   (coordonneeImageCliquee.Ligne != _partieEnCours.TailleGrille - 1);
-        }
-
-        private bool EstSurBordDroit(CoordonneePiece coordonneeImageCliquee)
-        {
-            return (coordonneeImageCliquee.Colonne == _partieEnCours.TailleGrille - 1) &&
-                   (coordonneeImageCliquee.Ligne != 0) && (coordonneeImageCliquee.Ligne != _partieEnCours.TailleGrille - 1);
-        }
-
-        private bool EstSurCoinHautGauche(CoordonneePiece coordonneeImageCliquee)
-        {
-            return (coordonneeImageCliquee.Colonne == 0) && (coordonneeImageCliquee.Ligne == 0);
-        }
-
-        private bool EstSurCoinHautDroit(CoordonneePiece coordonneeImageCliquee)
-        {
-            return (coordonneeImageCliquee.Colonne == _partieEnCours.TailleGrille - 1) &&
-                   (coordonneeImageCliquee.Ligne == 0);
-        }
-
-        private bool EstSurCoinBasGauche(CoordonneePiece coordonneeImageCliquee)
-        {
-            return (coordonneeImageCliquee.Colonne == 0) &&
-                   (coordonneeImageCliquee.Ligne == _partieEnCours.TailleGrille - 1);
-        }
-
-        private bool EstSurCoinBasDroit(CoordonneePiece coordonneeImageCliquee)
-        {
-            return (coordonneeImageCliquee.Colonne == _partieEnCours.TailleGrille - 1) &&
-                   (coordonneeImageCliquee.Ligne == _partieEnCours.TailleGrille - 1);
-        }
-
-        /// <summary>
-        /// Structure permettant de stocker les cooordonnées d'une pièce
-        /// </summary>
-        private struct CoordonneePiece
-        {
-            public int Ligne { get; private set; }
-            public int Colonne { get; private set; }
-
-            public CoordonneePiece(FrameworkElement imageCliquee)
-                : this()
-            {
-                Ligne = Grid.GetRow(imageCliquee);
-                Colonne = Grid.GetColumn(imageCliquee);
-            }
         }
     }
 }

@@ -28,16 +28,21 @@ namespace TaqNShare.Data
         public Piece(Image image)
         {
             Image = image;
-            Coordonnee = new CoordonneePiece(image);
             Id = Convert.ToInt32(image.Name);
-            Position = DeterminerPosition(Coordonnee);
             IsolatedStorageSettings.ApplicationSettings.TryGetValue("TailleGrille", out _tailleGrille);
-            DeterminerDeplacements(Position);
+            Ajuster();
         }
 
-        private void Ajuster()
+        public Piece()
         {
             
+        }
+
+        internal void Ajuster()
+        {
+            Coordonnee = new CoordonneePiece(Image);
+            Position = DeterminerPosition(Coordonnee);
+            DeterminerDeplacements(Position);
         }
 
         private void DeterminerDeplacements(string position)
@@ -108,7 +113,7 @@ namespace TaqNShare.Data
                     break;
             }
         }
-        
+
         private string DeterminerPosition(CoordonneePiece coordonneePiece)
         {
             if (EstSurBordHaut(coordonneePiece)) return "BordHaut";
