@@ -97,9 +97,9 @@ namespace TaqNShare.Views
                         Grid.SetRow(image, j);
                         Grid.SetColumn(image, i);
                         JeuGrid.Children.Add(image);
-                        compteur++;
                         Piece piece = new Piece(image);
                         _partieEnCours.ListePieces.Add(piece);
+                        compteur++;
                     }
                 }
             }
@@ -168,6 +168,12 @@ namespace TaqNShare.Views
 
             _partieEnCours.ListePieces.Add(piececlique);
 
+            if (_partieEnCours.DetecterFinJeu())
+            {
+                _partieEnCours.StopWatch.Stop();
+                _partieEnCours.CalculerScore();
+            }
+
         }
 
         private bool EstDeplacable(Piece piece)
@@ -202,6 +208,7 @@ namespace TaqNShare.Views
                 if (!(PiecePresente(piece.Coordonnee.Ligne - 1, piece.Coordonnee.Colonne)))
                 {
                     Grid.SetRow(piece.Image, piece.Coordonnee.Ligne - 1);
+                    piece.IndexPosition -= 1;
                     if (!casMelange)
                         _partieEnCours.NombreDeplacement++;
                 }
@@ -210,14 +217,16 @@ namespace TaqNShare.Views
                 if (!(PiecePresente(piece.Coordonnee.Ligne + 1, piece.Coordonnee.Colonne)))
                 {
                     Grid.SetRow(piece.Image, piece.Coordonnee.Ligne + 1);
+                    piece.IndexPosition += 1;
                     if (!casMelange)
-                        _partieEnCours.NombreDeplacement++;
+                        _partieEnCours.NombreDeplacement++;   
                 }
 
             if (piece.DeplacementGauche)
                 if (!(PiecePresente(piece.Coordonnee.Ligne, piece.Coordonnee.Colonne - 1)))
                 {
                     Grid.SetColumn(piece.Image, piece.Coordonnee.Colonne - 1);
+                    piece.IndexPosition -= _partieEnCours.TailleGrille;
                     if (!casMelange)
                         _partieEnCours.NombreDeplacement++;
                 }
@@ -226,6 +235,7 @@ namespace TaqNShare.Views
                 if (!(PiecePresente(piece.Coordonnee.Ligne, piece.Coordonnee.Colonne + 1)))
                 {
                     Grid.SetColumn(piece.Image, piece.Coordonnee.Colonne + 1);
+                    piece.IndexPosition += _partieEnCours.TailleGrille;
                     if (!casMelange)
                         _partieEnCours.NombreDeplacement++;
                 }

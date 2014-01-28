@@ -11,12 +11,13 @@ namespace TaqNShare.Data
 
         public Image Image { get; set; }
         public int Id { get; set; }
-        public string Position { get; set; }
+        private string Position { get; set; }
         public CoordonneePiece Coordonnee { get; set; }
         public bool DeplacementHaut { get; set; }
         public bool DeplacementBas { get; set; }
         public bool DeplacementGauche { get; set; }
         public bool DeplacementDroite { get; set; }
+        public int IndexPosition { get; set; }
 
         #endregion : propriétés
 
@@ -29,6 +30,7 @@ namespace TaqNShare.Data
         {
             Image = image;
             Id = Convert.ToInt32(image.Name);
+            IndexPosition = Id;
             IsolatedStorageSettings.ApplicationSettings.TryGetValue("TailleGrille", out _tailleGrille);
             Ajuster();
         }
