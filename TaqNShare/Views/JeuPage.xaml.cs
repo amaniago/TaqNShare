@@ -141,7 +141,7 @@ namespace TaqNShare.Views
 
             }//Fin boucle           
         }
-        
+
         /// <summary>
         /// Méthode permettant l'appel de la fonction de déplacement suivant 
         /// </summary>
@@ -172,6 +172,8 @@ namespace TaqNShare.Views
             {
                 _partieEnCours.StopWatch.Stop();
                 _partieEnCours.CalculerScore();
+                PhoneApplicationService.Current.State["partie"] = _partieEnCours;
+                NavigationService.Navigate(new Uri("/Views/JeuTerminePage.xaml", UriKind.Relative));
             }
 
         }
@@ -219,7 +221,7 @@ namespace TaqNShare.Views
                     Grid.SetRow(piece.Image, piece.Coordonnee.Ligne + 1);
                     piece.IndexPosition += 1;
                     if (!casMelange)
-                        _partieEnCours.NombreDeplacement++;   
+                        _partieEnCours.NombreDeplacement++;
                 }
 
             if (piece.DeplacementGauche)

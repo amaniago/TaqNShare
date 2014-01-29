@@ -96,6 +96,9 @@
     <Compile Include="Views\JeuPage.xaml.cs">
       <DependentUpon>JeuPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\JeuTerminePage.xaml.cs">
+      <DependentUpon>JeuTerminePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -120,6 +123,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\JeuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\JeuTerminePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

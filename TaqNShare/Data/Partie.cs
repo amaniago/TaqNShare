@@ -10,7 +10,7 @@ namespace TaqNShare.Data
 {
     sealed class Partie : INotifyPropertyChanged
     {
-        public int Score { get; set; }
+        public double Score { get; set; }
         public List<Piece> ListePieces { get; private set; }
         public Photo PhotoSelectionne { get; set; }
 
@@ -51,7 +51,7 @@ namespace TaqNShare.Data
             _timer = new DispatcherTimer();
             _timer.Tick += new EventHandler(delegate
             {
-                TimeElapsed = StopWatch.Elapsed.ToString("mm\\:ss\\.ff"); // Format as you wish
+                TimeElapsed = StopWatch.Elapsed.ToString("mm\\:ss"); // Format as you wish
                 PropertyChanged(this, new PropertyChangedEventArgs("TimeElapsed"));
             });
             _timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
@@ -78,7 +78,7 @@ namespace TaqNShare.Data
         {
             //Score = temps de résolution * 0,6 + nombre de déplacements + Malus facilité 
             //(Le score le plus faible est le meilleur)
-             
+            Score = Math.Round(((StopWatch.ElapsedMilliseconds / 1000.0) * 0.6) + NombreDeplacement);
         }
     }
 }
