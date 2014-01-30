@@ -46,7 +46,7 @@ namespace TaqNShare.Data
         /// <summary>
         /// Méthode permettant d'ajuster les attributs d'une pièce suivant sa position dans la grille
         /// </summary>
-        private void Ajuster()
+        internal void Ajuster()
         {
             Coordonnee = new CoordonneePiece(Image);
             Position = DeterminerPosition(Coordonnee);
