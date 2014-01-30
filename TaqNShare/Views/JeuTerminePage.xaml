@@ -1,12 +1,11 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="TaqNShare.Views.JeuPage"
+    x:Class="TaqNShare.Views.JeuTerminePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -21,17 +20,15 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
-        <Grid x:Name="JeuGrid" HorizontalAlignment="Center" Height="732" Margin="15,9,15,42" Grid.RowSpan="2" VerticalAlignment="Center" Width="450" ShowGridLines="True">
-            <shell:SystemTray.ProgressIndicator>
-                <shell:ProgressIndicator x:Name="MelangeProgressIndicator" IsIndeterminate="True" IsVisible="True" Text="Préparation de l'image en cours..."  />
-            </shell:SystemTray.ProgressIndicator>
-        </Grid>
-        <TextBlock  x:Name="TempsResolutionTextBlock" HorizontalAlignment="Left" Margin="15,738,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding TimeElapsed}" VerticalAlignment="Top" Width="222" />
-        <TextBlock HorizontalAlignment="Left" Margin="217,738,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Déplacements : " VerticalAlignment="Top"/>
-        <TextBlock  x:Name="DeplacementTextBlock" HorizontalAlignment="Left" Margin="377,738,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding NombreDeplacement}" VerticalAlignment="Top" Width="88" />
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Félicitations, vous avez résolu le taquin !" VerticalAlignment="Top" Width="436" Height="37"/>
+            <TextBlock x:Name="ScoreTextBlock" HorizontalAlignment="Left" Margin="10,46,0,0" TextWrapping="Wrap" Text="Text" VerticalAlignment="Top"/>
+            <Button x:Name="EnregistrementScoreBouton" Content="Enregistrer votre score" HorizontalAlignment="Center" Margin="0,0,0,60" VerticalAlignment="Bottom" Click="EnregistrementScoreBoutonClick"/>
+            <Button x:Name="RetourAccueilBouton" Content="Retour à l'accueil" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Bottom" Click="RetourAccueilBoutonClick"/>
+            <Image x:Name="TaquinTermineImage" HorizontalAlignment="Center" Height="537" Margin="13,92,12,0" VerticalAlignment="Top" Width="431"/>
 
+        </Grid>
     </Grid>
 
 </phone:PhoneApplicationPage>

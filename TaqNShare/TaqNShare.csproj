@@ -75,6 +75,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\Partie.cs" />
+    <Compile Include="Data\Piece.cs" />
     <Compile Include="Data\UtilisateurFacebook.cs" />
     <Compile Include="Data\ListeAmis.cs" />
     <Compile Include="Data\Parametre.cs" />
@@ -94,6 +95,9 @@
     </Compile>
     <Compile Include="Views\JeuPage.xaml.cs">
       <DependentUpon>JeuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\JeuTerminePage.xaml.cs">
+      <DependentUpon>JeuTerminePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -119,6 +123,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\JeuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\JeuTerminePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
