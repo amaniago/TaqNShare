@@ -21,10 +21,23 @@ namespace TaqNShare.Views
     public partial class JeuPage
     {
         private Partie _partieEnCours;
+        private readonly ProgressIndicator _indicator;
 
         public JeuPage()
         {
             InitializeComponent();
+
+            //Barre de progression qui s'affiche lors du chargement de la partie
+            _indicator = new ProgressIndicator
+            {
+                IsVisible = true,
+                IsIndeterminate = true,
+                Text = "Préparation de l'image en cours..."
+            };
+            SystemTray.SetProgressIndicator(this, _indicator);
+
+            //Appel à la méthode de préparation de l'image
+            Loaded += PreparerImage;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -32,21 +45,25 @@ namespace TaqNShare.Views
             int tailleGrille;
             IsolatedStorageSettings.ApplicationSettings.TryGetValue("TailleGrille", out tailleGrille);
             //Création de la partie
-            _partieEnCours = new Partie(tailleGrille);
+            _partieEnCours = new Partie(tailleGrille, 0);
             //Spécification du dataContext pour le Binding
             DataContext = _partieEnCours;
 
-            PreparerImage();
             base.OnNavigatedTo(e);
         }
 
 
-
-        private void PreparerImage()
+        /// <summary>
+        /// Méthode permettant le découpage de l'image, l'application des filtres
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="routedEventArgs"></param>
+        private void PreparerImage(object sender, RoutedEventArgs routedEventArgs)
         {
             int hauteurPiece = 244;
             int largeurPiece = 150;
 
+            //Initialisation de la taille des pièce suivant le nombre de découpage choisi par l'utilisateur
             switch (_partieEnCours.TailleGrille)
             {
                 case 0:
@@ -104,16 +121,20 @@ namespace TaqNShare.Views
                 }
             }
 
+            //Appel à la méthode de mélange
             Melange();
-
+            
         }
 
+        /// <summary>
+        /// Méthode permettant le mélange des pièces*
+        /// </summary>
         private void Melange()
         {
             Random random = new Random();
 
-            //Début boucle pour effectuer 500 déplacements
-            for (int i = 0; i < 500; i++)
+            //Début boucle pour effectuer 100 déplacements
+            for (int i = 0; i < 250; i++)
             {
                 //Récupération des pièces déplacables
                 List<Piece> listePiecesDeplacables = _partieEnCours.ListePieces.Where(EstDeplacable).ToList();
@@ -122,6 +143,7 @@ namespace TaqNShare.Views
                 int indexRandom = random.Next(listePiecesDeplacables.Count);
                 var pieceADeplacer = listePiecesDeplacables[indexRandom];
 
+                //Suppression de la pièce à déplacer de la liste
                 int tailleListe = _partieEnCours.ListePieces.Count;
                 for (int index = 0; index < tailleListe; index++)
                 {
@@ -133,22 +155,30 @@ namespace TaqNShare.Views
                     }
                 }
 
+                //Déplacement de la pièce
                 DeplacementSuivantPosition(pieceADeplacer, true);
 
+                //Calcul des nouveaux paramètres après déplacement
                 pieceADeplacer.Ajuster();
 
+                //Ajout de la pièce à la nouvelle position avec les nouveaux paramètres dans la liste des pièces de la partie en cours
                 _partieEnCours.ListePieces.Add(pieceADeplacer);
 
-            }//Fin boucle           
+            }//Fin boucle   
+
+            //On cache la barre de progression à la fin du mélange
+            _indicator.IsIndeterminate = false;
+            _indicator.IsVisible = false;
         }
 
         /// <summary>
-        /// Méthode permettant l'appel de la fonction de déplacement suivant 
+        /// Méthode appelée lors de l'appui sur une image
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ImageTap(object sender, GestureEventArgs e)
         {
+            //Récupération de la pièce correspondante à l'image cliquée
             int tailleListe = _partieEnCours.ListePieces.Count;
             Piece piececlique = new Piece();
 
@@ -158,45 +188,31 @@ namespace TaqNShare.Views
                 if (piece.Image.Equals(sender as Image))
                 {
                     piececlique = piece;
+                    _partieEnCours.ListePieces.Remove(piece);
                     tailleListe--;
                 }
             }
 
+            //Déplacement de la pièce
             DeplacementSuivantPosition(piececlique, false);
 
+            //Calcul des nouveaux paramètres après déplacement
             piececlique.Ajuster();
 
+            //Ajout de la pièce à la nouvelle position avec les nouveaux paramètres dans la liste des pièces de la partie en cours
             _partieEnCours.ListePieces.Add(piececlique);
 
+            //Détection de la fin de la partie (Image remise dans l'ordre)
             if (_partieEnCours.DetecterFinJeu())
             {
+                //Arrêt du chrono
                 _partieEnCours.StopWatch.Stop();
                 _partieEnCours.CalculerScore();
+                //Stockage de la partie pour la passer à la page suivante
                 PhoneApplicationService.Current.State["partie"] = _partieEnCours;
                 NavigationService.Navigate(new Uri("/Views/JeuTerminePage.xaml", UriKind.Relative));
             }
 
-        }
-
-        private bool EstDeplacable(Piece piece)
-        {
-            if (piece.DeplacementHaut)
-                if (!(PiecePresente(piece.Coordonnee.Ligne - 1, piece.Coordonnee.Colonne)))
-                    return true;
-
-            if (piece.DeplacementBas)
-                if (!(PiecePresente(piece.Coordonnee.Ligne + 1, piece.Coordonnee.Colonne)))
-                    return true;
-
-            if (piece.DeplacementGauche)
-                if (!(PiecePresente(piece.Coordonnee.Ligne, piece.Coordonnee.Colonne - 1)))
-                    return true;
-
-            if (piece.DeplacementDroite)
-                if (!(PiecePresente(piece.Coordonnee.Ligne, piece.Coordonnee.Colonne + 1)))
-                    return true;
-
-            return false;
         }
 
         /// <summary>
@@ -241,6 +257,32 @@ namespace TaqNShare.Views
                     if (!casMelange)
                         _partieEnCours.NombreDeplacement++;
                 }
+        }
+
+        /// <summary>
+        /// Méthode permttant de dire si une pièce est déplacable
+        /// </summary>
+        /// <param name="piece"></param>
+        /// <returns>True si la pièce est déplacable</returns>
+        private bool EstDeplacable(Piece piece)
+        {
+            if (piece.DeplacementHaut)
+                if (!(PiecePresente(piece.Coordonnee.Ligne - 1, piece.Coordonnee.Colonne)))
+                    return true;
+
+            if (piece.DeplacementBas)
+                if (!(PiecePresente(piece.Coordonnee.Ligne + 1, piece.Coordonnee.Colonne)))
+                    return true;
+
+            if (piece.DeplacementGauche)
+                if (!(PiecePresente(piece.Coordonnee.Ligne, piece.Coordonnee.Colonne - 1)))
+                    return true;
+
+            if (piece.DeplacementDroite)
+                if (!(PiecePresente(piece.Coordonnee.Ligne, piece.Coordonnee.Colonne + 1)))
+                    return true;
+
+            return false;
         }
 
         /// <summary>

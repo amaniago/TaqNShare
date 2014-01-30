@@ -22,7 +22,9 @@ namespace TaqNShare.Views
         public int UserDecoupage { get; set; }
         public int UserFiltre { get; set; }
 
-        // Constructeur
+        /// <summary>
+        /// Constructeur de la page
+        /// </summary>
         public MainPage()
         {
             InitializeComponent();

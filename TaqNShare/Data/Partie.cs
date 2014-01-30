@@ -10,11 +10,14 @@ namespace TaqNShare.Data
 {
     sealed class Partie : INotifyPropertyChanged
     {
+        #region propriétés
+
         public double Score { get; set; }
         public List<Piece> ListePieces { get; private set; }
         public Photo PhotoSelectionne { get; set; }
 
         public int TailleGrille { get; set; }
+        public int NombreFiltre { get; set; }
 
         private int _nombreDeplacement = 0;
         public int NombreDeplacement
@@ -43,10 +46,12 @@ namespace TaqNShare.Data
         public readonly Stopwatch StopWatch;
         private readonly DispatcherTimer _timer;
 
+        #endregion propriétés
+
         /// <summary>
         /// Contructeur
         /// </summary>
-        public Partie(int tailleGrille)
+        public Partie(int tailleGrille, int nombreFiltre)
         {
             _timer = new DispatcherTimer();
             _timer.Tick += new EventHandler(delegate
@@ -58,9 +63,13 @@ namespace TaqNShare.Data
             StopWatch = new Stopwatch();
 
             TailleGrille = tailleGrille;
+            NombreFiltre = nombreFiltre;
+
             ListePieces = new List<Piece>();
         }
 
+        
+        //Permet le binding des propriétés de la classe
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -69,16 +78,47 @@ namespace TaqNShare.Data
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        /// <summary>
+        /// Méthode permettant de détecter la fin du jeu
+        /// </summary>
+        /// <returns></returns>
         public bool DetecterFinJeu()
         {
             return ListePieces.All(piece => piece.Id == piece.IndexPosition);
         }
 
+        /// <summary>
+        /// Méthode permettant de calculer le score de l'utilisateur
+        /// </summary>
         public void CalculerScore()
         {
             //Score = temps de résolution * 0,6 + nombre de déplacements + Malus facilité 
             //(Le score le plus faible est le meilleur)
-            Score = Math.Round(((StopWatch.ElapsedMilliseconds / 1000.0) * 0.6) + NombreDeplacement);
+
+            int malusFacilite = 0;
+            switch (TailleGrille)
+            {
+                case 3:
+                    malusFacilite += 1000;
+                    break;
+
+                case 4:
+                    malusFacilite += 500;
+                    break;
+            }
+
+            switch (NombreFiltre)
+            {
+                case 0:
+                    malusFacilite += 1000;
+                    break;
+
+                case 1:
+                    malusFacilite += 500;
+                    break;
+            }
+            
+            Score = Math.Round(((StopWatch.ElapsedMilliseconds / 1000.0) * 0.6) + NombreDeplacement + malusFacilite);
         }
     }
 }

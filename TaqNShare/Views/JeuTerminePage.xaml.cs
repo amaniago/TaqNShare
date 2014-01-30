@@ -52,8 +52,7 @@ namespace TaqNShare.Views
         private void RetourAccueilBoutonClick(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Êtes-vous sur de vouloir retourner à l'accueil ? " +
-                            "Si vous acceptez, votre score sera perdu !", " ", MessageBoxButton.OKCancel) 
-                            == MessageBoxResult.OK)
+                            "Si vous acceptez, votre score sera perdu !", " ", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
                 PhoneApplicationService.Current.State.Clear();
                 NavigationService.Navigate(new Uri("/Views/MainPage.xaml", UriKind.Relative));

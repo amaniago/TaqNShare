@@ -7,7 +7,7 @@ namespace TaqNShare.Data
 {
     class Piece
     {
-        #region : propriétés
+        #region propriétés
 
         public Image Image { get; set; }
         public int Id { get; set; }
@@ -18,10 +18,18 @@ namespace TaqNShare.Data
         public bool DeplacementGauche { get; set; }
         public bool DeplacementDroite { get; set; }
         public int IndexPosition { get; set; }
-
-        #endregion : propriétés
-
+        
         private readonly int _tailleGrille;
+
+        #endregion propriétés
+
+        /// <summary>
+        /// Constructeur par défault
+        /// </summary>
+        public Piece()
+        {
+
+        }
 
         /// <summary>
         /// Contructeur
@@ -35,18 +43,20 @@ namespace TaqNShare.Data
             Ajuster();
         }
 
-        public Piece()
-        {
-            
-        }
-
-        internal void Ajuster()
+        /// <summary>
+        /// Méthode permettant d'ajuster les attributs d'une pièce suivant sa position dans la grille
+        /// </summary>
+        private void Ajuster()
         {
             Coordonnee = new CoordonneePiece(Image);
             Position = DeterminerPosition(Coordonnee);
             DeterminerDeplacements(Position);
         }
 
+        /// <summary>
+        /// Méthode permettant de déterminer les déplacements possibles d'une pièce suivant sa position
+        /// </summary>
+        /// <param name="position"></param>
         private void DeterminerDeplacements(string position)
         {
             switch (position)
@@ -116,6 +126,11 @@ namespace TaqNShare.Data
             }
         }
 
+        /// <summary>
+        /// Méthode permettant de déterminer la position d'une pièce dans la grille
+        /// </summary>
+        /// <param name="coordonneePiece"></param>
+        /// <returns></returns>
         private string DeterminerPosition(CoordonneePiece coordonneePiece)
         {
             if (EstSurBordHaut(coordonneePiece)) return "BordHaut";
@@ -129,7 +144,6 @@ namespace TaqNShare.Data
 
             return "Milieu";
         }
-
 
 
         private bool EstSurBordHaut(CoordonneePiece coordonneeImageCliquee)
