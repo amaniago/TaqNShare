@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Microsoft.Phone.Shell;
-using TaqNShare.Data;
 
 namespace TaqNShare.Views
 {
@@ -19,8 +19,8 @@ namespace TaqNShare.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Photo photo = (Photo)PhoneApplicationService.Current.State["photo"];
-            ImageSelectionne.Source = photo.PhotoSelectionne;
+            WriteableBitmap photo = (WriteableBitmap)PhoneApplicationService.Current.State["photo"];
+            ImageSelectionne.Source = photo;
             base.OnNavigatedTo(e);
         }
 

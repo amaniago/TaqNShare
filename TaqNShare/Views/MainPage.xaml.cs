@@ -49,9 +49,9 @@ namespace TaqNShare.Views
 
             Filtres = new List<Parametre>
             {
-                new Parametre(0, 1, 0),
-                new Parametre(1, 2, 0),
-                new Parametre(2, 4, 0)
+                new Parametre(0, 0, 0),
+                new Parametre(1, 1, 0),
+                new Parametre(2, 2, 0)
             };
 
             int userFiltre;
@@ -81,16 +81,15 @@ namespace TaqNShare.Views
             {
                 WriteableBitmap imageSelectionne = BitmapFactory.New(1, 1).FromStream(e.ChosenPhoto);
                 imageSelectionne = imageSelectionne.Resize(450, 732, WriteableBitmapExtensions.Interpolation.Bilinear);
-                Photo photo = new Photo(imageSelectionne);
-                PhoneApplicationService.Current.State["photo"] = photo;
+                PhoneApplicationService.Current.State["photo"] = imageSelectionne;
                 NavigationService.Navigate(new Uri("/Views/ValidationPhotoPage.xaml", UriKind.Relative));
             }
         }
 
         private void ListPickerDecoupageChange(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            SaveSettings("IndexDecoupage", ListPickerDecoupage, true);
             SaveSettings("TailleGrille", ListPickerDecoupage, false);
+            SaveSettings("IndexDecoupage", ListPickerDecoupage, true);
         }
 
         private void ListPickerFiltreChange(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -115,6 +114,7 @@ namespace TaqNShare.Views
                     settings[key] = p.TailleGrille;
 
             }
+            
             settings.Save();
         }
 
@@ -123,7 +123,7 @@ namespace TaqNShare.Views
             NavigationService.Navigate(new Uri("/Views/FacebookLoginPage.xaml", UriKind.Relative));
         }
 
-        private void FacebookConnexion ()
+        private void FacebookConnexion()
         {
             if (App.isAuthenticated)
             {
@@ -171,7 +171,7 @@ namespace TaqNShare.Views
         private async void DeConnexionFacebookBouton_Click(object sender, RoutedEventArgs e)
         {
             App.isAuthenticated = false;
-            
+
             /*App.FacebookId = null;
             App.AccessToken = null;*/
             //App.FacebookSessionClient.Logout();
@@ -184,7 +184,7 @@ namespace TaqNShare.Views
             FacebookWebBrowser.Navigate(new Uri(String.Format("https://www.facebook.com/logout.php?next={0}&access_token={1}", "http://www.facebook.com", App.AccessToken)));
             await FacebookWebBrowser.ClearCookiesAsync();
             FacebookConnexion();
-            
+
         }
     }
 }

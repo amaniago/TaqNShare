@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Nokia.InteropServices.WindowsRuntime;
 using TaqNShare.Data;
 
 namespace TaqNShare.Views
 {
-    public partial class JeuTerminePage : PhoneApplicationPage
+    public partial class JeuTerminePage
     {
         public JeuTerminePage()
         {
@@ -20,10 +22,9 @@ namespace TaqNShare.Views
         /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Photo photo = (Photo)PhoneApplicationService.Current.State["photo"];
-            TaquinTermineImage.Source = photo.PhotoSelectionne;
             //Récupération de la partie de l'utilisateur
             Partie partieTermine = (Partie)PhoneApplicationService.Current.State["partie"];
+            TaquinTermineImage.Source = partieTermine.Photo;
             ScoreTextBlock.Text = "Votre score : " + partieTermine.Score + " Pts";
             base.OnNavigatedTo(e);
         }

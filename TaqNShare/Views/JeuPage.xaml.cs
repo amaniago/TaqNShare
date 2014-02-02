@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Microsoft.Phone.Shell;
+using Nokia.Graphics.Imaging;
 using TaqNShare.Data;
 using GestureEventArgs = System.Windows.Input.GestureEventArgs;
 
@@ -44,8 +45,11 @@ namespace TaqNShare.Views
         {
             int tailleGrille;
             IsolatedStorageSettings.ApplicationSettings.TryGetValue("TailleGrille", out tailleGrille);
+
+            int nombreFiltre;
+            IsolatedStorageSettings.ApplicationSettings.TryGetValue("IndexFiltre", out nombreFiltre);
             //Création de la partie
-            _partieEnCours = new Partie(tailleGrille, 0);
+            _partieEnCours = new Partie(tailleGrille, nombreFiltre);
             //Spécification du dataContext pour le Binding
             DataContext = _partieEnCours;
 
@@ -58,7 +62,7 @@ namespace TaqNShare.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="routedEventArgs"></param>
-        private void PreparerImage(object sender, RoutedEventArgs routedEventArgs)
+        private async void PreparerImage(object sender, RoutedEventArgs routedEventArgs)
         {
             int hauteurPiece = 244;
             int largeurPiece = 150;
@@ -82,9 +86,8 @@ namespace TaqNShare.Views
             }
 
             //Récupération de la photo
-            Photo photo = (Photo)PhoneApplicationService.Current.State["photo"];
-            WriteableBitmap imageSelectionne = photo.PhotoSelectionne;
-
+            WriteableBitmap imageSelectionne = (WriteableBitmap)PhoneApplicationService.Current.State["photo"];;
+            _partieEnCours.Photo = imageSelectionne;
             //Création des colonnes de la grille
             for (int i = 0; i < _partieEnCours.TailleGrille; i++)
             {
@@ -97,7 +100,32 @@ namespace TaqNShare.Views
                 JeuGrid.RowDefinitions.Add(new RowDefinition());
             }
 
-            //Découpage de la photo  
+            List<IFilter> listeFiltre = new List<IFilter>
+                                        {
+                                            new AntiqueFilter(),
+                                            new CartoonFilter(),
+                                            new MagicPenFilter()
+                                            
+                                            //new ChromaKeyFilter()
+                                            //new ExposureFilter()
+                                            //new MonoColorFilter()
+                                            //new ColorBoostFilter()
+                                            //new CurvesFilter()
+                                        };
+
+
+
+            List<IFilter> listeFiltrePartie = new List<IFilter>();
+
+            for (int i = 0; i < _partieEnCours.NombreFiltre; i++)
+            {
+                Random random = new Random();
+                int indexRandom = random.Next(listeFiltre.Count);
+                listeFiltrePartie.Add(listeFiltre[indexRandom]);
+                listeFiltre.Remove(listeFiltre[indexRandom]);
+            }
+
+            //Préparation de l'image 
             int compteur = 0;
             for (int i = 0; i < _partieEnCours.TailleGrille; i++)
             {
@@ -105,12 +133,27 @@ namespace TaqNShare.Views
                 {
                     if (!(i == _partieEnCours.TailleGrille - 1 && j == _partieEnCours.TailleGrille - 1))
                     {
+                        //Découpage de la photo : TODO explication
+                        Photo photoDecoupe = new Photo(imageSelectionne.Crop(i * largeurPiece, j * hauteurPiece, largeurPiece, hauteurPiece), largeurPiece, hauteurPiece);
+
+                        //TODO Application des filtres
+                        if (_partieEnCours.NombreFiltre != 0)
+                        {
+                            FilterEffect filterEffect = new FilterEffect(photoDecoupe.PhotoBuffer);
+                            Random random2 = new Random();
+                            int indexRandom2 = random2.Next(_partieEnCours.NombreFiltre);
+                            filterEffect.Filters = new[] { listeFiltrePartie[indexRandom2] };
+
+                            // Render the image to a WriteableBitmap.
+                            var renderer = new WriteableBitmapRenderer(filterEffect, photoDecoupe.PhotoSelectionne);
+                            photoDecoupe.PhotoSelectionne = await renderer.RenderAsync();
+                        }
+
                         Image image = new Image
                         {
                             Name = compteur.ToString(CultureInfo.InvariantCulture),
-                            Source = imageSelectionne.Crop(i * largeurPiece, j * hauteurPiece, largeurPiece, hauteurPiece)
+                            Source = photoDecoupe.PhotoSelectionne
                         };
-                        image.Tap += ImageTap;
                         Grid.SetRow(image, j);
                         Grid.SetColumn(image, i);
                         JeuGrid.Children.Add(image);
@@ -123,6 +166,11 @@ namespace TaqNShare.Views
 
             //Appel à la méthode de mélange
             Melange();
+
+            foreach (var piece in _partieEnCours.ListePieces)
+            {
+                piece.Image.Tap += ImageTap;
+            }
             
         }
 

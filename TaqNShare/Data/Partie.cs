@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
 namespace TaqNShare.Data
@@ -14,7 +15,7 @@ namespace TaqNShare.Data
 
         public double Score { get; set; }
         public List<Piece> ListePieces { get; private set; }
-        public Photo PhotoSelectionne { get; set; }
+        public WriteableBitmap Photo { get; set; }
 
         public int TailleGrille { get; set; }
         public int NombreFiltre { get; set; }
@@ -62,13 +63,15 @@ namespace TaqNShare.Data
             _timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
             StopWatch = new Stopwatch();
 
+            
             TailleGrille = tailleGrille;
+
             NombreFiltre = nombreFiltre;
 
             ListePieces = new List<Piece>();
         }
 
-        
+
         //Permet le binding des propriétés de la classe
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -117,7 +120,7 @@ namespace TaqNShare.Data
                     malusFacilite += 500;
                     break;
             }
-            
+
             Score = Math.Round(((StopWatch.ElapsedMilliseconds / 1000.0) * 0.6) + NombreDeplacement + malusFacilite);
         }
     }
