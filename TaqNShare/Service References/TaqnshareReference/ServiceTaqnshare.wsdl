@@ -19,6 +19,12 @@
   <wsdl:message name="IServiceTaqnshare_GetDataUsingDataContract_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetDataUsingDataContractResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceTaqnshare_GetIdUtilisateur_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetIdUtilisateur" />
+  </wsdl:message>
+  <wsdl:message name="IServiceTaqnshare_GetIdUtilisateur_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetIdUtilisateurResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceTaqnshare">
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceTaqnshare/GetData" message="tns:IServiceTaqnshare_GetData_InputMessage" />
@@ -27,6 +33,10 @@
     <wsdl:operation name="GetDataUsingDataContract">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceTaqnshare/GetDataUsingDataContract" message="tns:IServiceTaqnshare_GetDataUsingDataContract_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceTaqnshare/GetDataUsingDataContractResponse" message="tns:IServiceTaqnshare_GetDataUsingDataContract_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIdUtilisateur">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceTaqnshare/GetIdUtilisateur" message="tns:IServiceTaqnshare_GetIdUtilisateur_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceTaqnshare/GetIdUtilisateurResponse" message="tns:IServiceTaqnshare_GetIdUtilisateur_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceTaqnshare" type="tns:IServiceTaqnshare">
@@ -42,6 +52,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetDataUsingDataContract">
       <soap:operation soapAction="http://tempuri.org/IServiceTaqnshare/GetDataUsingDataContract" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIdUtilisateur">
+      <soap:operation soapAction="http://tempuri.org/IServiceTaqnshare/GetIdUtilisateur" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

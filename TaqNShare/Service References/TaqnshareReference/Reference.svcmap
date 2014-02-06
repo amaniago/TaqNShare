@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="0bc5e5dd-2379-4534-9839-1cec0d8b7a5c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="6bbb4610-9fb0-4704-9085-08b5008c9c96" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
@@ -23,10 +23,10 @@
     <MetadataSource Address="http://192.168.42.71:3891/ServiceTaqnshare.svc?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ServiceTaqnshare.wsdl" MetadataType="Wsdl" ID="bcc03d32-8db3-479d-958d-6d2fed8f6107" SourceId="1" SourceUrl="http://192.168.42.71:3891/ServiceTaqnshare.svc?wsdl" />
-    <MetadataFile FileName="ServiceTaqnshare.xsd" MetadataType="Schema" ID="36ea967f-30d6-4070-a797-b684886a1b83" SourceId="1" SourceUrl="http://192.168.42.71:3891/ServiceTaqnshare.svc?xsd=xsd0" />
-    <MetadataFile FileName="ServiceTaqnshare1.xsd" MetadataType="Schema" ID="9982429b-ddc9-4a3d-b4de-53a03c50b2d1" SourceId="1" SourceUrl="http://192.168.42.71:3891/ServiceTaqnshare.svc?xsd=xsd2" />
-    <MetadataFile FileName="ServiceTaqnshare2.xsd" MetadataType="Schema" ID="5cbca82b-f406-498e-bfaa-1fc40dc3a9ac" SourceId="1" SourceUrl="http://192.168.42.71:3891/ServiceTaqnshare.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServiceTaqnshare.wsdl" MetadataType="Wsdl" ID="d0b23a43-6114-45e2-842e-e37bd9bec1a9" SourceId="1" SourceUrl="http://192.168.42.71:3891/ServiceTaqnshare.svc?wsdl" />
+    <MetadataFile FileName="ServiceTaqnshare.xsd" MetadataType="Schema" ID="9affb292-846a-44c9-8fc3-5f15d4e0bd9b" SourceId="1" SourceUrl="http://192.168.42.71:3891/ServiceTaqnshare.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServiceTaqnshare1.xsd" MetadataType="Schema" ID="75f3b9af-d3dd-4c04-96aa-304c440ec4c1" SourceId="1" SourceUrl="http://192.168.42.71:3891/ServiceTaqnshare.svc?xsd=xsd2" />
+    <MetadataFile FileName="ServiceTaqnshare2.xsd" MetadataType="Schema" ID="9b956b75-5959-427b-be45-ab4c368eb266" SourceId="1" SourceUrl="http://192.168.42.71:3891/ServiceTaqnshare.svc?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

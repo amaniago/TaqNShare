@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using CAD;
 
 namespace WebServiceTaqnshare
 {
@@ -28,6 +29,13 @@ namespace WebServiceTaqnshare
                 composite.StringValue += "Suffix";
             }
             return composite;
+        }
+
+        public string GetIdUtilisateur()
+        {
+            Cad cad = new Cad();
+
+            return cad.GetId();
         }
     }
 }

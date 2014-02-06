@@ -73,6 +73,11 @@ namespace TaqNShare.TaqnshareReference {
         System.IAsyncResult BeginGetDataUsingDataContract(TaqNShare.TaqnshareReference.CompositeType composite, System.AsyncCallback callback, object asyncState);
         
         TaqNShare.TaqnshareReference.CompositeType EndGetDataUsingDataContract(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IServiceTaqnshare/GetIdUtilisateur", ReplyAction="http://tempuri.org/IServiceTaqnshare/GetIdUtilisateurResponse")]
+        System.IAsyncResult BeginGetIdUtilisateur(System.AsyncCallback callback, object asyncState);
+        
+        string EndGetIdUtilisateur(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -119,6 +124,25 @@ namespace TaqNShare.TaqnshareReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetIdUtilisateurCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetIdUtilisateurCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public string Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class ServiceTaqnshareClient : System.ServiceModel.ClientBase<TaqNShare.TaqnshareReference.IServiceTaqnshare>, TaqNShare.TaqnshareReference.IServiceTaqnshare {
         
         private BeginOperationDelegate onBeginGetDataDelegate;
@@ -132,6 +156,12 @@ namespace TaqNShare.TaqnshareReference {
         private EndOperationDelegate onEndGetDataUsingDataContractDelegate;
         
         private System.Threading.SendOrPostCallback onGetDataUsingDataContractCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetIdUtilisateurDelegate;
+        
+        private EndOperationDelegate onEndGetIdUtilisateurDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetIdUtilisateurCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -189,6 +219,8 @@ namespace TaqNShare.TaqnshareReference {
         public event System.EventHandler<GetDataCompletedEventArgs> GetDataCompleted;
         
         public event System.EventHandler<GetDataUsingDataContractCompletedEventArgs> GetDataUsingDataContractCompleted;
+        
+        public event System.EventHandler<GetIdUtilisateurCompletedEventArgs> GetIdUtilisateurCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -284,6 +316,50 @@ namespace TaqNShare.TaqnshareReference {
             }
             base.InvokeAsync(this.onBeginGetDataUsingDataContractDelegate, new object[] {
                         composite}, this.onEndGetDataUsingDataContractDelegate, this.onGetDataUsingDataContractCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult TaqNShare.TaqnshareReference.IServiceTaqnshare.BeginGetIdUtilisateur(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetIdUtilisateur(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        string TaqNShare.TaqnshareReference.IServiceTaqnshare.EndGetIdUtilisateur(System.IAsyncResult result) {
+            return base.Channel.EndGetIdUtilisateur(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetIdUtilisateur(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return ((TaqNShare.TaqnshareReference.IServiceTaqnshare)(this)).BeginGetIdUtilisateur(callback, asyncState);
+        }
+        
+        private object[] OnEndGetIdUtilisateur(System.IAsyncResult result) {
+            string retVal = ((TaqNShare.TaqnshareReference.IServiceTaqnshare)(this)).EndGetIdUtilisateur(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetIdUtilisateurCompleted(object state) {
+            if ((this.GetIdUtilisateurCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetIdUtilisateurCompleted(this, new GetIdUtilisateurCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetIdUtilisateurAsync() {
+            this.GetIdUtilisateurAsync(null);
+        }
+        
+        public void GetIdUtilisateurAsync(object userState) {
+            if ((this.onBeginGetIdUtilisateurDelegate == null)) {
+                this.onBeginGetIdUtilisateurDelegate = new BeginOperationDelegate(this.OnBeginGetIdUtilisateur);
+            }
+            if ((this.onEndGetIdUtilisateurDelegate == null)) {
+                this.onEndGetIdUtilisateurDelegate = new EndOperationDelegate(this.OnEndGetIdUtilisateur);
+            }
+            if ((this.onGetIdUtilisateurCompletedDelegate == null)) {
+                this.onGetIdUtilisateurCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetIdUtilisateurCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetIdUtilisateurDelegate, null, this.onEndGetIdUtilisateurDelegate, this.onGetIdUtilisateurCompletedDelegate, userState);
         }
         
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
@@ -385,6 +461,18 @@ namespace TaqNShare.TaqnshareReference {
             public TaqNShare.TaqnshareReference.CompositeType EndGetDataUsingDataContract(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 TaqNShare.TaqnshareReference.CompositeType _result = ((TaqNShare.TaqnshareReference.CompositeType)(base.EndInvoke("GetDataUsingDataContract", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginGetIdUtilisateur(System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[0];
+                System.IAsyncResult _result = base.BeginInvoke("GetIdUtilisateur", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public string EndGetIdUtilisateur(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                string _result = ((string)(base.EndInvoke("GetIdUtilisateur", _args, result)));
                 return _result;
             }
         }

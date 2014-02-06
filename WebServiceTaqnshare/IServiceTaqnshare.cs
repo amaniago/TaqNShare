@@ -19,7 +19,8 @@ namespace WebServiceTaqnshare
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
-        // TODO: ajoutez vos opérations de service ici
+        [OperationContract]
+        string GetIdUtilisateur();
     }
 
 

@@ -68,11 +68,20 @@ namespace TaqNShare.Views
 
             ServiceTaqnshareClient s = new ServiceTaqnshareClient();
 
-            s.GetDataCompleted += RecupGetData;
-            s.GetDataAsync(12);
+            /*s.GetDataCompleted += RecupGetData;
+            s.GetDataAsync(13);*/
+
+            s.GetIdUtilisateurCompleted += RecupGetIdUtilisateur;
+            s.GetIdUtilisateurAsync();
         }
 
-        public void RecupGetData(object sender, GetDataCompletedEventArgs e)
+        /*public void RecupGetData(object sender, GetDataCompletedEventArgs e)
+        {
+            string test = e.Result;
+            testText.Text = test;
+        }*/
+
+        public void RecupGetIdUtilisateur(object sender, GetIdUtilisateurCompletedEventArgs e)
         {
             string test = e.Result;
             testText.Text = test;
