@@ -87,6 +87,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Service References\TaqnshareReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Views\FacebookLoginPage.xaml.cs">
       <DependentUpon>FacebookLoginPage.xaml</DependentUpon>
     </Compile>
@@ -151,6 +156,26 @@
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TaqnshareReference\configuration91.svcinfo" />
+    <None Include="Service References\TaqnshareReference\configuration.svcinfo" />
+    <None Include="Service References\TaqnshareReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="ServiceReferences.ClientConfig" />
+    <None Include="Service References\TaqnshareReference\ServiceTaqnshare.wsdl" />
+    <None Include="Service References\TaqnshareReference\ServiceTaqnshare.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TaqnshareReference\ServiceTaqnshare1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TaqnshareReference\ServiceTaqnshare2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TaqnshareReference\TaqNShare.TaqnshareReference.CompositeType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +254,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WriteableBitmapEx.1.0.9.0\lib\WindowsPhone8\WriteableBitmapExWinPhoneXnaDependant.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\TaqnshareReference\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

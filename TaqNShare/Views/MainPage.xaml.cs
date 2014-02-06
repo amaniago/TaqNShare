@@ -8,6 +8,7 @@ using Microsoft.Phone.Tasks;
 using TaqNShare.Data;
 using Facebook;
 using System.Windows;
+using TaqNShare.TaqnshareReference; 
 
 namespace TaqNShare.Views
 {
@@ -63,6 +64,18 @@ namespace TaqNShare.Views
 
             _galerie = new PhotoChooserTask();
             _galerie.Completed += ChoixPhotoCompleted;
+
+
+            ServiceTaqnshareClient s = new ServiceTaqnshareClient();
+
+            s.GetDataCompleted += RecupGetData;
+            s.GetDataAsync(12);
+        }
+
+        public void RecupGetData(object sender, GetDataCompletedEventArgs e)
+        {
+            string test = e.Result;
+            testText.Text = test;
         }
 
         private void ButtonPrendrePhotoTap(object sender, System.Windows.Input.GestureEventArgs e)

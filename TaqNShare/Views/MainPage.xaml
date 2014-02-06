@@ -41,8 +41,7 @@
                 <phone:PanoramaItem.RenderTransform>
                     <TranslateTransform/>
                 </phone:PanoramaItem.RenderTransform>
-                <Grid HorizontalAlignment="Left" Height="435" Margin="-6,-49,0,0" VerticalAlignment="Top" Width="408">
-                </Grid>
+                <TextBlock x:Name="testText" HorizontalAlignment="Left" Height="388" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="408"/>
             </phone:PanoramaItem>
             <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Classement" Height="512">
                 <phone:PanoramaItem.RenderTransform>
