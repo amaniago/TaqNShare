@@ -21,10 +21,7 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contient le nom de l'application et le titre de la page-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="MON APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="Identifiants" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
+        <StackPanel Grid.Row="0" Margin="12,17,0,28"/>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
