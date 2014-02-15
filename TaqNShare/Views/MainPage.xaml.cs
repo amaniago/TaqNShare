@@ -11,7 +11,6 @@ using Facebook;
 using System.Windows;
 using System.Windows.Navigation;
 using TaqNShare.TaqnshareReference; 
-using TaqNShare.WebService;
 using System.IO; 
 
 namespace TaqNShare.Views
@@ -76,8 +75,6 @@ namespace TaqNShare.Views
 
             if (!App.isAuthenticated && utilisateurConnecte)
                 Loaded += ConnexionFacebookBoutonClick;
-
-            TaqNShareWebService ws = new TaqNShareWebService();
 
             //s.GetIdUtilisateurCompleted += RecupGetIdUtilisateur;
             //s.GetIdUtilisateurAsync();

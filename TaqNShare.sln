@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaqNShare", "TaqNShare\TaqNShare.csproj", "{9F6B5B3F-510D-4D6F-9866-E32A0C8A0A0A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8691877A-E837-43E5-9DBB-52ADDDB101DB}"
@@ -26,9 +24,9 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9F6B5B3F-510D-4D6F-9866-E32A0C8A0A0A}.Debug|ARM.ActiveCfg = Debug|ARM
-		{9F6B5B3F-510D-4D6F-9866-E32A0C8A0A0A}.Debug|ARM.Build.0 = Debug|ARM
-		{9F6B5B3F-510D-4D6F-9866-E32A0C8A0A0A}.Debug|ARM.Deploy.0 = Debug|ARM
+		{9F6B5B3F-510D-4D6F-9866-E32A0C8A0A0A}.Debug|ARM.ActiveCfg = Debug|x86
+		{9F6B5B3F-510D-4D6F-9866-E32A0C8A0A0A}.Debug|ARM.Build.0 = Debug|x86
+		{9F6B5B3F-510D-4D6F-9866-E32A0C8A0A0A}.Debug|ARM.Deploy.0 = Debug|x86
 		{9F6B5B3F-510D-4D6F-9866-E32A0C8A0A0A}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{9F6B5B3F-510D-4D6F-9866-E32A0C8A0A0A}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{9F6B5B3F-510D-4D6F-9866-E32A0C8A0A0A}.Debug|Mixed Platforms.Deploy.0 = Debug|x86
