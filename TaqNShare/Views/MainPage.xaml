@@ -47,7 +47,9 @@
                 <phone:PanoramaItem.RenderTransform>
                     <TranslateTransform/>
                 </phone:PanoramaItem.RenderTransform>
-                <Grid HorizontalAlignment="Left" Height="435" Margin="-6,-49,0,0" VerticalAlignment="Top" Width="408">
+                <Grid HorizontalAlignment="Left" Height="388" VerticalAlignment="Top" Width="408">
+                    <Image x:Name="imageTest" HorizontalAlignment="Left" Height="100" Margin="141,40,0,0" VerticalAlignment="Top" Width="100"/>
+                    <Button Content="Button" HorizontalAlignment="Left" Margin="117,165,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
                 </Grid>
             </phone:PanoramaItem>
             <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Paramètres" Height="512">

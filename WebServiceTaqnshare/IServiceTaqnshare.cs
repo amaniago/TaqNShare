@@ -12,37 +12,16 @@ namespace WebServiceTaqnshare
     [ServiceContract]
     public interface IServiceTaqnshare
     {
-
-        [OperationContract]
-        string GetData(int value);
-
-        [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
-
         [OperationContract]
         string GetIdUtilisateur();
-    }
 
+        [OperationContract]
+        string GetCoucou(byte[] f, string fileName);
 
-    // Utilisez un contrat de données comme indiqué dans l'exemple ci-après pour ajouter les types composites aux opérations de service.
-    [DataContract]
-    public class CompositeType
-    {
-        bool boolValue = true;
-        string stringValue = "Hello ";
+        [OperationContract]
+        string UploadFile(byte[] f, string fileName);
 
-        [DataMember]
-        public bool BoolValue
-        {
-            get { return boolValue; }
-            set { boolValue = value; }
-        }
-
-        [DataMember]
-        public string StringValue
-        {
-            get { return stringValue; }
-            set { stringValue = value; }
-        }
+        [OperationContract]
+        byte[] GetImageFile(string fileName);
     }
 }

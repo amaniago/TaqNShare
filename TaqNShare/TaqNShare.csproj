@@ -171,12 +171,6 @@
     <None Include="Service References\TaqnshareReference\ServiceTaqnshare1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TaqnshareReference\ServiceTaqnshare2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TaqnshareReference\TaqNShare.TaqnshareReference.CompositeType.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\AlignmentGrid.png" />

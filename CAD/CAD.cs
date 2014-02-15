@@ -16,7 +16,7 @@ namespace CAD
                             select b;
 
                 var listeIdUtilisateur = query.Select(item => item.id_utilisateur).ToList();
-                return listeIdUtilisateur.ElementAt(0);
+                return listeIdUtilisateur.ElementAt(2);
             }
             catch (Exception e)
             {
