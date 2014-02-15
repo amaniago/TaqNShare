@@ -8,7 +8,7 @@ using Microsoft.Phone.Tasks;
 using TaqNShare.Data;
 using Facebook;
 using System.Windows;
-using TaqNShare.TaqnshareReference; 
+using System.Windows.Navigation;
 
 namespace TaqNShare.Views
 {
@@ -28,6 +28,9 @@ namespace TaqNShare.Views
         /// </summary>
         public MainPage()
         {
+            bool utilisateurConnecte = false;
+            IsolatedStorageSettings.ApplicationSettings.TryGetValue("UtilisateurConnecte", out utilisateurConnecte);
+
             InitializeComponent();
 
             FacebookConnexion();
@@ -65,26 +68,19 @@ namespace TaqNShare.Views
             _galerie = new PhotoChooserTask();
             _galerie.Completed += ChoixPhotoCompleted;
 
-
-            ServiceTaqnshareClient s = new ServiceTaqnshareClient();
-
-            /*s.GetDataCompleted += RecupGetData;
-            s.GetDataAsync(13);*/
-
-            s.GetIdUtilisateurCompleted += RecupGetIdUtilisateur;
-            s.GetIdUtilisateurAsync();
+            if (!App.isAuthenticated && utilisateurConnecte)
+                Loaded += Test;
         }
 
-        /*public void RecupGetData(object sender, GetDataCompletedEventArgs e)
+        private void Test(object sender, RoutedEventArgs routedEventArgs)
         {
-            string test = e.Result;
-            testText.Text = test;
-        }*/
+            NavigationService.Navigate(new Uri("/Views/FacebookLoginPage.xaml", UriKind.Relative));
+        }
 
-        public void RecupGetIdUtilisateur(object sender, GetIdUtilisateurCompletedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            string test = e.Result;
-            testText.Text = test;
+            FacebookConnexion();
+            base.OnNavigatedTo(e);
         }
 
         private void ButtonPrendrePhotoTap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -134,13 +130,12 @@ namespace TaqNShare.Views
                     settings[key] = p.Id;
                 else
                     settings[key] = p.TailleGrille;
-
             }
             
             settings.Save();
         }
 
-        private void ConnexionFacebookBouton_Click(object sender, RoutedEventArgs e)
+        private void ConnexionFacebookBoutonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Views/FacebookLoginPage.xaml", UriKind.Relative));
         }
@@ -190,23 +185,28 @@ namespace TaqNShare.Views
             fb.GetTaskAsync("me");
         }
 
-        private async void DeConnexionFacebookBouton_Click(object sender, RoutedEventArgs e)
+        private async void DeConnexionFacebookBoutonClick(object sender, RoutedEventArgs e)
         {
             App.isAuthenticated = false;
 
-            /*App.FacebookId = null;
-            App.AccessToken = null;*/
-            //App.FacebookSessionClient.Logout();
-            //App.FacebookSessionClient.CurrentSession.AccessToken = String.Empty;
-            //App.FacebookSessionClient.CurrentSession.FacebookId = String.Empty;
-            //App.FacebookSessionClient = new FacebookSessionClient("552340608180135");
+            var facebookWebBrowser = new WebBrowser();
 
-            WebBrowser FacebookWebBrowser = new WebBrowser();
+            facebookWebBrowser.Navigate(new Uri(String.Format("https://www.facebook.com/logout.php?next={0}&access_token={1}", "http://www.facebook.com", App.AccessToken)));
+            await facebookWebBrowser.ClearCookiesAsync();
 
-            FacebookWebBrowser.Navigate(new Uri(String.Format("https://www.facebook.com/logout.php?next={0}&access_token={1}", "http://www.facebook.com", App.AccessToken)));
-            await FacebookWebBrowser.ClearCookiesAsync();
+            IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
+
+            string key = "UtilisateurConnecte";
+
+            if (!settings.Contains(key))
+                settings.Add(key, false);
+            else
+                settings[key] = false;
+
+
+            settings.Save();
+
             FacebookConnexion();
-
         }
     }
 }

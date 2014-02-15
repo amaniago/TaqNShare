@@ -95,8 +95,8 @@
     <Compile Include="Views\FacebookLoginPage.xaml.cs">
       <DependentUpon>FacebookLoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FriendSelector.xaml.cs">
-      <DependentUpon>FriendSelector.xaml</DependentUpon>
+    <Compile Include="Views\ListeAmis.xaml.cs">
+      <DependentUpon>ListeAmis.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\JeuPage.xaml.cs">
       <DependentUpon>JeuPage.xaml</DependentUpon>
@@ -106,9 +106,6 @@
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\test.xaml.cs">
-      <DependentUpon>test.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ValidationPhotoPage.xaml.cs">
       <DependentUpon>ValidationPhotoPage.xaml</DependentUpon>
@@ -123,7 +120,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\FriendSelector.xaml">
+    <Page Include="Views\ListeAmis.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -138,10 +135,6 @@
     <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\test.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ValidationPhotoPage.xaml">
       <SubType>Designer</SubType>
