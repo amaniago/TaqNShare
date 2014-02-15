@@ -110,6 +110,7 @@
     <Compile Include="Views\ValidationPhotoPage.xaml.cs">
       <DependentUpon>ValidationPhotoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WebService\TaqNShareWebService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -157,14 +158,14 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="ServiceReferences.ClientConfig" />
-    <None Include="Service References\TaqnshareReference\ServiceTaqnshare.wsdl" />
-    <None Include="Service References\TaqnshareReference\ServiceTaqnshare.xsd">
+    <None Include="Service References\TaqnshareReference\ServiceTaqnshare1.wsdl" />
+    <None Include="Service References\TaqnshareReference\ServiceTaqnshare3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TaqnshareReference\ServiceTaqnshare1.xsd">
+    <None Include="Service References\TaqnshareReference\ServiceTaqnshare31.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TaqnshareReference\ServiceTaqnshare2.xsd">
+    <None Include="Service References\TaqnshareReference\ServiceTaqnshare32.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\TaqnshareReference\TaqNShare.TaqnshareReference.CompositeType.datasource">

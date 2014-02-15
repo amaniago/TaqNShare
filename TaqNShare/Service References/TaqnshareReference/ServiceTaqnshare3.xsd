@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://192.168.42.71:3891/ServiceTaqnshare.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WebServiceTaqnshare" />
+  <xs:import schemaLocation="http://192.168.1.21:3891/ServiceTaqnshare.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WebServiceTaqnshare" />
   <xs:element name="GetData">
     <xs:complexType>
       <xs:sequence>

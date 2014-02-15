@@ -96,8 +96,8 @@
     </EntityDeploy>
     <None Include="dbTaqnshare.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>dbTaqnshare.Context.cs</LastGenOutput>
       <DependentUpon>dbTaqnshare.edmx</DependentUpon>
+      <LastGenOutput>dbTaqnshare.Context.cs</LastGenOutput>
     </None>
     <None Include="dbTaqnshare.edmx.diagram">
       <DependentUpon>dbTaqnshare.edmx</DependentUpon>

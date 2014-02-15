@@ -20,13 +20,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://192.168.42.71:3891/ServiceTaqnshare.svc?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://192.168.1.21:3891/ServiceTaqnshare.svc?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ServiceTaqnshare.wsdl" MetadataType="Wsdl" ID="d0b23a43-6114-45e2-842e-e37bd9bec1a9" SourceId="1" SourceUrl="http://192.168.42.71:3891/ServiceTaqnshare.svc?wsdl" />
-    <MetadataFile FileName="ServiceTaqnshare.xsd" MetadataType="Schema" ID="9affb292-846a-44c9-8fc3-5f15d4e0bd9b" SourceId="1" SourceUrl="http://192.168.42.71:3891/ServiceTaqnshare.svc?xsd=xsd0" />
-    <MetadataFile FileName="ServiceTaqnshare1.xsd" MetadataType="Schema" ID="75f3b9af-d3dd-4c04-96aa-304c440ec4c1" SourceId="1" SourceUrl="http://192.168.42.71:3891/ServiceTaqnshare.svc?xsd=xsd2" />
-    <MetadataFile FileName="ServiceTaqnshare2.xsd" MetadataType="Schema" ID="9b956b75-5959-427b-be45-ab4c368eb266" SourceId="1" SourceUrl="http://192.168.42.71:3891/ServiceTaqnshare.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServiceTaqnshare3.xsd" MetadataType="Schema" ID="e3977311-bba8-49d5-8b84-7cfe0c7f7e73" SourceId="1" SourceUrl="http://192.168.1.21:3891/ServiceTaqnshare.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServiceTaqnshare1.wsdl" MetadataType="Wsdl" ID="13904862-ae88-4699-b2f3-eb95d944f1cd" SourceId="1" SourceUrl="http://192.168.1.21:3891/ServiceTaqnshare.svc?wsdl" />
+    <MetadataFile FileName="ServiceTaqnshare31.xsd" MetadataType="Schema" ID="3aa8bd51-5179-4d85-84fe-cab2455531b5" SourceId="1" SourceUrl="http://192.168.1.21:3891/ServiceTaqnshare.svc?xsd=xsd2" />
+    <MetadataFile FileName="ServiceTaqnshare32.xsd" MetadataType="Schema" ID="6b1714a4-3f85-4f68-a05f-8f7ea3aed338" SourceId="1" SourceUrl="http://192.168.1.21:3891/ServiceTaqnshare.svc?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -9,6 +9,8 @@ using TaqNShare.Data;
 using Facebook;
 using System.Windows;
 using System.Windows.Navigation;
+using TaqNShare.TaqnshareReference;
+using TaqNShare.WebService;
 
 namespace TaqNShare.Views
 {
@@ -69,12 +71,10 @@ namespace TaqNShare.Views
             _galerie.Completed += ChoixPhotoCompleted;
 
             if (!App.isAuthenticated && utilisateurConnecte)
-                Loaded += Test;
-        }
+                Loaded += ConnexionFacebookBoutonClick;
 
-        private void Test(object sender, RoutedEventArgs routedEventArgs)
-        {
-            NavigationService.Navigate(new Uri("/Views/FacebookLoginPage.xaml", UriKind.Relative));
+            TaqNShareWebService ws = new TaqNShareWebService();
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -131,7 +131,7 @@ namespace TaqNShare.Views
                 else
                     settings[key] = p.TailleGrille;
             }
-            
+
             settings.Save();
         }
 
@@ -196,7 +196,7 @@ namespace TaqNShare.Views
 
             IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
 
-            string key = "UtilisateurConnecte";
+            const string key = "UtilisateurConnecte";
 
             if (!settings.Contains(key))
                 settings.Add(key, false);
