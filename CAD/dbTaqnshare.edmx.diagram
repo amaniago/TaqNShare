@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ec5deb6180d44b6cb08afb1747510da1" Name="Diagramme1">
+      <Diagram DiagramId="8bbdc220c68842a88f8e59c61d5c97b4" Name="Diagram1">
         <EntityTypeShape EntityType="db_taqnshareModel.composer" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="db_taqnshareModel.defi" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="db_taqnshareModel.filtre" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="db_taqnshareModel.piece" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="db_taqnshareModel.utilisateur" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <AssociationConnector Association="db_taqnshareModel.FK__composer__id_def__4316F928" ManuallyRouted="false" />
-        <AssociationConnector Association="db_taqnshareModel.FK__composer__id_fil__4222D4EF" ManuallyRouted="false" />
-        <AssociationConnector Association="db_taqnshareModel.FK__composer__id_pie__412EB0B6" ManuallyRouted="false" />
-        <AssociationConnector Association="db_taqnshareModel.FK__defis__id_utilis__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="db_taqnshareModel.FK__composer__id_def__1B0907CE" ManuallyRouted="false" />
+        <AssociationConnector Association="db_taqnshareModel.FK__composer__id_fil__1A14E395" ManuallyRouted="false" />
+        <AssociationConnector Association="db_taqnshareModel.FK__composer__id_pie__1920BF5C" ManuallyRouted="false" />
+        <AssociationConnector Association="db_taqnshareModel.FK__defis__id_utilis__1273C1CD" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

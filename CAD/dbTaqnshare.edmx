@@ -4,80 +4,57 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="db_taqnshareModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="db_taqnshareModelStoreContainer">
-          <EntitySet Name="composer" EntityType="db_taqnshareModel.Store.composer" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="defis" EntityType="db_taqnshareModel.Store.defis" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="filtres" EntityType="db_taqnshareModel.Store.filtres" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="pieces" EntityType="db_taqnshareModel.Store.pieces" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="utilisateurs" EntityType="db_taqnshareModel.Store.utilisateurs" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="FK__composer__id_def__4316F928" Association="db_taqnshareModel.Store.FK__composer__id_def__4316F928">
-            <End Role="defis" EntitySet="defis" />
-            <End Role="composer" EntitySet="composer" />
-          </AssociationSet>
-          <AssociationSet Name="FK__composer__id_fil__4222D4EF" Association="db_taqnshareModel.Store.FK__composer__id_fil__4222D4EF">
-            <End Role="filtres" EntitySet="filtres" />
-            <End Role="composer" EntitySet="composer" />
-          </AssociationSet>
-          <AssociationSet Name="FK__composer__id_pie__412EB0B6" Association="db_taqnshareModel.Store.FK__composer__id_pie__412EB0B6">
-            <End Role="pieces" EntitySet="pieces" />
-            <End Role="composer" EntitySet="composer" />
-          </AssociationSet>
-          <AssociationSet Name="FK__defis__id_utilis__3A81B327" Association="db_taqnshareModel.Store.FK__defis__id_utilis__3A81B327">
-            <End Role="utilisateurs" EntitySet="utilisateurs" />
-            <End Role="defis" EntitySet="defis" />
-          </AssociationSet>
-        </EntityContainer>
+      <Schema Namespace="db_taqnshareModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="composer">
           <Key>
             <PropertyRef Name="id_piece" />
             <PropertyRef Name="id_filtre" />
             <PropertyRef Name="id_defi" />
           </Key>
-          <Property Name="id_piece" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="id_filtre" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="id_piece" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_filtre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="id_defi" Type="int" Nullable="false" />
-          <Property Name="position_piece" Type="numeric" Precision="8" />
+          <Property Name="position_piece" Type="numeric" Precision="8" Scale="0" />
         </EntityType>
         <EntityType Name="defis">
           <Key>
             <PropertyRef Name="id_defi" />
           </Key>
-          <Property Name="id_defi" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id_defi" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_utilisateur" Type="varchar" MaxLength="50" />
           <Property Name="nom_defi" Type="varchar" MaxLength="50" />
           <Property Name="id_adversaire_defi" Type="varchar" MaxLength="50" />
-          <Property Name="score_adversaire_defi" Type="numeric" Precision="8" />
-          <Property Name="score_utilisateur_defi" Type="numeric" Precision="8" />
+          <Property Name="score_adversaire_defi" Type="numeric" Precision="8" Scale="0" />
+          <Property Name="score_utilisateur_defi" Type="numeric" Precision="8" Scale="0" />
           <Property Name="chemin_image_defi" Type="varchar" MaxLength="50" />
-          <Property Name="nombre_decoupage_image_defi" Type="numeric" Precision="8" />
+          <Property Name="nombre_decoupage_image_defi" Type="numeric" Precision="8" Scale="0" />
           <Property Name="resolu" Type="bit" />
         </EntityType>
         <EntityType Name="filtres">
           <Key>
             <PropertyRef Name="id_filtre" />
           </Key>
-          <Property Name="id_filtre" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="id_filtre" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="pieces">
           <Key>
             <PropertyRef Name="id_piece" />
           </Key>
-          <Property Name="id_piece" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="id_piece" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="utilisateurs">
           <Key>
             <PropertyRef Name="id_utilisateur" />
           </Key>
-          <Property Name="id_utilisateur" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="nombre_partie_utilisateur" Type="numeric" Precision="8" />
-          <Property Name="score_total_utilisateur" Type="numeric" Precision="8" />
+          <Property Name="id_utilisateur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nombre_partie_utilisateur" Type="numeric" Precision="8" Scale="0" />
+          <Property Name="score_total_utilisateur" Type="numeric" Precision="8" Scale="0" />
         </EntityType>
-        <Association Name="FK__composer__id_def__4316F928">
-          <End Role="defis" Type="db_taqnshareModel.Store.defis" Multiplicity="1">
+        <Association Name="FK__composer__id_def__1B0907CE">
+          <End Role="defis" Type="Self.defis" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="composer" Type="db_taqnshareModel.Store.composer" Multiplicity="*" />
+          <End Role="composer" Type="Self.composer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="defis">
               <PropertyRef Name="id_defi" />
@@ -87,11 +64,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__composer__id_fil__4222D4EF">
-          <End Role="filtres" Type="db_taqnshareModel.Store.filtres" Multiplicity="1">
+        <Association Name="FK__composer__id_fil__1A14E395">
+          <End Role="filtres" Type="Self.filtres" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="composer" Type="db_taqnshareModel.Store.composer" Multiplicity="*" />
+          <End Role="composer" Type="Self.composer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="filtres">
               <PropertyRef Name="id_filtre" />
@@ -101,11 +78,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__composer__id_pie__412EB0B6">
-          <End Role="pieces" Type="db_taqnshareModel.Store.pieces" Multiplicity="1">
+        <Association Name="FK__composer__id_pie__1920BF5C">
+          <End Role="pieces" Type="Self.pieces" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="composer" Type="db_taqnshareModel.Store.composer" Multiplicity="*" />
+          <End Role="composer" Type="Self.composer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="pieces">
               <PropertyRef Name="id_piece" />
@@ -115,11 +92,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__defis__id_utilis__3A81B327">
-          <End Role="utilisateurs" Type="db_taqnshareModel.Store.utilisateurs" Multiplicity="0..1">
+        <Association Name="FK__defis__id_utilis__1273C1CD">
+          <End Role="utilisateurs" Type="Self.utilisateurs" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="defis" Type="db_taqnshareModel.Store.defis" Multiplicity="*" />
+          <End Role="defis" Type="Self.defis" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="utilisateurs">
               <PropertyRef Name="id_utilisateur" />
@@ -129,92 +106,92 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
-    <!-- CSDL content -->
-    <edmx:ConceptualModels>
-      <Schema Namespace="db_taqnshareModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="db_taqnshareEntities" p1:LazyLoadingEnabled="true">
-          <EntitySet Name="composers" EntityType="db_taqnshareModel.composer" />
-          <EntitySet Name="defis" EntityType="db_taqnshareModel.defi" />
-          <EntitySet Name="filtres" EntityType="db_taqnshareModel.filtre" />
-          <EntitySet Name="pieces" EntityType="db_taqnshareModel.piece" />
-          <EntitySet Name="utilisateurs" EntityType="db_taqnshareModel.utilisateur" />
-          <AssociationSet Name="FK__composer__id_def__4316F928" Association="db_taqnshareModel.FK__composer__id_def__4316F928">
+        <EntityContainer Name="db_taqnshareModelStoreContainer">
+          <EntitySet Name="composer" EntityType="Self.composer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="defis" EntityType="Self.defis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="filtres" EntityType="Self.filtres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pieces" EntityType="Self.pieces" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="utilisateurs" EntityType="Self.utilisateurs" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__composer__id_def__1B0907CE" Association="Self.FK__composer__id_def__1B0907CE">
             <End Role="defis" EntitySet="defis" />
-            <End Role="composer" EntitySet="composers" />
+            <End Role="composer" EntitySet="composer" />
           </AssociationSet>
-          <AssociationSet Name="FK__composer__id_fil__4222D4EF" Association="db_taqnshareModel.FK__composer__id_fil__4222D4EF">
+          <AssociationSet Name="FK__composer__id_fil__1A14E395" Association="Self.FK__composer__id_fil__1A14E395">
             <End Role="filtres" EntitySet="filtres" />
-            <End Role="composer" EntitySet="composers" />
+            <End Role="composer" EntitySet="composer" />
           </AssociationSet>
-          <AssociationSet Name="FK__composer__id_pie__412EB0B6" Association="db_taqnshareModel.FK__composer__id_pie__412EB0B6">
+          <AssociationSet Name="FK__composer__id_pie__1920BF5C" Association="Self.FK__composer__id_pie__1920BF5C">
             <End Role="pieces" EntitySet="pieces" />
-            <End Role="composer" EntitySet="composers" />
+            <End Role="composer" EntitySet="composer" />
           </AssociationSet>
-          <AssociationSet Name="FK__defis__id_utilis__3A81B327" Association="db_taqnshareModel.FK__defis__id_utilis__3A81B327">
+          <AssociationSet Name="FK__defis__id_utilis__1273C1CD" Association="Self.FK__defis__id_utilis__1273C1CD">
             <End Role="utilisateurs" EntitySet="utilisateurs" />
             <End Role="defis" EntitySet="defis" />
           </AssociationSet>
         </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_taqnshareModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="composer">
           <Key>
             <PropertyRef Name="id_piece" />
             <PropertyRef Name="id_filtre" />
             <PropertyRef Name="id_defi" />
           </Key>
-          <Property Name="id_piece" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="id_filtre" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="id_piece" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_filtre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="id_defi" Type="Int32" Nullable="false" />
           <Property Name="position_piece" Type="Decimal" Precision="8" Scale="0" />
-          <NavigationProperty Name="defi" Relationship="db_taqnshareModel.FK__composer__id_def__4316F928" FromRole="composer" ToRole="defis" />
-          <NavigationProperty Name="filtre" Relationship="db_taqnshareModel.FK__composer__id_fil__4222D4EF" FromRole="composer" ToRole="filtres" />
-          <NavigationProperty Name="piece" Relationship="db_taqnshareModel.FK__composer__id_pie__412EB0B6" FromRole="composer" ToRole="pieces" />
+          <NavigationProperty Name="defi" Relationship="Self.FK__composer__id_def__1B0907CE" FromRole="composer" ToRole="defis" />
+          <NavigationProperty Name="filtre" Relationship="Self.FK__composer__id_fil__1A14E395" FromRole="composer" ToRole="filtres" />
+          <NavigationProperty Name="piece" Relationship="Self.FK__composer__id_pie__1920BF5C" FromRole="composer" ToRole="pieces" />
         </EntityType>
         <EntityType Name="defi">
           <Key>
             <PropertyRef Name="id_defi" />
           </Key>
-          <Property Name="id_defi" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="id_utilisateur" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="nom_defi" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="id_adversaire_defi" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="id_defi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_utilisateur" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nom_defi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_adversaire_defi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="score_adversaire_defi" Type="Decimal" Precision="8" Scale="0" />
           <Property Name="score_utilisateur_defi" Type="Decimal" Precision="8" Scale="0" />
-          <Property Name="chemin_image_defi" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="chemin_image_defi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="nombre_decoupage_image_defi" Type="Decimal" Precision="8" Scale="0" />
           <Property Name="resolu" Type="Boolean" />
-          <NavigationProperty Name="composers" Relationship="db_taqnshareModel.FK__composer__id_def__4316F928" FromRole="defis" ToRole="composer" />
-          <NavigationProperty Name="utilisateur" Relationship="db_taqnshareModel.FK__defis__id_utilis__3A81B327" FromRole="defis" ToRole="utilisateurs" />
+          <NavigationProperty Name="composers" Relationship="Self.FK__composer__id_def__1B0907CE" FromRole="defis" ToRole="composer" />
+          <NavigationProperty Name="utilisateur" Relationship="Self.FK__defis__id_utilis__1273C1CD" FromRole="defis" ToRole="utilisateurs" />
         </EntityType>
         <EntityType Name="filtre">
           <Key>
             <PropertyRef Name="id_filtre" />
           </Key>
-          <Property Name="id_filtre" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="composers" Relationship="db_taqnshareModel.FK__composer__id_fil__4222D4EF" FromRole="filtres" ToRole="composer" />
+          <Property Name="id_filtre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="composers" Relationship="Self.FK__composer__id_fil__1A14E395" FromRole="filtres" ToRole="composer" />
         </EntityType>
         <EntityType Name="piece">
           <Key>
             <PropertyRef Name="id_piece" />
           </Key>
-          <Property Name="id_piece" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="composers" Relationship="db_taqnshareModel.FK__composer__id_pie__412EB0B6" FromRole="pieces" ToRole="composer" />
+          <Property Name="id_piece" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="composers" Relationship="Self.FK__composer__id_pie__1920BF5C" FromRole="pieces" ToRole="composer" />
         </EntityType>
         <EntityType Name="utilisateur">
           <Key>
             <PropertyRef Name="id_utilisateur" />
           </Key>
-          <Property Name="id_utilisateur" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="id_utilisateur" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nombre_partie_utilisateur" Type="Decimal" Precision="8" Scale="0" />
           <Property Name="score_total_utilisateur" Type="Decimal" Precision="8" Scale="0" />
-          <NavigationProperty Name="defis" Relationship="db_taqnshareModel.FK__defis__id_utilis__3A81B327" FromRole="utilisateurs" ToRole="defis" />
+          <NavigationProperty Name="defis" Relationship="Self.FK__defis__id_utilis__1273C1CD" FromRole="utilisateurs" ToRole="defis" />
         </EntityType>
-        <Association Name="FK__composer__id_def__4316F928">
-          <End Role="defis" Type="db_taqnshareModel.defi" Multiplicity="1">
+        <Association Name="FK__composer__id_def__1B0907CE">
+          <End Role="defis" Type="Self.defi" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="composer" Type="db_taqnshareModel.composer" Multiplicity="*" />
+          <End Role="composer" Type="Self.composer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="defis">
               <PropertyRef Name="id_defi" />
@@ -224,11 +201,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__composer__id_fil__4222D4EF">
-          <End Role="filtres" Type="db_taqnshareModel.filtre" Multiplicity="1">
+        <Association Name="FK__composer__id_fil__1A14E395">
+          <End Role="filtres" Type="Self.filtre" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="composer" Type="db_taqnshareModel.composer" Multiplicity="*" />
+          <End Role="composer" Type="Self.composer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="filtres">
               <PropertyRef Name="id_filtre" />
@@ -238,11 +215,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__composer__id_pie__412EB0B6">
-          <End Role="pieces" Type="db_taqnshareModel.piece" Multiplicity="1">
+        <Association Name="FK__composer__id_pie__1920BF5C">
+          <End Role="pieces" Type="Self.piece" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="composer" Type="db_taqnshareModel.composer" Multiplicity="*" />
+          <End Role="composer" Type="Self.composer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="pieces">
               <PropertyRef Name="id_piece" />
@@ -252,11 +229,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__defis__id_utilis__3A81B327">
-          <End Role="utilisateurs" Type="db_taqnshareModel.utilisateur" Multiplicity="0..1">
+        <Association Name="FK__defis__id_utilis__1273C1CD">
+          <End Role="utilisateurs" Type="Self.utilisateur" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="defis" Type="db_taqnshareModel.defi" Multiplicity="*" />
+          <End Role="defis" Type="Self.defi" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="utilisateurs">
               <PropertyRef Name="id_utilisateur" />
@@ -266,6 +243,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="db_taqnshareEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="composers" EntityType="Self.composer" />
+          <EntitySet Name="defis" EntityType="Self.defi" />
+          <EntitySet Name="filtres" EntityType="Self.filtre" />
+          <EntitySet Name="pieces" EntityType="Self.piece" />
+          <EntitySet Name="utilisateurs" EntityType="Self.utilisateur" />
+          <AssociationSet Name="FK__composer__id_def__1B0907CE" Association="Self.FK__composer__id_def__1B0907CE">
+            <End Role="defis" EntitySet="defis" />
+            <End Role="composer" EntitySet="composers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__composer__id_fil__1A14E395" Association="Self.FK__composer__id_fil__1A14E395">
+            <End Role="filtres" EntitySet="filtres" />
+            <End Role="composer" EntitySet="composers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__composer__id_pie__1920BF5C" Association="Self.FK__composer__id_pie__1920BF5C">
+            <End Role="pieces" EntitySet="pieces" />
+            <End Role="composer" EntitySet="composers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__defis__id_utilis__1273C1CD" Association="Self.FK__defis__id_utilis__1273C1CD">
+            <End Role="utilisateurs" EntitySet="utilisateurs" />
+            <End Role="defis" EntitySet="defis" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -334,8 +334,9 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
       </DesignerInfoPropertySet>
     </Options>

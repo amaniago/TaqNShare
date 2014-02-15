@@ -9,7 +9,9 @@ using Microsoft.Phone.Tasks;
 using TaqNShare.Data;
 using Facebook;
 using System.Windows;
-using TaqNShare.TaqnshareReference;
+using System.Windows.Navigation;
+using TaqNShare.TaqnshareReference; 
+using TaqNShare.WebService;
 using System.IO; 
 
 namespace TaqNShare.Views
@@ -32,6 +34,9 @@ namespace TaqNShare.Views
         /// </summary>
         public MainPage()
         {
+            bool utilisateurConnecte = false;
+            IsolatedStorageSettings.ApplicationSettings.TryGetValue("UtilisateurConnecte", out utilisateurConnecte);
+
             InitializeComponent();
 
             FacebookConnexion();
@@ -69,20 +74,19 @@ namespace TaqNShare.Views
             _galerie = new PhotoChooserTask();
             _galerie.Completed += ChoixPhotoCompleted;
 
+            if (!App.isAuthenticated && utilisateurConnecte)
+                Loaded += ConnexionFacebookBoutonClick;
+
+            TaqNShareWebService ws = new TaqNShareWebService();
+
             //s.GetIdUtilisateurCompleted += RecupGetIdUtilisateur;
             //s.GetIdUtilisateurAsync();
         }
 
-        /*public void RecupGetData(object sender, GetDataCompletedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            string test = e.Result;
-            testText.Text = test;
-        }*/
-
-        public void RecupGetIdUtilisateur(object sender, GetIdUtilisateurCompletedEventArgs e)
-        {
-            string test = e.Result;
-            testText.Text = test;
+            FacebookConnexion();
+            base.OnNavigatedTo(e);
         }
 
         private void ButtonPrendrePhotoTap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -132,13 +136,12 @@ namespace TaqNShare.Views
                     settings[key] = p.Id;
                 else
                     settings[key] = p.TailleGrille;
-
             }
             
             settings.Save();
         }
 
-        private void ConnexionFacebookBouton_Click(object sender, RoutedEventArgs e)
+        private void ConnexionFacebookBoutonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Views/FacebookLoginPage.xaml", UriKind.Relative));
         }
@@ -188,14 +191,27 @@ namespace TaqNShare.Views
             fb.GetTaskAsync("me");
         }
 
-        private async void DeConnexionFacebookBouton_Click(object sender, RoutedEventArgs e)
+        private async void DeConnexionFacebookBoutonClick(object sender, RoutedEventArgs e)
         {
             App.isAuthenticated = false;
 
-            WebBrowser FacebookWebBrowser = new WebBrowser();
+            var facebookWebBrowser = new WebBrowser();
 
-            FacebookWebBrowser.Navigate(new Uri(String.Format("https://www.facebook.com/logout.php?next={0}&access_token={1}", "http://www.facebook.com", App.AccessToken)));
-            await FacebookWebBrowser.ClearCookiesAsync();
+            facebookWebBrowser.Navigate(new Uri(String.Format("https://www.facebook.com/logout.php?next={0}&access_token={1}", "http://www.facebook.com", App.AccessToken)));
+            await facebookWebBrowser.ClearCookiesAsync();
+
+            IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
+
+            const string key = "UtilisateurConnecte";
+
+            if (!settings.Contains(key))
+                settings.Add(key, false);
+            else
+                settings[key] = false;
+
+
+            settings.Save();
+
             FacebookConnexion();
 
         }
