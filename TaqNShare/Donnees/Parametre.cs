@@ -1,4 +1,4 @@
-﻿namespace TaqNShare.Data
+﻿namespace TaqNShare.Donnees
 {
     public class Parametre
     {

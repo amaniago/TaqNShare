@@ -4,7 +4,7 @@ using System.Windows.Media.Imaging;
 using Windows.Storage.Streams;
 using Nokia.Graphics.Imaging;
 
-namespace TaqNShare.Data
+namespace TaqNShare.Donnees
 {
     /// <summary>
     /// Permet de stocker l'image selectionnée par l'utilisateur

@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
-namespace TaqNShare.Data
+namespace TaqNShare.Donnees
 {
     sealed class Partie : INotifyPropertyChanged
     {
@@ -87,7 +87,11 @@ namespace TaqNShare.Data
         /// <returns></returns>
         public bool DetecterFinJeu()
         {
+#if DEBUG
+            return true;
+#else
             return ListePieces.All(piece => piece.Id == piece.IndexPosition);
+#endif
         }
 
         /// <summary>

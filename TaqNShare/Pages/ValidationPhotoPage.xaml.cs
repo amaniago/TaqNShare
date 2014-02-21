@@ -3,7 +3,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Microsoft.Phone.Shell;
 
-namespace TaqNShare.Views
+namespace TaqNShare.Pages
 {
     /// <summary>
     /// Page permettant la validation de la photo prise :
@@ -38,7 +38,7 @@ namespace TaqNShare.Views
 
         private void BoutonLancerJeuTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Views/JeuPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Pages/JeuPage.xaml", UriKind.Relative));
         }
     }
 }

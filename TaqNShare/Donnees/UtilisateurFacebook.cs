@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TaqNShare.Data
+namespace TaqNShare.Donnees
 {
     public class UtilisateurFacebook
     {

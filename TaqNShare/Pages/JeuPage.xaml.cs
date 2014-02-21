@@ -9,10 +9,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Microsoft.Phone.Shell;
 using Nokia.Graphics.Imaging;
-using TaqNShare.Data;
+using TaqNShare.Donnees;
 using GestureEventArgs = System.Windows.Input.GestureEventArgs;
 
-namespace TaqNShare.Views
+namespace TaqNShare.Pages
 {
     /// <summary>
     /// Page de jeu :
@@ -258,7 +258,7 @@ namespace TaqNShare.Views
                 _partieEnCours.CalculerScore();
                 //Stockage de la partie pour la passer à la page suivante
                 PhoneApplicationService.Current.State["partie"] = _partieEnCours;
-                NavigationService.Navigate(new Uri("/Views/JeuTerminePage.xaml", UriKind.Relative));
+                NavigationService.Navigate(new Uri("/Pages/JeuTerminePage.xaml", UriKind.Relative));
             }
 
         }

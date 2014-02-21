@@ -5,9 +5,9 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Nokia.InteropServices.WindowsRuntime;
-using TaqNShare.Data;
+using TaqNShare.Donnees;
 
-namespace TaqNShare.Views
+namespace TaqNShare.Pages
 {
     public partial class JeuTerminePage
     {
@@ -42,7 +42,18 @@ namespace TaqNShare.Views
         /// <param name="e"></param>
         private void EnregistrementScoreBoutonClick(object sender, RoutedEventArgs e)
         {
+            if (App.EstAuthentifie)
+            {
+                NavigationService.Navigate(new Uri("/Pages/DemandeDefiPage", UriKind.Relative));
 
+            }
+            else
+            {
+                if (MessageBox.Show("Pour enregistrer une partie vous devez être connecté à Facebook. Voulez-vous vous connecter?", " ", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+                {
+                    NavigationService.Navigate(new Uri("/Pages/AuthentificationFacebookPage.xaml?pageAvant=DemandeDefiPage", UriKind.Relative));
+                }
+            }
         }
         
         /// <summary>
@@ -56,7 +67,7 @@ namespace TaqNShare.Views
                             "Si vous acceptez, votre score sera perdu !", " ", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
                 PhoneApplicationService.Current.State.Clear();
-                NavigationService.Navigate(new Uri("/Views/MainPage.xaml", UriKind.Relative));
+                NavigationService.Navigate(new Uri("/Pages/MainPage.xaml", UriKind.Relative));
             }
         }
     }

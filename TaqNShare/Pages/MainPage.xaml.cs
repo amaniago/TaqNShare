@@ -5,14 +5,14 @@ using System.Windows.Media.Imaging;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
-using TaqNShare.Data;
+using TaqNShare.Donnees;
 using Facebook;
 using System.Windows;
 using System.Windows.Navigation;
 using TaqNShare.TaqnshareReference;
 using TaqNShare.WebService;
 
-namespace TaqNShare.Views
+namespace TaqNShare.Pages
 {
     public partial class MainPage
     {
@@ -70,7 +70,7 @@ namespace TaqNShare.Views
             _galerie = new PhotoChooserTask();
             _galerie.Completed += ChoixPhotoCompleted;
 
-            if (!App.isAuthenticated && utilisateurConnecte)
+            if (!App.EstAuthentifie && utilisateurConnecte)
                 Loaded += ConnexionFacebookBoutonClick;
 
             TaqNShareWebService ws = new TaqNShareWebService();
@@ -100,7 +100,7 @@ namespace TaqNShare.Views
                 WriteableBitmap imageSelectionne = BitmapFactory.New(1, 1).FromStream(e.ChosenPhoto);
                 imageSelectionne = imageSelectionne.Resize(450, 732, WriteableBitmapExtensions.Interpolation.Bilinear);
                 PhoneApplicationService.Current.State["photo"] = imageSelectionne;
-                NavigationService.Navigate(new Uri("/Views/ValidationPhotoPage.xaml", UriKind.Relative));
+                NavigationService.Navigate(new Uri("/Pages/ValidationPhotoPage.xaml", UriKind.Relative));
             }
         }
 
@@ -137,25 +137,25 @@ namespace TaqNShare.Views
 
         private void ConnexionFacebookBoutonClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Views/FacebookLoginPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Pages/AuthentificationFacebookPage.xaml?pageAvant=MainPage", UriKind.Relative));
         }
 
         private void FacebookConnexion()
         {
-            if (App.isAuthenticated)
+            if (App.EstAuthentifie)
             {
                 ConnexionFacebookBouton.Visibility = Visibility.Collapsed;
                 DeConnexionFacebookBouton.Visibility = Visibility.Visible;
-                MyName.Visibility = Visibility.Visible;
-                MyImage.Visibility = Visibility.Visible;
+                nom.Visibility = Visibility.Visible;
+                photo.Visibility = Visibility.Visible;
                 LoadUserInfo();
             }
             else
             {
                 ConnexionFacebookBouton.Visibility = Visibility.Visible;
                 DeConnexionFacebookBouton.Visibility = Visibility.Collapsed;
-                MyName.Visibility = Visibility.Collapsed;
-                MyImage.Visibility = Visibility.Collapsed;
+                nom.Visibility = Visibility.Collapsed;
+                photo.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -175,11 +175,11 @@ namespace TaqNShare.Views
 
                 Dispatcher.BeginInvoke(() =>
                 {
-                    var profilePictureUrl = string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", App.FacebookId, "square", App.AccessToken);
+                    var profilePictureUrl = string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", App.IdFacebook, "square", App.AccessToken);
 
-                    MyImage.Source = new BitmapImage(new Uri(profilePictureUrl));
-                    if (MyName != null)
-                        MyName.Text = String.Format("{0} {1}", result["first_name"], result["last_name"]);
+                    photo.Source = new BitmapImage(new Uri(profilePictureUrl));
+                    if (nom != null)
+                        nom.Text = String.Format("{0} {1}", result["first_name"], result["last_name"]);
                 });
             };
             fb.GetTaskAsync("me");
@@ -187,7 +187,7 @@ namespace TaqNShare.Views
 
         private async void DeConnexionFacebookBoutonClick(object sender, RoutedEventArgs e)
         {
-            App.isAuthenticated = false;
+            App.EstAuthentifie = false;
 
             var facebookWebBrowser = new WebBrowser();
 

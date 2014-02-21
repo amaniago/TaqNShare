@@ -3,7 +3,7 @@ using System.IO.IsolatedStorage;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace TaqNShare.Data
+namespace TaqNShare.Donnees
 {
     class Piece
     {
