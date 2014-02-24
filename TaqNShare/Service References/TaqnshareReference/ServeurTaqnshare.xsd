@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ServeurTaqnshare" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ServeurTaqnshare" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="Utilisateur">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Defis" nillable="true" type="tns:ArrayOfDefi" />
+      <xs:element minOccurs="0" name="id_utilisateur" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="nom_utilisateur" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="nombre_partie_utilisateur" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="prenom_utilisateur" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="score_total_utilisateur" nillable="true" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Utilisateur" nillable="true" type="tns:Utilisateur" />
+  <xs:complexType name="ArrayOfDefi">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Defi" nillable="true" type="tns:Defi" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDefi" nillable="true" type="tns:ArrayOfDefi" />
+  <xs:complexType name="Defi">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Composers" nillable="true" type="tns:ArrayOfComposer" />
+      <xs:element minOccurs="0" name="Utilisateur" nillable="true" type="tns:Utilisateur" />
+      <xs:element minOccurs="0" name="chemin_image_defi" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id_adversaire_defi" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id_defi" type="xs:int" />
+      <xs:element minOccurs="0" name="id_utilisateur" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="nom_defi" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="resolu" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="score_adversaire_defi" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="score_utilisateur_defi" nillable="true" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Defi" nillable="true" type="tns:Defi" />
+  <xs:complexType name="ArrayOfComposer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Composer" nillable="true" type="tns:Composer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfComposer" nillable="true" type="tns:ArrayOfComposer" />
+  <xs:complexType name="Composer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Defi" nillable="true" type="tns:Defi" />
+      <xs:element minOccurs="0" name="Filtre" nillable="true" type="tns:Filtre" />
+      <xs:element minOccurs="0" name="Piece" nillable="true" type="tns:Piece" />
+      <xs:element minOccurs="0" name="id_defi" type="xs:int" />
+      <xs:element minOccurs="0" name="id_filtre" type="xs:int" />
+      <xs:element minOccurs="0" name="id_piece" type="xs:int" />
+      <xs:element minOccurs="0" name="position_piece" nillable="true" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Composer" nillable="true" type="tns:Composer" />
+  <xs:complexType name="Filtre">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Composers" nillable="true" type="tns:ArrayOfComposer" />
+      <xs:element minOccurs="0" name="id_filtre" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Filtre" nillable="true" type="tns:Filtre" />
+  <xs:complexType name="Piece">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Composers" nillable="true" type="tns:ArrayOfComposer" />
+      <xs:element minOccurs="0" name="id_piece" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Piece" nillable="true" type="tns:Piece" />
+</xs:schema>

@@ -13,7 +13,7 @@ namespace TaqNShare.Donnees
     {
         #region propriétés
 
-        public double Score { get; set; }
+        public int Score { get; set; }
         public List<Piece> ListePieces { get; private set; }
         public WriteableBitmap Photo { get; set; }
 
@@ -63,7 +63,7 @@ namespace TaqNShare.Donnees
             _timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
             StopWatch = new Stopwatch();
 
-            
+
             TailleGrille = tailleGrille;
 
             NombreFiltre = nombreFiltre;
@@ -87,11 +87,8 @@ namespace TaqNShare.Donnees
         /// <returns></returns>
         public bool DetecterFinJeu()
         {
-#if DEBUG
-            return true;
-#else
+            //return true;
             return ListePieces.All(piece => piece.Id == piece.IndexPosition);
-#endif
         }
 
         /// <summary>
@@ -125,7 +122,7 @@ namespace TaqNShare.Donnees
                     break;
             }
 
-            Score = Math.Round(((StopWatch.ElapsedMilliseconds / 1000.0) * 0.6) + NombreDeplacement + malusFacilite);
+            Score = Convert.ToInt32(Math.Round(((StopWatch.ElapsedMilliseconds / 1000.0) * 0.6) + NombreDeplacement + malusFacilite));
         }
     }
 }
