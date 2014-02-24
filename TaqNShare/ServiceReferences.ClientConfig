@@ -2,16 +2,16 @@
     <system.serviceModel>
         <bindings>
             <basicHttpBinding>
-                <binding name="BasicHttpBinding_IServiceTaqnshare" maxBufferSize="2147483647"
+                <binding name="BasicHttpBinding_ServiceTaqnshare" maxBufferSize="2147483647"
                     maxReceivedMessageSize="2147483647">
                     <security mode="None" />
                 </binding>
             </basicHttpBinding>
         </bindings>
         <client>
-            <endpoint address="http://192.168.1.21:3891/ServiceTaqnshare.svc"
-                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_IServiceTaqnshare"
-                contract="TaqnshareReference.IServiceTaqnshare" name="BasicHttpBinding_IServiceTaqnshare" />
+            <endpoint address="http://192.168.1.13:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_ServiceTaqnshare"
+                contract="TaqnshareReference.ServiceTaqnshare" name="BasicHttpBinding_ServiceTaqnshare" />
         </client>
     </system.serviceModel>
 </configuration>

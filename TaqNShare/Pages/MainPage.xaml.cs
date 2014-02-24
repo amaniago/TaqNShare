@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.IO.IsolatedStorage;
 using System.Windows.Media.Imaging;
 using Microsoft.Phone.Controls;
@@ -208,5 +209,58 @@ namespace TaqNShare.Pages
 
             FacebookConnexion();
         }
+
+        /*
+         * Test du web service en console pour l'envoi et le retour de l'image
+         * 
+        ServiceTaqnshareClient service = new ServiceTaqnshareClient();
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            byte[] test = ConvertToBytes();
+
+            //BitmapImage image = new BitmapImage();
+            //image.CreateOptions = BitmapCreateOptions.None;
+            //image.UriSource = new Uri("/Assets/Image/test.jpg", UriKind.Relative);
+
+            this.service.UploadFileCompleted += Test;
+            this.service.UploadFileAsync(test, "TaqNShare.png");
+        }
+
+        private void Test(object sender, UploadFileCompletedEventArgs e)
+        {
+            MessageBox.Show(e.Result);
+            this.service.GetImageFileCompleted += afficherImage;
+            this.service.GetImageFileAsync("TaqNShare.png");
+        }
+
+        private void afficherImage(object sender, GetImageFileCompletedEventArgs e)
+        {
+            testImage.Source = decodeImage(e.Result);
+        }
+
+        public static byte[] ConvertToBytes()
+        {
+            BitmapImage image = new BitmapImage();
+            image.CreateOptions = BitmapCreateOptions.None;
+            image.UriSource = new Uri("/TaqNShare.png", UriKind.Relative);
+            //image.UriSource = new Uri("/TaqNShare.png", UriKind.Relative);
+            WriteableBitmap wbmp = new WriteableBitmap(image);
+            MemoryStream ms = new MemoryStream();
+            wbmp.SaveJpeg(ms, wbmp.PixelWidth, wbmp.PixelHeight, 0, 100);
+            return ms.ToArray();
+        }
+
+        public BitmapImage decodeImage(byte[] array)
+        {
+            Stream stream = new MemoryStream(array);
+            BitmapImage image = new BitmapImage();
+
+            //image.;
+            //MessageBox.Show(array);
+            image.SetSource(stream);
+
+            return image;
+        } 
+         */
     }
 }

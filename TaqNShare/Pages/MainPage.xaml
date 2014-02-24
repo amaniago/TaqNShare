@@ -41,14 +41,13 @@
                 <phone:PanoramaItem.RenderTransform>
                     <TranslateTransform/>
                 </phone:PanoramaItem.RenderTransform>
-                <TextBlock x:Name="testText" HorizontalAlignment="Left" Height="388" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="408"/>
+                <Button Content="Button" HorizontalAlignment="Left" Height="89" VerticalAlignment="Top" Width="408" Margin="0,299,0,0"/>
             </phone:PanoramaItem>
             <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Classement" Height="512">
                 <phone:PanoramaItem.RenderTransform>
                     <TranslateTransform/>
                 </phone:PanoramaItem.RenderTransform>
-                <Grid HorizontalAlignment="Left" Height="435" Margin="-6,-49,0,0" VerticalAlignment="Top" Width="408">
-                </Grid>
+                <Image x:Name="testImage" HorizontalAlignment="Left" Height="388" VerticalAlignment="Top" Width="408"/>
             </phone:PanoramaItem>
             <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Paramètres" Height="512">
                 <phone:PanoramaItem.RenderTransform>

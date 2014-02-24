@@ -165,18 +165,12 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="ServiceReferences.ClientConfig" />
-    <None Include="Service References\TaqnshareReference\ServiceTaqnshare1.wsdl" />
-    <None Include="Service References\TaqnshareReference\ServiceTaqnshare3.xsd">
+    <None Include="Service References\TaqnshareReference\service.wsdl" />
+    <None Include="Service References\TaqnshareReference\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TaqnshareReference\ServiceTaqnshare31.xsd">
+    <None Include="Service References\TaqnshareReference\service1.xsd">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TaqnshareReference\ServiceTaqnshare32.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TaqnshareReference\TaqNShare.TaqnshareReference.CompositeType.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
