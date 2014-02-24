@@ -15,41 +15,31 @@ namespace TaqNShare.TaqnshareReference {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="TaqnshareReference.IServiceTaqnshare")]
-    public interface IServiceTaqnshare {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="TaqnshareReference.ServiceTaqnshare")]
+    public interface ServiceTaqnshare {
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IServiceTaqnshare/GetIdUtilisateur", ReplyAction="http://tempuri.org/IServiceTaqnshare/GetIdUtilisateurResponse")]
-        System.IAsyncResult BeginGetIdUtilisateur(System.AsyncCallback callback, object asyncState);
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ServiceTaqnshare/EnvoyerImage", ReplyAction="http://tempuri.org/ServiceTaqnshare/EnvoyerImageResponse")]
+        System.IAsyncResult BeginEnvoyerImage(byte[] imageByte, string nomImage, System.AsyncCallback callback, object asyncState);
         
-        string EndGetIdUtilisateur(System.IAsyncResult result);
+        string EndEnvoyerImage(System.IAsyncResult result);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IServiceTaqnshare/GetCoucou", ReplyAction="http://tempuri.org/IServiceTaqnshare/GetCoucouResponse")]
-        System.IAsyncResult BeginGetCoucou(byte[] f, string fileName, System.AsyncCallback callback, object asyncState);
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ServiceTaqnshare/RecupererImage", ReplyAction="http://tempuri.org/ServiceTaqnshare/RecupererImageResponse")]
+        System.IAsyncResult BeginRecupererImage(string nomImage, System.AsyncCallback callback, object asyncState);
         
-        string EndGetCoucou(System.IAsyncResult result);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IServiceTaqnshare/UploadFile", ReplyAction="http://tempuri.org/IServiceTaqnshare/UploadFileResponse")]
-        System.IAsyncResult BeginUploadFile(byte[] f, string fileName, System.AsyncCallback callback, object asyncState);
-        
-        string EndUploadFile(System.IAsyncResult result);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IServiceTaqnshare/GetImageFile", ReplyAction="http://tempuri.org/IServiceTaqnshare/GetImageFileResponse")]
-        System.IAsyncResult BeginGetImageFile(string fileName, System.AsyncCallback callback, object asyncState);
-        
-        byte[] EndGetImageFile(System.IAsyncResult result);
+        byte[] EndRecupererImage(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceTaqnshareChannel : TaqNShare.TaqnshareReference.IServiceTaqnshare, System.ServiceModel.IClientChannel {
+    public interface ServiceTaqnshareChannel : TaqNShare.TaqnshareReference.ServiceTaqnshare, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GetIdUtilisateurCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class EnvoyerImageCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        public GetIdUtilisateurCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        public EnvoyerImageCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -64,49 +54,11 @@ namespace TaqNShare.TaqnshareReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GetCoucouCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class RecupererImageCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        public GetCoucouCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        public string Result {
-            get {
-                base.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class UploadFileCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        public UploadFileCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        public string Result {
-            get {
-                base.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GetImageFileCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        public GetImageFileCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        public RecupererImageCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -121,31 +73,19 @@ namespace TaqNShare.TaqnshareReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceTaqnshareClient : System.ServiceModel.ClientBase<TaqNShare.TaqnshareReference.IServiceTaqnshare>, TaqNShare.TaqnshareReference.IServiceTaqnshare {
+    public partial class ServiceTaqnshareClient : System.ServiceModel.ClientBase<TaqNShare.TaqnshareReference.ServiceTaqnshare>, TaqNShare.TaqnshareReference.ServiceTaqnshare {
         
-        private BeginOperationDelegate onBeginGetIdUtilisateurDelegate;
+        private BeginOperationDelegate onBeginEnvoyerImageDelegate;
         
-        private EndOperationDelegate onEndGetIdUtilisateurDelegate;
+        private EndOperationDelegate onEndEnvoyerImageDelegate;
         
-        private System.Threading.SendOrPostCallback onGetIdUtilisateurCompletedDelegate;
+        private System.Threading.SendOrPostCallback onEnvoyerImageCompletedDelegate;
         
-        private BeginOperationDelegate onBeginGetCoucouDelegate;
+        private BeginOperationDelegate onBeginRecupererImageDelegate;
         
-        private EndOperationDelegate onEndGetCoucouDelegate;
+        private EndOperationDelegate onEndRecupererImageDelegate;
         
-        private System.Threading.SendOrPostCallback onGetCoucouCompletedDelegate;
-        
-        private BeginOperationDelegate onBeginUploadFileDelegate;
-        
-        private EndOperationDelegate onEndUploadFileDelegate;
-        
-        private System.Threading.SendOrPostCallback onUploadFileCompletedDelegate;
-        
-        private BeginOperationDelegate onBeginGetImageFileDelegate;
-        
-        private EndOperationDelegate onEndGetImageFileDelegate;
-        
-        private System.Threading.SendOrPostCallback onGetImageFileCompletedDelegate;
+        private System.Threading.SendOrPostCallback onRecupererImageCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -200,202 +140,106 @@ namespace TaqNShare.TaqnshareReference {
             }
         }
         
-        public event System.EventHandler<GetIdUtilisateurCompletedEventArgs> GetIdUtilisateurCompleted;
+        public event System.EventHandler<EnvoyerImageCompletedEventArgs> EnvoyerImageCompleted;
         
-        public event System.EventHandler<GetCoucouCompletedEventArgs> GetCoucouCompleted;
-        
-        public event System.EventHandler<UploadFileCompletedEventArgs> UploadFileCompleted;
-        
-        public event System.EventHandler<GetImageFileCompletedEventArgs> GetImageFileCompleted;
+        public event System.EventHandler<RecupererImageCompletedEventArgs> RecupererImageCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CloseCompleted;
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult TaqNShare.TaqnshareReference.IServiceTaqnshare.BeginGetIdUtilisateur(System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginGetIdUtilisateur(callback, asyncState);
+        System.IAsyncResult TaqNShare.TaqnshareReference.ServiceTaqnshare.BeginEnvoyerImage(byte[] imageByte, string nomImage, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginEnvoyerImage(imageByte, nomImage, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        string TaqNShare.TaqnshareReference.IServiceTaqnshare.EndGetIdUtilisateur(System.IAsyncResult result) {
-            return base.Channel.EndGetIdUtilisateur(result);
+        string TaqNShare.TaqnshareReference.ServiceTaqnshare.EndEnvoyerImage(System.IAsyncResult result) {
+            return base.Channel.EndEnvoyerImage(result);
         }
         
-        private System.IAsyncResult OnBeginGetIdUtilisateur(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            return ((TaqNShare.TaqnshareReference.IServiceTaqnshare)(this)).BeginGetIdUtilisateur(callback, asyncState);
+        private System.IAsyncResult OnBeginEnvoyerImage(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            byte[] imageByte = ((byte[])(inValues[0]));
+            string nomImage = ((string)(inValues[1]));
+            return ((TaqNShare.TaqnshareReference.ServiceTaqnshare)(this)).BeginEnvoyerImage(imageByte, nomImage, callback, asyncState);
         }
         
-        private object[] OnEndGetIdUtilisateur(System.IAsyncResult result) {
-            string retVal = ((TaqNShare.TaqnshareReference.IServiceTaqnshare)(this)).EndGetIdUtilisateur(result);
+        private object[] OnEndEnvoyerImage(System.IAsyncResult result) {
+            string retVal = ((TaqNShare.TaqnshareReference.ServiceTaqnshare)(this)).EndEnvoyerImage(result);
             return new object[] {
                     retVal};
         }
         
-        private void OnGetIdUtilisateurCompleted(object state) {
-            if ((this.GetIdUtilisateurCompleted != null)) {
+        private void OnEnvoyerImageCompleted(object state) {
+            if ((this.EnvoyerImageCompleted != null)) {
                 InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.GetIdUtilisateurCompleted(this, new GetIdUtilisateurCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+                this.EnvoyerImageCompleted(this, new EnvoyerImageCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
             }
         }
         
-        public void GetIdUtilisateurAsync() {
-            this.GetIdUtilisateurAsync(null);
+        public void EnvoyerImageAsync(byte[] imageByte, string nomImage) {
+            this.EnvoyerImageAsync(imageByte, nomImage, null);
         }
         
-        public void GetIdUtilisateurAsync(object userState) {
-            if ((this.onBeginGetIdUtilisateurDelegate == null)) {
-                this.onBeginGetIdUtilisateurDelegate = new BeginOperationDelegate(this.OnBeginGetIdUtilisateur);
+        public void EnvoyerImageAsync(byte[] imageByte, string nomImage, object userState) {
+            if ((this.onBeginEnvoyerImageDelegate == null)) {
+                this.onBeginEnvoyerImageDelegate = new BeginOperationDelegate(this.OnBeginEnvoyerImage);
             }
-            if ((this.onEndGetIdUtilisateurDelegate == null)) {
-                this.onEndGetIdUtilisateurDelegate = new EndOperationDelegate(this.OnEndGetIdUtilisateur);
+            if ((this.onEndEnvoyerImageDelegate == null)) {
+                this.onEndEnvoyerImageDelegate = new EndOperationDelegate(this.OnEndEnvoyerImage);
             }
-            if ((this.onGetIdUtilisateurCompletedDelegate == null)) {
-                this.onGetIdUtilisateurCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetIdUtilisateurCompleted);
+            if ((this.onEnvoyerImageCompletedDelegate == null)) {
+                this.onEnvoyerImageCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnEnvoyerImageCompleted);
             }
-            base.InvokeAsync(this.onBeginGetIdUtilisateurDelegate, null, this.onEndGetIdUtilisateurDelegate, this.onGetIdUtilisateurCompletedDelegate, userState);
+            base.InvokeAsync(this.onBeginEnvoyerImageDelegate, new object[] {
+                        imageByte,
+                        nomImage}, this.onEndEnvoyerImageDelegate, this.onEnvoyerImageCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult TaqNShare.TaqnshareReference.IServiceTaqnshare.BeginGetCoucou(byte[] f, string fileName, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginGetCoucou(f, fileName, callback, asyncState);
+        System.IAsyncResult TaqNShare.TaqnshareReference.ServiceTaqnshare.BeginRecupererImage(string nomImage, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginRecupererImage(nomImage, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        string TaqNShare.TaqnshareReference.IServiceTaqnshare.EndGetCoucou(System.IAsyncResult result) {
-            return base.Channel.EndGetCoucou(result);
+        byte[] TaqNShare.TaqnshareReference.ServiceTaqnshare.EndRecupererImage(System.IAsyncResult result) {
+            return base.Channel.EndRecupererImage(result);
         }
         
-        private System.IAsyncResult OnBeginGetCoucou(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            byte[] f = ((byte[])(inValues[0]));
-            string fileName = ((string)(inValues[1]));
-            return ((TaqNShare.TaqnshareReference.IServiceTaqnshare)(this)).BeginGetCoucou(f, fileName, callback, asyncState);
+        private System.IAsyncResult OnBeginRecupererImage(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string nomImage = ((string)(inValues[0]));
+            return ((TaqNShare.TaqnshareReference.ServiceTaqnshare)(this)).BeginRecupererImage(nomImage, callback, asyncState);
         }
         
-        private object[] OnEndGetCoucou(System.IAsyncResult result) {
-            string retVal = ((TaqNShare.TaqnshareReference.IServiceTaqnshare)(this)).EndGetCoucou(result);
+        private object[] OnEndRecupererImage(System.IAsyncResult result) {
+            byte[] retVal = ((TaqNShare.TaqnshareReference.ServiceTaqnshare)(this)).EndRecupererImage(result);
             return new object[] {
                     retVal};
         }
         
-        private void OnGetCoucouCompleted(object state) {
-            if ((this.GetCoucouCompleted != null)) {
+        private void OnRecupererImageCompleted(object state) {
+            if ((this.RecupererImageCompleted != null)) {
                 InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.GetCoucouCompleted(this, new GetCoucouCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+                this.RecupererImageCompleted(this, new RecupererImageCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
             }
         }
         
-        public void GetCoucouAsync(byte[] f, string fileName) {
-            this.GetCoucouAsync(f, fileName, null);
+        public void RecupererImageAsync(string nomImage) {
+            this.RecupererImageAsync(nomImage, null);
         }
         
-        public void GetCoucouAsync(byte[] f, string fileName, object userState) {
-            if ((this.onBeginGetCoucouDelegate == null)) {
-                this.onBeginGetCoucouDelegate = new BeginOperationDelegate(this.OnBeginGetCoucou);
+        public void RecupererImageAsync(string nomImage, object userState) {
+            if ((this.onBeginRecupererImageDelegate == null)) {
+                this.onBeginRecupererImageDelegate = new BeginOperationDelegate(this.OnBeginRecupererImage);
             }
-            if ((this.onEndGetCoucouDelegate == null)) {
-                this.onEndGetCoucouDelegate = new EndOperationDelegate(this.OnEndGetCoucou);
+            if ((this.onEndRecupererImageDelegate == null)) {
+                this.onEndRecupererImageDelegate = new EndOperationDelegate(this.OnEndRecupererImage);
             }
-            if ((this.onGetCoucouCompletedDelegate == null)) {
-                this.onGetCoucouCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetCoucouCompleted);
+            if ((this.onRecupererImageCompletedDelegate == null)) {
+                this.onRecupererImageCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnRecupererImageCompleted);
             }
-            base.InvokeAsync(this.onBeginGetCoucouDelegate, new object[] {
-                        f,
-                        fileName}, this.onEndGetCoucouDelegate, this.onGetCoucouCompletedDelegate, userState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult TaqNShare.TaqnshareReference.IServiceTaqnshare.BeginUploadFile(byte[] f, string fileName, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginUploadFile(f, fileName, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        string TaqNShare.TaqnshareReference.IServiceTaqnshare.EndUploadFile(System.IAsyncResult result) {
-            return base.Channel.EndUploadFile(result);
-        }
-        
-        private System.IAsyncResult OnBeginUploadFile(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            byte[] f = ((byte[])(inValues[0]));
-            string fileName = ((string)(inValues[1]));
-            return ((TaqNShare.TaqnshareReference.IServiceTaqnshare)(this)).BeginUploadFile(f, fileName, callback, asyncState);
-        }
-        
-        private object[] OnEndUploadFile(System.IAsyncResult result) {
-            string retVal = ((TaqNShare.TaqnshareReference.IServiceTaqnshare)(this)).EndUploadFile(result);
-            return new object[] {
-                    retVal};
-        }
-        
-        private void OnUploadFileCompleted(object state) {
-            if ((this.UploadFileCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.UploadFileCompleted(this, new UploadFileCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void UploadFileAsync(byte[] f, string fileName) {
-            this.UploadFileAsync(f, fileName, null);
-        }
-        
-        public void UploadFileAsync(byte[] f, string fileName, object userState) {
-            if ((this.onBeginUploadFileDelegate == null)) {
-                this.onBeginUploadFileDelegate = new BeginOperationDelegate(this.OnBeginUploadFile);
-            }
-            if ((this.onEndUploadFileDelegate == null)) {
-                this.onEndUploadFileDelegate = new EndOperationDelegate(this.OnEndUploadFile);
-            }
-            if ((this.onUploadFileCompletedDelegate == null)) {
-                this.onUploadFileCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnUploadFileCompleted);
-            }
-            base.InvokeAsync(this.onBeginUploadFileDelegate, new object[] {
-                        f,
-                        fileName}, this.onEndUploadFileDelegate, this.onUploadFileCompletedDelegate, userState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult TaqNShare.TaqnshareReference.IServiceTaqnshare.BeginGetImageFile(string fileName, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginGetImageFile(fileName, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        byte[] TaqNShare.TaqnshareReference.IServiceTaqnshare.EndGetImageFile(System.IAsyncResult result) {
-            return base.Channel.EndGetImageFile(result);
-        }
-        
-        private System.IAsyncResult OnBeginGetImageFile(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            string fileName = ((string)(inValues[0]));
-            return ((TaqNShare.TaqnshareReference.IServiceTaqnshare)(this)).BeginGetImageFile(fileName, callback, asyncState);
-        }
-        
-        private object[] OnEndGetImageFile(System.IAsyncResult result) {
-            byte[] retVal = ((TaqNShare.TaqnshareReference.IServiceTaqnshare)(this)).EndGetImageFile(result);
-            return new object[] {
-                    retVal};
-        }
-        
-        private void OnGetImageFileCompleted(object state) {
-            if ((this.GetImageFileCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.GetImageFileCompleted(this, new GetImageFileCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void GetImageFileAsync(string fileName) {
-            this.GetImageFileAsync(fileName, null);
-        }
-        
-        public void GetImageFileAsync(string fileName, object userState) {
-            if ((this.onBeginGetImageFileDelegate == null)) {
-                this.onBeginGetImageFileDelegate = new BeginOperationDelegate(this.OnBeginGetImageFile);
-            }
-            if ((this.onEndGetImageFileDelegate == null)) {
-                this.onEndGetImageFileDelegate = new EndOperationDelegate(this.OnEndGetImageFile);
-            }
-            if ((this.onGetImageFileCompletedDelegate == null)) {
-                this.onGetImageFileCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetImageFileCompleted);
-            }
-            base.InvokeAsync(this.onBeginGetImageFileDelegate, new object[] {
-                        fileName}, this.onEndGetImageFileDelegate, this.onGetImageFileCompletedDelegate, userState);
+            base.InvokeAsync(this.onBeginRecupererImageDelegate, new object[] {
+                        nomImage}, this.onEndRecupererImageDelegate, this.onRecupererImageCompletedDelegate, userState);
         }
         
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
@@ -464,66 +308,40 @@ namespace TaqNShare.TaqnshareReference {
             base.InvokeAsync(this.onBeginCloseDelegate, null, this.onEndCloseDelegate, this.onCloseCompletedDelegate, userState);
         }
         
-        protected override TaqNShare.TaqnshareReference.IServiceTaqnshare CreateChannel() {
+        protected override TaqNShare.TaqnshareReference.ServiceTaqnshare CreateChannel() {
             return new ServiceTaqnshareClientChannel(this);
         }
         
-        private class ServiceTaqnshareClientChannel : ChannelBase<TaqNShare.TaqnshareReference.IServiceTaqnshare>, TaqNShare.TaqnshareReference.IServiceTaqnshare {
+        private class ServiceTaqnshareClientChannel : ChannelBase<TaqNShare.TaqnshareReference.ServiceTaqnshare>, TaqNShare.TaqnshareReference.ServiceTaqnshare {
             
-            public ServiceTaqnshareClientChannel(System.ServiceModel.ClientBase<TaqNShare.TaqnshareReference.IServiceTaqnshare> client) : 
+            public ServiceTaqnshareClientChannel(System.ServiceModel.ClientBase<TaqNShare.TaqnshareReference.ServiceTaqnshare> client) : 
                     base(client) {
             }
             
-            public System.IAsyncResult BeginGetIdUtilisateur(System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[0];
-                System.IAsyncResult _result = base.BeginInvoke("GetIdUtilisateur", _args, callback, asyncState);
-                return _result;
-            }
-            
-            public string EndGetIdUtilisateur(System.IAsyncResult result) {
-                object[] _args = new object[0];
-                string _result = ((string)(base.EndInvoke("GetIdUtilisateur", _args, result)));
-                return _result;
-            }
-            
-            public System.IAsyncResult BeginGetCoucou(byte[] f, string fileName, System.AsyncCallback callback, object asyncState) {
+            public System.IAsyncResult BeginEnvoyerImage(byte[] imageByte, string nomImage, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[2];
-                _args[0] = f;
-                _args[1] = fileName;
-                System.IAsyncResult _result = base.BeginInvoke("GetCoucou", _args, callback, asyncState);
+                _args[0] = imageByte;
+                _args[1] = nomImage;
+                System.IAsyncResult _result = base.BeginInvoke("EnvoyerImage", _args, callback, asyncState);
                 return _result;
             }
             
-            public string EndGetCoucou(System.IAsyncResult result) {
+            public string EndEnvoyerImage(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                string _result = ((string)(base.EndInvoke("GetCoucou", _args, result)));
+                string _result = ((string)(base.EndInvoke("EnvoyerImage", _args, result)));
                 return _result;
             }
             
-            public System.IAsyncResult BeginUploadFile(byte[] f, string fileName, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[2];
-                _args[0] = f;
-                _args[1] = fileName;
-                System.IAsyncResult _result = base.BeginInvoke("UploadFile", _args, callback, asyncState);
-                return _result;
-            }
-            
-            public string EndUploadFile(System.IAsyncResult result) {
-                object[] _args = new object[0];
-                string _result = ((string)(base.EndInvoke("UploadFile", _args, result)));
-                return _result;
-            }
-            
-            public System.IAsyncResult BeginGetImageFile(string fileName, System.AsyncCallback callback, object asyncState) {
+            public System.IAsyncResult BeginRecupererImage(string nomImage, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[1];
-                _args[0] = fileName;
-                System.IAsyncResult _result = base.BeginInvoke("GetImageFile", _args, callback, asyncState);
+                _args[0] = nomImage;
+                System.IAsyncResult _result = base.BeginInvoke("RecupererImage", _args, callback, asyncState);
                 return _result;
             }
             
-            public byte[] EndGetImageFile(System.IAsyncResult result) {
+            public byte[] EndRecupererImage(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                byte[] _result = ((byte[])(base.EndInvoke("GetImageFile", _args, result)));
+                byte[] _result = ((byte[])(base.EndInvoke("RecupererImage", _args, result)));
                 return _result;
             }
         }
