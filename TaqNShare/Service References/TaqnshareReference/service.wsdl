@@ -6,32 +6,32 @@
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="ServiceTaqnshare_UploadFile_InputMessage">
-    <wsdl:part name="parameters" element="tns:UploadFile" />
+  <wsdl:message name="ServiceTaqnshare_EnvoyerImage_InputMessage">
+    <wsdl:part name="parameters" element="tns:EnvoyerImage" />
   </wsdl:message>
-  <wsdl:message name="ServiceTaqnshare_UploadFile_OutputMessage">
-    <wsdl:part name="parameters" element="tns:UploadFileResponse" />
+  <wsdl:message name="ServiceTaqnshare_EnvoyerImage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EnvoyerImageResponse" />
   </wsdl:message>
-  <wsdl:message name="ServiceTaqnshare_GetImageFile_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetImageFile" />
+  <wsdl:message name="ServiceTaqnshare_RecupererImage_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecupererImage" />
   </wsdl:message>
-  <wsdl:message name="ServiceTaqnshare_GetImageFile_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetImageFileResponse" />
+  <wsdl:message name="ServiceTaqnshare_RecupererImage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecupererImageResponse" />
   </wsdl:message>
   <wsdl:portType name="ServiceTaqnshare">
-    <wsdl:operation name="UploadFile">
-      <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/UploadFile" message="tns:ServiceTaqnshare_UploadFile_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/UploadFileResponse" message="tns:ServiceTaqnshare_UploadFile_OutputMessage" />
+    <wsdl:operation name="EnvoyerImage">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/EnvoyerImage" message="tns:ServiceTaqnshare_EnvoyerImage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/EnvoyerImageResponse" message="tns:ServiceTaqnshare_EnvoyerImage_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetImageFile">
-      <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/GetImageFile" message="tns:ServiceTaqnshare_GetImageFile_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/GetImageFileResponse" message="tns:ServiceTaqnshare_GetImageFile_OutputMessage" />
+    <wsdl:operation name="RecupererImage">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererImage" message="tns:ServiceTaqnshare_RecupererImage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererImageResponse" message="tns:ServiceTaqnshare_RecupererImage_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ServiceTaqnshare" type="tns:ServiceTaqnshare">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="UploadFile">
-      <soap:operation soapAction="http://tempuri.org/ServiceTaqnshare/UploadFile" style="document" />
+    <wsdl:operation name="EnvoyerImage">
+      <soap:operation soapAction="http://tempuri.org/ServiceTaqnshare/EnvoyerImage" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -39,8 +39,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetImageFile">
-      <soap:operation soapAction="http://tempuri.org/ServiceTaqnshare/GetImageFile" style="document" />
+    <wsdl:operation name="RecupererImage">
+      <soap:operation soapAction="http://tempuri.org/ServiceTaqnshare/RecupererImage" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

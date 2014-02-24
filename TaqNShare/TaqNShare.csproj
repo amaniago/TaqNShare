@@ -113,7 +113,6 @@
     <Compile Include="Pages\ValidationPhotoPage.xaml.cs">
       <DependentUpon>ValidationPhotoPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WebService\TaqNShareWebService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

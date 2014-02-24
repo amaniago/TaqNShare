@@ -11,7 +11,7 @@ using Facebook;
 using System.Windows;
 using System.Windows.Navigation;
 using TaqNShare.TaqnshareReference;
-using TaqNShare.WebService;
+
 
 namespace TaqNShare.Pages
 {
@@ -73,9 +73,6 @@ namespace TaqNShare.Pages
 
             if (!App.EstAuthentifie && utilisateurConnecte)
                 Loaded += ConnexionFacebookBoutonClick;
-
-            TaqNShareWebService ws = new TaqNShareWebService();
-
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -211,40 +208,34 @@ namespace TaqNShare.Pages
         }
 
         /*
-         * Test du web service en console pour l'envoi et le retour de l'image
-         * 
         ServiceTaqnshareClient service = new ServiceTaqnshareClient();
         private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            byte[] test = ConvertToBytes();
-
-            //BitmapImage image = new BitmapImage();
-            //image.CreateOptions = BitmapCreateOptions.None;
-            //image.UriSource = new Uri("/Assets/Image/test.jpg", UriKind.Relative);
-
-            this.service.UploadFileCompleted += Test;
-            this.service.UploadFileAsync(test, "TaqNShare.png");
-        }
-
-        private void Test(object sender, UploadFileCompletedEventArgs e)
-        {
-            MessageBox.Show(e.Result);
-            this.service.GetImageFileCompleted += afficherImage;
-            this.service.GetImageFileAsync("TaqNShare.png");
-        }
-
-        private void afficherImage(object sender, GetImageFileCompletedEventArgs e)
-        {
-            testImage.Source = decodeImage(e.Result);
-        }
-
-        public static byte[] ConvertToBytes()
         {
             BitmapImage image = new BitmapImage();
             image.CreateOptions = BitmapCreateOptions.None;
             image.UriSource = new Uri("/TaqNShare.png", UriKind.Relative);
-            //image.UriSource = new Uri("/TaqNShare.png", UriKind.Relative);
             WriteableBitmap wbmp = new WriteableBitmap(image);
+
+            byte[] test = ConvertToBytes(wbmp);
+
+            this.service.EnvoyerImageCompleted += EnvoyerImage;
+            this.service.EnvoyerImageAsync(test, "TaqNShare.png");
+        }
+
+        private void EnvoyerImage(object sender, EnvoyerImageCompletedEventArgs e)
+        {
+            MessageBox.Show(e.Result);
+            service.RecupererImageCompleted += AfficherImage;
+            service.RecupererImageAsync("TaqNShare.png");
+        }
+
+        private void AfficherImage(object sender, RecupererImageCompletedEventArgs e)
+        {
+            testImage.Source = decodeImage(e.Result);
+        }
+
+        public static byte[] ConvertToBytes(WriteableBitmap wbmp)
+        {
             MemoryStream ms = new MemoryStream();
             wbmp.SaveJpeg(ms, wbmp.PixelWidth, wbmp.PixelHeight, 0, 100);
             return ms.ToArray();
@@ -255,12 +246,10 @@ namespace TaqNShare.Pages
             Stream stream = new MemoryStream(array);
             BitmapImage image = new BitmapImage();
 
-            //image.;
-            //MessageBox.Show(array);
             image.SetSource(stream);
 
             return image;
         } 
-         */
+         * */
     }
 }
