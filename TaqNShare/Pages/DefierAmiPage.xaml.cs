@@ -26,7 +26,9 @@ namespace TaqNShare.Pages
 
         private void retourAccueil_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Pages/MainPage.xaml", UriKind.Relative));
+            MessageBox.Show(listeAmis.SelectedIndex.ToString());
+            MessageBox.Show(Amis[0].get)
+            //NavigationService.Navigate(new Uri("/Pages/MainPage.xaml", UriKind.Relative));
         }
 
         private void LoadUserInfo()
@@ -76,7 +78,6 @@ namespace TaqNShare.Pages
                         Amis.Add(new UtilisateurFacebook { Nom = (string)ami["name"], Id = (string)ami["id"], Image = new Uri(string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", ami["id"], "square", App.AccessToken)) });
                     }
                 });
-
             };
             fb.GetTaskAsync("/me/friends");
         }
