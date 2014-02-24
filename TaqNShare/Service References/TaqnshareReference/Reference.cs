@@ -512,7 +512,7 @@ namespace TaqNShare.TaqnshareReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ServiceTaqnshare/EnregistrerScore", ReplyAction="http://tempuri.org/ServiceTaqnshare/EnregistrerScoreResponse")]
         System.IAsyncResult BeginEnregistrerScore(TaqNShare.TaqnshareReference.Utilisateur utilisateurCourant, int scorePartie, System.AsyncCallback callback, object asyncState);
         
-        bool EndEnregistrerScore(System.IAsyncResult result);
+        string EndEnregistrerScore(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ServiceTaqnshare/CreerDefi", ReplyAction="http://tempuri.org/ServiceTaqnshare/CreerDefiResponse")]
         System.IAsyncResult BeginCreerDefi(TaqNShare.TaqnshareReference.Defi partieUtilisateur, System.Collections.Generic.List<TaqNShare.TaqnshareReference.Composer> compositionTaquin, System.AsyncCallback callback, object asyncState);
@@ -573,10 +573,10 @@ namespace TaqNShare.TaqnshareReference {
             this.results = results;
         }
         
-        public bool Result {
+        public string Result {
             get {
                 base.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
+                return ((string)(this.results[0]));
             }
         }
     }
@@ -793,7 +793,7 @@ namespace TaqNShare.TaqnshareReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        bool TaqNShare.TaqnshareReference.ServiceTaqnshare.EndEnregistrerScore(System.IAsyncResult result) {
+        string TaqNShare.TaqnshareReference.ServiceTaqnshare.EndEnregistrerScore(System.IAsyncResult result) {
             return base.Channel.EndEnregistrerScore(result);
         }
         
@@ -804,7 +804,7 @@ namespace TaqNShare.TaqnshareReference {
         }
         
         private object[] OnEndEnregistrerScore(System.IAsyncResult result) {
-            bool retVal = ((TaqNShare.TaqnshareReference.ServiceTaqnshare)(this)).EndEnregistrerScore(result);
+            string retVal = ((TaqNShare.TaqnshareReference.ServiceTaqnshare)(this)).EndEnregistrerScore(result);
             return new object[] {
                     retVal};
         }
@@ -994,9 +994,9 @@ namespace TaqNShare.TaqnshareReference {
                 return _result;
             }
             
-            public bool EndEnregistrerScore(System.IAsyncResult result) {
+            public string EndEnregistrerScore(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                bool _result = ((bool)(base.EndInvoke("EnregistrerScore", _args, result)));
+                string _result = ((string)(base.EndInvoke("EnregistrerScore", _args, result)));
                 return _result;
             }
             

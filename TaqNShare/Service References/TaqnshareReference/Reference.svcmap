@@ -20,13 +20,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://192.168.1.13:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="http://192.168.1.20:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="ac4406b3-2387-4279-a4f2-e1b8d7705997" SourceId="1" SourceUrl="http://192.168.1.13:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="33b529ce-2108-4eac-bf28-d92b74b8a22c" SourceId="1" SourceUrl="http://192.168.1.13:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="1312a13a-ee27-4df0-9fab-48f5fb71c4d3" SourceId="1" SourceUrl="http://192.168.1.13:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" />
-    <MetadataFile FileName="ServeurTaqnshare.xsd" MetadataType="Schema" ID="77dcb444-34b8-4828-a9f3-4ea62bf20234" SourceId="1" SourceUrl="http://192.168.1.13:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" />
+    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="f829b8c2-2d67-43da-b29e-fb28c9273b54" SourceId="1" SourceUrl="http://192.168.1.20:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" />
+    <MetadataFile FileName="service2.xsd" MetadataType="Schema" ID="dfe13835-056c-4ca9-abb1-85ae624da808" SourceId="1" SourceUrl="http://192.168.1.20:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" />
+    <MetadataFile FileName="service21.xsd" MetadataType="Schema" ID="bfa749f8-fccd-482d-b94d-547696635f1b" SourceId="1" SourceUrl="http://192.168.1.20:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" />
+    <MetadataFile FileName="ServeurTaqnshare1.xsd" MetadataType="Schema" ID="cb767f22-f809-4b91-8ec9-31eb514040e2" SourceId="1" SourceUrl="http://192.168.1.20:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

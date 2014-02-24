@@ -57,10 +57,8 @@ namespace TaqNShare.Pages
                     settings[key] = true;
 
                 settings.Save();
-
-                Dispatcher.BeginInvoke(() => NavigationService.Navigate(new Uri("/Pages/DefierAmiPage.xaml", UriKind.Relative)));
-
-                //Dispatcher.BeginInvoke(() => NavigationService.Navigate(new Uri("/Pages/" + _pageAvant + ".xaml", UriKind.Relative)));
+                
+                Dispatcher.BeginInvoke(() => NavigationService.Navigate(new Uri("/Pages/" + _pageAvant + ".xaml", UriKind.Relative)));
             }
             catch (InvalidOperationException e)
             {

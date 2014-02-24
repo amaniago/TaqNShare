@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using Nokia.InteropServices.WindowsRuntime;
 using TaqNShare.Donnees;
 
 namespace TaqNShare.Pages
@@ -44,7 +41,7 @@ namespace TaqNShare.Pages
         {
             if (App.EstAuthentifie)
             {
-                NavigationService.Navigate(new Uri("/Pages/DefierAmiPage.xaml", UriKind.Relative));
+                NavigationService.Navigate(new Uri("/Pages/DemandeDefiPage.xaml", UriKind.Relative));
 
             }
             else

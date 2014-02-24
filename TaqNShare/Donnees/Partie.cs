@@ -13,7 +13,7 @@ namespace TaqNShare.Donnees
     {
         #region propriétés
 
-        public double Score { get; set; }
+        public int Score { get; set; }
         public List<Piece> ListePieces { get; private set; }
         public WriteableBitmap Photo { get; set; }
 
@@ -125,7 +125,7 @@ namespace TaqNShare.Donnees
                     break;
             }
 
-            Score = Math.Round(((StopWatch.ElapsedMilliseconds / 1000.0) * 0.6) + NombreDeplacement + malusFacilite);
+            Score = Convert.ToInt32(Math.Round(((StopWatch.ElapsedMilliseconds / 1000.0) * 0.6) + NombreDeplacement + malusFacilite));
         }
     }
 }
