@@ -164,6 +164,9 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="ServiceReferences.ClientConfig" />
+    <None Include="Service References\TaqnshareReference\ServeurTaqnshare.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\TaqnshareReference\service.wsdl" />
     <None Include="Service References\TaqnshareReference\service.xsd">
       <SubType>Designer</SubType>
