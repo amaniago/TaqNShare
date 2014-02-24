@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+﻿    using System.Collections.ObjectModel;
 
 namespace TaqNShare.Donnees
 {
@@ -12,6 +12,13 @@ namespace TaqNShare.Donnees
             {
                 return amis;
             }
+
+            
+        }
+
+        public void Ajouter(UtilisateurFacebook u)
+        {
+            amis.Add(u);
         }
 
         private static readonly ObservableCollection<UtilisateurFacebook> amisSelectionnes = new ObservableCollection<UtilisateurFacebook>();

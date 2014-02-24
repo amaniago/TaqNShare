@@ -11,6 +11,8 @@ namespace TaqNShare.Pages
     {
         public ObservableCollection<UtilisateurFacebook> UtilisateurList { get; set; }
 
+        List<UtilisateurFacebook> amis = new List<UtilisateurFacebook>();
+
         public DefierAmiPage()
         {
 
@@ -21,7 +23,7 @@ namespace TaqNShare.Pages
             LoadUserInfo();
             RecupererListeAmis();
 
-            UtilisateurList = ListeAmis.Amis;
+            UtilisateurList = amis;
 
             DataContext = this;
         }
@@ -79,8 +81,8 @@ namespace TaqNShare.Pages
                     foreach (var item in data)
                     {
                         var friend = (IDictionary<string, object>)item;
-
-                        ListeAmis.Amis.Add(new UtilisateurFacebook { Nom = (string)friend["name"], Id = (string)friend["id"], Image = new Uri(string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", friend["id"], "square", App.AccessToken)) });
+                   
+                        amis.Ajouter(new UtilisateurFacebook { Nom = (string)friend["name"], Id = (string)friend["id"], Image = new Uri(string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", friend["id"], "square", App.AccessToken)) });
                     }
                 });
 
