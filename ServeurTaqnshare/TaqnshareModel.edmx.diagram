@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a52784911bbd4f369dc17158875f457a" Name="Diagramme1">
+        <EntityTypeShape EntityType="TaqnshareModel.Composer" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaqnshareModel.Defi" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaqnshareModel.Filtre" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaqnshareModel.Piece" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaqnshareModel.Utilisateur" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="TaqnshareModel.FK__Composer__id_def__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="TaqnshareModel.FK__Composer__id_fil__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="TaqnshareModel.FK__Composer__id_pie__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="TaqnshareModel.FK__Defis__id_utilis__4E88ABD4" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
