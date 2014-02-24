@@ -8,23 +8,21 @@ namespace ServeurTaqnshare
     public interface IServiceTaqnshare
     {
         [OperationContract]
-        string UploadFile(byte[] f, string fileName);
+        string EnvoyerImage(byte[] imageByte, string nomImage);
 
         [OperationContract]
-        byte[] GetImageFile(string fileName);
+        byte[] RecupererImage(string nomImage);
     }
 
     public class ServiceTaqnshare : IServiceTaqnshare
     {
-
-        public string UploadFile(byte[] f, string fileName)
+        public string EnvoyerImage(byte[] imageByte, string nomImage)
         {
             try
             {
-                MemoryStream ms = new MemoryStream(f);
+                MemoryStream ms = new MemoryStream(imageByte);
                 //FileStream fs = new FileStream(System.Web.Hosting.HostingEnvironment.MapPath("~/TransientStorage/") + fileName, FileMode.Create);
-                FileStream fs = new FileStream(Directory.GetCurrentDirectory() + "\\ImagesWebService\\" + fileName, FileMode.Create);
-
+                FileStream fs = new FileStream(Directory.GetCurrentDirectory() + "\\ImagesWebService\\" + nomImage, FileMode.Create);
 
                 ms.WriteTo(fs);
                 ms.Close();
@@ -36,16 +34,12 @@ namespace ServeurTaqnshare
             {
                 return (ex.ToString());
             }
-            //return Directory.GetCurrentDirectory();
         }
 
-        public byte[] GetImageFile(string fileName)
+        public byte[] RecupererImage(string nomImage)
         {
-            //return System.IO.File.ReadAllBytes(System.Web.Hosting.HostingEnvironment.MapPath("~/TransientStorage/") + fileName);
-
-            return System.IO.File.ReadAllBytes(Directory.GetCurrentDirectory() + "\\ImagesWebService\\" + fileName);
-
-
+            //return File.ReadAllBytes(System.Web.Hosting.HostingEnvironment.MapPath("~/TransientStorage/") + fileName);
+            return File.ReadAllBytes(Directory.GetCurrentDirectory() + "\\ImagesWebService\\" + nomImage);
         }
     }
 }
