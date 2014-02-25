@@ -208,7 +208,7 @@ namespace TaqNShare.Pages
             FacebookConnexion();
         }
 
-        /*
+        
         ServiceTaqnshareClient service = new ServiceTaqnshareClient();
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -251,6 +251,5 @@ namespace TaqNShare.Pages
 
             return image;
         } 
-         * */
     }
 }
