@@ -24,13 +24,6 @@ namespace TaqNShare.Pages
             DataContext = this;
         }
 
-        private void retourAccueil_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show(listeAmis.SelectedIndex.ToString());
-            MessageBox.Show(Amis[0].get)
-            //NavigationService.Navigate(new Uri("/Pages/MainPage.xaml", UriKind.Relative));
-        }
-
         private void LoadUserInfo()
         {
             var fb = new FacebookClient(App.AccessToken);
@@ -80,6 +73,26 @@ namespace TaqNShare.Pages
                 });
             };
             fb.GetTaskAsync("/me/friends");
+        }
+
+        private void retourAccueil_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/MainPage.xaml", UriKind.Relative));
+        }
+
+
+        private void defier_Click(object sender, RoutedEventArgs e)
+        {
+            if (listeAmis.SelectedIndex == -1)
+            {
+                MessageBox.Show("Vous devez sélectionner un ami");
+            }
+            else
+            {
+                MessageBox.Show(listeAmis.SelectedIndex.ToString());
+                MessageBox.Show(Amis[listeAmis.SelectedIndex].Id);
+                NavigationService.Navigate(new Uri("/Pages/MainPage.xaml", UriKind.Relative));
+            }
         }
     }
 }

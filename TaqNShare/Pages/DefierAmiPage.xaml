@@ -22,7 +22,7 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="Liste des Amis" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="Défier un ami" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
@@ -46,6 +46,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
-        <Button x:Name="retourAccueil" Content="Défier" HorizontalAlignment="Left" Height="72" Margin="159,568,0,-82" Grid.Row="1" VerticalAlignment="Top" Width="189" Click="retourAccueil_Click"/>
+        <Button x:Name="retourAccueil" Content="Accueil" HorizontalAlignment="Left" Height="72" Margin="159,568,0,-82" Grid.Row="1" VerticalAlignment="Top" Width="189" Click="retourAccueil_Click"/>
+        <Button x:Name="defierAmi" Content="Défier" HorizontalAlignment="Left" Height="72" Margin="159,491,0,-5" Grid.Row="1" VerticalAlignment="Top" Width="189"  Click="defier_Click"/>
     </Grid>
 </phone:PhoneApplicationPage>
