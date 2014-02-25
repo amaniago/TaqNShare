@@ -7,11 +7,9 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using TaqNShare.Donnees;
-using Facebook;
 using System.Windows;
 using System.Windows.Navigation;
 using TaqNShare.TaqnshareReference;
-
 
 
 namespace TaqNShare.Pages
@@ -147,7 +145,7 @@ namespace TaqNShare.Pages
                 DeConnexionFacebookBouton.Visibility = Visibility.Visible;
                 nom.Visibility = Visibility.Visible;
                 photo.Visibility = Visibility.Visible;
-                LoadUserInfo();
+                RecupererInformationsUtilisateur();
             }
             else
             {
@@ -158,30 +156,13 @@ namespace TaqNShare.Pages
             }
         }
 
-        private void LoadUserInfo()
+        private void RecupererInformationsUtilisateur()
         {
-            var fb = new FacebookClient(App.AccessToken);
+            photo.Source = App.PhotoUtilisateur;
+            Utilisateur u = App.UtilisateurCourant;
 
-            fb.GetCompleted += (o, e) =>
-            {
-                if (e.Error != null)
-                {
-                    Dispatcher.BeginInvoke(() => MessageBox.Show(e.Error.Message));
-                    return;
-                }
-
-                var result = (IDictionary<string, object>)e.GetResultData();
-
-                Dispatcher.BeginInvoke(() =>
-                {
-                    var profilePictureUrl = string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", App.IdFacebook, "square", App.AccessToken);
-
-                    photo.Source = new BitmapImage(new Uri(profilePictureUrl));
-                    if (nom != null)
-                        nom.Text = String.Format("{0} {1}", result["first_name"], result["last_name"]);
-                });
-            };
-            fb.GetTaskAsync("me");
+            if (nom != null)
+                nom.Text = String.Format("{0} {1}", u.prenom_utilisateur, u.nom_utilisateur);
         }
 
         private async void DeConnexionFacebookBoutonClick(object sender, RoutedEventArgs e)
@@ -208,7 +189,6 @@ namespace TaqNShare.Pages
             FacebookConnexion();
         }
 
-        
         ServiceTaqnshareClient service = new ServiceTaqnshareClient();
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -219,8 +199,8 @@ namespace TaqNShare.Pages
 
             byte[] test = ConvertToBytes(wbmp);
 
-            this.service.EnvoyerImageCompleted += EnvoyerImage;
-            this.service.EnvoyerImageAsync(test, "TaqNShare.png");
+            service.EnvoyerImageCompleted += EnvoyerImage;
+            service.EnvoyerImageAsync(test, "TaqNShare.png");
         }
 
         private void EnvoyerImage(object sender, EnvoyerImageCompletedEventArgs e)
@@ -250,6 +230,6 @@ namespace TaqNShare.Pages
             image.SetSource(stream);
 
             return image;
-        } 
+        }    
     }
 }

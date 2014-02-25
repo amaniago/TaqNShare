@@ -45,6 +45,7 @@ namespace TaqNShare.Pages
             if (App.EstAuthentifie)
             {
                 NavigationService.Navigate(new Uri("/Pages/DemandeDefiPage.xaml", UriKind.Relative));
+
             }
             else
             {
