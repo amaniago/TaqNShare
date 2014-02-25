@@ -5,6 +5,7 @@
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/ServeurTaqnshare" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ServiceTaqnshare_EnvoyerImage_InputMessage">
@@ -31,6 +32,12 @@
   <wsdl:message name="ServiceTaqnshare_CreerDefi_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreerDefiResponse" />
   </wsdl:message>
+  <wsdl:message name="ServiceTaqnshare_RecupererDefi_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecupererDefi" />
+  </wsdl:message>
+  <wsdl:message name="ServiceTaqnshare_RecupererDefi_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecupererDefiResponse" />
+  </wsdl:message>
   <wsdl:portType name="ServiceTaqnshare">
     <wsdl:operation name="EnvoyerImage">
       <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/EnvoyerImage" message="tns:ServiceTaqnshare_EnvoyerImage_InputMessage" />
@@ -47,6 +54,10 @@
     <wsdl:operation name="CreerDefi">
       <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/CreerDefi" message="tns:ServiceTaqnshare_CreerDefi_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/CreerDefiResponse" message="tns:ServiceTaqnshare_CreerDefi_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecupererDefi">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererDefi" message="tns:ServiceTaqnshare_RecupererDefi_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererDefiResponse" message="tns:ServiceTaqnshare_RecupererDefi_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ServiceTaqnshare" type="tns:ServiceTaqnshare">
@@ -80,6 +91,15 @@
     </wsdl:operation>
     <wsdl:operation name="CreerDefi">
       <soap:operation soapAction="http://tempuri.org/ServiceTaqnshare/CreerDefi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecupererDefi">
+      <soap:operation soapAction="http://tempuri.org/ServiceTaqnshare/RecupererDefi" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

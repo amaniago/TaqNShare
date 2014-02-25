@@ -27,6 +27,7 @@
     <MetadataFile FileName="service2.xsd" MetadataType="Schema" ID="dfe13835-056c-4ca9-abb1-85ae624da808" SourceId="1" SourceUrl="http://192.168.1.20:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" />
     <MetadataFile FileName="service21.xsd" MetadataType="Schema" ID="bfa749f8-fccd-482d-b94d-547696635f1b" SourceId="1" SourceUrl="http://192.168.1.20:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" />
     <MetadataFile FileName="ServeurTaqnshare1.xsd" MetadataType="Schema" ID="cb767f22-f809-4b91-8ec9-31eb514040e2" SourceId="1" SourceUrl="http://192.168.1.20:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="a14e364d-d424-4e19-815e-e8052acdf61d" SourceId="1" SourceUrl="http://192.168.1.20:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

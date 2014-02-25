@@ -17,6 +17,9 @@ namespace TaqNShare.Pages
 {
     public partial class MainPage
     {
+
+        #region propriétés
+
         readonly CameraCaptureTask _camera;
         readonly PhotoChooserTask _galerie;
 
@@ -25,6 +28,8 @@ namespace TaqNShare.Pages
 
         public int UserDecoupage { get; set; }
         public int UserFiltre { get; set; }
+
+        #endregion propriétés
 
         /// <summary>
         /// Constructeur de la page
@@ -218,8 +223,8 @@ namespace TaqNShare.Pages
 
             byte[] test = ConvertToBytes(wbmp);
 
-            this.service.EnvoyerImageCompleted += EnvoyerImage;
-            this.service.EnvoyerImageAsync(test, "TaqNShare.png");
+            service.EnvoyerImageCompleted += EnvoyerImage;
+            service.EnvoyerImageAsync(test, "TaqNShare.png");
         }
 
         private void EnvoyerImage(object sender, EnvoyerImageCompletedEventArgs e)
@@ -234,6 +239,7 @@ namespace TaqNShare.Pages
             testImage.Source = decodeImage(e.Result);
         }
 
+        //TODO A Supprimer
         public static byte[] ConvertToBytes(WriteableBitmap wbmp)
         {
             MemoryStream ms = new MemoryStream();
@@ -241,6 +247,7 @@ namespace TaqNShare.Pages
             return ms.ToArray();
         }
 
+        //TODO A Supprimer
         public BitmapImage decodeImage(byte[] array)
         {
             Stream stream = new MemoryStream(array);
@@ -249,6 +256,12 @@ namespace TaqNShare.Pages
             image.SetSource(stream);
 
             return image;
-        } 
+        }
+
+        private void LancerDefiBoutonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/LancerDefiPage.xaml", UriKind.Relative));
+        }
+        
     }
 }

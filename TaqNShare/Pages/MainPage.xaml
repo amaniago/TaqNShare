@@ -41,8 +41,10 @@
                 <phone:PanoramaItem.RenderTransform>
                     <TranslateTransform/>
                 </phone:PanoramaItem.RenderTransform>
-                <Button Content="Button" HorizontalAlignment="Left" Height="89" VerticalAlignment="Top" Width="408" Margin="0,299,0,0" Click="Button_Click"/>
-            </phone:PanoramaItem>
+                <Grid Margin="0,-43,0,0">
+                    <Button Content="Button" HorizontalAlignment="Left" Height="89" VerticalAlignment="Top" Width="408" Margin="0,332,0,0" Click="Button_Click"/>
+                    <Button x:Name="LancerDefiBouton" Content="Button" HorizontalAlignment="Left" Height="89" VerticalAlignment="Top" Width="408" Margin="0,81,0,0" Tap="LancerDefiBoutonTap"/>
+                </Grid></phone:PanoramaItem>
             <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Classement" Height="512">
                 <phone:PanoramaItem.RenderTransform>
                     <TranslateTransform/>

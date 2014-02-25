@@ -30,5 +30,22 @@ namespace TaqNShare.Donnees
             IBuffer buffer = fileStream.GetWindowsRuntimeBuffer();
             PhotoBuffer = new BufferImageSource(buffer);
         }
+
+        public static byte[] ConvertToBytes(WriteableBitmap photo)
+        {
+            MemoryStream ms = new MemoryStream();
+            photo.SaveJpeg(ms, photo.PixelWidth, photo.PixelHeight, 0, 100);
+            return ms.ToArray();
+        }
+
+        public static BitmapImage DecodeImage(byte[] array)
+        {
+            Stream stream = new MemoryStream(array);
+            BitmapImage image = new BitmapImage();
+
+            image.SetSource(stream);
+
+            return image;
+        }
     }
 }
