@@ -10,7 +10,10 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Shell;
 using Nokia.Graphics.Imaging;
 using TaqNShare.Donnees;
+using TaqNShare.TaqnshareReference;
+using Filtre = TaqNShare.Donnees.Filtre;
 using GestureEventArgs = System.Windows.Input.GestureEventArgs;
+using Piece = TaqNShare.Donnees.Piece;
 
 namespace TaqNShare.Pages
 {
@@ -23,6 +26,23 @@ namespace TaqNShare.Pages
     {
         private Partie _partieEnCours;
         private readonly ProgressIndicator _indicator;
+        //Liste des filtres disponibles dans le sdk
+        readonly List<Filtre> _listeFiltre = new List<Filtre>
+                                        {
+                                            new Filtre(1, new AntiqueFilter()),
+                                            new Filtre(2, new CartoonFilter()),
+                                            new Filtre(3, new MagicPenFilter()),
+                                            
+                                            //new ChromaKeyFilter()
+                                            //new ExposureFilter()
+                                            //new MonoColorFilter()
+                                            //new ColorBoostFilter()
+                                            //new CurvesFilter()
+                                        };
+        int _hauteurPiece = 244;
+        int _largeurPiece = 150;
+
+        private bool _casDefi;
 
         public JeuPage()
         {
@@ -36,12 +56,28 @@ namespace TaqNShare.Pages
                 Text = "Préparation de l'image en cours..."
             };
             SystemTray.SetProgressIndicator(this, _indicator);
-
-            //Appel à la méthode de préparation de l'image
-            Loaded += PreparerImage;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            string casDefiQuery;
+            if (NavigationContext.QueryString.TryGetValue("casDefi", out casDefiQuery))
+            {
+                _casDefi = Convert.ToBoolean(casDefiQuery);
+            }
+            //Appel à la méthode de préparation de l'image
+            if (!_casDefi)
+                PreparerImage();
+            else
+                PreparerImageDefi();
+
+            base.OnNavigatedTo(e);
+        }
+
+        /// <summary>
+        /// Méthode permettant le découpage de l'image, l'application des filtres
+        /// </summary>
+        private async void PreparerImage()
         {
             int tailleGrille;
             IsolatedStorageSettings.ApplicationSettings.TryGetValue("TailleGrille", out tailleGrille);
@@ -52,77 +88,21 @@ namespace TaqNShare.Pages
             _partieEnCours = new Partie(tailleGrille, nombreFiltre);
             //Spécification du dataContext pour le Binding
             DataContext = _partieEnCours;
-
-            base.OnNavigatedTo(e);
-        }
-
-
-        /// <summary>
-        /// Méthode permettant le découpage de l'image, l'application des filtres
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="routedEventArgs"></param>
-        private async void PreparerImage(object sender, RoutedEventArgs routedEventArgs)
-        {
-            int hauteurPiece = 244;
-            int largeurPiece = 150;
-
-            //Initialisation de la taille des pièce suivant le nombre de découpage choisi par l'utilisateur
-            switch (_partieEnCours.TailleGrille)
-            {
-                case 0:
-                    _partieEnCours.TailleGrille = 3;
-                    break;
-
-                case 4:
-                    hauteurPiece = 183;
-                    largeurPiece = 112;
-                    break;
-
-                case 5:
-                    hauteurPiece = 146;
-                    largeurPiece = 90;
-                    break;
-            }
+            //Création de la grille
+            CreerGrille(_partieEnCours.TailleGrille);
 
             //Récupération de la photo
-            WriteableBitmap imageSelectionne = (WriteableBitmap)PhoneApplicationService.Current.State["photo"];;
+            WriteableBitmap imageSelectionne = (WriteableBitmap)PhoneApplicationService.Current.State["photo"];
             _partieEnCours.Photo = imageSelectionne;
-            //Création des colonnes de la grille
-            for (int i = 0; i < _partieEnCours.TailleGrille; i++)
-            {
-                JeuGrid.ColumnDefinitions.Add(new ColumnDefinition());
-            }
 
-            // Create des lignes de la grille
-            for (int i = 0; i < _partieEnCours.TailleGrille; i++)
-            {
-                JeuGrid.RowDefinitions.Add(new RowDefinition());
-            }
-
-            List<IFilter> listeFiltre = new List<IFilter>
-                                        {
-                                            new AntiqueFilter(),
-                                            new CartoonFilter(),
-                                            new MagicPenFilter()
-                                            
-                                            //new ChromaKeyFilter()
-                                            //new ExposureFilter()
-                                            //new MonoColorFilter()
-                                            //new ColorBoostFilter()
-                                            //new CurvesFilter()
-                                        };
-
-
-
-            List<IFilter> listeFiltrePartie = new List<IFilter>();
-
+            //On choisit des filtres au hasard dans la liste du sdk pour la partie et suivant les paramètres choisis par l'utilisateur
+            List<Filtre> listeFiltrePartie = new List<Filtre>();
             for (int i = 0; i < _partieEnCours.NombreFiltre; i++)
             {
                 Random random = new Random();
-                int indexRandom = random.Next(listeFiltre.Count);
-                listeFiltrePartie.Add(listeFiltre[indexRandom]);
-                listeFiltre.Remove(listeFiltre[indexRandom]);
+                int indexRandom = random.Next(_listeFiltre.Count);
+                listeFiltrePartie.Add(_listeFiltre[indexRandom]);
+                _listeFiltre.Remove(_listeFiltre[indexRandom]);
             }
 
             //Préparation de l'image 
@@ -134,17 +114,16 @@ namespace TaqNShare.Pages
                     if (!(i == _partieEnCours.TailleGrille - 1 && j == _partieEnCours.TailleGrille - 1))
                     {
                         //Découpage de la photo : TODO explication
-                        Photo photoDecoupe = new Photo(imageSelectionne.Crop(i * largeurPiece, j * hauteurPiece, largeurPiece, hauteurPiece), largeurPiece, hauteurPiece);
+                        Photo photoDecoupe = new Photo(imageSelectionne.Crop(i * _largeurPiece, j * _hauteurPiece, _largeurPiece, _hauteurPiece), _largeurPiece, _hauteurPiece);
 
-                        //TODO Application des filtres
+                        //Application des filtres
+                        Random random2 = new Random();
+                        int indexRandom2 = random2.Next(_partieEnCours.NombreFiltre);
+
                         if (_partieEnCours.NombreFiltre != 0)
                         {
                             FilterEffect filterEffect = new FilterEffect(photoDecoupe.PhotoBuffer);
-                            Random random2 = new Random();
-                            int indexRandom2 = random2.Next(_partieEnCours.NombreFiltre);
-                            filterEffect.Filters = new[] { listeFiltrePartie[indexRandom2] };
-
-                            // Render the image to a WriteableBitmap.
+                            filterEffect.Filters = new[] { listeFiltrePartie[indexRandom2].Type };
                             var renderer = new WriteableBitmapRenderer(filterEffect, photoDecoupe.PhotoSelectionne);
                             photoDecoupe.PhotoSelectionne = await renderer.RenderAsync();
                         }
@@ -154,10 +133,14 @@ namespace TaqNShare.Pages
                             Name = compteur.ToString(CultureInfo.InvariantCulture),
                             Source = photoDecoupe.PhotoSelectionne
                         };
+
                         Grid.SetRow(image, j);
                         Grid.SetColumn(image, i);
                         JeuGrid.Children.Add(image);
                         Piece piece = new Piece(image);
+
+                        piece.IdFiltre = _partieEnCours.NombreFiltre != 0 ? listeFiltrePartie[indexRandom2].Id : 0;
+
                         _partieEnCours.ListePieces.Add(piece);
                         compteur++;
                     }
@@ -171,7 +154,118 @@ namespace TaqNShare.Pages
             {
                 piece.Image.Tap += ImageTap;
             }
-            
+
+            _partieEnCours.ListePiecesInitale = _partieEnCours.ListePieces;
+        }
+
+        private async void PreparerImageDefi()
+        {
+            //Récupération du défi
+            Defi defi = (Defi)PhoneApplicationService.Current.State["defi"];
+
+            //Récupération de la photo TODO Récupérer la vraie image
+            WriteableBitmap imageSelectionne = (WriteableBitmap)PhoneApplicationService.Current.State["photo"];
+
+            int tailleGrille = defi.Composers.Count;
+
+            CreerGrille(tailleGrille);
+
+            int compteur = 0;
+            for (int i = 0; i < tailleGrille; i++)
+            {
+                for (int j = 0; j < tailleGrille; j++)
+                {
+                    if (!(i == tailleGrille - 1 && j == tailleGrille - 1))
+                    {
+                        //Découpage de la photo
+                        Photo photoDecoupe = new Photo(imageSelectionne.Crop(i * _largeurPiece, j * _hauteurPiece, _largeurPiece, _hauteurPiece), _largeurPiece, _hauteurPiece);
+
+                        if (defi.Composers[0].Filtre.id_filtre != 0)
+                        {
+                            FilterEffect filterEffect = new FilterEffect(photoDecoupe.PhotoBuffer);
+
+                            Composer composer = null;
+
+                            foreach (var c in defi.Composers)
+                            {
+                                if (c.id_piece == compteur)
+                                    composer = c;
+                            }
+
+
+                            Filtre filtre = null;
+                            foreach (var filtre1 in _listeFiltre)
+                            {
+                                if (composer != null && filtre1.Id == composer.id_filtre)
+                                {
+                                    filtre = filtre1;
+                                }
+                            }
+
+                            if (filtre != null) filterEffect.Filters = new[] { filtre.Type };
+                            var renderer = new WriteableBitmapRenderer(filterEffect, photoDecoupe.PhotoSelectionne);
+                            photoDecoupe.PhotoSelectionne = await renderer.RenderAsync();
+                        }
+
+                        Image image = new Image
+                        {
+                            Name = compteur.ToString(CultureInfo.InvariantCulture),
+                            Source = photoDecoupe.PhotoSelectionne
+                        };
+
+
+                        //TODO Determiner les coordonees en fonction de l'index
+
+                        Grid.SetRow(image, j);
+                        Grid.SetColumn(image, i);
+                        JeuGrid.Children.Add(image);
+                        Piece piece = new Piece(image);
+
+                        //piece.IdFiltre =;
+
+                        _partieEnCours.ListePieces.Add(piece);
+
+                        compteur++;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Méthode permettant de creer la grille suivant la taille de la grille chosie par l'utilisateur
+        /// </summary>
+        private void CreerGrille(int tailleGrille)
+        {
+            //Création des colonnes de la grille
+            for (int i = 0; i < tailleGrille; i++)
+            {
+                JeuGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            }
+
+            // Create des lignes de la grille
+            for (int i = 0; i < tailleGrille; i++)
+            {
+                JeuGrid.RowDefinitions.Add(new RowDefinition());
+            }
+
+            //Initialisation de la taille des pièce suivant le nombre de découpage choisi par l'utilisateur
+            switch (tailleGrille)
+            {
+                case 0:
+                    if (!_casDefi)
+                        _partieEnCours.TailleGrille = 3;
+                    break;
+
+                case 4:
+                    _hauteurPiece = 183;
+                    _largeurPiece = 112;
+                    break;
+
+                case 5:
+                    _hauteurPiece = 146;
+                    _largeurPiece = 90;
+                    break;
+            }
         }
 
         /// <summary>

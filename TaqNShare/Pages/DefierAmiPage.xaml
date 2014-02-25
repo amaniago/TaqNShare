@@ -46,6 +46,6 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
-        <Button x:Name="retourAccueil" Content="Défier" HorizontalAlignment="Left" Height="72" Margin="159,568,0,-82" Grid.Row="1" VerticalAlignment="Top" Width="189" Click="retourAccueil_Click"/>
+        <Button x:Name="DefierAmiBouton" Content="Défier" HorizontalAlignment="Left" Height="72" Margin="159,568,0,-82" Grid.Row="1" VerticalAlignment="Top" Width="189" Tap="DefierAmiBoutonTap"/>
     </Grid>
 </phone:PhoneApplicationPage>

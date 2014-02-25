@@ -38,7 +38,7 @@ namespace TaqNShare.Pages
 
         private void BoutonLancerJeuTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Pages/JeuPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Pages/JeuPage.xaml?casDefi=" + false, UriKind.Relative));
         }
     }
 }

@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Collections.ObjectModel;
 using Facebook;
+using Microsoft.Phone.Shell;
 using TaqNShare.Donnees;
+using TaqNShare.TaqnshareReference;
 
 namespace TaqNShare.Pages
 {
     public partial class DefierAmiPage
     {
+        readonly Partie _partieTermine = (Partie)PhoneApplicationService.Current.State["partie"];
+        readonly ServiceTaqnshareClient _webServiceTaqnshareClient = new ServiceTaqnshareClient();
         public ObservableCollection<UtilisateurFacebook> UtilisateurList { get; set; }
 
         public DefierAmiPage()
@@ -24,11 +28,6 @@ namespace TaqNShare.Pages
             UtilisateurList = ListeAmis.Amis;
 
             DataContext = this;
-        }
-
-        private void retourAccueil_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/Pages/MainPage.xaml", UriKind.Relative));
         }
 
         private void LoadUserInfo()
@@ -86,6 +85,44 @@ namespace TaqNShare.Pages
 
             };
             fb.GetTaskAsync("/me/friends");
+        }
+
+        private void DefierAmiBoutonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            Defi defi = new Defi();
+            defi.id_utilisateur = App.IdFacebook;
+            defi.nom_defi = "Test";
+            defi.score_utilisateur_defi = _partieTermine.Score;
+            defi.resolu = false;
+            defi.id_adversaire_defi = "Friend";
+
+            List<Composer> listePiecePartie = new List<Composer>();
+            foreach (var piece in _partieTermine.ListePiecesInitale)
+            {
+                Composer composer = new Composer();
+                composer.id_filtre = piece.IdFiltre;
+                composer.id_piece = piece.Id;
+                composer.position_piece = piece.IndexPosition;
+
+                listePiecePartie.Add(composer);
+                
+            }
+
+            _webServiceTaqnshareClient.CreerDefiCompleted += Defier;
+            _webServiceTaqnshareClient.CreerDefiAsync(defi, listePiecePartie);
+
+        }
+
+        private void Defier(object sender, CreerDefiCompletedEventArgs e)
+        {
+            if (e.Result == "OK")
+            {
+                MessageBox.Show(e.Result);
+                NavigationService.Navigate(new Uri("/Pages/MainPage.xaml", UriKind.Relative));
+            }
+            else
+                MessageBox.Show(e.Result);
+            
         }
     }
 }

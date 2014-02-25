@@ -18,7 +18,8 @@ namespace TaqNShare.Donnees
         public bool DeplacementGauche { get; set; }
         public bool DeplacementDroite { get; set; }
         public int IndexPosition { get; set; }
-        
+        public int IdFiltre { get; set; }
+
         private readonly int _tailleGrille;
 
         #endregion propriétés

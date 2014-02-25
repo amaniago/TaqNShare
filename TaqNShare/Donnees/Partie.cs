@@ -15,6 +15,7 @@ namespace TaqNShare.Donnees
 
         public int Score { get; set; }
         public List<Piece> ListePieces { get; private set; }
+        public List<Piece> ListePiecesInitale { get; set; }
         public WriteableBitmap Photo { get; set; }
 
         public int TailleGrille { get; set; }
@@ -43,6 +44,7 @@ namespace TaqNShare.Donnees
         }
 
         public string TimeElapsed { get; set; }
+        
 
         public readonly Stopwatch StopWatch;
         private readonly DispatcherTimer _timer;
@@ -87,11 +89,8 @@ namespace TaqNShare.Donnees
         /// <returns></returns>
         public bool DetecterFinJeu()
         {
-#if DEBUG
             return true;
-#else
-            return ListePieces.All(piece => piece.Id == piece.IndexPosition);
-#endif
+            //return ListePieces.All(piece => piece.Id == piece.IndexPosition);
         }
 
         /// <summary>
