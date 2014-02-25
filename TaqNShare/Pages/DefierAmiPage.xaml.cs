@@ -63,12 +63,17 @@ namespace TaqNShare.Pages
         {
             if (listeAmis.SelectedIndex == -1)
             {
-                MessageBox.Show("Vous devez sélectionner un ami");
+                MessageBox.Show("Vous devez sélectionner un ami.");
+            }
+            else if (nomDefi.Text == "")
+            {
+                MessageBox.Show("Le défi doit avoir un nom.");
             }
             else
             {
-                MessageBox.Show(listeAmis.SelectedIndex.ToString());
-                MessageBox.Show(Amis[listeAmis.SelectedIndex].Id);
+                MessageBox.Show("Numéro de l'ami dans la liste : " + listeAmis.SelectedIndex.ToString());
+                MessageBox.Show("Id de l'ami : " + Amis[listeAmis.SelectedIndex].Id);
+                MessageBox.Show(nomDefi.Text);
                 NavigationService.Navigate(new Uri("/Pages/MainPage.xaml", UriKind.Relative));
             }
         }

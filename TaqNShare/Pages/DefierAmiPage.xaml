@@ -46,7 +46,9 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
-        <Button x:Name="retourAccueil" Content="Accueil" HorizontalAlignment="Left" Height="72" Margin="159,568,0,-82" Grid.Row="1" VerticalAlignment="Top" Width="189" Click="retourAccueil_Click"/>
-        <Button x:Name="defierAmi" Content="Défier" HorizontalAlignment="Left" Height="72" Margin="159,491,0,-5" Grid.Row="1" VerticalAlignment="Top" Width="189"  Click="defier_Click"/>
+        <Button x:Name="retourAccueil" Content="Accueil" HorizontalAlignment="Left" Height="72" Margin="279,568,0,-82" Grid.Row="1" VerticalAlignment="Top" Width="189" Click="retourAccueil_Click"/>
+        <Button x:Name="defierAmi" Content="Défier" HorizontalAlignment="Left" Height="72" Margin="24,568,0,-82" Grid.Row="1" VerticalAlignment="Top" Width="189"  Click="defier_Click"/>
+        <TextBox x:Name="nomDefi" HorizontalAlignment="Left" Height="72" Margin="14,496,0,-10" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="456"/>
+        <TextBlock HorizontalAlignment="Left" Margin="140,456,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Donner un nom au défi" VerticalAlignment="Top" Width="221" Height="40"/>
     </Grid>
 </phone:PhoneApplicationPage>
