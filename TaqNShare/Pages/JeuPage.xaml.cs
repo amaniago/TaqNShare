@@ -153,6 +153,7 @@ namespace TaqNShare.Pages
             //Appel à la méthode de mélange
             Melange();
             _partieEnCours.ListePiecesInitale = new List<Piece>();
+
             foreach (var piece in _partieEnCours.ListePieces)
             {
                 piece.Image.Tap += ImageTap;
@@ -173,11 +174,7 @@ namespace TaqNShare.Pages
 
                 //Ajout de l'objet dans la liste initiale utilisée ensuite pour créer le défi
                 _partieEnCours.ListePiecesInitale.Add(pieceInitiale);
-
             }
-
-            
-            //_partieEnCours.ListePiecesInitale = _partieEnCours.ListePieces;
         }
 
         private async void PreparerImageDefi()
@@ -394,10 +391,9 @@ namespace TaqNShare.Pages
                 _partieEnCours.CalculerScore();
                 //Stockage de la partie pour la passer à la page suivante
                 PhoneApplicationService.Current.State["partie"] = _partieEnCours;
-                if(_casDefi)
-                    NavigationService.Navigate(new Uri("/Pages/DefiTerminePage.xaml", UriKind.Relative));
-                else
-                    NavigationService.Navigate(new Uri("/Pages/JeuTerminePage.xaml", UriKind.Relative));
+                NavigationService.Navigate(_casDefi
+                    ? new Uri("/Pages/DefiTerminePage.xaml", UriKind.Relative)
+                    : new Uri("/Pages/JeuTerminePage.xaml", UriKind.Relative));
             }
 
         }

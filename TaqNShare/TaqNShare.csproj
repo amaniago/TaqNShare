@@ -74,6 +74,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Donnees\DefiAffiche.cs" />
     <Compile Include="Donnees\Filtre.cs" />
     <Compile Include="Donnees\Partie.cs" />
     <Compile Include="Donnees\Piece.cs" />
@@ -82,14 +83,14 @@
     <Compile Include="Donnees\Parametre.cs" />
     <Compile Include="Donnees\Photo.cs" />
     <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="Pages\AfficherDetailDefiPage.xaml.cs">
+      <DependentUpon>AfficherDetailDefiPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\DefiTerminePage.xaml.cs">
       <DependentUpon>DefiTerminePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\DemandeDefiPage.xaml.cs">
       <DependentUpon>DemandeDefiPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\LancerDefiPage.xaml.cs">
-      <DependentUpon>LancerDefiPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\AppResources.Designer.cs">
@@ -126,6 +127,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Pages\AfficherDetailDefiPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\AuthentificationFacebookPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -147,10 +152,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\JeuTerminePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\LancerDefiPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Collections.ObjectModel;
 using System.IO.IsolatedStorage;
+using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -29,6 +30,7 @@ namespace TaqNShare.Pages
         public int UserDecoupage { get; set; }
         public int UserFiltre { get; set; }
 
+        readonly ObservableCollection<DefiAffiche> DefisAAfficher = new ObservableCollection<DefiAffiche>();
         #endregion propriétés
 
         /// <summary>
@@ -42,6 +44,8 @@ namespace TaqNShare.Pages
             InitializeComponent();
 
             FacebookConnexion();
+
+            
 
             DataContext = this;
 
@@ -78,6 +82,10 @@ namespace TaqNShare.Pages
 
             if (!App.EstAuthentifie && utilisateurConnecte)
                 Loaded += ConnexionFacebookBoutonClick;
+
+            
+            
+            
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -186,6 +194,37 @@ namespace TaqNShare.Pages
                 });
             };
             fb.GetTaskAsync("me");
+
+            ServiceTaqnshareClient serviceTaqnshareClient = new ServiceTaqnshareClient();
+            serviceTaqnshareClient.RecupererDefisCompleted += AfficherDefis;
+            //serviceTaqnshareClient.RecupererDefisAsync(App.IdFacebook);
+            serviceTaqnshareClient.RecupererDefisAsync("Friend");
+            
+        }
+
+
+        private void AfficherDefis(object sender, RecupererDefisCompletedEventArgs e)
+        {
+            List<DefiService> listeDefiServices = e.Result;
+
+            foreach (var defiService in listeDefiServices)
+            {
+                DefiAffiche defiAffiche = new DefiAffiche(defiService);
+                DefisAAfficher.Add(defiAffiche);
+            }
+
+            DefisListBox.ItemsSource = DefisAAfficher;
+        }
+
+        private void AfficherDetailDefiBoutonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            Button bouton = (Button)sender;
+            if (bouton.DataContext is DefiAffiche)
+            {
+                DefiAffiche defiAffiche = (DefiAffiche)bouton.DataContext;
+                NavigationService.Navigate(new Uri("/Pages/AfficherDetailDefiPage.xaml?idDefi=" + defiAffiche.IdDefi, UriKind.Relative));
+            }
+            
         }
 
         private async void DeConnexionFacebookBoutonClick(object sender, RoutedEventArgs e)
@@ -210,58 +249,6 @@ namespace TaqNShare.Pages
             settings.Save();
 
             FacebookConnexion();
-        }
-
-        
-        ServiceTaqnshareClient service = new ServiceTaqnshareClient();
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            BitmapImage image = new BitmapImage();
-            image.CreateOptions = BitmapCreateOptions.None;
-            image.UriSource = new Uri("/TaqNShare.png", UriKind.Relative);
-            WriteableBitmap wbmp = new WriteableBitmap(image);
-
-            byte[] test = ConvertToBytes(wbmp);
-
-            service.EnvoyerImageCompleted += EnvoyerImage;
-            service.EnvoyerImageAsync(test, "TaqNShare.png");
-        }
-
-        private void EnvoyerImage(object sender, EnvoyerImageCompletedEventArgs e)
-        {
-            MessageBox.Show(e.Result);
-            service.RecupererImageCompleted += AfficherImage;
-            service.RecupererImageAsync("TaqNShare.png");
-        }
-
-        private void AfficherImage(object sender, RecupererImageCompletedEventArgs e)
-        {
-            testImage.Source = decodeImage(e.Result);
-        }
-
-        //TODO A Supprimer
-        public static byte[] ConvertToBytes(WriteableBitmap wbmp)
-        {
-            MemoryStream ms = new MemoryStream();
-            wbmp.SaveJpeg(ms, wbmp.PixelWidth, wbmp.PixelHeight, 0, 100);
-            return ms.ToArray();
-        }
-
-        //TODO A Supprimer
-        public BitmapImage decodeImage(byte[] array)
-        {
-            Stream stream = new MemoryStream(array);
-            BitmapImage image = new BitmapImage();
-
-            image.SetSource(stream);
-
-            return image;
-        }
-
-        private void LancerDefiBoutonTap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/Pages/LancerDefiPage.xaml", UriKind.Relative));
-        }
-        
+        }  
     }
 }

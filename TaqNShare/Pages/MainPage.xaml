@@ -6,7 +6,6 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:facebookControls="clr-namespace:Facebook.Client.Controls;assembly=Facebook.Client"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -42,14 +41,26 @@
                     <TranslateTransform/>
                 </phone:PanoramaItem.RenderTransform>
                 <Grid Margin="0,-43,0,0">
-                    <Button Content="Button" HorizontalAlignment="Left" Height="89" VerticalAlignment="Top" Width="408" Margin="0,332,0,0" Click="Button_Click"/>
-                    <Button x:Name="LancerDefiBouton" Content="Button" HorizontalAlignment="Left" Height="89" VerticalAlignment="Top" Width="408" Margin="0,81,0,0" Tap="LancerDefiBoutonTap"/>
-                </Grid></phone:PanoramaItem>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <ListBox x:Name="DefisListBox" Margin="0,0,0,10">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Margin="20 0 0 0" Text="{Binding NomDefi}" />
+                                    <Button Content="Voir" Tap="AfficherDetailDefiBoutonTap"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </phone:PanoramaItem>
             <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Classement" Height="512">
                 <phone:PanoramaItem.RenderTransform>
                     <TranslateTransform/>
                 </phone:PanoramaItem.RenderTransform>
-                <Image x:Name="testImage" HorizontalAlignment="Left" Height="388" VerticalAlignment="Top" Width="408"/>
             </phone:PanoramaItem>
             <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Paramètres" Height="512">
                 <phone:PanoramaItem.RenderTransform>

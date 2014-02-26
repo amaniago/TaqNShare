@@ -8,18 +8,6 @@
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/ServeurTaqnshare.ClasseDeService" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="ServiceTaqnshare_EnvoyerImage_InputMessage">
-    <wsdl:part name="parameters" element="tns:EnvoyerImage" />
-  </wsdl:message>
-  <wsdl:message name="ServiceTaqnshare_EnvoyerImage_OutputMessage">
-    <wsdl:part name="parameters" element="tns:EnvoyerImageResponse" />
-  </wsdl:message>
-  <wsdl:message name="ServiceTaqnshare_RecupererImage_InputMessage">
-    <wsdl:part name="parameters" element="tns:RecupererImage" />
-  </wsdl:message>
-  <wsdl:message name="ServiceTaqnshare_RecupererImage_OutputMessage">
-    <wsdl:part name="parameters" element="tns:RecupererImageResponse" />
-  </wsdl:message>
   <wsdl:message name="ServiceTaqnshare_EnregistrerScore_InputMessage">
     <wsdl:part name="parameters" element="tns:EnregistrerScore" />
   </wsdl:message>
@@ -44,15 +32,13 @@
   <wsdl:message name="ServiceTaqnshare_ModifierDefi_OutputMessage">
     <wsdl:part name="parameters" element="tns:ModifierDefiResponse" />
   </wsdl:message>
+  <wsdl:message name="ServiceTaqnshare_RecupererDefis_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecupererDefis" />
+  </wsdl:message>
+  <wsdl:message name="ServiceTaqnshare_RecupererDefis_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecupererDefisResponse" />
+  </wsdl:message>
   <wsdl:portType name="ServiceTaqnshare">
-    <wsdl:operation name="EnvoyerImage">
-      <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/EnvoyerImage" message="tns:ServiceTaqnshare_EnvoyerImage_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/EnvoyerImageResponse" message="tns:ServiceTaqnshare_EnvoyerImage_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="RecupererImage">
-      <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererImage" message="tns:ServiceTaqnshare_RecupererImage_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererImageResponse" message="tns:ServiceTaqnshare_RecupererImage_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="EnregistrerScore">
       <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/EnregistrerScore" message="tns:ServiceTaqnshare_EnregistrerScore_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/EnregistrerScoreResponse" message="tns:ServiceTaqnshare_EnregistrerScore_OutputMessage" />
@@ -69,27 +55,13 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/ModifierDefi" message="tns:ServiceTaqnshare_ModifierDefi_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/ModifierDefiResponse" message="tns:ServiceTaqnshare_ModifierDefi_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="RecupererDefis">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererDefis" message="tns:ServiceTaqnshare_RecupererDefis_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererDefisResponse" message="tns:ServiceTaqnshare_RecupererDefis_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ServiceTaqnshare" type="tns:ServiceTaqnshare">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="EnvoyerImage">
-      <soap:operation soapAction="http://tempuri.org/ServiceTaqnshare/EnvoyerImage" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="RecupererImage">
-      <soap:operation soapAction="http://tempuri.org/ServiceTaqnshare/RecupererImage" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="EnregistrerScore">
       <soap:operation soapAction="http://tempuri.org/ServiceTaqnshare/EnregistrerScore" style="document" />
       <wsdl:input>
@@ -119,6 +91,15 @@
     </wsdl:operation>
     <wsdl:operation name="ModifierDefi">
       <soap:operation soapAction="http://tempuri.org/ServiceTaqnshare/ModifierDefi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecupererDefis">
+      <soap:operation soapAction="http://tempuri.org/ServiceTaqnshare/RecupererDefis" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

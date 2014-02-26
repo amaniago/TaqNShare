@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Microsoft.Phone.Shell;
@@ -8,20 +7,26 @@ using TaqNShare.TaqnshareReference;
 
 namespace TaqNShare.Pages
 {
-    public partial class LancerDefiPage
+    public partial class AfficherDetailDefiPage
     {
-
-        public LancerDefiPage()
+        public AfficherDetailDefiPage()
         {
             InitializeComponent();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            string idDefiQuery;
+            int idDefi = 0;
+            if (NavigationContext.QueryString.TryGetValue("idDefi", out idDefiQuery))
+            {
+                idDefi = Convert.ToInt32(idDefiQuery);
+            }
+
             ServiceTaqnshareClient webServiceTaqnshareClient = new ServiceTaqnshareClient();
 
             webServiceTaqnshareClient.RecupererDefiCompleted += AfficherDefi;
-            webServiceTaqnshareClient.RecupererDefiAsync(17);
+            webServiceTaqnshareClient.RecupererDefiAsync(idDefi);
             base.OnNavigatedTo(e);
         }
 
