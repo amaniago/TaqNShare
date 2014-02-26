@@ -29,17 +29,31 @@ namespace TaqNShare.Donnees
         /// </summary>
         public Piece()
         {
-
         }
 
         /// <summary>
-        /// Contructeur
+        /// Contructeur partie normale
         /// </summary>
+        /// <param name="image"></param>
         public Piece(Image image)
         {
             Image = image;
             Id = Convert.ToInt32(image.Name);
             IndexPosition = Id;
+            IsolatedStorageSettings.ApplicationSettings.TryGetValue("TailleGrille", out _tailleGrille);
+            Ajuster();
+        }
+
+        /// <summary>
+        /// Constructeur cas defi
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="indexPosition"></param>
+        public Piece(Image image, int indexPosition)
+        {
+            Image = image;
+            Id = Convert.ToInt32(image.Name);
+            IndexPosition = indexPosition;
             IsolatedStorageSettings.ApplicationSettings.TryGetValue("TailleGrille", out _tailleGrille);
             Ajuster();
         }
@@ -209,6 +223,71 @@ namespace TaqNShare.Donnees
                 Ligne = Grid.GetRow(imageCliquee);
                 Colonne = Grid.GetColumn(imageCliquee);
             }
+        }
+
+        public static int[] CalculerCoordonnees(int indexPosition, int tailleGrille)
+        {
+            int[] coordonnees = new int[2];
+
+            if (tailleGrille == 3)
+            {
+                switch (indexPosition)
+                {
+                    case 0:
+                        coordonnees[0] = 0;
+                        coordonnees[1] = 0;
+                        break;
+                    case 1:
+                        coordonnees[0] = 0;
+                        coordonnees[1] = 1;
+                        break;
+                    case 2:
+                        coordonnees[0] = 0;
+                        coordonnees[1] = 2;
+                        break;
+                    case 3:
+                        coordonnees[0] = 1;
+                        coordonnees[1] = 0;
+                        break;
+                    case 4:
+                        coordonnees[0] = 1;
+                        coordonnees[1] = 1;
+                        break;
+                    case 5:
+                        coordonnees[0] = 1;
+                        coordonnees[1] = 2;
+                        break;
+                    case 6:
+                        coordonnees[0] = 2;
+                        coordonnees[1] = 0;
+                        break;
+                    case 7:
+                        coordonnees[0] = 2;
+                        coordonnees[1] = 1;
+                        break;
+                    case 8:
+                        coordonnees[0] = 2;
+                        coordonnees[1] = 2;
+                        break;
+                }
+            }
+            /*
+        else if (tailleGrille == 4)
+        {
+            switch (indexPosition)
+            {
+
+            }
+        }
+        else if (tailleGrille == 5)
+        {
+            switch (indexPosition)
+            {
+
+            }
+        }*/
+
+            return coordonnees;
         }
     }
 }

@@ -495,6 +495,186 @@ namespace TaqNShare.TaqnshareReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DefiService", Namespace="http://schemas.datacontract.org/2004/07/ServeurTaqnshare.ClasseDeService", IsReference=true)]
+    public partial class DefiService : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private System.Collections.Generic.List<TaqNShare.TaqnshareReference.Composition> CompositionField;
+        
+        private string IdAdversaireDefiField;
+        
+        private int IdDefiField;
+        
+        private string IdUtilisateurField;
+        
+        private byte[] ImageDefiField;
+        
+        private string NomDefiField;
+        
+        private int ScoreUtilisateurDefiField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<TaqNShare.TaqnshareReference.Composition> Composition {
+            get {
+                return this.CompositionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CompositionField, value) != true)) {
+                    this.CompositionField = value;
+                    this.RaisePropertyChanged("Composition");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string IdAdversaireDefi {
+            get {
+                return this.IdAdversaireDefiField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdAdversaireDefiField, value) != true)) {
+                    this.IdAdversaireDefiField = value;
+                    this.RaisePropertyChanged("IdAdversaireDefi");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdDefi {
+            get {
+                return this.IdDefiField;
+            }
+            set {
+                if ((this.IdDefiField.Equals(value) != true)) {
+                    this.IdDefiField = value;
+                    this.RaisePropertyChanged("IdDefi");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string IdUtilisateur {
+            get {
+                return this.IdUtilisateurField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdUtilisateurField, value) != true)) {
+                    this.IdUtilisateurField = value;
+                    this.RaisePropertyChanged("IdUtilisateur");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] ImageDefi {
+            get {
+                return this.ImageDefiField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ImageDefiField, value) != true)) {
+                    this.ImageDefiField = value;
+                    this.RaisePropertyChanged("ImageDefi");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NomDefi {
+            get {
+                return this.NomDefiField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NomDefiField, value) != true)) {
+                    this.NomDefiField = value;
+                    this.RaisePropertyChanged("NomDefi");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ScoreUtilisateurDefi {
+            get {
+                return this.ScoreUtilisateurDefiField;
+            }
+            set {
+                if ((this.ScoreUtilisateurDefiField.Equals(value) != true)) {
+                    this.ScoreUtilisateurDefiField = value;
+                    this.RaisePropertyChanged("ScoreUtilisateurDefi");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Composition", Namespace="http://schemas.datacontract.org/2004/07/ServeurTaqnshare.ClasseDeService", IsReference=true)]
+    public partial class Composition : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int IdFiltreField;
+        
+        private int IdPieceField;
+        
+        private int IndexPositionField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdFiltre {
+            get {
+                return this.IdFiltreField;
+            }
+            set {
+                if ((this.IdFiltreField.Equals(value) != true)) {
+                    this.IdFiltreField = value;
+                    this.RaisePropertyChanged("IdFiltre");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdPiece {
+            get {
+                return this.IdPieceField;
+            }
+            set {
+                if ((this.IdPieceField.Equals(value) != true)) {
+                    this.IdPieceField = value;
+                    this.RaisePropertyChanged("IdPiece");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IndexPosition {
+            get {
+                return this.IndexPositionField;
+            }
+            set {
+                if ((this.IndexPositionField.Equals(value) != true)) {
+                    this.IndexPositionField = value;
+                    this.RaisePropertyChanged("IndexPosition");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="TaqnshareReference.ServiceTaqnshare")]
     public interface ServiceTaqnshare {
@@ -520,17 +700,9 @@ namespace TaqNShare.TaqnshareReference {
         string EndCreerDefi(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ServiceTaqnshare/RecupererDefi", ReplyAction="http://tempuri.org/ServiceTaqnshare/RecupererDefiResponse")]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(TaqNShare.TaqnshareReference.Utilisateur))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<TaqNShare.TaqnshareReference.Defi>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(TaqNShare.TaqnshareReference.Defi))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<TaqNShare.TaqnshareReference.Composer>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(TaqNShare.TaqnshareReference.Composer))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(TaqNShare.TaqnshareReference.Filtre))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(TaqNShare.TaqnshareReference.Piece))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<object>))]
         System.IAsyncResult BeginRecupererDefi(int idDefi, System.AsyncCallback callback, object asyncState);
         
-        System.Collections.Generic.List<object> EndRecupererDefi(System.IAsyncResult result);
+        TaqNShare.TaqnshareReference.DefiService EndRecupererDefi(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -624,10 +796,10 @@ namespace TaqNShare.TaqnshareReference {
             this.results = results;
         }
         
-        public System.Collections.Generic.List<object> Result {
+        public TaqNShare.TaqnshareReference.DefiService Result {
             get {
                 base.RaiseExceptionIfNecessary();
-                return ((System.Collections.Generic.List<object>)(this.results[0]));
+                return ((TaqNShare.TaqnshareReference.DefiService)(this.results[0]));
             }
         }
     }
@@ -931,7 +1103,7 @@ namespace TaqNShare.TaqnshareReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Collections.Generic.List<object> TaqNShare.TaqnshareReference.ServiceTaqnshare.EndRecupererDefi(System.IAsyncResult result) {
+        TaqNShare.TaqnshareReference.DefiService TaqNShare.TaqnshareReference.ServiceTaqnshare.EndRecupererDefi(System.IAsyncResult result) {
             return base.Channel.EndRecupererDefi(result);
         }
         
@@ -941,7 +1113,7 @@ namespace TaqNShare.TaqnshareReference {
         }
         
         private object[] OnEndRecupererDefi(System.IAsyncResult result) {
-            System.Collections.Generic.List<object> retVal = ((TaqNShare.TaqnshareReference.ServiceTaqnshare)(this)).EndRecupererDefi(result);
+            TaqNShare.TaqnshareReference.DefiService retVal = ((TaqNShare.TaqnshareReference.ServiceTaqnshare)(this)).EndRecupererDefi(result);
             return new object[] {
                     retVal};
         }
@@ -1110,9 +1282,9 @@ namespace TaqNShare.TaqnshareReference {
                 return _result;
             }
             
-            public System.Collections.Generic.List<object> EndRecupererDefi(System.IAsyncResult result) {
+            public TaqNShare.TaqnshareReference.DefiService EndRecupererDefi(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                System.Collections.Generic.List<object> _result = ((System.Collections.Generic.List<object>)(base.EndInvoke("RecupererDefi", _args, result)));
+                TaqNShare.TaqnshareReference.DefiService _result = ((TaqNShare.TaqnshareReference.DefiService)(base.EndInvoke("RecupererDefi", _args, result)));
                 return _result;
             }
         }

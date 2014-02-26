@@ -5,7 +5,7 @@
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/ServeurTaqnshare" />
-      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/ServeurTaqnshare.ClasseDeService" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ServiceTaqnshare_EnvoyerImage_InputMessage">

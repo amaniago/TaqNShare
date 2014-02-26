@@ -73,6 +73,20 @@ namespace TaqNShare.Donnees
             ListePieces = new List<Piece>();
         }
 
+        public Partie()
+        {
+            _timer = new DispatcherTimer();
+            _timer.Tick += new EventHandler(delegate
+            {
+                TimeElapsed = StopWatch.Elapsed.ToString("mm\\:ss"); // Format as you wish
+                PropertyChanged(this, new PropertyChangedEventArgs("TimeElapsed"));
+            });
+            _timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
+            StopWatch = new Stopwatch();
+            
+            ListePieces = new List<Piece>();
+        }
+
 
         //Permet le binding des propriétés de la classe
         public event PropertyChangedEventHandler PropertyChanged;
@@ -89,8 +103,8 @@ namespace TaqNShare.Donnees
         /// <returns></returns>
         public bool DetecterFinJeu()
         {
-            return true;
-            //return ListePieces.All(piece => piece.Id == piece.IndexPosition);
+            //return true;
+            return ListePieces.All(piece => piece.Id == piece.IndexPosition);
         }
 
         /// <summary>

@@ -46,8 +46,9 @@ namespace TaqNShare.Pages
 
         public JeuPage()
         {
+            
             InitializeComponent();
-
+            
             //Barre de progression qui s'affiche lors du chargement de la partie
             _indicator = new ProgressIndicator
             {
@@ -56,6 +57,7 @@ namespace TaqNShare.Pages
                 Text = "Préparation de l'image en cours..."
             };
             SystemTray.SetProgressIndicator(this, _indicator);
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -87,7 +89,8 @@ namespace TaqNShare.Pages
             //Création de la partie
             _partieEnCours = new Partie(tailleGrille, nombreFiltre);
             //Spécification du dataContext pour le Binding
-            DataContext = _partieEnCours;
+            DataContext = _partieEnCours; 
+
             //Création de la grille
             CreerGrille(_partieEnCours.TailleGrille);
 
@@ -160,13 +163,28 @@ namespace TaqNShare.Pages
 
         private async void PreparerImageDefi()
         {
+            _partieEnCours = new Partie();
+            //Spécification du dataContext pour le Binding
+            DataContext = _partieEnCours; 
+
             //Récupération du défi
-            Defi defi = (Defi)PhoneApplicationService.Current.State["defi"];
+            DefiService defi = (DefiService)PhoneApplicationService.Current.State["defi"];
+           
+            //Calcul de la taille de la grille en fonction
+            int tailleGrille = defi.Composition.Count;
 
-            //Récupération de la photo TODO Récupérer la vraie image
-            WriteableBitmap imageSelectionne = (WriteableBitmap)PhoneApplicationService.Current.State["photo"];
-
-            int tailleGrille = defi.Composers.Count;
+            switch (tailleGrille)
+            {
+                case 8 :
+                    tailleGrille = 3;
+                    break;
+                case 15 :
+                    tailleGrille = 4;
+                    break;
+                case 24 :
+                    tailleGrille = 5;
+                    break;
+            }
 
             CreerGrille(tailleGrille);
 
@@ -178,25 +196,25 @@ namespace TaqNShare.Pages
                     if (!(i == tailleGrille - 1 && j == tailleGrille - 1))
                     {
                         //Découpage de la photo
-                        Photo photoDecoupe = new Photo(imageSelectionne.Crop(i * _largeurPiece, j * _hauteurPiece, _largeurPiece, _hauteurPiece), _largeurPiece, _hauteurPiece);
+                        Photo photoDecoupe = new Photo(new WriteableBitmap(Photo.DecodeImage(defi.ImageDefi)).Crop(i * _largeurPiece, j * _hauteurPiece, _largeurPiece, _hauteurPiece), _largeurPiece, _hauteurPiece);
 
-                        if (defi.Composers[0].Filtre.id_filtre != 0)
+                        
+                        Composition composer = null;
+
+                        foreach (var c in defi.Composition)
+                        {
+                            if (c.IdPiece == compteur)
+                                composer = c;
+                        }
+
+                        if (defi.Composition[compteur].IdFiltre != 0)
                         {
                             FilterEffect filterEffect = new FilterEffect(photoDecoupe.PhotoBuffer);
-
-                            Composer composer = null;
-
-                            foreach (var c in defi.Composers)
-                            {
-                                if (c.id_piece == compteur)
-                                    composer = c;
-                            }
-
-
+                            
                             Filtre filtre = null;
                             foreach (var filtre1 in _listeFiltre)
                             {
-                                if (composer != null && filtre1.Id == composer.id_filtre)
+                                if (composer != null && filtre1.Id == composer.IdFiltre)
                                 {
                                     filtre = filtre1;
                                 }
@@ -213,22 +231,28 @@ namespace TaqNShare.Pages
                             Source = photoDecoupe.PhotoSelectionne
                         };
 
-
                         //TODO Determiner les coordonees en fonction de l'index
+                        int[] coordonnees = Piece.CalculerCoordonnees(composer.IndexPosition, tailleGrille);
 
-                        Grid.SetRow(image, j);
-                        Grid.SetColumn(image, i);
+                        Grid.SetColumn(image, coordonnees[0]);
+                        Grid.SetRow(image, coordonnees[1]);
                         JeuGrid.Children.Add(image);
-                        Piece piece = new Piece(image);
-
-                        //piece.IdFiltre =;
-
+                        Piece piece = new Piece(image, composer.IndexPosition);
+                        
                         _partieEnCours.ListePieces.Add(piece);
 
                         compteur++;
                     }
                 }
             }
+
+            foreach (var piece in _partieEnCours.ListePieces)
+            {
+                piece.Image.Tap += ImageTap;
+            }
+
+            _indicator.IsIndeterminate = false;
+            _indicator.IsVisible = false;
         }
 
         /// <summary>
