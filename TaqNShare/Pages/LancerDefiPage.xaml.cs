@@ -21,7 +21,7 @@ namespace TaqNShare.Pages
             ServiceTaqnshareClient webServiceTaqnshareClient = new ServiceTaqnshareClient();
 
             webServiceTaqnshareClient.RecupererDefiCompleted += AfficherDefi;
-            webServiceTaqnshareClient.RecupererDefiAsync(15);
+            webServiceTaqnshareClient.RecupererDefiAsync(17);
             base.OnNavigatedTo(e);
         }
 

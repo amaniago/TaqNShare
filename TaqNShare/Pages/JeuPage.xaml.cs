@@ -152,13 +152,32 @@ namespace TaqNShare.Pages
 
             //Appel à la méthode de mélange
             Melange();
-
+            _partieEnCours.ListePiecesInitale = new List<Piece>();
             foreach (var piece in _partieEnCours.ListePieces)
             {
                 piece.Image.Tap += ImageTap;
+
+                //Copie de la piece dans un nouvel objet pour éviter de modifier la valeur initiale de la piece
+                Piece pieceInitiale = new Piece
+                                      {
+                                          Id = piece.Id,
+                                          Image = piece.Image,
+                                          Coordonnee = piece.Coordonnee,
+                                          DeplacementHaut = piece.DeplacementHaut,
+                                          DeplacementBas = piece.DeplacementBas,
+                                          DeplacementGauche = piece.DeplacementGauche,
+                                          DeplacementDroite = piece.DeplacementDroite,
+                                          IndexPosition = piece.IndexPosition,
+                                          IdFiltre = piece.IdFiltre
+                                      };
+
+                //Ajout de l'objet dans la liste initiale utilisée ensuite pour créer le défi
+                _partieEnCours.ListePiecesInitale.Add(pieceInitiale);
+
             }
 
-            _partieEnCours.ListePiecesInitale = _partieEnCours.ListePieces;
+            
+            //_partieEnCours.ListePiecesInitale = _partieEnCours.ListePieces;
         }
 
         private async void PreparerImageDefi()
@@ -171,29 +190,28 @@ namespace TaqNShare.Pages
             DefiService defi = (DefiService)PhoneApplicationService.Current.State["defi"];
            
             //Calcul de la taille de la grille en fonction
-            int tailleGrille = defi.Composition.Count;
-
-            switch (tailleGrille)
+            
+            switch (defi.Composition.Count)
             {
                 case 8 :
-                    tailleGrille = 3;
+                    _partieEnCours.TailleGrille = 3;
                     break;
                 case 15 :
-                    tailleGrille = 4;
+                    _partieEnCours.TailleGrille = 4;
                     break;
                 case 24 :
-                    tailleGrille = 5;
+                    _partieEnCours.TailleGrille = 5;
                     break;
             }
 
-            CreerGrille(tailleGrille);
+            CreerGrille(_partieEnCours.TailleGrille);
 
             int compteur = 0;
-            for (int i = 0; i < tailleGrille; i++)
+            for (int i = 0; i < _partieEnCours.TailleGrille; i++)
             {
-                for (int j = 0; j < tailleGrille; j++)
+                for (int j = 0; j < _partieEnCours.TailleGrille; j++)
                 {
-                    if (!(i == tailleGrille - 1 && j == tailleGrille - 1))
+                    if (!(i == _partieEnCours.TailleGrille - 1 && j == _partieEnCours.TailleGrille - 1))
                     {
                         //Découpage de la photo
                         Photo photoDecoupe = new Photo(new WriteableBitmap(Photo.DecodeImage(defi.ImageDefi)).Crop(i * _largeurPiece, j * _hauteurPiece, _largeurPiece, _hauteurPiece), _largeurPiece, _hauteurPiece);
@@ -232,7 +250,7 @@ namespace TaqNShare.Pages
                         };
 
                         //TODO Determiner les coordonees en fonction de l'index
-                        int[] coordonnees = Piece.CalculerCoordonnees(composer.IndexPosition, tailleGrille);
+                        int[] coordonnees = Piece.CalculerCoordonnees(composer.IndexPosition, _partieEnCours.TailleGrille);
 
                         Grid.SetColumn(image, coordonnees[0]);
                         Grid.SetRow(image, coordonnees[1]);
@@ -376,7 +394,10 @@ namespace TaqNShare.Pages
                 _partieEnCours.CalculerScore();
                 //Stockage de la partie pour la passer à la page suivante
                 PhoneApplicationService.Current.State["partie"] = _partieEnCours;
-                NavigationService.Navigate(new Uri("/Pages/JeuTerminePage.xaml", UriKind.Relative));
+                if(_casDefi)
+                    NavigationService.Navigate(new Uri("/Pages/DefiTerminePage.xaml", UriKind.Relative));
+                else
+                    NavigationService.Navigate(new Uri("/Pages/JeuTerminePage.xaml", UriKind.Relative));
             }
 
         }

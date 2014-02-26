@@ -82,6 +82,9 @@
     <Compile Include="Donnees\Parametre.cs" />
     <Compile Include="Donnees\Photo.cs" />
     <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="Pages\DefiTerminePage.xaml.cs">
+      <DependentUpon>DefiTerminePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\DemandeDefiPage.xaml.cs">
       <DependentUpon>DemandeDefiPage.xaml</DependentUpon>
     </Compile>
@@ -124,6 +127,10 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Page Include="Pages\AuthentificationFacebookPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DefiTerminePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

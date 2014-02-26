@@ -703,6 +703,11 @@ namespace TaqNShare.TaqnshareReference {
         System.IAsyncResult BeginRecupererDefi(int idDefi, System.AsyncCallback callback, object asyncState);
         
         TaqNShare.TaqnshareReference.DefiService EndRecupererDefi(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ServiceTaqnshare/ModifierDefi", ReplyAction="http://tempuri.org/ServiceTaqnshare/ModifierDefiResponse")]
+        System.IAsyncResult BeginModifierDefi(TaqNShare.TaqnshareReference.Defi defiTermine, System.AsyncCallback callback, object asyncState);
+        
+        string EndModifierDefi(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -806,6 +811,25 @@ namespace TaqNShare.TaqnshareReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ModifierDefiCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public ModifierDefiCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public string Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class ServiceTaqnshareClient : System.ServiceModel.ClientBase<TaqNShare.TaqnshareReference.ServiceTaqnshare>, TaqNShare.TaqnshareReference.ServiceTaqnshare {
         
         private BeginOperationDelegate onBeginEnvoyerImageDelegate;
@@ -837,6 +861,12 @@ namespace TaqNShare.TaqnshareReference {
         private EndOperationDelegate onEndRecupererDefiDelegate;
         
         private System.Threading.SendOrPostCallback onRecupererDefiCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginModifierDefiDelegate;
+        
+        private EndOperationDelegate onEndModifierDefiDelegate;
+        
+        private System.Threading.SendOrPostCallback onModifierDefiCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -900,6 +930,8 @@ namespace TaqNShare.TaqnshareReference {
         public event System.EventHandler<CreerDefiCompletedEventArgs> CreerDefiCompleted;
         
         public event System.EventHandler<RecupererDefiCompletedEventArgs> RecupererDefiCompleted;
+        
+        public event System.EventHandler<ModifierDefiCompletedEventArgs> ModifierDefiCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -1143,6 +1175,52 @@ namespace TaqNShare.TaqnshareReference {
                         idDefi}, this.onEndRecupererDefiDelegate, this.onRecupererDefiCompletedDelegate, userState);
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult TaqNShare.TaqnshareReference.ServiceTaqnshare.BeginModifierDefi(TaqNShare.TaqnshareReference.Defi defiTermine, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginModifierDefi(defiTermine, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        string TaqNShare.TaqnshareReference.ServiceTaqnshare.EndModifierDefi(System.IAsyncResult result) {
+            return base.Channel.EndModifierDefi(result);
+        }
+        
+        private System.IAsyncResult OnBeginModifierDefi(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            TaqNShare.TaqnshareReference.Defi defiTermine = ((TaqNShare.TaqnshareReference.Defi)(inValues[0]));
+            return ((TaqNShare.TaqnshareReference.ServiceTaqnshare)(this)).BeginModifierDefi(defiTermine, callback, asyncState);
+        }
+        
+        private object[] OnEndModifierDefi(System.IAsyncResult result) {
+            string retVal = ((TaqNShare.TaqnshareReference.ServiceTaqnshare)(this)).EndModifierDefi(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnModifierDefiCompleted(object state) {
+            if ((this.ModifierDefiCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ModifierDefiCompleted(this, new ModifierDefiCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ModifierDefiAsync(TaqNShare.TaqnshareReference.Defi defiTermine) {
+            this.ModifierDefiAsync(defiTermine, null);
+        }
+        
+        public void ModifierDefiAsync(TaqNShare.TaqnshareReference.Defi defiTermine, object userState) {
+            if ((this.onBeginModifierDefiDelegate == null)) {
+                this.onBeginModifierDefiDelegate = new BeginOperationDelegate(this.OnBeginModifierDefi);
+            }
+            if ((this.onEndModifierDefiDelegate == null)) {
+                this.onEndModifierDefiDelegate = new EndOperationDelegate(this.OnEndModifierDefi);
+            }
+            if ((this.onModifierDefiCompletedDelegate == null)) {
+                this.onModifierDefiCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnModifierDefiCompleted);
+            }
+            base.InvokeAsync(this.onBeginModifierDefiDelegate, new object[] {
+                        defiTermine}, this.onEndModifierDefiDelegate, this.onModifierDefiCompletedDelegate, userState);
+        }
+        
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
             return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(callback, asyncState);
         }
@@ -1285,6 +1363,19 @@ namespace TaqNShare.TaqnshareReference {
             public TaqNShare.TaqnshareReference.DefiService EndRecupererDefi(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 TaqNShare.TaqnshareReference.DefiService _result = ((TaqNShare.TaqnshareReference.DefiService)(base.EndInvoke("RecupererDefi", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginModifierDefi(TaqNShare.TaqnshareReference.Defi defiTermine, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = defiTermine;
+                System.IAsyncResult _result = base.BeginInvoke("ModifierDefi", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public string EndModifierDefi(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                string _result = ((string)(base.EndInvoke("ModifierDefi", _args, result)));
                 return _result;
             }
         }
