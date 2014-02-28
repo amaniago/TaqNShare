@@ -18,9 +18,9 @@ namespace TaqNShare.Pages
     public partial class MainPage
     {
         #region propriétés
-        ServiceTaqnshareClient serviceTaqnshareClient = new ServiceTaqnshareClient();
-        public ObservableCollection<Classement> Classement { get; set; }
-        private ObservableCollection<Classement> classement = new ObservableCollection<Classement>();
+
+        ServiceTaqnshareClient _serviceTaqnshareClient = new ServiceTaqnshareClient();
+        readonly ObservableCollection<Classement> _classement = new ObservableCollection<Classement>();
 
         readonly CameraCaptureTask _camera;
         readonly PhotoChooserTask _galerie;
@@ -31,7 +31,7 @@ namespace TaqNShare.Pages
         public int UserDecoupage { get; set; }
         public int UserFiltre { get; set; }
 
-        readonly ObservableCollection<DefiAffiche> DefisAAfficher = new ObservableCollection<DefiAffiche>();
+        readonly ObservableCollection<DefiAffiche> _defisAAfficher = new ObservableCollection<DefiAffiche>();
         #endregion propriétés
 
         /// <summary>
@@ -39,21 +39,12 @@ namespace TaqNShare.Pages
         /// </summary>
         public MainPage()
         {
-            bool utilisateurConnecte = false;
+            bool utilisateurConnecte;
             IsolatedStorageSettings.ApplicationSettings.TryGetValue("UtilisateurConnecte", out utilisateurConnecte);
 
             InitializeComponent();
 
-            InitialiserClassement();
-            Classement = classement;
-
             AffichageRangScore();
-            if (App.EstAuthentifie)
-                InitialiserScoreJoueur();
-
-            FacebookConnexion();
-
-            
 
             DataContext = this;
 
@@ -88,12 +79,12 @@ namespace TaqNShare.Pages
             _galerie = new PhotoChooserTask();
             _galerie.Completed += ChoixPhotoCompleted;
 
-            if (!App.EstAuthentifie && utilisateurConnecte)
-                Loaded += ConnexionFacebookBoutonClick;
+            //Récupération du classement
+            _serviceTaqnshareClient.RecupererClassementCompleted += RecupererClassement;
+            _serviceTaqnshareClient.RecupererClassementAsync();
 
-            
-            
-            
+            if (!App.EstAuthentifie && utilisateurConnecte)
+                Loaded += ConnexionFacebookBoutonTap;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -102,7 +93,7 @@ namespace TaqNShare.Pages
             base.OnNavigatedTo(e);
         }
 
-        private void ButtonPrendrePhotoTap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void BoutonPrendrePhotoTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             _camera.Show();
         }
@@ -123,13 +114,13 @@ namespace TaqNShare.Pages
             }
         }
 
-        private void ListPickerDecoupageChange(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void ListPickerDecoupageChange(object sender, SelectionChangedEventArgs e)
         {
             SaveSettings("TailleGrille", ListPickerDecoupage, false);
             SaveSettings("IndexDecoupage", ListPickerDecoupage, true);
         }
 
-        private void ListPickerFiltreChange(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void ListPickerFiltreChange(object sender, SelectionChangedEventArgs e)
         {
             SaveSettings("IndexFiltre", ListPickerFiltre, true);
         }
@@ -154,7 +145,7 @@ namespace TaqNShare.Pages
             settings.Save();
         }
 
-        private void ConnexionFacebookBoutonClick(object sender, RoutedEventArgs e)
+        private void ConnexionFacebookBoutonTap(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Pages/AuthentificationFacebookPage.xaml?pageAvant=MainPage", UriKind.Relative));
         }
@@ -164,32 +155,40 @@ namespace TaqNShare.Pages
             if (App.EstAuthentifie)
             {
                 ConnexionFacebookBouton.Visibility = Visibility.Collapsed;
-                DeConnexionFacebookBouton.Visibility = Visibility.Visible;
-                nom.Visibility = Visibility.Visible;
-                photo.Visibility = Visibility.Visible;
+                DeconnexionFacebookBouton.Visibility = Visibility.Visible;
+                NomUtilisateurTextBlock.Visibility = Visibility.Visible;
+                UtilisateurImage.Visibility = Visibility.Visible;
                 RecupererInformationsUtilisateur();
             }
             else
             {
                 ConnexionFacebookBouton.Visibility = Visibility.Visible;
-                DeConnexionFacebookBouton.Visibility = Visibility.Collapsed;
-                nom.Visibility = Visibility.Collapsed;
-                photo.Visibility = Visibility.Collapsed;
+                DeconnexionFacebookBouton.Visibility = Visibility.Collapsed;
+                NomUtilisateurTextBlock.Visibility = Visibility.Collapsed;
+                UtilisateurImage.Visibility = Visibility.Collapsed;
             }
         }
 
         private void RecupererInformationsUtilisateur()
         {
-            photo.Source = App.PhotoUtilisateur;
+            UtilisateurImage.Source = App.PhotoUtilisateur;
             Utilisateur utilisateurCourant = App.UtilisateurCourant;
 
-                    if (nom != null)
-                        nom.Text = String.Format("{0} {1}", utilisateurCourant.prenom_utilisateur, utilisateurCourant.nom_utilisateur);
-            
-            serviceTaqnshareClient.RecupererDefisCompleted += AfficherDefis;
-            //serviceTaqnshareClient.RecupererDefisAsync(App.IdFacebook);
-            serviceTaqnshareClient.RecupererDefisAsync("Friend");
-            
+            if (NomUtilisateurTextBlock != null)
+                NomUtilisateurTextBlock.Text = String.Format("{0} {1}", utilisateurCourant.prenom_utilisateur, utilisateurCourant.nom_utilisateur);
+
+            //Récupération des défis en attente de l'utilisateur
+            _serviceTaqnshareClient.RecupererDefisCompleted += AfficherDefis;
+            _serviceTaqnshareClient.RecupererDefisAsync(App.UtilisateurCourant.id_utilisateur);
+
+            //Récupération du rang de l'utilisateur
+            _serviceTaqnshareClient.RecupererRangJoueurCompleted += RecupererRang;
+            _serviceTaqnshareClient.RecupererRangJoueurAsync(App.UtilisateurCourant.id_utilisateur);
+
+            //Récupération du score de l'utilisateur
+            _serviceTaqnshareClient.RecupererScoreJoueurCompleted += RecupererScore;
+            _serviceTaqnshareClient.RecupererScoreJoueurAsync(App.UtilisateurCourant.id_utilisateur);
+
         }
 
 
@@ -200,10 +199,10 @@ namespace TaqNShare.Pages
             foreach (var defiService in listeDefiServices)
             {
                 DefiAffiche defiAffiche = new DefiAffiche(defiService);
-                DefisAAfficher.Add(defiAffiche);
+                _defisAAfficher.Add(defiAffiche);
             }
 
-            DefisListBox.ItemsSource = DefisAAfficher;
+            DefisListBox.ItemsSource = _defisAAfficher;
         }
 
         private void AfficherDetailDefiBoutonTap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -214,10 +213,10 @@ namespace TaqNShare.Pages
                 DefiAffiche defiAffiche = (DefiAffiche)bouton.DataContext;
                 NavigationService.Navigate(new Uri("/Pages/AfficherDetailDefiPage.xaml?idDefi=" + defiAffiche.IdDefi, UriKind.Relative));
             }
-            
+
         }
 
-        private async void DeConnexionFacebookBoutonClick(object sender, RoutedEventArgs e)
+        private async void DeconnexionFacebookBoutonTap(object sender, RoutedEventArgs e)
         {
             App.EstAuthentifie = false;
 
@@ -241,72 +240,47 @@ namespace TaqNShare.Pages
             FacebookConnexion();
         }
 
-
-
-        public void InitialiserClassement()
-        {
-            serviceTaqnshareClient.RecupererClassementCompleted += RecupererClassement;
-            serviceTaqnshareClient.RecupererClassementAsync();
-
-
-            //classement.Add(new Classement{Position = 1,Nom = "Ruault",Prenom = "Nicolas",ScoreTotale = 7});
-            //classement.Add(new Classement { Position = 2, Nom = "Echerfaoui", Prenom = "Bakre", ScoreTotale = 9 });
-            //classement.Add(new Classement { Position = 3, Nom = "Maniago", Prenom = "Anthony", ScoreTotale = 12 });
-        }
-
         private void RecupererClassement(object sender, RecupererClassementCompletedEventArgs e)
         {
             List<UtilisateurService> utilisateurs = e.Result;
-            //MessageBox.Show("coucou");
             int position = 1;
 
             foreach (UtilisateurService u in utilisateurs)
             {
-                classement.Add(new Classement { Position = position, Nom = u.NomUtilisateur, Prenom = u.PrenomUtilisateur, ScoreTotal = (float) (u.ScoreTotalUtilisateur/u.NombrePartieUtilisateur) });
+                _classement.Add(new Classement { Position = position, Nom = u.NomUtilisateur, Prenom = u.PrenomUtilisateur, ScoreTotal = (float)(u.ScoreTotalUtilisateur / u.NombrePartieUtilisateur) });
                 position++;
             }
-        }
 
-        private void InitialiserScoreJoueur ()
-        {
-            serviceTaqnshareClient.RecupererRangJoueurCompleted += RecupererRang;
-            serviceTaqnshareClient.RecupererRangJoueurAsync(App.UtilisateurCourant.id_utilisateur);
-
-            serviceTaqnshareClient.RecupererScoreJoueurCompleted += RecupererScore;
-            serviceTaqnshareClient.RecupererScoreJoueurAsync(App.UtilisateurCourant.id_utilisateur);
+            ClassementListBox.ItemsSource = _classement;
         }
 
         private void RecupererScore(object sender, RecupererScoreJoueurCompletedEventArgs e)
         {
-            ScoreJoueur.Text = e.Result.ToString();
+            ScoreUtilisateurTextBlock.Text = "Score : " + e.Result;
         }
 
         private void RecupererRang(object sender, RecupererRangJoueurCompletedEventArgs e)
         {
-            RangJoueur.Text = e.Result.ToString();
+            RangUtilisateurTextBlock.Text = "Rang : " + e.Result;
         }
 
         private void AffichageRangScore()
         {
-            if(App.EstAuthentifie)
+            if (App.EstAuthentifie)
             {
-                ScoreJoueur.Visibility = Visibility.Visible;
-                RangJoueur.Visibility = Visibility.Visible;
-                texteRang.Visibility = Visibility.Visible;
-                texteScore.Visibility = Visibility.Visible;
+                RangUtilisateurTextBlock.Visibility = Visibility.Visible;
+                ScoreUtilisateurTextBlock.Visibility = Visibility.Visible;
             }
             else
             {
-                ScoreJoueur.Visibility = Visibility.Collapsed;
-                RangJoueur.Visibility = Visibility.Collapsed;
-                texteRang.Visibility = Visibility.Collapsed;
-                texteScore.Visibility = Visibility.Collapsed;
+                RangUtilisateurTextBlock.Visibility = Visibility.Collapsed;
+                ScoreUtilisateurTextBlock.Visibility = Visibility.Collapsed;
             }
         }
 
         private void DefisUtilisateursClick(object sender, RoutedEventArgs e)
         {
 
-        }    
+        }
     }
 }

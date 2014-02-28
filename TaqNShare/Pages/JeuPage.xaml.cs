@@ -94,7 +94,7 @@ namespace TaqNShare.Pages
             //Création de la grille
             CreerGrille(_partieEnCours.TailleGrille);
 
-            //Récupération de la photo
+            //Récupération de la UtilisateurImage
             WriteableBitmap imageSelectionne = (WriteableBitmap)PhoneApplicationService.Current.State["photo"];
             _partieEnCours.Photo = imageSelectionne;
 
@@ -116,7 +116,7 @@ namespace TaqNShare.Pages
                 {
                     if (!(i == _partieEnCours.TailleGrille - 1 && j == _partieEnCours.TailleGrille - 1))
                     {
-                        //Découpage de la photo : TODO explication
+                        //Découpage de la UtilisateurImage : TODO explication
                         Photo photoDecoupe = new Photo(imageSelectionne.Crop(i * _largeurPiece, j * _hauteurPiece, _largeurPiece, _hauteurPiece), _largeurPiece, _hauteurPiece);
 
                         //Application des filtres
@@ -210,7 +210,7 @@ namespace TaqNShare.Pages
                 {
                     if (!(i == _partieEnCours.TailleGrille - 1 && j == _partieEnCours.TailleGrille - 1))
                     {
-                        //Découpage de la photo
+                        //Découpage de la UtilisateurImage
                         Photo photoDecoupe = new Photo(new WriteableBitmap(Photo.DecodeImage(defi.ImageDefi)).Crop(i * _largeurPiece, j * _hauteurPiece, _largeurPiece, _hauteurPiece), _largeurPiece, _hauteurPiece);
 
                         

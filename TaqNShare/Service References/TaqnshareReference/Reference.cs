@@ -830,7 +830,7 @@ namespace TaqNShare.TaqnshareReference {
         float EndRecupererScoreJoueur(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ServiceTaqnshare/ModifierDefi", ReplyAction="http://tempuri.org/ServiceTaqnshare/ModifierDefiResponse")]
-        System.IAsyncResult BeginModifierDefi(TaqNShare.TaqnshareReference.Defi defiTermine, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginModifierDefi(TaqNShare.TaqnshareReference.Defi defiTermine, TaqNShare.TaqnshareReference.Utilisateur utilisateurCourant, System.AsyncCallback callback, object asyncState);
         
         string EndModifierDefi(System.IAsyncResult result);
         
@@ -1402,8 +1402,8 @@ namespace TaqNShare.TaqnshareReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult TaqNShare.TaqnshareReference.ServiceTaqnshare.BeginModifierDefi(TaqNShare.TaqnshareReference.Defi defiTermine, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginModifierDefi(defiTermine, callback, asyncState);
+        System.IAsyncResult TaqNShare.TaqnshareReference.ServiceTaqnshare.BeginModifierDefi(TaqNShare.TaqnshareReference.Defi defiTermine, TaqNShare.TaqnshareReference.Utilisateur utilisateurCourant, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginModifierDefi(defiTermine, utilisateurCourant, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1413,7 +1413,8 @@ namespace TaqNShare.TaqnshareReference {
         
         private System.IAsyncResult OnBeginModifierDefi(object[] inValues, System.AsyncCallback callback, object asyncState) {
             TaqNShare.TaqnshareReference.Defi defiTermine = ((TaqNShare.TaqnshareReference.Defi)(inValues[0]));
-            return ((TaqNShare.TaqnshareReference.ServiceTaqnshare)(this)).BeginModifierDefi(defiTermine, callback, asyncState);
+            TaqNShare.TaqnshareReference.Utilisateur utilisateurCourant = ((TaqNShare.TaqnshareReference.Utilisateur)(inValues[1]));
+            return ((TaqNShare.TaqnshareReference.ServiceTaqnshare)(this)).BeginModifierDefi(defiTermine, utilisateurCourant, callback, asyncState);
         }
         
         private object[] OnEndModifierDefi(System.IAsyncResult result) {
@@ -1429,11 +1430,11 @@ namespace TaqNShare.TaqnshareReference {
             }
         }
         
-        public void ModifierDefiAsync(TaqNShare.TaqnshareReference.Defi defiTermine) {
-            this.ModifierDefiAsync(defiTermine, null);
+        public void ModifierDefiAsync(TaqNShare.TaqnshareReference.Defi defiTermine, TaqNShare.TaqnshareReference.Utilisateur utilisateurCourant) {
+            this.ModifierDefiAsync(defiTermine, utilisateurCourant, null);
         }
         
-        public void ModifierDefiAsync(TaqNShare.TaqnshareReference.Defi defiTermine, object userState) {
+        public void ModifierDefiAsync(TaqNShare.TaqnshareReference.Defi defiTermine, TaqNShare.TaqnshareReference.Utilisateur utilisateurCourant, object userState) {
             if ((this.onBeginModifierDefiDelegate == null)) {
                 this.onBeginModifierDefiDelegate = new BeginOperationDelegate(this.OnBeginModifierDefi);
             }
@@ -1444,7 +1445,8 @@ namespace TaqNShare.TaqnshareReference {
                 this.onModifierDefiCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnModifierDefiCompleted);
             }
             base.InvokeAsync(this.onBeginModifierDefiDelegate, new object[] {
-                        defiTermine}, this.onEndModifierDefiDelegate, this.onModifierDefiCompletedDelegate, userState);
+                        defiTermine,
+                        utilisateurCourant}, this.onEndModifierDefiDelegate, this.onModifierDefiCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1649,9 +1651,10 @@ namespace TaqNShare.TaqnshareReference {
                 return _result;
             }
             
-            public System.IAsyncResult BeginModifierDefi(TaqNShare.TaqnshareReference.Defi defiTermine, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[1];
+            public System.IAsyncResult BeginModifierDefi(TaqNShare.TaqnshareReference.Defi defiTermine, TaqNShare.TaqnshareReference.Utilisateur utilisateurCourant, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[2];
                 _args[0] = defiTermine;
+                _args[1] = utilisateurCourant;
                 System.IAsyncResult _result = base.BeginInvoke("ModifierDefi", _args, callback, asyncState);
                 return _result;
             }

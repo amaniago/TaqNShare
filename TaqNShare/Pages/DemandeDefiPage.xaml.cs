@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using Microsoft.Phone.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Shell;
 using TaqNShare.Donnees;
@@ -8,22 +7,20 @@ using TaqNShare.TaqnshareReference;
 
 namespace TaqNShare.Pages
 {
-    public partial class EnregistrerScorePage
+    public partial class DemandeDefiPage
     {
         readonly ServiceTaqnshareClient _serviceTaqnshareClient = new ServiceTaqnshareClient();
         readonly Partie _partieTermine = (Partie)PhoneApplicationService.Current.State["partie"];
 
-        public EnregistrerScorePage()
+        public DemandeDefiPage()
         {
             InitializeComponent();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Utilisateur utilisateur = new Utilisateur();
-            utilisateur.id_utilisateur = App.UtilisateurCourant.id_utilisateur;
             _serviceTaqnshareClient.EnregistrerScoreCompleted += Enregistrement;
-            _serviceTaqnshareClient.EnregistrerScoreAsync(utilisateur, _partieTermine.Score);
+            _serviceTaqnshareClient.EnregistrerScoreAsync(App.UtilisateurCourant, _partieTermine.Score);
             base.OnNavigatedTo(e);
         }
 

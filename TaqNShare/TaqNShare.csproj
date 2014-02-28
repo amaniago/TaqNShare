@@ -74,6 +74,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Donnees\AmisFacebook.cs" />
     <Compile Include="Donnees\DefiAffiche.cs" />
     <Compile Include="Donnees\Filtre.cs" />
     <Compile Include="Donnees\Classement.cs" />
@@ -172,22 +173,22 @@
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TaqnshareReference\ServeurTaqnshare.ClasseDeService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TaqnshareReference\ServeurTaqnshare.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TaqnshareReference\service.wsdl" />
-    <None Include="Service References\TaqnshareReference\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TaqnshareReference\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="ServiceReferences.ClientConfig">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Service References\TaqnshareReference\ServeurTaqnshare.ClasseDeService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TaqnshareReference\ServeurTaqnshare1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TaqnshareReference\service1.wsdl" />
+    <None Include="Service References\TaqnshareReference\service2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TaqnshareReference\service21.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\TaqnshareReference\TaqNShare.TaqnshareReference.DefiService.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

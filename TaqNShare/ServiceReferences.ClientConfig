@@ -3,15 +3,15 @@
     <bindings>
       <basicHttpBinding>
         <binding name="BasicHttpBinding_ServiceTaqnshare" maxBufferSize="2147483647"
-            maxReceivedMessageSize="2147483647">
+          maxReceivedMessageSize="2147483647">
           <security mode="None" />
         </binding>
       </basicHttpBinding>
     </bindings>
     <client>
       <endpoint address="http://192.168.1.20:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc"
-          binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_ServiceTaqnshare"
-          contract="TaqnshareReference.ServiceTaqnshare" name="BasicHttpBinding_ServiceTaqnshare" />
+        binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_ServiceTaqnshare"
+        contract="TaqnshareReference.ServiceTaqnshare" name="BasicHttpBinding_ServiceTaqnshare" />
     </client>
   </system.serviceModel>
 </configuration>

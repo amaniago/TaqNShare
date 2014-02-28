@@ -18,7 +18,7 @@ namespace TaqNShare.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //Récupération de la photo
+            //Récupération de la UtilisateurImage
             DefiService defi = (DefiService)PhoneApplicationService.Current.State["defi"];
             TaquinTermineImage.Source = new WriteableBitmap(Photo.DecodeImage(defi.ImageDefi));
 
@@ -33,7 +33,7 @@ namespace TaqNShare.Pages
 
             ServiceTaqnshareClient serviceTaqnshareClient = new ServiceTaqnshareClient();
             serviceTaqnshareClient.ModifierDefiCompleted += DefiModifie;
-            serviceTaqnshareClient.ModifierDefiAsync(defiTermine);
+            serviceTaqnshareClient.ModifierDefiAsync(defiTermine, App.UtilisateurCourant);
            
             base.OnNavigatedTo(e);
         }
