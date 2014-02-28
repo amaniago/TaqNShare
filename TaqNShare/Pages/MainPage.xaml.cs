@@ -285,7 +285,7 @@ namespace TaqNShare.Pages
 
         private void DefisUtilisateursClick(object sender, RoutedEventArgs e)
         {
-
-        }
+            NavigationService.Navigate(new Uri("/Pages/ListeDefisPage.xaml", UriKind.Relative));
+        }    
     }
 }
