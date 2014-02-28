@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServeurTaqnshare.ClasseDeService;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,6 +21,15 @@ namespace ServeurTaqnshare
 
         [OperationContract]
         string CreerDefi(Defi partieUtilisateur, List<Composer> compositionTaquin);
+
+        [OperationContract]
+        List<UtilisateurService> RecupererClassement();
+
+        [OperationContract]
+        int RecupererRangJoueur(string idJoueur);
+
+        [OperationContract]
+        float RecupererScoreJoueur(string idJoueur);
     }
 
     public class ServiceTaqnshare : IServiceTaqnshare
@@ -30,13 +40,14 @@ namespace ServeurTaqnshare
             {
                 MemoryStream ms = new MemoryStream(imageByte);
                 //FileStream fs = new FileStream(System.Web.Hosting.HostingEnvironment.MapPath("~/TransientStorage/") + fileName, FileMode.Create);
-                FileStream fs = new FileStream(Directory.GetCurrentDirectory() + "\\ImagesWebService\\" + nomImage, FileMode.Create);
+                FileStream fs = new FileStream(Directory.GetCurrentDirectory() + "\\ImagesWebService\\" + nomImage,
+                                               FileMode.Create);
 
                 ms.WriteTo(fs);
                 ms.Close();
                 fs.Close();
                 fs.Dispose();
-                return "OK";
+                return "OK!";
             }
             catch (Exception ex)
             {
@@ -76,11 +87,11 @@ namespace ServeurTaqnshare
                     else
                     {
                         Utilisateur nouvelUtilisateur = new Utilisateur
-                                                        {
-                                                            id_utilisateur = utilisateurCourant.id_utilisateur,
-                                                            nombre_partie_utilisateur = 1,
-                                                            score_total_utilisateur = scorePartie
-                                                        };
+                                                            {
+                                                                id_utilisateur = utilisateurCourant.id_utilisateur,
+                                                                nombre_partie_utilisateur = 1,
+                                                                score_total_utilisateur = scorePartie
+                                                            };
                         db.Utilisateurs.Add(nouvelUtilisateur);
                     }
                     db.SaveChanges();
@@ -118,6 +129,64 @@ namespace ServeurTaqnshare
             {
                 return e.Message;
             }
+        }
+
+        public List<UtilisateurService> RecupererClassement()
+        {
+            var classement = new List<UtilisateurService>();
+            int cpt = 0;
+
+            using (var db = new TaqnshareEntities())
+            {
+                var utilisateurs = from u in db.Utilisateurs
+                                    orderby u.score_total_utilisateur/u.nombre_partie_utilisateur 
+                                    select u;
+
+                foreach (Utilisateur u in utilisateurs)
+                {
+                    if (cpt < 10)
+                        classement.Add(new UtilisateurService(u));
+                    cpt++;
+                }
+            }
+            return classement;
+        }
+
+        public int RecupererRangJoueur (string idJoueur)
+        {
+            int rang = 0;
+            int cpt = 1;
+            using (var db = new TaqnshareEntities())
+            {
+                var utilisateurs = from u in db.Utilisateurs
+                                   orderby u.score_total_utilisateur / u.nombre_partie_utilisateur
+                                   select u;
+
+                if (utilisateurs != null)
+                    foreach (Utilisateur u in utilisateurs)
+                    {
+                        if (u.id_utilisateur == idJoueur)
+                            rang = cpt;
+                        cpt++;
+                    }
+            }
+            return rang;
+        }
+
+        public float RecupererScoreJoueur (string idJoueur)
+        {
+            float score = 0;
+            using (var db = new TaqnshareEntities())
+            {
+                var utilisateur = (from u in db.Utilisateurs
+                                   where u.id_utilisateur == idJoueur
+                                   select u).SingleOrDefault();
+
+                if (utilisateur != null)
+                    score = (float) (utilisateur.score_total_utilisateur/utilisateur.nombre_partie_utilisateur);
+            }
+
+            return score;
         }
     }
 }

@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fa0e7c9bf7e5431985f79187a9e0e5fd" Name="Diagram1">
+      <Diagram DiagramId="ac40966f30bb4578a8fafa9090229511" Name="Diagramme1">
         <EntityTypeShape EntityType="TaqnshareModel.Composer" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TaqnshareModel.Defi" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="TaqnshareModel.Filtre" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TaqnshareModel.Piece" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TaqnshareModel.Utilisateur" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <AssociationConnector Association="TaqnshareModel.FK__Composer__id_def__3A81B327" ManuallyRouted="false" />
-        <AssociationConnector Association="TaqnshareModel.FK__Composer__id_fil__398D8EEE" ManuallyRouted="false" />
-        <AssociationConnector Association="TaqnshareModel.FK__Composer__id_pie__38996AB5" ManuallyRouted="false" />
-        <AssociationConnector Association="TaqnshareModel.FK__Defis__id_utilis__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="TaqnshareModel.FK__Composer__id_def__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="TaqnshareModel.FK__Composer__id_fil__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="TaqnshareModel.FK__Composer__id_pie__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="TaqnshareModel.FK__Defis__id_utilis__4E88ABD4" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
