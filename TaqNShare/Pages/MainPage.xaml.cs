@@ -201,31 +201,7 @@ namespace TaqNShare.Pages
         }
 
         ServiceTaqnshareClient service = new ServiceTaqnshareClient();
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            BitmapImage image = new BitmapImage();
-            image.CreateOptions = BitmapCreateOptions.None;
-            image.UriSource = new Uri("/TaqNShare.png", UriKind.Relative);
-            WriteableBitmap wbmp = new WriteableBitmap(image);
-
-            byte[] test = ConvertToBytes(wbmp);
-
-            service.EnvoyerImageCompleted += EnvoyerImage;
-            service.EnvoyerImageAsync(test, "TaqNShare.png");
-        }
-
-        private void EnvoyerImage(object sender, EnvoyerImageCompletedEventArgs e)
-        {
-            MessageBox.Show(e.Result);
-            service.RecupererImageCompleted += AfficherImage;
-            service.RecupererImageAsync("TaqNShare.png");
-        }
-
-        private void AfficherImage(object sender, RecupererImageCompletedEventArgs e)
-        {
-            //testImage.Source = decodeImage(e.Result);
-        }
-
+      
         public static byte[] ConvertToBytes(WriteableBitmap wbmp)
         {
             MemoryStream ms = new MemoryStream();
@@ -243,22 +219,15 @@ namespace TaqNShare.Pages
             return image;
         }
 
-
         public void InitialiserClassement()
         {
             service.RecupererClassementCompleted += RecupererClassement;
             service.RecupererClassementAsync();
-
-
-            //classement.Add(new Classement{Position = 1,Nom = "Ruault",Prenom = "Nicolas",ScoreTotale = 7});
-            //classement.Add(new Classement { Position = 2, Nom = "Echerfaoui", Prenom = "Bakre", ScoreTotale = 9 });
-            //classement.Add(new Classement { Position = 3, Nom = "Maniago", Prenom = "Anthony", ScoreTotale = 12 });
         }
 
         private void RecupererClassement(object sender, RecupererClassementCompletedEventArgs e)
         {
             List<UtilisateurService> utilisateurs = e.Result;
-            //MessageBox.Show("coucou");
             int position = 1;
 
             foreach (UtilisateurService u in utilisateurs)
@@ -307,7 +276,7 @@ namespace TaqNShare.Pages
 
         private void DefisUtilisateursClick(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new Uri("/Pages/ListeDefisPage.xaml", UriKind.Relative));
         }    
     }
 }

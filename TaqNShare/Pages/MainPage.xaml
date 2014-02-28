@@ -41,7 +41,6 @@
                 <phone:PanoramaItem.RenderTransform>
                     <TranslateTransform/>
                 </phone:PanoramaItem.RenderTransform>
-                <Button Content="testwebservice" HorizontalAlignment="Left" Height="89" VerticalAlignment="Top" Width="408" Margin="0,299,0,0" Click="Button_Click"/>
             </phone:PanoramaItem>
             <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Classement" Height="512">
                 <phone:PanoramaItem.RenderTransform>
