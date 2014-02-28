@@ -73,7 +73,7 @@ namespace TaqNShare.Donnees
             ListePieces = new List<Piece>();
         }
 
-        public Partie()
+        public Partie(int nombreFiltre)
         {
             _timer = new DispatcherTimer();
             _timer.Tick += new EventHandler(delegate
@@ -85,6 +85,7 @@ namespace TaqNShare.Donnees
             StopWatch = new Stopwatch();
 
             ListePieces = new List<Piece>();
+            NombreFiltre = nombreFiltre;
         }
 
 

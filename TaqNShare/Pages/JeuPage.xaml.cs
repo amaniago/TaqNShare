@@ -179,13 +179,13 @@ namespace TaqNShare.Pages
 
         private async void PreparerImageDefi()
         {
-            _partieEnCours = new Partie();
+            //Récupération du défi
+            DefiService defi = (DefiService)PhoneApplicationService.Current.State["defi"];
+
+            _partieEnCours = new Partie(defi.NombreFiltre);
             //Spécification du dataContext pour le Binding
             DataContext = _partieEnCours; 
 
-            //Récupération du défi
-            DefiService defi = (DefiService)PhoneApplicationService.Current.State["defi"];
-           
             //Calcul de la taille de la grille en fonction
             
             switch (defi.Composition.Count)

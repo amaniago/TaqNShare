@@ -514,6 +514,8 @@ namespace TaqNShare.TaqnshareReference {
         
         private string NomUtilisateurField;
         
+        private int NombreFiltreField;
+        
         private string PrenomUtilisateurField;
         
         private int ScoreUtilisateurDefiField;
@@ -605,6 +607,19 @@ namespace TaqNShare.TaqnshareReference {
                 if ((object.ReferenceEquals(this.NomUtilisateurField, value) != true)) {
                     this.NomUtilisateurField = value;
                     this.RaisePropertyChanged("NomUtilisateur");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int NombreFiltre {
+            get {
+                return this.NombreFiltreField;
+            }
+            set {
+                if ((this.NombreFiltreField.Equals(value) != true)) {
+                    this.NombreFiltreField = value;
+                    this.RaisePropertyChanged("NombreFiltre");
                 }
             }
         }

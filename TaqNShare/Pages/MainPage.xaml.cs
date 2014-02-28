@@ -31,7 +31,7 @@ namespace TaqNShare.Pages
         public int UserDecoupage { get; set; }
         public int UserFiltre { get; set; }
 
-        readonly ObservableCollection<DefiAffiche> _defisAAfficher = new ObservableCollection<DefiAffiche>();
+        ObservableCollection<DefiAffiche> _defisAAfficher = new ObservableCollection<DefiAffiche>();
         #endregion propriétés
 
         /// <summary>
@@ -238,6 +238,8 @@ namespace TaqNShare.Pages
             settings.Save();
 
             FacebookConnexion();
+
+            AffichageRangScore();
         }
 
         private void RecupererClassement(object sender, RecupererClassementCompletedEventArgs e)
@@ -270,11 +272,14 @@ namespace TaqNShare.Pages
             {
                 RangUtilisateurTextBlock.Visibility = Visibility.Visible;
                 ScoreUtilisateurTextBlock.Visibility = Visibility.Visible;
+                defisUtilisateurs.Visibility = Visibility.Visible;
             }
             else
             {
                 RangUtilisateurTextBlock.Visibility = Visibility.Collapsed;
                 ScoreUtilisateurTextBlock.Visibility = Visibility.Collapsed;
+                defisUtilisateurs.Visibility = Visibility.Collapsed;
+                _defisAAfficher.Clear();
             }
         }
 
