@@ -76,10 +76,9 @@
     </Compile>
     <Compile Include="Donnees\DefiAffiche.cs" />
     <Compile Include="Donnees\Filtre.cs" />
+    <Compile Include="Donnees\Classement.cs" />
     <Compile Include="Donnees\Partie.cs" />
     <Compile Include="Donnees\Piece.cs" />
-    <Compile Include="Donnees\UtilisateurFacebook.cs" />
-    <Compile Include="Donnees\ListeAmis.cs" />
     <Compile Include="Donnees\Parametre.cs" />
     <Compile Include="Donnees\Photo.cs" />
     <Compile Include="LocalizedStrings.cs" />
@@ -98,11 +97,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Service References\TaqnshareReference\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Pages\AuthentificationFacebookPage.xaml.cs">
       <DependentUpon>AuthentificationFacebookPage.xaml</DependentUpon>
     </Compile>
@@ -120,6 +114,11 @@
     </Compile>
     <Compile Include="Pages\ValidationPhotoPage.xaml.cs">
       <DependentUpon>ValidationPhotoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\TaqnshareReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -173,32 +172,20 @@
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TaqnshareReference\configuration91.svcinfo" />
-    <None Include="Service References\TaqnshareReference\configuration.svcinfo" />
-    <None Include="Service References\TaqnshareReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <Content Include="ServiceReferences.ClientConfig" />
     <None Include="Service References\TaqnshareReference\ServeurTaqnshare.ClasseDeService.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TaqnshareReference\ServeurTaqnshare1.xsd">
+    <None Include="Service References\TaqnshareReference\ServeurTaqnshare.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TaqnshareReference\service1.wsdl" />
-    <None Include="Service References\TaqnshareReference\service2.xsd">
+    <None Include="Service References\TaqnshareReference\service.wsdl" />
+    <None Include="Service References\TaqnshareReference\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TaqnshareReference\service21.xsd">
+    <None Include="Service References\TaqnshareReference\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TaqnshareReference\TaqNShare.TaqnshareReference.DefiService.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TaqnshareReference\TaqNShare.TaqnshareReference.UtilisateurService.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
+    <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\AlignmentGrid.png" />
@@ -220,6 +207,12 @@
     <Content Include="Assets\Tiles\IconicTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Service References\TaqnshareReference\configuration91.svcinfo" />
+    <None Include="Service References\TaqnshareReference\configuration.svcinfo" />
+    <None Include="Service References\TaqnshareReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="SplashScreenImage.jpg" />
     <Content Include="TaqNShare.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
@@ -268,13 +261,13 @@
       <HintPath>..\packages\NokiaImagingSDK.1.1.177\lib\wp8\Nokia.Graphics.Imaging.Managed.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="WriteableBitmapExWinPhone, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="WriteableBitmapExWinPhone, Version=1.0.10.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\WriteableBitmapEx.1.0.9.0\lib\WindowsPhone8\WriteableBitmapExWinPhone.dll</HintPath>
+      <HintPath>..\packages\WriteableBitmapEx.1.0.10.0\lib\WindowsPhone8\WriteableBitmapExWinPhone.dll</HintPath>
     </Reference>
-    <Reference Include="WriteableBitmapExWinPhoneXnaDependant, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="WriteableBitmapExWinPhoneXnaDependant, Version=1.0.10.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\WriteableBitmapEx.1.0.9.0\lib\WindowsPhone8\WriteableBitmapExWinPhoneXnaDependant.dll</HintPath>
+      <HintPath>..\packages\WriteableBitmapEx.1.0.10.0\lib\WindowsPhone8\WriteableBitmapExWinPhoneXnaDependant.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

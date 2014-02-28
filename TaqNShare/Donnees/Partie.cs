@@ -44,7 +44,7 @@ namespace TaqNShare.Donnees
         }
 
         public string TimeElapsed { get; set; }
-        
+
 
         public readonly Stopwatch StopWatch;
         private readonly DispatcherTimer _timer;
@@ -83,7 +83,7 @@ namespace TaqNShare.Donnees
             });
             _timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
             StopWatch = new Stopwatch();
-            
+
             ListePieces = new List<Piece>();
         }
 

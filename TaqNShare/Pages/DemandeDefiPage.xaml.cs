@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using Microsoft.Phone.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Shell;
 using TaqNShare.Donnees;
@@ -20,7 +21,7 @@ namespace TaqNShare.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Utilisateur utilisateur = new Utilisateur();
-            utilisateur.id_utilisateur = App.IdFacebook;
+            utilisateur.id_utilisateur = App.UtilisateurCourant.id_utilisateur;
             _webServiceTaqnshareClient.EnregistrerScoreCompleted += Enregistrement;
             _webServiceTaqnshareClient.EnregistrerScoreAsync(utilisateur, _partieTermine.Score);
             base.OnNavigatedTo(e);

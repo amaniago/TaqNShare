@@ -8,18 +8,20 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using TaqNShare.Donnees;
-using Facebook;
 using System.Windows;
 using System.Windows.Navigation;
 using TaqNShare.TaqnshareReference;
+using System.Collections.ObjectModel;
 
 
 namespace TaqNShare.Pages
 {
     public partial class MainPage
     {
-
         #region propriétés
+        ServiceTaqnshareClient serviceTaqnshareClient = new ServiceTaqnshareClient();
+        public ObservableCollection<Classement> Classement { get; set; }
+        private ObservableCollection<Classement> classement = new ObservableCollection<Classement>();
 
         readonly CameraCaptureTask _camera;
         readonly PhotoChooserTask _galerie;
@@ -42,6 +44,13 @@ namespace TaqNShare.Pages
             IsolatedStorageSettings.ApplicationSettings.TryGetValue("UtilisateurConnecte", out utilisateurConnecte);
 
             InitializeComponent();
+
+            InitialiserClassement();
+            Classement = classement;
+
+            AffichageRangScore();
+            if (App.EstAuthentifie)
+                InitialiserScoreJoueur();
 
             FacebookConnexion();
 
@@ -159,7 +168,7 @@ namespace TaqNShare.Pages
                 DeConnexionFacebookBouton.Visibility = Visibility.Visible;
                 nom.Visibility = Visibility.Visible;
                 photo.Visibility = Visibility.Visible;
-                LoadUserInfo();
+                RecupererInformationsUtilisateur();
             }
             else
             {
@@ -170,32 +179,14 @@ namespace TaqNShare.Pages
             }
         }
 
-        private void LoadUserInfo()
+        private void RecupererInformationsUtilisateur()
         {
-            var fb = new FacebookClient(App.AccessToken);
+            photo.Source = App.PhotoUtilisateur;
+            Utilisateur utilisateurCourant = App.UtilisateurCourant;
 
-            fb.GetCompleted += (o, e) =>
-            {
-                if (e.Error != null)
-                {
-                    Dispatcher.BeginInvoke(() => MessageBox.Show(e.Error.Message));
-                    return;
-                }
-
-                var result = (IDictionary<string, object>)e.GetResultData();
-
-                Dispatcher.BeginInvoke(() =>
-                {
-                    var profilePictureUrl = string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", App.IdFacebook, "square", App.AccessToken);
-
-                    photo.Source = new BitmapImage(new Uri(profilePictureUrl));
                     if (nom != null)
-                        nom.Text = String.Format("{0} {1}", result["first_name"], result["last_name"]);
-                });
-            };
-            fb.GetTaskAsync("me");
-
-            ServiceTaqnshareClient serviceTaqnshareClient = new ServiceTaqnshareClient();
+                        nom.Text = String.Format("{0} {1}", utilisateurCourant.prenom_utilisateur, utilisateurCourant.nom_utilisateur);
+            
             serviceTaqnshareClient.RecupererDefisCompleted += AfficherDefis;
             //serviceTaqnshareClient.RecupererDefisAsync(App.IdFacebook);
             serviceTaqnshareClient.RecupererDefisAsync("Friend");
@@ -249,6 +240,74 @@ namespace TaqNShare.Pages
             settings.Save();
 
             FacebookConnexion();
-        }  
+        }
+
+
+
+        public void InitialiserClassement()
+        {
+            serviceTaqnshareClient.RecupererClassementCompleted += RecupererClassement;
+            serviceTaqnshareClient.RecupererClassementAsync();
+
+
+            //classement.Add(new Classement{Position = 1,Nom = "Ruault",Prenom = "Nicolas",ScoreTotale = 7});
+            //classement.Add(new Classement { Position = 2, Nom = "Echerfaoui", Prenom = "Bakre", ScoreTotale = 9 });
+            //classement.Add(new Classement { Position = 3, Nom = "Maniago", Prenom = "Anthony", ScoreTotale = 12 });
+        }
+
+        private void RecupererClassement(object sender, RecupererClassementCompletedEventArgs e)
+        {
+            List<UtilisateurService> utilisateurs = e.Result;
+            //MessageBox.Show("coucou");
+            int position = 1;
+
+            foreach (UtilisateurService u in utilisateurs)
+            {
+                classement.Add(new Classement { Position = position, Nom = u.NomUtilisateur, Prenom = u.PrenomUtilisateur, ScoreTotal = (float) (u.ScoreTotalUtilisateur/u.NombrePartieUtilisateur) });
+                position++;
+            }
+        }
+
+        private void InitialiserScoreJoueur ()
+        {
+            serviceTaqnshareClient.RecupererRangJoueurCompleted += RecupererRang;
+            serviceTaqnshareClient.RecupererRangJoueurAsync(App.UtilisateurCourant.id_utilisateur);
+
+            serviceTaqnshareClient.RecupererScoreJoueurCompleted += RecupererScore;
+            serviceTaqnshareClient.RecupererScoreJoueurAsync(App.UtilisateurCourant.id_utilisateur);
+        }
+
+        private void RecupererScore(object sender, RecupererScoreJoueurCompletedEventArgs e)
+        {
+            ScoreJoueur.Text = e.Result.ToString();
+        }
+
+        private void RecupererRang(object sender, RecupererRangJoueurCompletedEventArgs e)
+        {
+            RangJoueur.Text = e.Result.ToString();
+        }
+
+        private void AffichageRangScore()
+        {
+            if(App.EstAuthentifie)
+            {
+                ScoreJoueur.Visibility = Visibility.Visible;
+                RangJoueur.Visibility = Visibility.Visible;
+                texteRang.Visibility = Visibility.Visible;
+                texteScore.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ScoreJoueur.Visibility = Visibility.Collapsed;
+                RangJoueur.Visibility = Visibility.Collapsed;
+                texteRang.Visibility = Visibility.Collapsed;
+                texteScore.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void DefisUtilisateursClick(object sender, RoutedEventArgs e)
+        {
+
+        }    
     }
 }

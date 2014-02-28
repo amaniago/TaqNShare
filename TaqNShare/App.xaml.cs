@@ -6,16 +6,19 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TaqNShare.Resources;
-using Facebook.Client; 
+using Facebook.Client;
+using System.Windows.Media.Imaging; 
 
 namespace TaqNShare
 {
     public partial class App : Application
     {
         internal static string AccessToken = String.Empty;
-        internal static string IdFacebook = String.Empty;
         public static bool EstAuthentifie = false;
         public static readonly FacebookSessionClient FacebookSessionClient = new FacebookSessionClient("552340608180135");
+        public static Utilisateur UtilisateurCourant;
+        public static BitmapImage PhotoUtilisateur = new BitmapImage();
+
         /// <summary>
         /// Permet d'accéder facilement au frame racine de l'application téléphonique.
         /// </summary>

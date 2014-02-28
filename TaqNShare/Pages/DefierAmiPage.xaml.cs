@@ -8,55 +8,30 @@ using Microsoft.Phone.Shell;
 using TaqNShare.Donnees;
 using TaqNShare.TaqnshareReference;
 
+
 namespace TaqNShare.Pages
 {
     public partial class DefierAmiPage
     {
-
-        public ObservableCollection<UtilisateurFacebook> UtilisateurList { get; set; }
+        public ObservableCollection<InformationsAmis> ListeAmis { get; set; }
+        private ObservableCollection<InformationsAmis> Amis = new ObservableCollection<InformationsAmis>();
+        private Utilisateur u = App.UtilisateurCourant;
 
         public DefierAmiPage()
         {
-
-            ListeAmis.Vider();
-            //UtilisateurList.Clear();
             InitializeComponent();
 
-            LoadUserInfo();
             RecupererListeAmis();
 
-            UtilisateurList = ListeAmis.Amis;
+            ListeAmis = Amis;
 
             DataContext = this;
-        }
-
-        private void LoadUserInfo()
-        {
-            var fb = new FacebookClient(App.AccessToken);
-
-            fb.GetCompleted += (o, e) =>
-            {
-                if (e.Error != null)
-                {
-                    Dispatcher.BeginInvoke(() => MessageBox.Show(e.Error.Message));
-                    return;
-                }
-
-                var result = (IDictionary<string, object>)e.GetResultData();
-
-                Dispatcher.BeginInvoke(() =>
-                {
-                    var profilePictureUrl = string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", App.IdFacebook, "square", App.AccessToken);
-                });
-            };
-
-            fb.GetTaskAsync("me");
         }
 
         private void RecupererListeAmis()
         {
             FacebookClient fb = new FacebookClient(App.AccessToken);
-
+            
             fb.GetCompleted += (o, e) =>
             {
                 if (e.Error != null)
@@ -73,14 +48,46 @@ namespace TaqNShare.Pages
                 {
                     foreach (var item in data)
                     {
-                        var friend = (IDictionary<string, object>)item;
+                        var ami = (IDictionary<string, object>)item;
 
-                        ListeAmis.Amis.Add(new UtilisateurFacebook { Nom = (string)friend["name"], Id = (string)friend["id"], Image = new Uri(string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", friend["id"], "square", App.AccessToken)) });
+                        Amis.Add(new InformationsAmis { Nom = (string)ami["name"], Id = (string)ami["id"], Image = (new Uri(string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", ami["id"], "square", App.AccessToken)))});
                     }
                 });
-
             };
             fb.GetTaskAsync("/me/friends");
+        }
+
+        private void retourAccueil_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/MainPage.xaml", UriKind.Relative));
+        }
+
+        private void defier_Click(object sender, RoutedEventArgs e)
+        {
+            if (listeAmis.SelectedIndex == -1)
+        {
+                MessageBox.Show("Vous devez sélectionner un ami.");
+            }
+            else if (nomDefi.Text == "")
+            {
+                MessageBox.Show("Le défi doit avoir un nom.");
+            }
+            else
+                {
+                MessageBox.Show("Numéro de l'ami dans la liste : " + listeAmis.SelectedIndex.ToString());
+                MessageBox.Show("Id de l'ami : " + Amis[listeAmis.SelectedIndex].Id);
+                MessageBox.Show(nomDefi.Text);
+                NavigationService.Navigate(new Uri("/Pages/MainPage.xaml", UriKind.Relative));
+            }
+                }
+
+        public class InformationsAmis
+                    {
+            public string Id { get; set; }
+
+            public string Nom { get; set; }
+
+            public Uri Image { get; set; }
         }
 
         /// <summary>
@@ -95,7 +102,7 @@ namespace TaqNShare.Pages
 
             //Création du défi
             Defi defi = new Defi();
-            defi.id_utilisateur = App.IdFacebook;
+            defi.id_utilisateur = App.UtilisateurCourant.id_utilisateur;
             defi.nom_defi = "Test";
             defi.score_utilisateur_defi = partieTermine.Score;
             defi.resolu = false;

@@ -4,12 +4,16 @@ using System.Windows;
 using Facebook.Client;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
+using Facebook;
+using System.Windows.Media.Imaging;
+using TaqNShare.TaqnshareReference;
 
 namespace TaqNShare.Pages
 {
     public partial class FacebookLoginPage
     {
         private string _pageAvant;
+        private string _idFacebook;
 
         public FacebookLoginPage()
         {
@@ -45,7 +49,7 @@ namespace TaqNShare.Pages
             {
                 _session = await App.FacebookSessionClient.LoginAsync("user_about_me,read_stream");
                 App.AccessToken = _session.AccessToken;
-                App.IdFacebook = _session.FacebookId;
+                _idFacebook = _session.FacebookId;
 
                 IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
 
@@ -57,7 +61,22 @@ namespace TaqNShare.Pages
                     settings[key] = true;
 
                 settings.Save();
-                
+
+                var fb = new FacebookClient(App.AccessToken);
+                JsonObject data = await GetAsyncEx(fb,"https://graph.facebook.com/me", null);
+                Dispatcher.BeginInvoke(() =>
+                {
+                    var profilePictureUrl = string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", _idFacebook, "square", App.AccessToken);
+                    BitmapImage photo = new BitmapImage(new Uri(profilePictureUrl));
+                    App.PhotoUtilisateur = photo;
+
+                    Utilisateur u = new Utilisateur();
+                    u.id_utilisateur = _idFacebook;
+                    u.prenom_utilisateur = data["first_name"].ToString();
+                    u.nom_utilisateur = data["last_name"].ToString();
+                    App.UtilisateurCourant = u;
+                });
+
                 Dispatcher.BeginInvoke(() => NavigationService.Navigate(new Uri("/Pages/" + _pageAvant + ".xaml", UriKind.Relative)));
             }
             catch (InvalidOperationException e)
@@ -65,5 +84,27 @@ namespace TaqNShare.Pages
                 MessageBox.Show("Login failed! Exception details: " + e.Message);
             }
         }
+
+        public static Task<JsonObject> GetAsyncEx(FacebookClient facebookClient, string uri, object parameters)
+        {
+            TaskCompletionSource<JsonObject> taskCompletionSource = new TaskCompletionSource<JsonObject>();
+            EventHandler<FacebookApiEventArgs> getCompletedHandler = null;
+            getCompletedHandler = (s, e) =>
+            {
+                facebookClient.GetCompleted -= getCompletedHandler;
+                if (e.Error != null)
+                    taskCompletionSource.TrySetException(e.Error);
+                else
+                    taskCompletionSource.TrySetResult((JsonObject)e.GetResultData());
+            };
+
+            facebookClient.GetCompleted += getCompletedHandler;
+            facebookClient.GetAsync(uri, parameters);
+
+            return taskCompletionSource.Task;
+        }
     }
 }
+
+
+        

@@ -22,12 +22,12 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="Liste des Amis" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="Défier un ami" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,125">
-            <ListBox ItemsSource="{Binding UtilisateurList}" Grid.Row="1" >
+            <ListBox x:Name="listeAmis" ItemsSource="{Binding ListeAmis}" Grid.Row="1" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -46,6 +46,8 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
+        <TextBox x:Name="nomDefi" HorizontalAlignment="Left" Height="72" Margin="14,496,0,-10" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="456"/>
+        <TextBlock HorizontalAlignment="Left" Margin="140,456,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Donner un nom au défi" VerticalAlignment="Top" Width="221" Height="40"/>
         <Button x:Name="DefierAmiBouton" Content="Défier" HorizontalAlignment="Left" Height="72" Margin="159,568,0,-82" Grid.Row="1" VerticalAlignment="Top" Width="189" Tap="DefierAmiBoutonTap"/>
     </Grid>
 </phone:PhoneApplicationPage>
