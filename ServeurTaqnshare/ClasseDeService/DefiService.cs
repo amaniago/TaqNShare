@@ -31,11 +31,14 @@ namespace ServeurTaqnshare.ClasseDeService
         [DataMember]
         public string PrenomUtilisateur { get; set; }
         [DataMember]
+        public int NombreFiltre { get; set; }
+        [DataMember]
         public string NomAdversaire { get; set; }
         [DataMember]
         public string PrenomAdversaire { get; set; }
 
-        public DefiService(Defi defi, byte[] imageDefi)
+
+        public DefiService(Defi defi, byte[] imageDefi, int nombreFiltre)
         {
             IdDefi = defi.id_defi;
             IdUtilisateur = defi.id_utilisateur;
@@ -43,6 +46,7 @@ namespace ServeurTaqnshare.ClasseDeService
             NomDefi = defi.nom_defi;
             ScoreUtilisateurDefi = Convert.ToInt32(defi.score_utilisateur_defi);
             ImageDefi = imageDefi;
+            NombreFiltre = nombreFiltre;
 
             Composition = new List<Composition>();
 
@@ -52,6 +56,7 @@ namespace ServeurTaqnshare.ClasseDeService
             }
         }
 
+        
         public DefiService(Defi defi, Utilisateur createurDefi)
         {
             IdDefi = defi.id_defi;
