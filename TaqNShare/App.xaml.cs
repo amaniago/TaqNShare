@@ -7,7 +7,8 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TaqNShare.Resources;
 using Facebook.Client;
-using System.Windows.Media.Imaging; 
+using System.Windows.Media.Imaging;
+using TaqNShare.TaqnshareReference;
 
 namespace TaqNShare
 {

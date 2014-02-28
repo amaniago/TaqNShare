@@ -10,7 +10,7 @@ namespace TaqNShare.Pages
 {
     public partial class EnregistrerScorePage
     {
-        readonly ServiceTaqnshareClient _webServiceTaqnshareClient = new ServiceTaqnshareClient();
+        readonly ServiceTaqnshareClient _serviceTaqnshareClient = new ServiceTaqnshareClient();
         readonly Partie _partieTermine = (Partie)PhoneApplicationService.Current.State["partie"];
 
         public EnregistrerScorePage()
@@ -22,8 +22,8 @@ namespace TaqNShare.Pages
         {
             Utilisateur utilisateur = new Utilisateur();
             utilisateur.id_utilisateur = App.UtilisateurCourant.id_utilisateur;
-            _webServiceTaqnshareClient.EnregistrerScoreCompleted += Enregistrement;
-            _webServiceTaqnshareClient.EnregistrerScoreAsync(utilisateur, _partieTermine.Score);
+            _serviceTaqnshareClient.EnregistrerScoreCompleted += Enregistrement;
+            _serviceTaqnshareClient.EnregistrerScoreAsync(utilisateur, _partieTermine.Score);
             base.OnNavigatedTo(e);
         }
 

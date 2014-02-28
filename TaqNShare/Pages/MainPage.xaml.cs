@@ -11,7 +11,6 @@ using TaqNShare.Donnees;
 using System.Windows;
 using System.Windows.Navigation;
 using TaqNShare.TaqnshareReference;
-using System.Collections.ObjectModel;
 
 
 namespace TaqNShare.Pages
