@@ -13,7 +13,7 @@ namespace ServeurTaqnshare
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TaqnshareEntities : DbContext
+    public partial class TaqnshareEntities : DbContext, IDisposable
     {
         public TaqnshareEntities()
             : base("name=TaqnshareEntities")
@@ -30,5 +30,9 @@ namespace ServeurTaqnshare
         public virtual DbSet<Filtre> Filtres { get; set; }
         public virtual DbSet<Piece> Pieces { get; set; }
         public virtual DbSet<Utilisateur> Utilisateurs { get; set; }
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

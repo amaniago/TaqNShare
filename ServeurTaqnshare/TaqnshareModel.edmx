@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TaqnshareModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="db_taqnshareModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Composer">
           <Key>
             <PropertyRef Name="id_piece" />
@@ -51,7 +51,7 @@
           <Property Name="nombre_partie_utilisateur" Type="numeric" Precision="8" Scale="0" />
           <Property Name="score_total_utilisateur" Type="numeric" Precision="10" Scale="0" />
         </EntityType>
-        <Association Name="FK__Composer__id_def__3A81B327">
+        <Association Name="FK__Composer__id_def__1B0907CE">
           <End Role="Defis" Type="Self.Defis" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -65,7 +65,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Composer__id_fil__398D8EEE">
+        <Association Name="FK__Composer__id_fil__1A14E395">
           <End Role="Filtres" Type="Self.Filtres" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -79,7 +79,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Composer__id_pie__38996AB5">
+        <Association Name="FK__Composer__id_pie__1920BF5C">
           <End Role="Pieces" Type="Self.Pieces" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -93,7 +93,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Defis__id_utilis__31EC6D26">
+        <Association Name="FK__Defis__id_utilis__1273C1CD">
           <End Role="Utilisateurs" Type="Self.Utilisateurs" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -107,25 +107,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TaqnshareModelStoreContainer">
+        <EntityContainer Name="db_taqnshareModelStoreContainer">
           <EntitySet Name="Composer" EntityType="Self.Composer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Defis" EntityType="Self.Defis" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Filtres" EntityType="Self.Filtres" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pieces" EntityType="Self.Pieces" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Utilisateurs" EntityType="Self.Utilisateurs" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Composer__id_def__3A81B327" Association="Self.FK__Composer__id_def__3A81B327">
+          <AssociationSet Name="FK__Composer__id_def__1B0907CE" Association="Self.FK__Composer__id_def__1B0907CE">
             <End Role="Defis" EntitySet="Defis" />
             <End Role="Composer" EntitySet="Composer" />
           </AssociationSet>
-          <AssociationSet Name="FK__Composer__id_fil__398D8EEE" Association="Self.FK__Composer__id_fil__398D8EEE">
+          <AssociationSet Name="FK__Composer__id_fil__1A14E395" Association="Self.FK__Composer__id_fil__1A14E395">
             <End Role="Filtres" EntitySet="Filtres" />
             <End Role="Composer" EntitySet="Composer" />
           </AssociationSet>
-          <AssociationSet Name="FK__Composer__id_pie__38996AB5" Association="Self.FK__Composer__id_pie__38996AB5">
+          <AssociationSet Name="FK__Composer__id_pie__1920BF5C" Association="Self.FK__Composer__id_pie__1920BF5C">
             <End Role="Pieces" EntitySet="Pieces" />
             <End Role="Composer" EntitySet="Composer" />
           </AssociationSet>
-          <AssociationSet Name="FK__Defis__id_utilis__31EC6D26" Association="Self.FK__Defis__id_utilis__31EC6D26">
+          <AssociationSet Name="FK__Defis__id_utilis__1273C1CD" Association="Self.FK__Defis__id_utilis__1273C1CD">
             <End Role="Utilisateurs" EntitySet="Utilisateurs" />
             <End Role="Defis" EntitySet="Defis" />
           </AssociationSet>
@@ -134,7 +134,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="TaqnshareModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="db_taqnshareModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Composer">
           <Key>
             <PropertyRef Name="id_piece" />
@@ -145,9 +145,9 @@
           <Property Name="id_filtre" Type="Int32" Nullable="false" />
           <Property Name="id_defi" Type="Int32" Nullable="false" />
           <Property Name="position_piece" Type="Decimal" Precision="8" Scale="0" />
-          <NavigationProperty Name="Defi" Relationship="Self.FK__Composer__id_def__3A81B327" FromRole="Composer" ToRole="Defis" />
-          <NavigationProperty Name="Filtre" Relationship="Self.FK__Composer__id_fil__398D8EEE" FromRole="Composer" ToRole="Filtres" />
-          <NavigationProperty Name="Piece" Relationship="Self.FK__Composer__id_pie__38996AB5" FromRole="Composer" ToRole="Pieces" />
+          <NavigationProperty Name="Defi" Relationship="Self.FK__Composer__id_def__1B0907CE" FromRole="Composer" ToRole="Defis" />
+          <NavigationProperty Name="Filtre" Relationship="Self.FK__Composer__id_fil__1A14E395" FromRole="Composer" ToRole="Filtres" />
+          <NavigationProperty Name="Piece" Relationship="Self.FK__Composer__id_pie__1920BF5C" FromRole="Composer" ToRole="Pieces" />
         </EntityType>
         <EntityType Name="Defi">
           <Key>
@@ -161,22 +161,22 @@
           <Property Name="score_adversaire_defi" Type="Decimal" Precision="8" Scale="0" />
           <Property Name="resolu" Type="Boolean" />
           <Property Name="chemin_image_defi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Composers" Relationship="Self.FK__Composer__id_def__3A81B327" FromRole="Defis" ToRole="Composer" />
-          <NavigationProperty Name="Utilisateur" Relationship="Self.FK__Defis__id_utilis__31EC6D26" FromRole="Defis" ToRole="Utilisateurs" />
+          <NavigationProperty Name="Composers" Relationship="Self.FK__Composer__id_def__1B0907CE" FromRole="Defis" ToRole="Composer" />
+          <NavigationProperty Name="Utilisateur" Relationship="Self.FK__Defis__id_utilis__1273C1CD" FromRole="Defis" ToRole="Utilisateurs" />
         </EntityType>
         <EntityType Name="Filtre">
           <Key>
             <PropertyRef Name="id_filtre" />
           </Key>
           <Property Name="id_filtre" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Composers" Relationship="Self.FK__Composer__id_fil__398D8EEE" FromRole="Filtres" ToRole="Composer" />
+          <NavigationProperty Name="Composers" Relationship="Self.FK__Composer__id_fil__1A14E395" FromRole="Filtres" ToRole="Composer" />
         </EntityType>
         <EntityType Name="Piece">
           <Key>
             <PropertyRef Name="id_piece" />
           </Key>
           <Property Name="id_piece" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Composers" Relationship="Self.FK__Composer__id_pie__38996AB5" FromRole="Pieces" ToRole="Composer" />
+          <NavigationProperty Name="Composers" Relationship="Self.FK__Composer__id_pie__1920BF5C" FromRole="Pieces" ToRole="Composer" />
         </EntityType>
         <EntityType Name="Utilisateur">
           <Key>
@@ -187,9 +187,9 @@
           <Property Name="prenom_utilisateur" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="nombre_partie_utilisateur" Type="Decimal" Precision="8" Scale="0" />
           <Property Name="score_total_utilisateur" Type="Decimal" Precision="10" Scale="0" />
-          <NavigationProperty Name="Defis" Relationship="Self.FK__Defis__id_utilis__31EC6D26" FromRole="Utilisateurs" ToRole="Defis" />
+          <NavigationProperty Name="Defis" Relationship="Self.FK__Defis__id_utilis__1273C1CD" FromRole="Utilisateurs" ToRole="Defis" />
         </EntityType>
-        <Association Name="FK__Composer__id_def__3A81B327">
+        <Association Name="FK__Composer__id_def__1B0907CE">
           <End Role="Defis" Type="Self.Defi" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -203,7 +203,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Composer__id_fil__398D8EEE">
+        <Association Name="FK__Composer__id_fil__1A14E395">
           <End Role="Filtres" Type="Self.Filtre" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -217,7 +217,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Composer__id_pie__38996AB5">
+        <Association Name="FK__Composer__id_pie__1920BF5C">
           <End Role="Pieces" Type="Self.Piece" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -231,7 +231,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Defis__id_utilis__31EC6D26">
+        <Association Name="FK__Defis__id_utilis__1273C1CD">
           <End Role="Utilisateurs" Type="Self.Utilisateur" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -251,19 +251,19 @@
           <EntitySet Name="Filtres" EntityType="Self.Filtre" />
           <EntitySet Name="Pieces" EntityType="Self.Piece" />
           <EntitySet Name="Utilisateurs" EntityType="Self.Utilisateur" />
-          <AssociationSet Name="FK__Composer__id_def__3A81B327" Association="Self.FK__Composer__id_def__3A81B327">
+          <AssociationSet Name="FK__Composer__id_def__1B0907CE" Association="Self.FK__Composer__id_def__1B0907CE">
             <End Role="Defis" EntitySet="Defis" />
             <End Role="Composer" EntitySet="Composers" />
           </AssociationSet>
-          <AssociationSet Name="FK__Composer__id_fil__398D8EEE" Association="Self.FK__Composer__id_fil__398D8EEE">
+          <AssociationSet Name="FK__Composer__id_fil__1A14E395" Association="Self.FK__Composer__id_fil__1A14E395">
             <End Role="Filtres" EntitySet="Filtres" />
             <End Role="Composer" EntitySet="Composers" />
           </AssociationSet>
-          <AssociationSet Name="FK__Composer__id_pie__38996AB5" Association="Self.FK__Composer__id_pie__38996AB5">
+          <AssociationSet Name="FK__Composer__id_pie__1920BF5C" Association="Self.FK__Composer__id_pie__1920BF5C">
             <End Role="Pieces" EntitySet="Pieces" />
             <End Role="Composer" EntitySet="Composers" />
           </AssociationSet>
-          <AssociationSet Name="FK__Defis__id_utilis__31EC6D26" Association="Self.FK__Defis__id_utilis__31EC6D26">
+          <AssociationSet Name="FK__Defis__id_utilis__1273C1CD" Association="Self.FK__Defis__id_utilis__1273C1CD">
             <End Role="Utilisateurs" EntitySet="Utilisateurs" />
             <End Role="Defis" EntitySet="Defis" />
           </AssociationSet>
@@ -273,9 +273,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TaqnshareModelStoreContainer" CdmEntityContainer="TaqnshareEntities">
+        <EntityContainerMapping StorageEntityContainer="db_taqnshareModelStoreContainer" CdmEntityContainer="TaqnshareEntities">
           <EntitySetMapping Name="Composers">
-            <EntityTypeMapping TypeName="TaqnshareModel.Composer">
+            <EntityTypeMapping TypeName="db_taqnshareModel.Composer">
               <MappingFragment StoreEntitySet="Composer">
                 <ScalarProperty Name="id_piece" ColumnName="id_piece" />
                 <ScalarProperty Name="id_filtre" ColumnName="id_filtre" />
@@ -285,7 +285,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Defis">
-            <EntityTypeMapping TypeName="TaqnshareModel.Defi">
+            <EntityTypeMapping TypeName="db_taqnshareModel.Defi">
               <MappingFragment StoreEntitySet="Defis">
                 <ScalarProperty Name="id_defi" ColumnName="id_defi" />
                 <ScalarProperty Name="id_utilisateur" ColumnName="id_utilisateur" />
@@ -299,21 +299,21 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Filtres">
-            <EntityTypeMapping TypeName="TaqnshareModel.Filtre">
+            <EntityTypeMapping TypeName="db_taqnshareModel.Filtre">
               <MappingFragment StoreEntitySet="Filtres">
                 <ScalarProperty Name="id_filtre" ColumnName="id_filtre" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Pieces">
-            <EntityTypeMapping TypeName="TaqnshareModel.Piece">
+            <EntityTypeMapping TypeName="db_taqnshareModel.Piece">
               <MappingFragment StoreEntitySet="Pieces">
                 <ScalarProperty Name="id_piece" ColumnName="id_piece" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Utilisateurs">
-            <EntityTypeMapping TypeName="TaqnshareModel.Utilisateur">
+            <EntityTypeMapping TypeName="db_taqnshareModel.Utilisateur">
               <MappingFragment StoreEntitySet="Utilisateurs">
                 <ScalarProperty Name="id_utilisateur" ColumnName="id_utilisateur" />
                 <ScalarProperty Name="nom_utilisateur" ColumnName="nom_utilisateur" />
