@@ -9,7 +9,7 @@
             </basicHttpBinding>
         </bindings>
         <client>
-            <endpoint address="http://192.168.1.13:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc"
+            <endpoint address="http://192.168.1.19:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc"
                 binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_ServiceTaqnshare"
                 contract="TaqnshareReference.ServiceTaqnshare" name="BasicHttpBinding_ServiceTaqnshare" />
         </client>

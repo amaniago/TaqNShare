@@ -74,6 +74,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Donnees\Classement.cs" />
     <Compile Include="Donnees\Partie.cs" />
     <Compile Include="Donnees\Piece.cs" />
     <Compile Include="Donnees\Parametre.cs" />
@@ -162,6 +163,9 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="ServiceReferences.ClientConfig" />
+    <None Include="Service References\TaqnshareReference\ServeurTaqnshare.ClasseDeService.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\TaqnshareReference\ServeurTaqnshare.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -171,6 +175,9 @@
     </None>
     <None Include="Service References\TaqnshareReference\service1.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TaqnshareReference\TaqNShare.TaqnshareReference.UtilisateurService.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

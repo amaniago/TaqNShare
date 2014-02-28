@@ -5,6 +5,7 @@
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/ServeurTaqnshare" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/ServeurTaqnshare.ClasseDeService" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ServiceTaqnshare_EnvoyerImage_InputMessage">
@@ -31,6 +32,24 @@
   <wsdl:message name="ServiceTaqnshare_CreerDefi_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreerDefiResponse" />
   </wsdl:message>
+  <wsdl:message name="ServiceTaqnshare_RecupererClassement_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecupererClassement" />
+  </wsdl:message>
+  <wsdl:message name="ServiceTaqnshare_RecupererClassement_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecupererClassementResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceTaqnshare_RecupererRangJoueur_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecupererRangJoueur" />
+  </wsdl:message>
+  <wsdl:message name="ServiceTaqnshare_RecupererRangJoueur_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecupererRangJoueurResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceTaqnshare_RecupererScoreJoueur_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecupererScoreJoueur" />
+  </wsdl:message>
+  <wsdl:message name="ServiceTaqnshare_RecupererScoreJoueur_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecupererScoreJoueurResponse" />
+  </wsdl:message>
   <wsdl:portType name="ServiceTaqnshare">
     <wsdl:operation name="EnvoyerImage">
       <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/EnvoyerImage" message="tns:ServiceTaqnshare_EnvoyerImage_InputMessage" />
@@ -47,6 +66,18 @@
     <wsdl:operation name="CreerDefi">
       <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/CreerDefi" message="tns:ServiceTaqnshare_CreerDefi_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/CreerDefiResponse" message="tns:ServiceTaqnshare_CreerDefi_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecupererClassement">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererClassement" message="tns:ServiceTaqnshare_RecupererClassement_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererClassementResponse" message="tns:ServiceTaqnshare_RecupererClassement_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecupererRangJoueur">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererRangJoueur" message="tns:ServiceTaqnshare_RecupererRangJoueur_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererRangJoueurResponse" message="tns:ServiceTaqnshare_RecupererRangJoueur_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecupererScoreJoueur">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererScoreJoueur" message="tns:ServiceTaqnshare_RecupererScoreJoueur_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererScoreJoueurResponse" message="tns:ServiceTaqnshare_RecupererScoreJoueur_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ServiceTaqnshare" type="tns:ServiceTaqnshare">
@@ -87,10 +118,37 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="RecupererClassement">
+      <soap:operation soapAction="http://tempuri.org/ServiceTaqnshare/RecupererClassement" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecupererRangJoueur">
+      <soap:operation soapAction="http://tempuri.org/ServiceTaqnshare/RecupererRangJoueur" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecupererScoreJoueur">
+      <soap:operation soapAction="http://tempuri.org/ServiceTaqnshare/RecupererScoreJoueur" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="ServiceTaqnshare">
     <wsdl:port name="BasicHttpBinding_ServiceTaqnshare" binding="tns:BasicHttpBinding_ServiceTaqnshare">
-      <soap:address location="http://192.168.1.13:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc" />
+      <soap:address location="http://192.168.1.19:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
