@@ -5,7 +5,6 @@ using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
 using System.ServiceModel;
-using ServeurTaqnshare.ClasseDeService;
 
 namespace ServeurTaqnshare
 {
@@ -38,6 +37,9 @@ namespace ServeurTaqnshare
 
         [OperationContract]
         List<DefiService> RecupererDefis(string idUtilisateur);
+
+        [OperationContract]
+        List<DefiService> RecupererDefisUtilisateur(string idUtilisateur);
     }
 
     public class ServiceTaqnshare : IServiceTaqnshare
@@ -198,6 +200,34 @@ namespace ServeurTaqnshare
             return defisRetour;
         }
 
+        public List<DefiService> RecupererDefisUtilisateur(string idUtilisateur)
+        {
+
+            var db = new TaqnshareEntities();
+
+            var defis = from d in db.Defis
+                        where d.id_utilisateur == idUtilisateur || d.id_adversaire_defi == idUtilisateur
+                                select d;
+
+            List<DefiService> defisRetour = new List<DefiService>();
+            foreach (var defi in defis)
+            {
+                if ((bool)defi.resolu)
+                {
+                    var utilisateur = (from u in db.Utilisateurs
+                                       where u.id_utilisateur == defi.id_utilisateur
+                                       select u).SingleOrDefault();
+
+                    var adversaire = (from a in db.Utilisateurs
+                                       where a.id_utilisateur == defi.id_adversaire_defi
+                                       select a).SingleOrDefault();
+
+                    defisRetour.Add(new DefiService(defi, utilisateur, adversaire));
+                }
+            }
+            return defisRetour;
+        }
+
         public List<UtilisateurService> RecupererClassement()
         {
             var classement = new List<UtilisateurService>();
@@ -252,14 +282,8 @@ namespace ServeurTaqnshare
                 if (utilisateur != null)
                     score = (float) (utilisateur.score_total_utilisateur/utilisateur.nombre_partie_utilisateur);
             }
-
             return score;
-
-            
-
         }
     }
-
-
 }
 

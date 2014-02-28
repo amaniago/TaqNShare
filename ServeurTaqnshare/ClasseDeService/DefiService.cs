@@ -23,11 +23,17 @@ namespace ServeurTaqnshare.ClasseDeService
         [DataMember]
         public int ScoreUtilisateurDefi { get; set; }
         [DataMember]
+        public int ScoreAdversaireDefi { get; set; }
+        [DataMember]
         public List<Composition> Composition { get; set; }
         [DataMember]
         public string NomUtilisateur { get; set; }
         [DataMember]
         public string PrenomUtilisateur { get; set; }
+        [DataMember]
+        public string NomAdversaire { get; set; }
+        [DataMember]
+        public string PrenomAdversaire { get; set; }
 
         public DefiService(Defi defi, byte[] imageDefi)
         {
@@ -54,6 +60,16 @@ namespace ServeurTaqnshare.ClasseDeService
             PrenomUtilisateur = createurDefi.prenom_utilisateur;
         }
 
+        public DefiService(Defi defi, Utilisateur utilisateur, Utilisateur adversaire)
+        {
+            NomDefi = defi.nom_defi;
+            PrenomUtilisateur = utilisateur.prenom_utilisateur;
+            NomUtilisateur = utilisateur.nom_utilisateur;
+            PrenomAdversaire = adversaire.prenom_utilisateur;
+            NomAdversaire = adversaire.nom_utilisateur;
+            ScoreUtilisateurDefi = (int) defi.score_utilisateur_defi;
+            ScoreAdversaireDefi = (int) defi.score_adversaire_defi;
+        }
     }
 
     [DataContract(IsReference = true)]
