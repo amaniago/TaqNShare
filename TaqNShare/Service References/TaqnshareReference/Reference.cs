@@ -495,6 +495,96 @@ namespace TaqNShare.TaqnshareReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="UtilisateurService", Namespace="http://schemas.datacontract.org/2004/07/ServeurTaqnshare.ClasseDeService")]
+    public partial class UtilisateurService : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string IdUtilisateurField;
+        
+        private string NomUtilisateurField;
+        
+        private decimal NombrePartieUtilisateurField;
+        
+        private string PrenomUtilisateurField;
+        
+        private decimal ScoreTotalUtilisateurField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string IdUtilisateur {
+            get {
+                return this.IdUtilisateurField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdUtilisateurField, value) != true)) {
+                    this.IdUtilisateurField = value;
+                    this.RaisePropertyChanged("IdUtilisateur");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NomUtilisateur {
+            get {
+                return this.NomUtilisateurField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NomUtilisateurField, value) != true)) {
+                    this.NomUtilisateurField = value;
+                    this.RaisePropertyChanged("NomUtilisateur");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal NombrePartieUtilisateur {
+            get {
+                return this.NombrePartieUtilisateurField;
+            }
+            set {
+                if ((this.NombrePartieUtilisateurField.Equals(value) != true)) {
+                    this.NombrePartieUtilisateurField = value;
+                    this.RaisePropertyChanged("NombrePartieUtilisateur");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PrenomUtilisateur {
+            get {
+                return this.PrenomUtilisateurField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PrenomUtilisateurField, value) != true)) {
+                    this.PrenomUtilisateurField = value;
+                    this.RaisePropertyChanged("PrenomUtilisateur");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal ScoreTotalUtilisateur {
+            get {
+                return this.ScoreTotalUtilisateurField;
+            }
+            set {
+                if ((this.ScoreTotalUtilisateurField.Equals(value) != true)) {
+                    this.ScoreTotalUtilisateurField = value;
+                    this.RaisePropertyChanged("ScoreTotalUtilisateur");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="TaqnshareReference.ServiceTaqnshare")]
     public interface ServiceTaqnshare {
@@ -518,6 +608,21 @@ namespace TaqNShare.TaqnshareReference {
         System.IAsyncResult BeginCreerDefi(TaqNShare.TaqnshareReference.Defi partieUtilisateur, System.Collections.Generic.List<TaqNShare.TaqnshareReference.Composer> compositionTaquin, System.AsyncCallback callback, object asyncState);
         
         string EndCreerDefi(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ServiceTaqnshare/RecupererClassement", ReplyAction="http://tempuri.org/ServiceTaqnshare/RecupererClassementResponse")]
+        System.IAsyncResult BeginRecupererClassement(System.AsyncCallback callback, object asyncState);
+        
+        System.Collections.Generic.List<TaqNShare.TaqnshareReference.UtilisateurService> EndRecupererClassement(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ServiceTaqnshare/RecupererRangJoueur", ReplyAction="http://tempuri.org/ServiceTaqnshare/RecupererRangJoueurResponse")]
+        System.IAsyncResult BeginRecupererRangJoueur(string idJoueur, System.AsyncCallback callback, object asyncState);
+        
+        int EndRecupererRangJoueur(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ServiceTaqnshare/RecupererScoreJoueur", ReplyAction="http://tempuri.org/ServiceTaqnshare/RecupererScoreJoueurResponse")]
+        System.IAsyncResult BeginRecupererScoreJoueur(string idJoueur, System.AsyncCallback callback, object asyncState);
+        
+        float EndRecupererScoreJoueur(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -602,6 +707,63 @@ namespace TaqNShare.TaqnshareReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class RecupererClassementCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public RecupererClassementCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.Generic.List<TaqNShare.TaqnshareReference.UtilisateurService> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.Generic.List<TaqNShare.TaqnshareReference.UtilisateurService>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class RecupererRangJoueurCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public RecupererRangJoueurCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public int Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class RecupererScoreJoueurCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public RecupererScoreJoueurCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public float Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((float)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class ServiceTaqnshareClient : System.ServiceModel.ClientBase<TaqNShare.TaqnshareReference.ServiceTaqnshare>, TaqNShare.TaqnshareReference.ServiceTaqnshare {
         
         private BeginOperationDelegate onBeginEnvoyerImageDelegate;
@@ -627,6 +789,24 @@ namespace TaqNShare.TaqnshareReference {
         private EndOperationDelegate onEndCreerDefiDelegate;
         
         private System.Threading.SendOrPostCallback onCreerDefiCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginRecupererClassementDelegate;
+        
+        private EndOperationDelegate onEndRecupererClassementDelegate;
+        
+        private System.Threading.SendOrPostCallback onRecupererClassementCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginRecupererRangJoueurDelegate;
+        
+        private EndOperationDelegate onEndRecupererRangJoueurDelegate;
+        
+        private System.Threading.SendOrPostCallback onRecupererRangJoueurCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginRecupererScoreJoueurDelegate;
+        
+        private EndOperationDelegate onEndRecupererScoreJoueurDelegate;
+        
+        private System.Threading.SendOrPostCallback onRecupererScoreJoueurCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -688,6 +868,12 @@ namespace TaqNShare.TaqnshareReference {
         public event System.EventHandler<EnregistrerScoreCompletedEventArgs> EnregistrerScoreCompleted;
         
         public event System.EventHandler<CreerDefiCompletedEventArgs> CreerDefiCompleted;
+        
+        public event System.EventHandler<RecupererClassementCompletedEventArgs> RecupererClassementCompleted;
+        
+        public event System.EventHandler<RecupererRangJoueurCompletedEventArgs> RecupererRangJoueurCompleted;
+        
+        public event System.EventHandler<RecupererScoreJoueurCompletedEventArgs> RecupererScoreJoueurCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -883,6 +1069,142 @@ namespace TaqNShare.TaqnshareReference {
                         compositionTaquin}, this.onEndCreerDefiDelegate, this.onCreerDefiCompletedDelegate, userState);
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult TaqNShare.TaqnshareReference.ServiceTaqnshare.BeginRecupererClassement(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginRecupererClassement(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Collections.Generic.List<TaqNShare.TaqnshareReference.UtilisateurService> TaqNShare.TaqnshareReference.ServiceTaqnshare.EndRecupererClassement(System.IAsyncResult result) {
+            return base.Channel.EndRecupererClassement(result);
+        }
+        
+        private System.IAsyncResult OnBeginRecupererClassement(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return ((TaqNShare.TaqnshareReference.ServiceTaqnshare)(this)).BeginRecupererClassement(callback, asyncState);
+        }
+        
+        private object[] OnEndRecupererClassement(System.IAsyncResult result) {
+            System.Collections.Generic.List<TaqNShare.TaqnshareReference.UtilisateurService> retVal = ((TaqNShare.TaqnshareReference.ServiceTaqnshare)(this)).EndRecupererClassement(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnRecupererClassementCompleted(object state) {
+            if ((this.RecupererClassementCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.RecupererClassementCompleted(this, new RecupererClassementCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void RecupererClassementAsync() {
+            this.RecupererClassementAsync(null);
+        }
+        
+        public void RecupererClassementAsync(object userState) {
+            if ((this.onBeginRecupererClassementDelegate == null)) {
+                this.onBeginRecupererClassementDelegate = new BeginOperationDelegate(this.OnBeginRecupererClassement);
+            }
+            if ((this.onEndRecupererClassementDelegate == null)) {
+                this.onEndRecupererClassementDelegate = new EndOperationDelegate(this.OnEndRecupererClassement);
+            }
+            if ((this.onRecupererClassementCompletedDelegate == null)) {
+                this.onRecupererClassementCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnRecupererClassementCompleted);
+            }
+            base.InvokeAsync(this.onBeginRecupererClassementDelegate, null, this.onEndRecupererClassementDelegate, this.onRecupererClassementCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult TaqNShare.TaqnshareReference.ServiceTaqnshare.BeginRecupererRangJoueur(string idJoueur, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginRecupererRangJoueur(idJoueur, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        int TaqNShare.TaqnshareReference.ServiceTaqnshare.EndRecupererRangJoueur(System.IAsyncResult result) {
+            return base.Channel.EndRecupererRangJoueur(result);
+        }
+        
+        private System.IAsyncResult OnBeginRecupererRangJoueur(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string idJoueur = ((string)(inValues[0]));
+            return ((TaqNShare.TaqnshareReference.ServiceTaqnshare)(this)).BeginRecupererRangJoueur(idJoueur, callback, asyncState);
+        }
+        
+        private object[] OnEndRecupererRangJoueur(System.IAsyncResult result) {
+            int retVal = ((TaqNShare.TaqnshareReference.ServiceTaqnshare)(this)).EndRecupererRangJoueur(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnRecupererRangJoueurCompleted(object state) {
+            if ((this.RecupererRangJoueurCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.RecupererRangJoueurCompleted(this, new RecupererRangJoueurCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void RecupererRangJoueurAsync(string idJoueur) {
+            this.RecupererRangJoueurAsync(idJoueur, null);
+        }
+        
+        public void RecupererRangJoueurAsync(string idJoueur, object userState) {
+            if ((this.onBeginRecupererRangJoueurDelegate == null)) {
+                this.onBeginRecupererRangJoueurDelegate = new BeginOperationDelegate(this.OnBeginRecupererRangJoueur);
+            }
+            if ((this.onEndRecupererRangJoueurDelegate == null)) {
+                this.onEndRecupererRangJoueurDelegate = new EndOperationDelegate(this.OnEndRecupererRangJoueur);
+            }
+            if ((this.onRecupererRangJoueurCompletedDelegate == null)) {
+                this.onRecupererRangJoueurCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnRecupererRangJoueurCompleted);
+            }
+            base.InvokeAsync(this.onBeginRecupererRangJoueurDelegate, new object[] {
+                        idJoueur}, this.onEndRecupererRangJoueurDelegate, this.onRecupererRangJoueurCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult TaqNShare.TaqnshareReference.ServiceTaqnshare.BeginRecupererScoreJoueur(string idJoueur, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginRecupererScoreJoueur(idJoueur, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        float TaqNShare.TaqnshareReference.ServiceTaqnshare.EndRecupererScoreJoueur(System.IAsyncResult result) {
+            return base.Channel.EndRecupererScoreJoueur(result);
+        }
+        
+        private System.IAsyncResult OnBeginRecupererScoreJoueur(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string idJoueur = ((string)(inValues[0]));
+            return ((TaqNShare.TaqnshareReference.ServiceTaqnshare)(this)).BeginRecupererScoreJoueur(idJoueur, callback, asyncState);
+        }
+        
+        private object[] OnEndRecupererScoreJoueur(System.IAsyncResult result) {
+            float retVal = ((TaqNShare.TaqnshareReference.ServiceTaqnshare)(this)).EndRecupererScoreJoueur(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnRecupererScoreJoueurCompleted(object state) {
+            if ((this.RecupererScoreJoueurCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.RecupererScoreJoueurCompleted(this, new RecupererScoreJoueurCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void RecupererScoreJoueurAsync(string idJoueur) {
+            this.RecupererScoreJoueurAsync(idJoueur, null);
+        }
+        
+        public void RecupererScoreJoueurAsync(string idJoueur, object userState) {
+            if ((this.onBeginRecupererScoreJoueurDelegate == null)) {
+                this.onBeginRecupererScoreJoueurDelegate = new BeginOperationDelegate(this.OnBeginRecupererScoreJoueur);
+            }
+            if ((this.onEndRecupererScoreJoueurDelegate == null)) {
+                this.onEndRecupererScoreJoueurDelegate = new EndOperationDelegate(this.OnEndRecupererScoreJoueur);
+            }
+            if ((this.onRecupererScoreJoueurCompletedDelegate == null)) {
+                this.onRecupererScoreJoueurCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnRecupererScoreJoueurCompleted);
+            }
+            base.InvokeAsync(this.onBeginRecupererScoreJoueurDelegate, new object[] {
+                        idJoueur}, this.onEndRecupererScoreJoueurDelegate, this.onRecupererScoreJoueurCompletedDelegate, userState);
+        }
+        
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
             return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(callback, asyncState);
         }
@@ -1011,6 +1333,44 @@ namespace TaqNShare.TaqnshareReference {
             public string EndCreerDefi(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 string _result = ((string)(base.EndInvoke("CreerDefi", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginRecupererClassement(System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[0];
+                System.IAsyncResult _result = base.BeginInvoke("RecupererClassement", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public System.Collections.Generic.List<TaqNShare.TaqnshareReference.UtilisateurService> EndRecupererClassement(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                System.Collections.Generic.List<TaqNShare.TaqnshareReference.UtilisateurService> _result = ((System.Collections.Generic.List<TaqNShare.TaqnshareReference.UtilisateurService>)(base.EndInvoke("RecupererClassement", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginRecupererRangJoueur(string idJoueur, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = idJoueur;
+                System.IAsyncResult _result = base.BeginInvoke("RecupererRangJoueur", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public int EndRecupererRangJoueur(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                int _result = ((int)(base.EndInvoke("RecupererRangJoueur", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginRecupererScoreJoueur(string idJoueur, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = idJoueur;
+                System.IAsyncResult _result = base.BeginInvoke("RecupererScoreJoueur", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public float EndRecupererScoreJoueur(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                float _result = ((float)(base.EndInvoke("RecupererScoreJoueur", _args, result)));
                 return _result;
             }
         }
