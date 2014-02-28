@@ -1,4 +1,5 @@
-﻿using ServeurTaqnshare.ClasseDeService;
+﻿using System.Data.Common.CommandTrees;
+using ServeurTaqnshare.ClasseDeService;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
@@ -34,7 +35,7 @@ namespace ServeurTaqnshare
         float RecupererScoreJoueur(string idJoueur);
 
         [OperationContract]
-        string ModifierDefi(Defi defiTermine);
+        string ModifierDefi(Defi defiTermine, Utilisateur utilisateurCourant);
 
         [OperationContract]
         List<DefiService> RecupererDefis(string idUtilisateur);
@@ -68,6 +69,8 @@ namespace ServeurTaqnshare
                         Utilisateur nouvelUtilisateur = new Utilisateur
                                                         {
                                                             id_utilisateur = utilisateurCourant.id_utilisateur,
+                                                            prenom_utilisateur = utilisateurCourant.prenom_utilisateur,
+                                                            nom_utilisateur = utilisateurCourant.nom_utilisateur,
                                                             nombre_partie_utilisateur = 1,
                                                             score_total_utilisateur = scorePartie
                                                         };
@@ -96,10 +99,13 @@ namespace ServeurTaqnshare
             {
 
                 var db = new TaqnshareEntities();
-
+                
                 var nouveauDefi = db.Defis.Add(partieUtilisateur);
                 db.SaveChanges();
 
+                nouveauDefi.chemin_image_defi = (Directory.GetCurrentDirectory() + "\\ImagesWebService\\Image" + nouveauDefi.id_defi + ".jpg");
+                db.Defis.AddOrUpdate(nouveauDefi);
+                db.SaveChanges();
 
                 foreach (Composer composer in compositionTaquin)
                 {
@@ -110,7 +116,7 @@ namespace ServeurTaqnshare
                 db.SaveChanges();
 
                 MemoryStream ms = new MemoryStream(imageDefi);
-                FileStream fs = new FileStream(Directory.GetCurrentDirectory() + "\\ImagesWebService\\Image" + nouveauDefi.id_defi + ".jpg", FileMode.Create);
+                FileStream fs = new FileStream(nouveauDefi.chemin_image_defi, FileMode.Create);
 
                 ms.WriteTo(fs);
                 ms.Close();
@@ -138,9 +144,17 @@ namespace ServeurTaqnshare
                         where defis.id_defi == idDefi
                         select defis).Single();
 
-            byte[] imageDefi = File.ReadAllBytes(Directory.GetCurrentDirectory() + "\\ImagesWebService\\Image" + idDefi + ".jpg");
+            var nombreFiltre = (from c in db.Composers 
+                                where c.id_defi == idDefi && c.id_filtre != 0
+                                group c by c.id_filtre into cgroup 
+                                select new
+                                {
+                                   cgroup.Key
+                                }).Count();
 
-            DefiService retour = new DefiService(defi, imageDefi);
+            byte[] imageDefi = File.ReadAllBytes(defi.chemin_image_defi);
+
+            DefiService retour = new DefiService(defi, imageDefi, nombreFiltre);
 
             return retour;
         }
@@ -149,8 +163,9 @@ namespace ServeurTaqnshare
         /// Méthode permettant de modifier un défi lorsque celui-ci a été accepter par l'adversaire
         /// </summary>
         /// <param name="defiTermine"></param>
+        /// <param name="utilisateurCourant"></param>
         /// <returns></returns>
-        public string ModifierDefi(Defi defiTermine)
+        public string ModifierDefi(Defi defiTermine, Utilisateur utilisateurCourant)
         {
             try
             {
@@ -164,6 +179,29 @@ namespace ServeurTaqnshare
                 defi.score_adversaire_defi = defiTermine.score_adversaire_defi;
 
                 db.Defis.AddOrUpdate(defi);
+                db.SaveChanges();
+
+                var utilisateur = (from u in db.Utilisateurs
+                                   where u.id_utilisateur == utilisateurCourant.id_utilisateur
+                                   select u).SingleOrDefault();
+
+                if (utilisateur != null)
+                {
+                    utilisateur.nombre_partie_utilisateur += 1;
+                    utilisateur.score_total_utilisateur += defiTermine.score_adversaire_defi;
+                }
+                else
+                {
+                    Utilisateur nouvelUtilisateur = new Utilisateur
+                    {
+                        id_utilisateur = utilisateurCourant.id_utilisateur,
+                        prenom_utilisateur = utilisateurCourant.prenom_utilisateur,
+                        nom_utilisateur = utilisateurCourant.nom_utilisateur,
+                        nombre_partie_utilisateur = 1,
+                        score_total_utilisateur = defiTermine.score_adversaire_defi
+                    };
+                    db.Utilisateurs.Add(nouvelUtilisateur);
+                }
                 db.SaveChanges();
 
                 return "OK";
@@ -180,10 +218,8 @@ namespace ServeurTaqnshare
             var db = new TaqnshareEntities();
 
             List<Defi> defis = (from d in db.Defis
-                                where d.id_adversaire_defi == idUtilisateur
+                                where d.id_adversaire_defi == idUtilisateur && d.resolu == false
                                 select d).ToList();
-
-            
 
             List<DefiService> defisRetour = new List<DefiService>();
             foreach (var defi in defis)
@@ -259,7 +295,5 @@ namespace ServeurTaqnshare
 
         }
     }
-
-
 }
 

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="db_taqnshareModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="db_taqnshareModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Composer">
           <Key>
             <PropertyRef Name="id_piece" />
@@ -27,7 +27,7 @@
           <Property Name="score_utilisateur_defi" Type="numeric" Precision="8" Scale="0" />
           <Property Name="score_adversaire_defi" Type="numeric" Precision="8" Scale="0" />
           <Property Name="resolu" Type="bit" />
-          <Property Name="chemin_image_defi" Type="varchar" MaxLength="50" />
+          <Property Name="chemin_image_defi" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Filtres">
           <Key>
@@ -130,8 +130,7 @@
             <End Role="Defis" EntitySet="Defis" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="db_taqnshareModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -160,7 +159,7 @@
           <Property Name="score_utilisateur_defi" Type="Decimal" Precision="8" Scale="0" />
           <Property Name="score_adversaire_defi" Type="Decimal" Precision="8" Scale="0" />
           <Property Name="resolu" Type="Boolean" />
-          <Property Name="chemin_image_defi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="chemin_image_defi" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Composers" Relationship="Self.FK__Composer__id_def__1B0907CE" FromRole="Defis" ToRole="Composer" />
           <NavigationProperty Name="Utilisateur" Relationship="Self.FK__Defis__id_utilis__1273C1CD" FromRole="Defis" ToRole="Utilisateurs" />
         </EntityType>
