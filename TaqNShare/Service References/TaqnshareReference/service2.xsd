@@ -47,10 +47,50 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="RecupererClassement">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecupererClassementResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ServeurTaqnshare.ClasseDeService" minOccurs="0" name="RecupererClassementResult" nillable="true" type="q5:ArrayOfUtilisateurService" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecupererRangJoueur">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idJoueur" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecupererRangJoueurResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RecupererRangJoueurResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecupererScoreJoueur">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idJoueur" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecupererScoreJoueurResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RecupererScoreJoueurResult" type="xs:float" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ModifierDefi">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ServeurTaqnshare" minOccurs="0" name="defiTermine" nillable="true" type="q5:Defi" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ServeurTaqnshare" minOccurs="0" name="defiTermine" nillable="true" type="q6:Defi" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -71,7 +111,7 @@
   <xs:element name="RecupererDefisResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ServeurTaqnshare.ClasseDeService" minOccurs="0" name="RecupererDefisResult" nillable="true" type="q6:ArrayOfDefiService" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ServeurTaqnshare.ClasseDeService" minOccurs="0" name="RecupererDefisResult" nillable="true" type="q7:ArrayOfDefiService" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

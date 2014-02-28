@@ -196,6 +196,9 @@
     <None Include="Service References\TaqnshareReference\TaqNShare.TaqnshareReference.DefiService.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\TaqnshareReference\TaqNShare.TaqnshareReference.UtilisateurService.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\AlignmentGrid.png" />

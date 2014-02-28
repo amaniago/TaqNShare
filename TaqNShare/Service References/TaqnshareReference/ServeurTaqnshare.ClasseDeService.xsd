@@ -33,6 +33,22 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Composition" nillable="true" type="tns:Composition" />
+  <xs:complexType name="ArrayOfUtilisateurService">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UtilisateurService" nillable="true" type="tns:UtilisateurService" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUtilisateurService" nillable="true" type="tns:ArrayOfUtilisateurService" />
+  <xs:complexType name="UtilisateurService">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IdUtilisateur" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NomUtilisateur" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombrePartieUtilisateur" type="xs:decimal" />
+      <xs:element minOccurs="0" name="PrenomUtilisateur" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ScoreTotalUtilisateur" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UtilisateurService" nillable="true" type="tns:UtilisateurService" />
   <xs:complexType name="ArrayOfDefiService">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="DefiService" nillable="true" type="tns:DefiService" />

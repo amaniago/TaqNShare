@@ -26,6 +26,24 @@
   <wsdl:message name="ServiceTaqnshare_RecupererDefi_OutputMessage">
     <wsdl:part name="parameters" element="tns:RecupererDefiResponse" />
   </wsdl:message>
+  <wsdl:message name="ServiceTaqnshare_RecupererClassement_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecupererClassement" />
+  </wsdl:message>
+  <wsdl:message name="ServiceTaqnshare_RecupererClassement_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecupererClassementResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceTaqnshare_RecupererRangJoueur_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecupererRangJoueur" />
+  </wsdl:message>
+  <wsdl:message name="ServiceTaqnshare_RecupererRangJoueur_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecupererRangJoueurResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceTaqnshare_RecupererScoreJoueur_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecupererScoreJoueur" />
+  </wsdl:message>
+  <wsdl:message name="ServiceTaqnshare_RecupererScoreJoueur_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecupererScoreJoueurResponse" />
+  </wsdl:message>
   <wsdl:message name="ServiceTaqnshare_ModifierDefi_InputMessage">
     <wsdl:part name="parameters" element="tns:ModifierDefi" />
   </wsdl:message>
@@ -50,6 +68,18 @@
     <wsdl:operation name="RecupererDefi">
       <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererDefi" message="tns:ServiceTaqnshare_RecupererDefi_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererDefiResponse" message="tns:ServiceTaqnshare_RecupererDefi_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecupererClassement">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererClassement" message="tns:ServiceTaqnshare_RecupererClassement_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererClassementResponse" message="tns:ServiceTaqnshare_RecupererClassement_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecupererRangJoueur">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererRangJoueur" message="tns:ServiceTaqnshare_RecupererRangJoueur_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererRangJoueurResponse" message="tns:ServiceTaqnshare_RecupererRangJoueur_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecupererScoreJoueur">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererScoreJoueur" message="tns:ServiceTaqnshare_RecupererScoreJoueur_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererScoreJoueurResponse" message="tns:ServiceTaqnshare_RecupererScoreJoueur_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ModifierDefi">
       <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/ModifierDefi" message="tns:ServiceTaqnshare_ModifierDefi_InputMessage" />
@@ -82,6 +112,33 @@
     </wsdl:operation>
     <wsdl:operation name="RecupererDefi">
       <soap:operation soapAction="http://tempuri.org/ServiceTaqnshare/RecupererDefi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecupererClassement">
+      <soap:operation soapAction="http://tempuri.org/ServiceTaqnshare/RecupererClassement" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecupererRangJoueur">
+      <soap:operation soapAction="http://tempuri.org/ServiceTaqnshare/RecupererRangJoueur" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecupererScoreJoueur">
+      <soap:operation soapAction="http://tempuri.org/ServiceTaqnshare/RecupererScoreJoueur" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
