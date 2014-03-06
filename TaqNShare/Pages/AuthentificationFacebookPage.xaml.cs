@@ -27,9 +27,9 @@ namespace TaqNShare.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e); 
-            string pa;
+            string pageAvant;
             //_pageAvant reçoit le nom de la page sur laquelle on va rediriger après que l'authentification ait réussi.
-            if(NavigationContext.QueryString.TryGetValue("pageAvant",out pa))
+            if (NavigationContext.QueryString.TryGetValue("pageAvant", out pageAvant))
             {
                 _pageAvant = pageAvant;
             }  
