@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="cuEZOd00h88/lckgdsQz+P2d9l0=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="k6NQGB1u8D6bQn3bmQtUMuQTehg=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_ServiceTaqnshare">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_ServiceTaqnshare" contract="TaqnshareReference.ServiceTaqnshare" bindingType="basicHttpBinding" address="http://192.168.1.15:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc" bindingConfiguration="BasicHttpBinding_ServiceTaqnshare">
+    <endpoint name="BasicHttpBinding_ServiceTaqnshare" contract="TaqnshareReference.ServiceTaqnshare" bindingType="basicHttpBinding" address="http://192.168.1.20:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc" bindingConfiguration="BasicHttpBinding_ServiceTaqnshare">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://192.168.1.15:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc</serializedValue>
+          <serializedValue>http://192.168.1.20:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

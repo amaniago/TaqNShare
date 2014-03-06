@@ -181,39 +181,27 @@
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="ServiceReferences.ClientConfig">
-      <SubType>Designer</SubType>
-    </Content>
-    <None Include="Service References\TaqnshareReference\ServeurTaqnshare.ClasseDeService1.xsd">
+    <None Include="Service References\TaqnshareReference\configuration91.svcinfo" />
+    <None Include="Service References\TaqnshareReference\configuration.svcinfo" />
+    <None Include="Service References\TaqnshareReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="ServiceReferences.ClientConfig" />
+    <None Include="Service References\TaqnshareReference\ServeurTaqnshare.ClasseDeService.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TaqnshareReference\ServeurTaqnshare.ClasseDeService11.xsd">
+    <None Include="Service References\TaqnshareReference\ServeurTaqnshare.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TaqnshareReference\ServeurTaqnshare1.xsd">
+    <None Include="Service References\TaqnshareReference\service.wsdl" />
+    <None Include="Service References\TaqnshareReference\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TaqnshareReference\ServeurTaqnshare11.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TaqnshareReference\service1.wsdl" />
-    <None Include="Service References\TaqnshareReference\service11.wsdl" />
-    <None Include="Service References\TaqnshareReference\service2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TaqnshareReference\service21.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TaqnshareReference\service22.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TaqnshareReference\service23.xsd">
+    <None Include="Service References\TaqnshareReference\service1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\TaqnshareReference\TaqNShare.TaqnshareReference.DefiService.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TaqnshareReference\TaqNShare.TaqnshareReference.DefiService1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\TaqnshareReference\TaqNShare.TaqnshareReference.UtilisateurService.datasource">
@@ -240,13 +228,6 @@
     <Content Include="Assets\Tiles\IconicTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Service References\TaqnshareReference\configuration91.svcinfo" />
-    <None Include="Service References\TaqnshareReference\configuration.svcinfo" />
-    <None Include="Service References\TaqnshareReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="SplashScreenImage.jpg" />
     <Content Include="TaqNShare.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />

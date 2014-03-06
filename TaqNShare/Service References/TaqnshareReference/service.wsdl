@@ -50,11 +50,11 @@
   <wsdl:message name="ServiceTaqnshare_ModifierDefi_OutputMessage">
     <wsdl:part name="parameters" element="tns:ModifierDefiResponse" />
   </wsdl:message>
-  <wsdl:message name="ServiceTaqnshare_RecupererDefis_InputMessage">
-    <wsdl:part name="parameters" element="tns:RecupererDefis" />
+  <wsdl:message name="ServiceTaqnshare_RecupererDefisEnAttente_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecupererDefisEnAttente" />
   </wsdl:message>
-  <wsdl:message name="ServiceTaqnshare_RecupererDefis_OutputMessage">
-    <wsdl:part name="parameters" element="tns:RecupererDefisResponse" />
+  <wsdl:message name="ServiceTaqnshare_RecupererDefisEnAttente_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecupererDefisEnAttenteResponse" />
   </wsdl:message>
   <wsdl:message name="ServiceTaqnshare_RecupererDefisUtilisateur_InputMessage">
     <wsdl:part name="parameters" element="tns:RecupererDefisUtilisateur" />
@@ -97,9 +97,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/ModifierDefi" message="tns:ServiceTaqnshare_ModifierDefi_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/ModifierDefiResponse" message="tns:ServiceTaqnshare_ModifierDefi_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="RecupererDefis">
-      <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererDefis" message="tns:ServiceTaqnshare_RecupererDefis_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererDefisResponse" message="tns:ServiceTaqnshare_RecupererDefis_OutputMessage" />
+    <wsdl:operation name="RecupererDefisEnAttente">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererDefisEnAttente" message="tns:ServiceTaqnshare_RecupererDefisEnAttente_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererDefisEnAttenteResponse" message="tns:ServiceTaqnshare_RecupererDefisEnAttente_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="RecupererDefisUtilisateur">
       <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererDefisUtilisateur" message="tns:ServiceTaqnshare_RecupererDefisUtilisateur_InputMessage" />
@@ -175,8 +175,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="RecupererDefis">
-      <soap:operation soapAction="http://tempuri.org/ServiceTaqnshare/RecupererDefis" style="document" />
+    <wsdl:operation name="RecupererDefisEnAttente">
+      <soap:operation soapAction="http://tempuri.org/ServiceTaqnshare/RecupererDefisEnAttente" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

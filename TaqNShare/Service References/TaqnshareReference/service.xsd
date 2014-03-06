@@ -29,7 +29,7 @@
   <xs:element name="CreerDefiResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="CreerDefiResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CreerDefiResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -102,17 +102,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="RecupererDefis">
+  <xs:element name="RecupererDefisEnAttente">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="idUtilisateur" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="RecupererDefisResponse">
+  <xs:element name="RecupererDefisEnAttenteResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ServeurTaqnshare.ClasseDeService" minOccurs="0" name="RecupererDefisResult" nillable="true" type="q8:ArrayOfDefiService" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ServeurTaqnshare.ClasseDeService" minOccurs="0" name="RecupererDefisEnAttenteResult" nillable="true" type="q8:ArrayOfDefiService" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -178,8 +178,8 @@ namespace TaqNShare.Pages
                 NomUtilisateurTextBlock.Text = String.Format("{0} {1}", utilisateurCourant.prenom_utilisateur, utilisateurCourant.nom_utilisateur);
 
             //Récupération des défis en attente de l'utilisateur
-            _serviceTaqnshareClient.RecupererDefisCompleted += AfficherDefis;
-            _serviceTaqnshareClient.RecupererDefisAsync(App.UtilisateurCourant.id_utilisateur);
+            _serviceTaqnshareClient.RecupererDefisEnAttenteCompleted += AfficherDefis;
+            _serviceTaqnshareClient.RecupererDefisEnAttenteAsync(App.UtilisateurCourant.id_utilisateur);
 
             //Récupération du rang de l'utilisateur
             _serviceTaqnshareClient.RecupererRangJoueurCompleted += RecupererRang;
@@ -192,7 +192,7 @@ namespace TaqNShare.Pages
         }
 
 
-        private void AfficherDefis(object sender, RecupererDefisCompletedEventArgs e)
+        private void AfficherDefis(object sender, RecupererDefisEnAttenteCompletedEventArgs e)
         {
             List<DefiService> listeDefiServices = e.Result;
 
