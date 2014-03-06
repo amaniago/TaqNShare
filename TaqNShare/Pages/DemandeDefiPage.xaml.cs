@@ -26,7 +26,7 @@ namespace TaqNShare.Pages
 
         private void Enregistrement(object sender, EnregistrerScoreCompletedEventArgs e)
         {
-            MessageBox.Show(e.Result);
+            //MessageBox.Show(e.Result);
         }
 
         private void RetourAccueilBoutonClick(object sender, RoutedEventArgs e)

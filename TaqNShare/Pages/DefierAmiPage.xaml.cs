@@ -129,14 +129,14 @@ namespace TaqNShare.Pages
         /// <param name="e"></param>
         private void Defier(object sender, CreerDefiCompletedEventArgs e)
         {
-            if (e.Result == "OK")
+            if (e.Result)
             {
-                MessageBox.Show(e.Result);
+                MessageBox.Show(e.Result.ToString());
                 NavigationService.Navigate(new Uri("/Pages/MainPage.xaml", UriKind.Relative));
                 PhoneApplicationService.Current.State.Clear();
             }
             else
-                MessageBox.Show(e.Result);
+                MessageBox.Show(e.Result.ToString());
 
         }
     }

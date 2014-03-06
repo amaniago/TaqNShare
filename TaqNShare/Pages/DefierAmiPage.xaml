@@ -12,9 +12,21 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
+	<phone:PhoneApplicationPage.Background>
+		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+			<GradientStop Color="Black" Offset="0"/>
+			<GradientStop Color="#FF00B4FF" Offset="1"/>
+		</LinearGradientBrush>
+	</phone:PhoneApplicationPage.Background>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent" Margin="0,0,0,76">
+    <Grid x:Name="LayoutRoot">
+    	<Grid.Background>
+    		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    			<GradientStop Color="Black" Offset="0"/>
+    			<GradientStop Color="#FF00B4FF" Offset="1"/>
+    		</LinearGradientBrush>
+    	</Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -52,6 +64,13 @@
         </Grid>
         <TextBox x:Name="NomDefiTextBox" HorizontalAlignment="Left" Height="72" Margin="14,496,0,-10" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="456"/>
         <TextBlock HorizontalAlignment="Center" Margin="0,456,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Donner un nom au défi" VerticalAlignment="Top" Width="221" Height="40"/>
-        <Button x:Name="DefierAmiBouton" Content="Défier" HorizontalAlignment="Left" Height="72" Margin="159,568,0,-82" Grid.Row="1" VerticalAlignment="Top" Width="189" Tap="DefierAmiBoutonTap"/>
+        <Button x:Name="DefierAmiBouton" Content="Défier" HorizontalAlignment="Left" Height="72" Margin="159,568,0,-82" Grid.Row="1" VerticalAlignment="Top" Width="189" Tap="DefierAmiBoutonTap" BorderThickness="0">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF1B414F" Offset="0.466"/>
+                    <GradientStop Color="#FFC6CAD8" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
     </Grid>
 </phone:PhoneApplicationPage>

@@ -50,11 +50,23 @@
   <wsdl:message name="ServiceTaqnshare_ModifierDefi_OutputMessage">
     <wsdl:part name="parameters" element="tns:ModifierDefiResponse" />
   </wsdl:message>
-  <wsdl:message name="ServiceTaqnshare_RecupererDefis_InputMessage">
-    <wsdl:part name="parameters" element="tns:RecupererDefis" />
+  <wsdl:message name="ServiceTaqnshare_RecupererDefisEnAttente_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecupererDefisEnAttente" />
   </wsdl:message>
-  <wsdl:message name="ServiceTaqnshare_RecupererDefis_OutputMessage">
-    <wsdl:part name="parameters" element="tns:RecupererDefisResponse" />
+  <wsdl:message name="ServiceTaqnshare_RecupererDefisEnAttente_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecupererDefisEnAttenteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceTaqnshare_RecupererDefisUtilisateur_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecupererDefisUtilisateur" />
+  </wsdl:message>
+  <wsdl:message name="ServiceTaqnshare_RecupererDefisUtilisateur_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecupererDefisUtilisateurResponse" />
+  </wsdl:message>
+  <wsdl:message name="ServiceTaqnshare_DeclinerDefi_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeclinerDefi" />
+  </wsdl:message>
+  <wsdl:message name="ServiceTaqnshare_DeclinerDefi_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeclinerDefiResponse" />
   </wsdl:message>
   <wsdl:portType name="ServiceTaqnshare">
     <wsdl:operation name="EnregistrerScore">
@@ -85,9 +97,17 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/ModifierDefi" message="tns:ServiceTaqnshare_ModifierDefi_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/ModifierDefiResponse" message="tns:ServiceTaqnshare_ModifierDefi_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="RecupererDefis">
-      <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererDefis" message="tns:ServiceTaqnshare_RecupererDefis_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererDefisResponse" message="tns:ServiceTaqnshare_RecupererDefis_OutputMessage" />
+    <wsdl:operation name="RecupererDefisEnAttente">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererDefisEnAttente" message="tns:ServiceTaqnshare_RecupererDefisEnAttente_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererDefisEnAttenteResponse" message="tns:ServiceTaqnshare_RecupererDefisEnAttente_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecupererDefisUtilisateur">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererDefisUtilisateur" message="tns:ServiceTaqnshare_RecupererDefisUtilisateur_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/RecupererDefisUtilisateurResponse" message="tns:ServiceTaqnshare_RecupererDefisUtilisateur_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeclinerDefi">
+      <wsdl:input wsaw:Action="http://tempuri.org/ServiceTaqnshare/DeclinerDefi" message="tns:ServiceTaqnshare_DeclinerDefi_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ServiceTaqnshare/DeclinerDefiResponse" message="tns:ServiceTaqnshare_DeclinerDefi_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ServiceTaqnshare" type="tns:ServiceTaqnshare">
@@ -155,8 +175,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="RecupererDefis">
-      <soap:operation soapAction="http://tempuri.org/ServiceTaqnshare/RecupererDefis" style="document" />
+    <wsdl:operation name="RecupererDefisEnAttente">
+      <soap:operation soapAction="http://tempuri.org/ServiceTaqnshare/RecupererDefisEnAttente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecupererDefisUtilisateur">
+      <soap:operation soapAction="http://tempuri.org/ServiceTaqnshare/RecupererDefisUtilisateur" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeclinerDefi">
+      <soap:operation soapAction="http://tempuri.org/ServiceTaqnshare/DeclinerDefi" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -167,7 +205,7 @@
   </wsdl:binding>
   <wsdl:service name="ServiceTaqnshare">
     <wsdl:port name="BasicHttpBinding_ServiceTaqnshare" binding="tns:BasicHttpBinding_ServiceTaqnshare">
-      <soap:address location="http://192.168.1.20:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc" />
+      <soap:address location="http://192.168.1.15:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

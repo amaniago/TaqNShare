@@ -23,9 +23,29 @@
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        	<Grid.Background>
+        		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+        			<GradientStop Color="Black" Offset="0"/>
+        			<GradientStop Color="#FF00B4FF" Offset="1"/>
+        		</LinearGradientBrush>
+        	</Grid.Background>
             <TextBlock HorizontalAlignment="Left" Margin="0,40,0,0" TextWrapping="Wrap" Text="L'enregistrement de votre score s'est effectué  avec succès. Vous pouvez si vous le souhaitez défier un ami." VerticalAlignment="Top" Width="456"/>
-            <Button Content="Défier " HorizontalAlignment="Left" Margin="159,358,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.184,0.492" Click="DefierAmiBoutonClick"/>
-            <Button Content="Accueil" HorizontalAlignment="Left" Margin="159,505,0,0" VerticalAlignment="Top" Click="RetourAccueilBoutonClick"/>
+            <Button Content="Défier " HorizontalAlignment="Left" Margin="159,358,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.184,0.492" Click="DefierAmiBoutonClick" BorderThickness="0">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1B414F" Offset="0.466"/>
+                        <GradientStop Color="#FFC6CAD8" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Content="Accueil" HorizontalAlignment="Left" Margin="159,505,0,0" VerticalAlignment="Top" Click="RetourAccueilBoutonClick" BorderThickness="0">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1B414F" Offset="0.466"/>
+                        <GradientStop Color="#FFC6CAD8" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         </Grid>
     </Grid>
 

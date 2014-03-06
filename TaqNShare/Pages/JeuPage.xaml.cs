@@ -214,7 +214,7 @@ namespace TaqNShare.Pages
                         Photo photoDecoupe = new Photo(new WriteableBitmap(Photo.DecodeImage(defi.ImageDefi)).Crop(i * _largeurPiece, j * _hauteurPiece, _largeurPiece, _hauteurPiece), _largeurPiece, _hauteurPiece);
 
                         
-                        Composition composer = null;
+                        CompositionService composer = null;
 
                         foreach (var c in defi.Composition)
                         {

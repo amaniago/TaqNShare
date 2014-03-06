@@ -172,6 +172,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="Help\Nokia Imaging SDK.chm" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
@@ -281,13 +282,11 @@
       <HintPath>..\packages\NokiaImagingSDK.1.1.177\lib\wp8\Nokia.Graphics.Imaging.Managed.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="WriteableBitmapExWinPhone, Version=1.0.10.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\WriteableBitmapEx.1.0.10.0\lib\WindowsPhone8\WriteableBitmapExWinPhone.dll</HintPath>
+    <Reference Include="WriteableBitmapExWinPhone">
+      <HintPath>..\packages\WriteableBitmapEx.1.0.12.0\lib\WindowsPhone8\WriteableBitmapExWinPhone.dll</HintPath>
     </Reference>
-    <Reference Include="WriteableBitmapExWinPhoneXnaDependant, Version=1.0.10.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\WriteableBitmapEx.1.0.10.0\lib\WindowsPhone8\WriteableBitmapExWinPhoneXnaDependant.dll</HintPath>
+    <Reference Include="WriteableBitmapExWinPhoneXnaDependant">
+      <HintPath>..\packages\WriteableBitmapEx.1.0.12.0\lib\WindowsPhone8\WriteableBitmapExWinPhoneXnaDependant.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -23,18 +23,38 @@
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"/>
-        <phone:Panorama HorizontalAlignment="Left" Title="TAQ'N SHARE" Width="468"
+        <phone:Panorama HorizontalAlignment="Left" Title="TAQ'N SHARE" Width="480"
                         Grid.Row="1" FontWeight="Bold" FontFamily="Times New Roman" Margin="0,0,0,-5">
-            <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Jouer" Height="484">
+        	<phone:Panorama.Background>
+        		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+        			<GradientStop Color="Black" Offset="0"/>
+        			<GradientStop Color="#FF00B4FF" Offset="1"/>
+        		</LinearGradientBrush>
+        	</phone:Panorama.Background>
+            <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Jouer" Height="484" FontWeight="Normal" Width="386">
                 <phone:PanoramaItem.RenderTransform>
                     <TranslateTransform/>
                 </phone:PanoramaItem.RenderTransform>
                 <Grid HorizontalAlignment="Left" Height="435" Margin="-6,-49,0,0" VerticalAlignment="Top" Width="408">
-                    <Button x:Name="BoutonPrendrePhoto" Content="Prendre une nouvelle photo" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="31,53,29,310" Tap="BoutonPrendrePhotoTap"/>
-                    <Button x:Name="BoutonSelectPhoto" Content="Sélectionner une photo" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="54,130,55,233" Tap="BoutonSelectPhotoTap"/>
+                    <Button x:Name="BoutonPrendrePhoto" Content="Prendre une nouvelle photo" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="46,57,30,312" Tap="BoutonPrendrePhotoTap" BorderThickness="0" FontWeight="Normal">
+                    	<Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF1B414F" Offset="0.655"/>
+                    <GradientStop Color="#FFC6CAD8" Offset="0.94"/>
+                </LinearGradientBrush>
+            </Button.Background>
+                    </Button>
+                    <Button x:Name="BoutonSelectPhoto" Content="Sélectionner une photo" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="73,151,50,218" BorderThickness="0" FontWeight="Normal" Click="BoutonSelectPhoto_Click">
+                    	<Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF1B414F" Offset="0.466"/>
+                    <GradientStop Color="#FFC6CAD8" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+                    </Button>
                 </Grid>
             </phone:PanoramaItem>
-            <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Défis" Height="512">
+            <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Défis" Height="511" Width="390" FontWeight="Normal">
                 <phone:PanoramaItem.RenderTransform>
                     <TranslateTransform/>
                 </phone:PanoramaItem.RenderTransform>
@@ -51,12 +71,12 @@
                     </ListBox>
                 </Grid>
             </phone:PanoramaItem>
-            <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Classement" Height="512">
+            <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Classement" Height="559" FontSize="18.667" Width="445" Margin="20,0,0,0" FontWeight="Normal">
                 <phone:PanoramaItem.RenderTransform>
                     <TranslateTransform/>
                 </phone:PanoramaItem.RenderTransform>
-                <Grid HorizontalAlignment="Left" Height="388" VerticalAlignment="Top" Width="408">
-                    <TextBlock HorizontalAlignment="Left" Height="35" TextWrapping="Wrap" VerticalAlignment="Top" Width="408">
+                <Grid HorizontalAlignment="Left" Height="388" VerticalAlignment="Top" Width="429" Margin="0,0,-52,0">
+                    <TextBlock HorizontalAlignment="Left" Height="35" TextWrapping="Wrap" VerticalAlignment="Top" Width="408" Margin="20,0,0,0">
                     	<Run Text="Rang   "/>
                     	<Run Text="  "/>
                     	<Run Text="      "/>
@@ -68,7 +88,7 @@
                     	<Run Text="    Score"/>
                     </TextBlock>
 
-                    <ListBox x:Name="ClassementListBox" Margin="0,40,10,60" >
+                    <ListBox x:Name="ClassementListBox" Margin="28,40,-18,60" RenderTransformOrigin="0.615,0.509" >
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -92,13 +112,20 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <Button x:Name="defisUtilisateurs" Content="Vos Défis" HorizontalAlignment="Left" Margin="171,328,0,-12" VerticalAlignment="Top" Click="DefisUtilisateursClick" RenderTransformOrigin="0.482,0.936"/>
-                    <TextBlock x:Name="ScoreUtilisateurTextBlock" HorizontalAlignment="Left" Margin="0,333,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-                    <TextBlock x:Name="RangUtilisateurTextBlock" HorizontalAlignment="Left" Margin="0,361,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                    <Button x:Name="defisUtilisateurs" Content="Vos Défis" HorizontalAlignment="Left" Margin="129,312,0,0" VerticalAlignment="Top" Click="DefisUtilisateursClick" RenderTransformOrigin="0.482,0.936" BorderThickness="0">
+                        <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF1B414F" Offset="0.466"/>
+                    <GradientStop Color="#FFC6CAD8" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+                    </Button>
+                    <TextBlock x:Name="ScoreUtilisateurTextBlock" Text="vghvc" HorizontalAlignment="Left" Margin="10,307,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="RangUtilisateurTextBlock" Text="vghvc" HorizontalAlignment="Left" Margin="10,337,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
                 </Grid>
 
             </phone:PanoramaItem>
-            <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Paramètres" Height="512">
+            <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Paramètres" Height="512" Width="375" HorizontalAlignment="Right" FontWeight="Normal">
                 <phone:PanoramaItem.RenderTransform>
                     <TranslateTransform/>
                 </phone:PanoramaItem.RenderTransform>
@@ -107,16 +134,16 @@
                         <ColumnDefinition Width="401*"/>
                         <ColumnDefinition Width="7*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock HorizontalAlignment="Left" Margin="12,10,0,400" TextWrapping="Wrap" Text="Nombre de découpages : " RenderTransformOrigin="0.341,0.44"/>
-                    <toolkit:ListPicker Grid.Row="0" Grid.Column="0" x:Name="ListPickerDecoupage" SelectionChanged="ListPickerDecoupageChange" ItemsSource="{Binding Decoupages}" SelectedIndex="{Binding UserDecoupage, Mode=TwoWay}" Margin="12,30,5,236">
+                    <TextBlock HorizontalAlignment="Left" Margin="0,49,0,361" TextWrapping="Wrap" Text="Nombre de découpages : " RenderTransformOrigin="0.341,0.44"/>
+                    <toolkit:ListPicker Grid.Row="0" Grid.Column="0" x:Name="ListPickerDecoupage" SelectionChanged="ListPickerDecoupageChange" ItemsSource="{Binding Decoupages}" SelectedIndex="{Binding UserDecoupage, Mode=TwoWay}" Margin="0,94,47,182">
                         <toolkit:ListPicker.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Margin="20 0 0 0" Text="{Binding Valeur}" />
                             </DataTemplate>
                         </toolkit:ListPicker.ItemTemplate>
                     </toolkit:ListPicker>
-                    <TextBlock Grid.Column="0" HorizontalAlignment="Left" Margin="10,223,0,182" TextWrapping="Wrap" Text="Nombre de filtres : "/>
-                    <toolkit:ListPicker Grid.Row="0" Grid.Column="0" x:Name="ListPickerFiltre" SelectionChanged="ListPickerFiltreChange" ItemsSource="{Binding Filtres}" SelectedIndex="{Binding UserFiltre, Mode=TwoWay}" Margin="14,253,3,9">
+                    <TextBlock Grid.Column="0" HorizontalAlignment="Left" Margin="0,223,0,182" TextWrapping="Wrap" Text="Nombre de filtres : "/>
+                    <toolkit:ListPicker Grid.Row="0" Grid.Column="0" x:Name="ListPickerFiltre" SelectionChanged="ListPickerFiltreChange" ItemsSource="{Binding Filtres}" SelectedIndex="{Binding UserFiltre, Mode=TwoWay}" Margin="0,258,46,9">
                         <toolkit:ListPicker.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Margin="20 0 0 0" Text="{Binding Valeur}" />
@@ -126,12 +153,26 @@
                 </Grid>
             </phone:PanoramaItem>
         </phone:Panorama>
-        <Button x:Name="ConnexionFacebookBouton" Content="Connection avec Facebook" HorizontalAlignment="Left" Margin="-12,701,0,-5" Grid.Row="1" VerticalAlignment="Top" Width="327" Tap="ConnexionFacebookBoutonTap"/>
-        <Button x:Name="DeconnexionFacebookBouton" Content="Deconnexion" HorizontalAlignment="Left" Margin="-12,701,0,-5" Grid.Row="1" VerticalAlignment="Top" Width="327" Tap="DeconnexionFacebookBoutonTap"/>
+        <Button x:Name="ConnexionFacebookBouton" Content="Connection avec Facebook" HorizontalAlignment="Left" Margin="158,690,-5,0" Grid.Row="1" VerticalAlignment="Top" Width="327" Tap="ConnexionFacebookBoutonTap" BorderThickness="0">
+           <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF1B414F" Offset="0.466"/>
+                    <GradientStop Color="#FFC6CAD8" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="DeconnexionFacebookBouton" Content="Deconnexion" HorizontalAlignment="Left" Margin="158,692,-5,0" Grid.Row="1" VerticalAlignment="Top" Width="327" Tap="DeconnexionFacebookBoutonTap" BorderThickness="0">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF1B414F" Offset="0.466"/>
+                    <GradientStop Color="#FFC6CAD8" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
 
-        <TextBlock x:Name="NomUtilisateurTextBlock" Text="" Margin="317,731,10,10" Grid.Row="1" />
-        <Image x:Name="UtilisateurImage" HorizontalAlignment="Left" Height="41" Margin="358,690,0,0" Grid.Row="0"
-               Grid.RowSpan="2" VerticalAlignment="Top" Width="67"/>
+        <TextBlock x:Name="NomUtilisateurTextBlock" Text="" Margin="5,736,322,5" Grid.Row="1" />
+        <Image x:Name="UtilisateurImage" HorizontalAlignment="Left" Height="41" Margin="0,690,0,0" Grid.Row="0"
+               Grid.RowSpan="2" VerticalAlignment="Top" Width="67" RenderTransformOrigin="6.515,0.232"/>
     </Grid>
 
 </phone:PhoneApplicationPage>
