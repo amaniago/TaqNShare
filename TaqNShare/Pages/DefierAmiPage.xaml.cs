@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Collections.ObjectModel;
-using System.Windows.Media.Imaging;
 using Facebook;
 using Microsoft.Phone.Shell;
 using TaqNShare.Donnees;
@@ -119,8 +118,6 @@ namespace TaqNShare.Pages
                 webServiceTaqnshareClient.CreerDefiAsync(defi, listePiecePartie, imageAEnvoyer);
 
             }
-
-
         }
 
         /// <summary>
@@ -132,13 +129,11 @@ namespace TaqNShare.Pages
         {
             if (e.Result == "OK")
             {
-                MessageBox.Show(e.Result);
                 NavigationService.Navigate(new Uri("/Pages/MainPage.xaml", UriKind.Relative));
                 PhoneApplicationService.Current.State.Clear();
             }
             else
                 MessageBox.Show(e.Result);
-
         }
     }
 }

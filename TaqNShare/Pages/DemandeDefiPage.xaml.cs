@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Navigation;
 using Microsoft.Phone.Shell;
-using TaqNShare.Donnees;
-using TaqNShare.TaqnshareReference;
 
 namespace TaqNShare.Pages
 {
