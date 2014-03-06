@@ -25,7 +25,7 @@ namespace TaqNShare.Pages
         public void RecupererListeDefis()
         {
             service.RecupererDefisUtilisateurCompleted += RecupererDefisUtilisateur;
-            service.RecupererDefisUtilisateurAsync("1");
+            service.RecupererDefisUtilisateurAsync(App.UtilisateurCourant.id_utilisateur);
         }
 
         private void RecupererDefisUtilisateur(object sender, RecupererDefisUtilisateurCompletedEventArgs e)

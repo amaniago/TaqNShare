@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/ServeurTaqnshare" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/ServeurTaqnshare.ClasseDeService" />
+  <xs:element name="EnregistrerScore">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ServeurTaqnshare" minOccurs="0" name="utilisateurCourant" nillable="true" type="q1:Utilisateur" />
+        <xs:element minOccurs="0" name="scorePartie" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EnregistrerScoreResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="EnregistrerScoreResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreerDefi">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ServeurTaqnshare" minOccurs="0" name="partieUtilisateur" nillable="true" type="q2:Defi" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ServeurTaqnshare" minOccurs="0" name="compositionTaquin" nillable="true" type="q3:ArrayOfComposer" />
+        <xs:element minOccurs="0" name="imageDefi" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreerDefiResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CreerDefiResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecupererDefi">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idDefi" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecupererDefiResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ServeurTaqnshare.ClasseDeService" minOccurs="0" name="RecupererDefiResult" nillable="true" type="q4:DefiService" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecupererClassement">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecupererClassementResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ServeurTaqnshare.ClasseDeService" minOccurs="0" name="RecupererClassementResult" nillable="true" type="q5:ArrayOfUtilisateurService" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecupererRangJoueur">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idJoueur" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecupererRangJoueurResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RecupererRangJoueurResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecupererScoreJoueur">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idJoueur" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecupererScoreJoueurResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RecupererScoreJoueurResult" type="xs:float" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ModifierDefi">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ServeurTaqnshare" minOccurs="0" name="defiTermine" nillable="true" type="q6:Defi" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ServeurTaqnshare" minOccurs="0" name="utilisateurCourant" nillable="true" type="q7:Utilisateur" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ModifierDefiResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ModifierDefiResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecupererDefis">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idUtilisateur" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecupererDefisResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ServeurTaqnshare.ClasseDeService" minOccurs="0" name="RecupererDefisResult" nillable="true" type="q8:ArrayOfDefiService" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecupererDefisUtilisateur">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idUtilisateur" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecupererDefisUtilisateurResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/ServeurTaqnshare.ClasseDeService" minOccurs="0" name="RecupererDefisUtilisateurResult" nillable="true" type="q9:ArrayOfDefiService" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

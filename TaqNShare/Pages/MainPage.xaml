@@ -25,7 +25,7 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"/>
         <phone:Panorama HorizontalAlignment="Left" Title="TAQ'N SHARE" Width="468"
                         Grid.Row="1" FontWeight="Bold" FontFamily="Times New Roman" Margin="0,0,0,-5">
-            <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Jouer" Height="484">
+            <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Jouer" Height="484" FontSize="10">
                 <phone:PanoramaItem.RenderTransform>
                     <TranslateTransform/>
                 </phone:PanoramaItem.RenderTransform>
@@ -34,7 +34,7 @@
                     <Button x:Name="BoutonSelectPhoto" Content="Sélectionner une photo" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="54,130,55,233" Tap="BoutonSelectPhotoTap"/>
                 </Grid>
             </phone:PanoramaItem>
-            <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Défis" Height="512">
+            <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Défis en attente" Height="512">
                 <phone:PanoramaItem.RenderTransform>
                     <TranslateTransform/>
                 </phone:PanoramaItem.RenderTransform>

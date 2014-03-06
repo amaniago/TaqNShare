@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/ServeurTaqnshare.ClasseDeService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ServeurTaqnshare.ClasseDeService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="DefiService">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Composition" nillable="true" type="tns:ArrayOfComposition" />
+      <xs:element minOccurs="0" name="IdAdversaireDefi" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IdDefi" type="xs:int" />
+      <xs:element minOccurs="0" name="IdUtilisateur" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ImageDefi" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="NomAdversaire" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NomDefi" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NomUtilisateur" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreFiltre" type="xs:int" />
+      <xs:element minOccurs="0" name="PrenomAdversaire" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrenomUtilisateur" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ScoreAdversaireDefi" type="xs:int" />
+      <xs:element minOccurs="0" name="ScoreUtilisateurDefi" type="xs:int" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="DefiService" nillable="true" type="tns:DefiService" />
+  <xs:complexType name="ArrayOfComposition">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Composition" nillable="true" type="tns:Composition" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfComposition" nillable="true" type="tns:ArrayOfComposition" />
+  <xs:complexType name="Composition">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IdFiltre" type="xs:int" />
+      <xs:element minOccurs="0" name="IdPiece" type="xs:int" />
+      <xs:element minOccurs="0" name="IndexPosition" type="xs:int" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Composition" nillable="true" type="tns:Composition" />
+  <xs:complexType name="ArrayOfUtilisateurService">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UtilisateurService" nillable="true" type="tns:UtilisateurService" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUtilisateurService" nillable="true" type="tns:ArrayOfUtilisateurService" />
+  <xs:complexType name="UtilisateurService">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IdUtilisateur" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NomUtilisateur" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombrePartieUtilisateur" type="xs:decimal" />
+      <xs:element minOccurs="0" name="PrenomUtilisateur" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ScoreTotalUtilisateur" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UtilisateurService" nillable="true" type="tns:UtilisateurService" />
+  <xs:complexType name="ArrayOfDefiService">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DefiService" nillable="true" type="tns:DefiService" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDefiService" nillable="true" type="tns:ArrayOfDefiService" />
+</xs:schema>

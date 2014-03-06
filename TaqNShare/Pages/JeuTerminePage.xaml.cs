@@ -3,11 +3,15 @@ using System.Windows;
 using System.Windows.Navigation;
 using Microsoft.Phone.Shell;
 using TaqNShare.Donnees;
+using TaqNShare.TaqnshareReference;
 
 namespace TaqNShare.Pages
 {
     public partial class JeuTerminePage
     {
+        readonly ServiceTaqnshareClient _serviceTaqnshareClient = new ServiceTaqnshareClient();
+        readonly Partie _partieTermine = (Partie)PhoneApplicationService.Current.State["partie"];
+
         public JeuTerminePage()
         {
             InitializeComponent();
@@ -41,8 +45,8 @@ namespace TaqNShare.Pages
         {
             if (App.EstAuthentifie)
             {
-                NavigationService.Navigate(new Uri("/Pages/DemandeDefiPage.xaml", UriKind.Relative));
-
+                _serviceTaqnshareClient.EnregistrerScoreCompleted += Enregistrement;
+                _serviceTaqnshareClient.EnregistrerScoreAsync(App.UtilisateurCourant, _partieTermine.Score);
             }
             else
             {
@@ -51,6 +55,13 @@ namespace TaqNShare.Pages
                     NavigationService.Navigate(new Uri("/Pages/AuthentificationFacebookPage.xaml?pageAvant=DemandeDefiPage", UriKind.Relative));
                 }
             }
+        }
+
+        private void Enregistrement(object sender, EnregistrerScoreCompletedEventArgs e)
+        {
+            EnregistrementScoreBouton.IsEnabled = false;
+            RetourAccueilBouton.IsEnabled = false;
+            NavigationService.Navigate(new Uri("/Pages/DemandeDefiPage.xaml", UriKind.Relative));
         }
         
         /// <summary>
