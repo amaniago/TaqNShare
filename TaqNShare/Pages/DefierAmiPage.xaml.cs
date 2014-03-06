@@ -117,6 +117,7 @@ namespace TaqNShare.Pages
                 ServiceTaqnshareClient webServiceTaqnshareClient = new ServiceTaqnshareClient();
                 webServiceTaqnshareClient.CreerDefiCompleted += Defier;
                 webServiceTaqnshareClient.CreerDefiAsync(defi, listePiecePartie, imageAEnvoyer);
+
             }
 
 

@@ -23,8 +23,9 @@
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Image x:Name="DefiImage" HorizontalAlignment="Center" Height="517" Margin="0,10,0,0" VerticalAlignment="Top" Width="436"/>
-            <Button x:Name="AccepterDefiBouton" Content="Accepter le défi" HorizontalAlignment="Center" Margin="0,554,0,0" VerticalAlignment="Top" Tap="AccepterDefiBoutonTap"/>
-            <Button x:Name="RetourAccueilBouton" Content="Accueil" HorizontalAlignment="Center" Margin="0,631,0,0" VerticalAlignment="Top" Tap="RetourAccueilBoutonTap"/>
+            <Button x:Name="AccepterDefiBouton" Content="Accepter le défi" HorizontalAlignment="Center" Margin="126,537,119,0" VerticalAlignment="Top" Tap="AccepterDefiBoutonTap"/>
+            <Button x:Name="RetourAccueilBouton" Content="Accueil" HorizontalAlignment="Center" Margin="0,686,0,0" VerticalAlignment="Top" Tap="RetourAccueilBoutonTap"/>
+            <Button x:Name="DeclinerDefiBouton" Content="Decliner le défi" HorizontalAlignment="Center" Margin="0,609,0,0" VerticalAlignment="Top" Tap="DeclinerDefiBoutonTap"/>
         </Grid>
     </Grid>
 

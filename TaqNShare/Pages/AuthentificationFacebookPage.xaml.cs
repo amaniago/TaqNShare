@@ -25,10 +25,10 @@ namespace TaqNShare.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e); 
-            string pa;
-            if(NavigationContext.QueryString.TryGetValue("pageAvant",out pa))
+            string pageAvant;
+            if(NavigationContext.QueryString.TryGetValue("pageAvant",out pageAvant))
             {
-                _pageAvant = pa;
+                _pageAvant = pageAvant;
             }  
         }
 

@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Threading;
 using System.Windows;
 using System.Windows.Navigation;
 using Microsoft.Phone.Shell;
 using TaqNShare.Donnees;
+using TaqNShare.TaqnshareReference;
 
 namespace TaqNShare.Pages
 {
     public partial class JeuTerminePage
     {
+        private Partie _partieTermine;
+        private readonly ManualResetEvent _resetEvent = new ManualResetEvent(false);
+
         public JeuTerminePage()
         {
             InitializeComponent();
@@ -20,9 +25,9 @@ namespace TaqNShare.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             //Récupération de la partie de l'utilisateur
-            Partie partieTermine = (Partie)PhoneApplicationService.Current.State["partie"];
-            TaquinTermineImage.Source = partieTermine.Photo;
-            ScoreTextBlock.Text = "Votre score : " + partieTermine.Score + " Pts";
+            _partieTermine = (Partie)PhoneApplicationService.Current.State["partie"];
+            TaquinTermineImage.Source = _partieTermine.Photo;
+            ScoreTextBlock.Text = "Votre score : " + _partieTermine.Score + " Pts";
             base.OnNavigatedTo(e);
         }
 
@@ -41,8 +46,11 @@ namespace TaqNShare.Pages
         {
             if (App.EstAuthentifie)
             {
-                NavigationService.Navigate(new Uri("/Pages/DemandeDefiPage.xaml", UriKind.Relative));
-
+                
+                ServiceTaqnshareClient serviceTaqnshareClient = new ServiceTaqnshareClient();
+                serviceTaqnshareClient.EnregistrerScoreCompleted += Enregistrement;
+                serviceTaqnshareClient.EnregistrerScoreAsync(App.UtilisateurCourant, _partieTermine.Score);
+                _resetEvent.WaitOne();
             }
             else
             {
@@ -52,7 +60,17 @@ namespace TaqNShare.Pages
                 }
             }
         }
-        
+
+        private void Enregistrement(object sender, EnregistrerScoreCompletedEventArgs e)
+        {
+            _resetEvent.Set();
+            _resetEvent.Close();
+            if (e.Result)
+                NavigationService.Navigate(new Uri("/Pages/DemandeDefiPage.xaml", UriKind.Relative));
+            else
+                MessageBox.Show("Une erreur est survenue lors de votre enregistrement!");
+        }
+
         /// <summary>
         /// Méthode permettant le retour à l'accueil sans enregistrement
         /// </summary>
