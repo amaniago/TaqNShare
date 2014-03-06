@@ -1,5 +1,4 @@
-﻿using System.Windows.Controls;
-using TaqNShare.TaqnshareReference;
+﻿using TaqNShare.TaqnshareReference;
 
 namespace TaqNShare.Donnees
 {
