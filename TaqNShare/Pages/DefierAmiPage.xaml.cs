@@ -93,6 +93,7 @@ namespace TaqNShare.Pages
             }
             else
             {
+                DefierAmiBouton.IsEnabled = false;
                 //Création du défi
                 Defi defi = new Defi();
                 defi.id_utilisateur = App.UtilisateurCourant.id_utilisateur;

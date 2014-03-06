@@ -64,7 +64,7 @@
         </Grid>
         <TextBox x:Name="NomDefiTextBox" HorizontalAlignment="Left" Height="72" Margin="14,496,0,-10" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="456"/>
         <TextBlock HorizontalAlignment="Center" Margin="0,456,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Donner un nom au défi" VerticalAlignment="Top" Width="221" Height="40"/>
-        <Button x:Name="DefierAmiBouton" Content="Défier" HorizontalAlignment="Left" Height="72" Margin="159,568,0,-82" Grid.Row="1" VerticalAlignment="Top" Width="189" Tap="DefierAmiBoutonTap" BorderThickness="0">
+        <Button x:Name="DefierAmiBouton" Content="Défier" HorizontalAlignment="Left" Height="72" Margin="162,562,0,0" Grid.Row="1" VerticalAlignment="Top" Width="189" Tap="DefierAmiBoutonTap" BorderThickness="0">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FF1B414F" Offset="0.466"/>

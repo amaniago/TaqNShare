@@ -45,6 +45,8 @@ namespace TaqNShare.Pages
         {
             if (App.EstAuthentifie)
             {
+                EnregistrementScoreBouton.IsEnabled = false;
+                RetourAccueilBouton.IsEnabled = false;
                 _serviceTaqnshareClient.EnregistrerScoreCompleted += Enregistrement;
                 _serviceTaqnshareClient.EnregistrerScoreAsync(App.UtilisateurCourant, _partieTermine.Score);
             }
@@ -59,8 +61,6 @@ namespace TaqNShare.Pages
 
         private void Enregistrement(object sender, EnregistrerScoreCompletedEventArgs e)
         {
-            EnregistrementScoreBouton.IsEnabled = false;
-            RetourAccueilBouton.IsEnabled = false;
             NavigationService.Navigate(new Uri("/Pages/DemandeDefiPage.xaml", UriKind.Relative));
         }
         
