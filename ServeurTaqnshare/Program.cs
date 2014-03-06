@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ServiceModel;
-using ServeurTaqnshare.ClasseDeService;
 
 namespace ServeurTaqnshare
 {
@@ -10,6 +9,7 @@ namespace ServeurTaqnshare
 
         static void Main(string[] args)
         {
+            //Lancement du serveur
             _host = new ServiceHost(typeof(ServiceTaqnshare));
             _host.Open();
             Console.WriteLine("Serveur démarré.");

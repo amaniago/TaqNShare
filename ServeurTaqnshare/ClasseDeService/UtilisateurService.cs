@@ -1,22 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServeurTaqnshare.ClasseDeService
 {
+    /// <summary>
+    /// Classe permettant de transmettre les infos d'un utilisateur par le web service
+    /// </summary>
     [DataContract]
     public class UtilisateurService
     {
-        public UtilisateurService(Utilisateur u)
+        /// <summary>
+        /// Constructeur
+        /// </summary>
+        /// <param name="utilisateur"></param>
+        public UtilisateurService(Utilisateur utilisateur)
         {
-            IdUtilisateur = u.id_utilisateur;
-            NomUtilisateur = u.nom_utilisateur;
-            PrenomUtilisateur = u.prenom_utilisateur;
-            NombrePartieUtilisateur = Convert.ToInt32(u.nombre_partie_utilisateur);
-            ScoreTotalUtilisateur = Convert.ToInt32(u.score_total_utilisateur);
+            IdUtilisateur = utilisateur.id_utilisateur;
+            NomUtilisateur = utilisateur.nom_utilisateur;
+            PrenomUtilisateur = utilisateur.prenom_utilisateur;
+            NombrePartieUtilisateur = Convert.ToInt32(utilisateur.nombre_partie_utilisateur);
+            ScoreTotalUtilisateur = Convert.ToInt32(utilisateur.score_total_utilisateur);
         }
 
         [DataMember]

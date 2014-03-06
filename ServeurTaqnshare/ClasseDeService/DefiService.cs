@@ -10,6 +10,64 @@ namespace ServeurTaqnshare.ClasseDeService
     [DataContract(IsReference = true)]
     public sealed class DefiService
     {
+        #region Constructeurs
+        /// <summary>
+        /// Constructeur utilisé dans le cas de la récupération d'un défi pour pouvoir le résoudre
+        /// </summary>
+        /// <param name="defi"></param>
+        /// <param name="imageDefi"></param>
+        /// <param name="nombreFiltre"></param>
+        public DefiService(Defi defi, byte[] imageDefi, int nombreFiltre)
+        {
+            IdDefi = defi.id_defi;
+            IdUtilisateur = defi.id_utilisateur;
+            IdAdversaireDefi = defi.id_adversaire_defi;
+            NomDefi = defi.nom_defi;
+            ScoreUtilisateurDefi = Convert.ToInt32(defi.score_utilisateur_defi);
+            ImageDefi = imageDefi;
+            NombreFiltre = nombreFiltre;
+
+            Composition = new List<CompositionService>();
+
+            foreach (var composer in defi.Composers)
+            {
+                Composition.Add(new CompositionService(composer));
+            }
+        }
+
+        /// <summary>
+        /// Constructeur utilisé dans le cas de la récupération des defis en attente de l'utilisateur
+        /// </summary>
+        /// <param name="defi"></param>
+        /// <param name="createurDefi"></param>
+        public DefiService(Defi defi, Utilisateur createurDefi)
+        {
+            IdDefi = defi.id_defi;
+            NomDefi = defi.nom_defi;
+            NomUtilisateur = createurDefi.nom_utilisateur;
+            PrenomUtilisateur = createurDefi.prenom_utilisateur;
+        }
+
+        /// <summary>
+        /// Constructeur utilisé dans le cas de la récupération des défis terminés de l'utilisateur
+        /// </summary>
+        /// <param name="defi"></param>
+        /// <param name="utilisateur"></param>
+        /// <param name="adversaire"></param>
+        public DefiService(Defi defi, Utilisateur utilisateur, Utilisateur adversaire)
+        {
+            NomDefi = defi.nom_defi;
+            PrenomUtilisateur = utilisateur.prenom_utilisateur;
+            NomUtilisateur = utilisateur.nom_utilisateur;
+            PrenomAdversaire = adversaire.prenom_utilisateur;
+            NomAdversaire = adversaire.nom_utilisateur;
+            ScoreUtilisateurDefi = (int)defi.score_utilisateur_defi;
+            ScoreAdversaireDefi = (int)defi.score_adversaire_defi;
+        }
+
+        #endregion Constructeurs
+
+        #region Propriétés
         [DataMember]
         public int IdDefi { get; set; }
         [DataMember]
@@ -25,7 +83,7 @@ namespace ServeurTaqnshare.ClasseDeService
         [DataMember]
         public int ScoreAdversaireDefi { get; set; }
         [DataMember]
-        public List<Composition> Composition { get; set; }
+        public List<CompositionService> Composition { get; set; }
         [DataMember]
         public string NomUtilisateur { get; set; }
         [DataMember]
@@ -37,61 +95,8 @@ namespace ServeurTaqnshare.ClasseDeService
         [DataMember]
         public string PrenomAdversaire { get; set; }
 
-
-        public DefiService(Defi defi, byte[] imageDefi, int nombreFiltre)
-        {
-            IdDefi = defi.id_defi;
-            IdUtilisateur = defi.id_utilisateur;
-            IdAdversaireDefi = defi.id_adversaire_defi;
-            NomDefi = defi.nom_defi;
-            ScoreUtilisateurDefi = Convert.ToInt32(defi.score_utilisateur_defi);
-            ImageDefi = imageDefi;
-            NombreFiltre = nombreFiltre;
-
-            Composition = new List<Composition>();
-
-            foreach (var composer in defi.Composers)
-            {
-                Composition.Add(new Composition(composer));
-            }
-        }
-
+        #endregion Propriétés
+    }
         
-        public DefiService(Defi defi, Utilisateur createurDefi)
-        {
-            IdDefi = defi.id_defi;
-            NomDefi = defi.nom_defi;
-            NomUtilisateur = createurDefi.nom_utilisateur;
-            PrenomUtilisateur = createurDefi.prenom_utilisateur;
-        }
-
-        public DefiService(Defi defi, Utilisateur utilisateur, Utilisateur adversaire)
-        {
-            NomDefi = defi.nom_defi;
-            PrenomUtilisateur = utilisateur.prenom_utilisateur;
-            NomUtilisateur = utilisateur.nom_utilisateur;
-            PrenomAdversaire = adversaire.prenom_utilisateur;
-            NomAdversaire = adversaire.nom_utilisateur;
-            ScoreUtilisateurDefi = (int) defi.score_utilisateur_defi;
-            ScoreAdversaireDefi = (int) defi.score_adversaire_defi;
-        }
-    }
-
-    [DataContract(IsReference = true)]
-    public class Composition
-    {
-        public Composition(Composer composer)
-        {
-            IdPiece = composer.id_piece;
-            IdFiltre = composer.id_filtre;
-            IndexPosition = Convert.ToInt32(composer.position_piece);
-        }
-
-        [DataMember]
-        public int IdPiece { get; set; }
-        [DataMember]
-        public int IdFiltre { get; set; }
-        [DataMember]
-        public int IndexPosition { get; set; }
-    }
+    
 }
