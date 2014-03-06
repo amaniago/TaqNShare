@@ -24,6 +24,7 @@ namespace TaqNShare.Pages
             base.OnNavigatedTo(e);
         }
 
+
         private void Enregistrement(object sender, EnregistrerScoreCompletedEventArgs e)
         {
             //MessageBox.Show(e.Result);
