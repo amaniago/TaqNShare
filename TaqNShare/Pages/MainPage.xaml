@@ -44,7 +44,7 @@
                 </LinearGradientBrush>
             </Button.Background>
                     </Button>
-                    <Button x:Name="BoutonSelectPhoto" Content="Sélectionner une photo" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="73,151,50,218" BorderThickness="0" FontWeight="Normal">
+                    <Button x:Name="BoutonSelectPhoto" Content="Sélectionner une photo" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="73,151,50,218" BorderThickness="0" FontWeight="Normal" Tap="BoutonSelectPhotoTap">
                     	<Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF1B414F" Offset="0.466"/>
@@ -54,7 +54,7 @@
                     </Button>
                 </Grid>
             </phone:PanoramaItem>
-            <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Défis en attente" Height="511" Width="390" FontWeight="Normal">
+            <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Défis " Height="511" Width="390" FontWeight="Normal">
                 <phone:PanoramaItem.RenderTransform>
                     <TranslateTransform/>
                 </phone:PanoramaItem.RenderTransform>
@@ -63,8 +63,15 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <TextBlock Margin="20 0 0 0" Text="{Binding NomDefi}" />
-                                    <Button Content="Voir" Tap="AfficherDetailDefiBoutonTap"/>
+                                    <TextBlock  Margin="5, 30, 0, 0" Text="{Binding NomDefi}" FontSize="30" />
+                                    <Button Content="Détails" Tap="AfficherDetailDefiBoutonTap" BorderThickness="0">
+                                        <Button.Background>
+                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                <GradientStop Color="#FF1B414F" Offset="0.466"/>
+                                                <GradientStop Color="#FFC6CAD8" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Button.Background>
+                                    </Button>
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -76,7 +83,7 @@
                     <TranslateTransform/>
                 </phone:PanoramaItem.RenderTransform>
                 <Grid HorizontalAlignment="Left" Height="388" VerticalAlignment="Top" Width="429" Margin="0,0,-52,0">
-                    <TextBlock HorizontalAlignment="Left" Height="35" TextWrapping="Wrap" VerticalAlignment="Top" Width="408" Margin="20,0,0,0">
+                    <TextBlock HorizontalAlignment="Left" Height="35" TextWrapping="Wrap" VerticalAlignment="Top" Width="408" Margin="20,0,0,0" FontWeight="Bold">
                     	<Run Text="Rang   "/>
                     	<Run Text="  "/>
                     	<Run Text="      "/>
@@ -120,8 +127,8 @@
                 </LinearGradientBrush>
             </Button.Background>
                     </Button>
-                    <TextBlock x:Name="ScoreUtilisateurTextBlock" Text="vghvc" HorizontalAlignment="Left" Margin="10,307,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-                    <TextBlock x:Name="RangUtilisateurTextBlock" Text="vghvc" HorizontalAlignment="Left" Margin="10,337,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="ScoreUtilisateurTextBlock" Text="vghvc" HorizontalAlignment="Left" Margin="20,307,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="RangUtilisateurTextBlock" Text="vghvc" HorizontalAlignment="Left" Margin="20,337,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
                 </Grid>
 
             </phone:PanoramaItem>
@@ -134,8 +141,8 @@
                         <ColumnDefinition Width="401*"/>
                         <ColumnDefinition Width="7*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock HorizontalAlignment="Left" Margin="0,49,0,361" TextWrapping="Wrap" Text="Nombre de découpages : " RenderTransformOrigin="0.341,0.44"/>
-                    <toolkit:ListPicker Grid.Row="0" Grid.Column="0" x:Name="ListPickerDecoupage" SelectionChanged="ListPickerDecoupageChange" ItemsSource="{Binding Decoupages}" SelectedIndex="{Binding UserDecoupage, Mode=TwoWay}" Margin="0,94,47,182">
+                    <TextBlock HorizontalAlignment="Left" Margin="0,15,0,395" TextWrapping="Wrap" Text="Nombre de découpages : " RenderTransformOrigin="0.341,0.44"/>
+                    <toolkit:ListPicker Grid.Row="0" Grid.Column="0" x:Name="ListPickerDecoupage" SelectionChanged="ListPickerDecoupageChange" ItemsSource="{Binding Decoupages}" SelectedIndex="{Binding UserDecoupage, Mode=TwoWay}" Margin="0,48,47,217">
                         <toolkit:ListPicker.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Margin="20 0 0 0" Text="{Binding Valeur}" />
@@ -170,8 +177,8 @@
             </Button.Background>
         </Button>
 
-        <TextBlock x:Name="NomUtilisateurTextBlock" Text="" Margin="5,736,322,5" Grid.Row="1" />
-        <Image x:Name="UtilisateurImage" HorizontalAlignment="Left" Height="41" Margin="0,690,0,0" Grid.Row="0"
+        <TextBlock x:Name="NomUtilisateurTextBlock" Text="" Margin="12,736,315,5" Grid.Row="1" />
+        <Image x:Name="UtilisateurImage" HorizontalAlignment="Left" Height="41" Margin="12,690,0,0" Grid.Row="0"
                Grid.RowSpan="2" VerticalAlignment="Top" Width="67" RenderTransformOrigin="6.515,0.232"/>
     </Grid>
 

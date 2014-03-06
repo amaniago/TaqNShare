@@ -44,6 +44,7 @@ namespace TaqNShare.Pages
 
             InitializeComponent();
 
+
             AffichageRangScore();
 
             DataContext = this;
@@ -100,7 +101,8 @@ namespace TaqNShare.Pages
 
         private void BoutonSelectPhotoTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            _galerie.Show();
+            //_galerie.Show();
+            NavigationService.Navigate(new Uri("/Pages/DefierAmiPage.xaml", UriKind.Relative));
         }
 
         private void ChoixPhotoCompleted(object sender, PhotoResult e)

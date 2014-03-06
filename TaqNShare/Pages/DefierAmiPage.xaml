@@ -38,7 +38,7 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,125">
+        <Grid x:Name="ContentPanel" Grid.Row="2" Margin="12,0,12,125">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
@@ -55,8 +55,8 @@
                                 <RowDefinition Height="auto" />
                                 <RowDefinition Height="auto" />
                             </Grid.RowDefinitions>
-                            <Image Source="{Binding Image}" Grid.RowSpan="2" />
-                            <TextBlock Text="{Binding Nom}" Grid.Row="0" Grid.Column="1" />
+                            <Image Source="{Binding Image}" Grid.RowSpan="2" Margin="10" />
+                            <TextBlock Text="{Binding Nom}" Grid.Row="0" Grid.Column="2" FontSize="30"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
