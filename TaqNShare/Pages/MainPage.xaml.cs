@@ -98,10 +98,10 @@ namespace TaqNShare.Pages
             _camera.Show();
         }
 
-        /*private void BoutonSelectPhotoTap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void BoutonSelectPhotoTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             _galerie.Show();
-        }*/
+        }
 
         private void ChoixPhotoCompleted(object sender, PhotoResult e)
         {
@@ -286,12 +286,6 @@ namespace TaqNShare.Pages
         private void DefisUtilisateursClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Pages/ListeDefisPage.xaml", UriKind.Relative));
-        }
-
-        private void BoutonSelectPhoto_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/Pages/DefierAmiPage.xaml", UriKind.Relative));
-
         }    
     }
 }

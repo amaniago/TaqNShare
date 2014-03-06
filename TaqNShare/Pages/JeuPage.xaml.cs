@@ -32,12 +32,22 @@ namespace TaqNShare.Pages
                                             new Filtre(1, new AntiqueFilter()),
                                             new Filtre(2, new CartoonFilter()),
                                             new Filtre(3, new MagicPenFilter()),
+                                            //new Filtre(4, new FogFilter()),
+                                            //new Filtre(5, new GrayscaleFilter()),
+                                            //new Filtre(6, new NegativeFilter()),
+                                            //new Filtre(7, new AutoLevelsFilter()),
+                                            //new Filtre(8, new GrayscaleNegativeFilter()),
+                                            //new Filtre(9, new LomoFilter()),
+                                            //new Filtre(10, new MilkyFilter()),
+                                            //new Filtre(11, new OilyFilter()),
+                                            //new Filtre(12, new PaintFilter()),
+                                            //new Filtre(13, new PosterizeFilter()),
+                                            //new Filtre(14, new SepiaFilter()),
+                                            //new Filtre(15, new SharpnessFilter()),
+                                            //new Filtre(16, new SolarizeFilter()),
+                                            //new Filtre(17, new WhiteBalanceFilter())
+
                                             
-                                            //new ChromaKeyFilter()
-                                            //new ExposureFilter()
-                                            //new MonoColorFilter()
-                                            //new ColorBoostFilter()
-                                            //new CurvesFilter()
                                         };
         int _hauteurPiece = 244;
         int _largeurPiece = 150;

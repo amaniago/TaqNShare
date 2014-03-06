@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Collections.ObjectModel;
-using System.Windows.Media.Imaging;
 using Facebook;
 using Microsoft.Phone.Shell;
 using TaqNShare.Donnees;
@@ -13,7 +12,8 @@ namespace TaqNShare.Pages
 {
     public partial class DefierAmiPage
     {
-        public ObservableCollection<AmisFacebook> ListeAmis { get; set; }
+        //Ces deux variables sont des listes de type AmisFacebook qui permettent de stocker les informations des amis et le binding
+        public ObservableCollection<AmisFacebook> ListeAmis { get; set; }//Pour le binding
         private readonly ObservableCollection<AmisFacebook> _amis = new ObservableCollection<AmisFacebook>();
 
         public DefierAmiPage()
@@ -29,8 +29,10 @@ namespace TaqNShare.Pages
 
         private void RecupererListeAmis()
         {
+            //On se connecte à la session Facebook de l'utilisateur à partir du token
             FacebookClient fb = new FacebookClient(App.AccessToken);
 
+            //On récupère la liste des amis en parcourant le graphe Facebook.
             fb.GetCompleted += (o, e) =>
                                {
                                    if (e.Error != null)
@@ -117,9 +119,8 @@ namespace TaqNShare.Pages
                 ServiceTaqnshareClient webServiceTaqnshareClient = new ServiceTaqnshareClient();
                 webServiceTaqnshareClient.CreerDefiCompleted += Defier;
                 webServiceTaqnshareClient.CreerDefiAsync(defi, listePiecePartie, imageAEnvoyer);
+
             }
-
-
         }
 
         /// <summary>
@@ -131,13 +132,11 @@ namespace TaqNShare.Pages
         {
             if (e.Result)
             {
-                MessageBox.Show(e.Result.ToString());
                 NavigationService.Navigate(new Uri("/Pages/MainPage.xaml", UriKind.Relative));
                 PhoneApplicationService.Current.State.Clear();
             }
             else
                 MessageBox.Show(e.Result.ToString());
-
         }
     }
 }

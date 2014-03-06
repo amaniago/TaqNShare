@@ -44,7 +44,7 @@
                 </LinearGradientBrush>
             </Button.Background>
                     </Button>
-                    <Button x:Name="BoutonSelectPhoto" Content="Sélectionner une photo" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="73,151,50,218" BorderThickness="0" FontWeight="Normal" Click="BoutonSelectPhoto_Click">
+                    <Button x:Name="BoutonSelectPhoto" Content="Sélectionner une photo" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="73,151,50,218" BorderThickness="0" FontWeight="Normal">
                     	<Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF1B414F" Offset="0.466"/>
@@ -54,7 +54,7 @@
                     </Button>
                 </Grid>
             </phone:PanoramaItem>
-            <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Défis" Height="511" Width="390" FontWeight="Normal">
+            <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Défis en attente" Height="511" Width="390" FontWeight="Normal">
                 <phone:PanoramaItem.RenderTransform>
                     <TranslateTransform/>
                 </phone:PanoramaItem.RenderTransform>

@@ -44,7 +44,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button Content="Accueil" HorizontalAlignment="Left" Margin="155,564,0,0" VerticalAlignment="Top" Click="AccueilClick" BorderThickness="0">
+            <Button Content="Accueil" HorizontalAlignment="Left" Margin="155,564,0,0" VerticalAlignment="Top" Tap="AccueilTap" BorderThickness="0">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                         <GradientStop Color="#FF1B414F" Offset="0.466"/>
