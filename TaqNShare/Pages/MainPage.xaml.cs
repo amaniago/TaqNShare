@@ -101,8 +101,7 @@ namespace TaqNShare.Pages
 
         private void BoutonSelectPhotoTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            //_galerie.Show();
-            NavigationService.Navigate(new Uri("/Pages/DefierAmiPage.xaml", UriKind.Relative));
+            _galerie.Show();
         }
 
         private void ChoixPhotoCompleted(object sender, PhotoResult e)
@@ -180,7 +179,7 @@ namespace TaqNShare.Pages
                 NomUtilisateurTextBlock.Text = String.Format("{0} {1}", utilisateurCourant.prenom_utilisateur, utilisateurCourant.nom_utilisateur);
 
             //Récupération des défis en attente de l'utilisateur
-            _serviceTaqnshareClient.RecupererDefisEnAttenteCompleted += AfficherDefis;
+            _serviceTaqnshareClient.RecupererDefisEnAttenteCompleted += AfficherDefisEnAttente;
             _serviceTaqnshareClient.RecupererDefisEnAttenteAsync(App.UtilisateurCourant.id_utilisateur);
 
             //Récupération du rang de l'utilisateur
@@ -193,8 +192,7 @@ namespace TaqNShare.Pages
 
         }
 
-
-        private void AfficherDefis(object sender, RecupererDefisEnAttenteCompletedEventArgs e)
+        private void AfficherDefisEnAttente(object sender, RecupererDefisEnAttenteCompletedEventArgs e)
         {
             List<DefiService> listeDefiServices = e.Result;
 
@@ -203,7 +201,9 @@ namespace TaqNShare.Pages
                 DefiAffiche defiAffiche = new DefiAffiche(defiService);
                 _defisAAfficher.Add(defiAffiche);
             }
-
+            
+            AucunDefiEnAttenteTextBlock.Visibility = _defisAAfficher.Count <= 0 ? Visibility.Visible : Visibility.Collapsed;  
+            
             DefisListBox.ItemsSource = _defisAAfficher;
         }
 

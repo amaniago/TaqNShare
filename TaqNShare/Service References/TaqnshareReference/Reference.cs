@@ -892,7 +892,7 @@ namespace TaqNShare.TaqnshareReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ServiceTaqnshare/ModifierDefi", ReplyAction="http://tempuri.org/ServiceTaqnshare/ModifierDefiResponse")]
         System.IAsyncResult BeginModifierDefi(TaqNShare.TaqnshareReference.Defi defiTermine, TaqNShare.TaqnshareReference.Utilisateur utilisateurCourant, System.AsyncCallback callback, object asyncState);
         
-        string EndModifierDefi(System.IAsyncResult result);
+        bool EndModifierDefi(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ServiceTaqnshare/RecupererDefisEnAttente", ReplyAction="http://tempuri.org/ServiceTaqnshare/RecupererDefisEnAttenteResponse")]
         System.IAsyncResult BeginRecupererDefisEnAttente(string idUtilisateur, System.AsyncCallback callback, object asyncState);
@@ -907,7 +907,7 @@ namespace TaqNShare.TaqnshareReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ServiceTaqnshare/DeclinerDefi", ReplyAction="http://tempuri.org/ServiceTaqnshare/DeclinerDefiResponse")]
         System.IAsyncResult BeginDeclinerDefi(int idDefiDecline, System.AsyncCallback callback, object asyncState);
         
-        string EndDeclinerDefi(System.IAsyncResult result);
+        bool EndDeclinerDefi(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1039,10 +1039,10 @@ namespace TaqNShare.TaqnshareReference {
             this.results = results;
         }
         
-        public string Result {
+        public bool Result {
             get {
                 base.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
+                return ((bool)(this.results[0]));
             }
         }
     }
@@ -1096,10 +1096,10 @@ namespace TaqNShare.TaqnshareReference {
             this.results = results;
         }
         
-        public string Result {
+        public bool Result {
             get {
                 base.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
+                return ((bool)(this.results[0]));
             }
         }
     }
@@ -1531,7 +1531,7 @@ namespace TaqNShare.TaqnshareReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        string TaqNShare.TaqnshareReference.ServiceTaqnshare.EndModifierDefi(System.IAsyncResult result) {
+        bool TaqNShare.TaqnshareReference.ServiceTaqnshare.EndModifierDefi(System.IAsyncResult result) {
             return base.Channel.EndModifierDefi(result);
         }
         
@@ -1542,7 +1542,7 @@ namespace TaqNShare.TaqnshareReference {
         }
         
         private object[] OnEndModifierDefi(System.IAsyncResult result) {
-            string retVal = ((TaqNShare.TaqnshareReference.ServiceTaqnshare)(this)).EndModifierDefi(result);
+            bool retVal = ((TaqNShare.TaqnshareReference.ServiceTaqnshare)(this)).EndModifierDefi(result);
             return new object[] {
                     retVal};
         }
@@ -1671,7 +1671,7 @@ namespace TaqNShare.TaqnshareReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        string TaqNShare.TaqnshareReference.ServiceTaqnshare.EndDeclinerDefi(System.IAsyncResult result) {
+        bool TaqNShare.TaqnshareReference.ServiceTaqnshare.EndDeclinerDefi(System.IAsyncResult result) {
             return base.Channel.EndDeclinerDefi(result);
         }
         
@@ -1681,7 +1681,7 @@ namespace TaqNShare.TaqnshareReference {
         }
         
         private object[] OnEndDeclinerDefi(System.IAsyncResult result) {
-            string retVal = ((TaqNShare.TaqnshareReference.ServiceTaqnshare)(this)).EndDeclinerDefi(result);
+            bool retVal = ((TaqNShare.TaqnshareReference.ServiceTaqnshare)(this)).EndDeclinerDefi(result);
             return new object[] {
                     retVal};
         }
@@ -1875,9 +1875,9 @@ namespace TaqNShare.TaqnshareReference {
                 return _result;
             }
             
-            public string EndModifierDefi(System.IAsyncResult result) {
+            public bool EndModifierDefi(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                string _result = ((string)(base.EndInvoke("ModifierDefi", _args, result)));
+                bool _result = ((bool)(base.EndInvoke("ModifierDefi", _args, result)));
                 return _result;
             }
             
@@ -1914,9 +1914,9 @@ namespace TaqNShare.TaqnshareReference {
                 return _result;
             }
             
-            public string EndDeclinerDefi(System.IAsyncResult result) {
+            public bool EndDeclinerDefi(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                string _result = ((string)(base.EndInvoke("DeclinerDefi", _args, result)));
+                bool _result = ((bool)(base.EndInvoke("DeclinerDefi", _args, result)));
                 return _result;
             }
         }

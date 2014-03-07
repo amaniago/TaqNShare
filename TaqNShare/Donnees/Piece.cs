@@ -272,22 +272,182 @@ namespace TaqNShare.Donnees
                         break;
                 }
             }
-            //TODO A terminer
-            /*
-        else if (tailleGrille == 4)
-        {
-            switch (indexPosition)
+            else if (tailleGrille == 4)
             {
-
+                switch (indexPosition)
+                {
+                    case 0:
+                        coordonnees[0] = 0;
+                        coordonnees[1] = 0;
+                        break;
+                    case 1:
+                        coordonnees[0] = 0;
+                        coordonnees[1] = 1;
+                        break;
+                    case 2:
+                        coordonnees[0] = 0;
+                        coordonnees[1] = 2;
+                        break;
+                    case 3:
+                        coordonnees[0] = 0;
+                        coordonnees[1] = 3;
+                        break;
+                    case 4:
+                        coordonnees[0] = 1;
+                        coordonnees[1] = 0;
+                        break;
+                    case 5:
+                        coordonnees[0] = 1;
+                        coordonnees[1] = 1;
+                        break;
+                    case 6:
+                        coordonnees[0] = 1;
+                        coordonnees[1] = 2;
+                        break;
+                    case 7:
+                        coordonnees[0] = 1;
+                        coordonnees[1] = 3;
+                        break;
+                    case 8:
+                        coordonnees[0] = 2;
+                        coordonnees[1] = 0;
+                        break;
+                    case 9:
+                        coordonnees[0] = 2;
+                        coordonnees[1] = 1;
+                        break;
+                    case 10:
+                        coordonnees[0] = 2;
+                        coordonnees[1] = 2;
+                        break;
+                    case 11:
+                        coordonnees[0] = 2;
+                        coordonnees[1] = 3;
+                        break;
+                    case 12:
+                        coordonnees[0] = 3;
+                        coordonnees[1] = 0;
+                        break;
+                    case 13:
+                        coordonnees[0] = 3;
+                        coordonnees[1] = 1;
+                        break;
+                    case 14:
+                        coordonnees[0] = 3;
+                        coordonnees[1] = 2;
+                        break;
+                    case 15:
+                        coordonnees[0] = 3;
+                        coordonnees[1] = 3;
+                        break;
+                }
             }
-        }
-        else if (tailleGrille == 5)
-        {
-            switch (indexPosition)
+            else if (tailleGrille == 5)
             {
-
+                switch (indexPosition)
+                {
+                    case 0:
+                        coordonnees[0] = 0;
+                        coordonnees[1] = 0;
+                        break;
+                    case 1:
+                        coordonnees[0] = 0;
+                        coordonnees[1] = 1;
+                        break;
+                    case 2:
+                        coordonnees[0] = 0;
+                        coordonnees[1] = 2;
+                        break;
+                    case 3:
+                        coordonnees[0] = 0;
+                        coordonnees[1] = 3;
+                        break;
+                    case 4:
+                        coordonnees[0] = 0;
+                        coordonnees[1] = 4;
+                        break;
+                    case 5:
+                        coordonnees[0] = 1;
+                        coordonnees[1] = 0;
+                        break;
+                    case 6:
+                        coordonnees[0] = 1;
+                        coordonnees[1] = 1;
+                        break;
+                    case 7:
+                        coordonnees[0] = 1;
+                        coordonnees[1] = 2;
+                        break;
+                    case 8:
+                        coordonnees[0] = 1;
+                        coordonnees[1] = 3;
+                        break;
+                    case 9:
+                        coordonnees[0] = 1;
+                        coordonnees[1] = 4;
+                        break;
+                    case 10:
+                        coordonnees[0] = 2;
+                        coordonnees[1] = 0;
+                        break;
+                    case 11:
+                        coordonnees[0] = 2;
+                        coordonnees[1] = 1;
+                        break;
+                    case 12:
+                        coordonnees[0] = 2;
+                        coordonnees[1] = 2;
+                        break;
+                    case 13:
+                        coordonnees[0] = 2;
+                        coordonnees[1] = 3;
+                        break;
+                    case 14:
+                        coordonnees[0] = 2;
+                        coordonnees[1] = 4;
+                        break;
+                    case 15:
+                        coordonnees[0] = 3;
+                        coordonnees[1] = 0;
+                        break;
+                    case 16:
+                        coordonnees[0] = 3;
+                        coordonnees[1] = 1;
+                        break;
+                    case 17:
+                        coordonnees[0] = 3;
+                        coordonnees[1] = 2;
+                        break;
+                    case 18:
+                        coordonnees[0] = 3;
+                        coordonnees[1] = 3;
+                        break;
+                    case 19:
+                        coordonnees[0] = 3;
+                        coordonnees[1] = 4;
+                        break;
+                    case 20:
+                        coordonnees[0] = 4;
+                        coordonnees[1] = 0;
+                        break;
+                    case 21:
+                        coordonnees[0] = 4;
+                        coordonnees[1] = 1;
+                        break;
+                    case 22:
+                        coordonnees[0] = 4;
+                        coordonnees[1] = 2;
+                        break;
+                    case 23:
+                        coordonnees[0] = 4;
+                        coordonnees[1] = 3;
+                        break;
+                    case 24:
+                        coordonnees[0] = 4;
+                        coordonnees[1] = 4;
+                        break;
+                }
             }
-        }*/
 
             return coordonnees;
         }
