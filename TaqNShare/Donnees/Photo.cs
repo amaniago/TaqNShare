@@ -11,8 +11,12 @@ namespace TaqNShare.Donnees
     /// </summary>
     class Photo
     {
+        #region Propriétés
+
         public WriteableBitmap PhotoSelectionne { get; set; }
         public BufferImageSource PhotoBuffer { get; set; }
+
+        #endregion
 
         /// <summary>
         /// Constructeur de la classe photo qui permet de transformer l'image sélectionnée en Buffer pour l'application des filtres
@@ -31,6 +35,13 @@ namespace TaqNShare.Donnees
             PhotoBuffer = new BufferImageSource(buffer);
         }
 
+        #region Méthodes
+
+        /// <summary>
+        /// Permet de convertir une image en tableau de byte pour le transfert par le web service
+        /// </summary>
+        /// <param name="photo"></param>
+        /// <returns></returns>
         public static byte[] ConvertToBytes(WriteableBitmap photo)
         {
             MemoryStream ms = new MemoryStream();
@@ -38,6 +49,11 @@ namespace TaqNShare.Donnees
             return ms.ToArray();
         }
 
+        /// <summary>
+        /// Permet de décoder un tableau de byte en image lors du renvoi de l'image par le web service lors d'un défi
+        /// </summary>
+        /// <param name="array"></param>
+        /// <returns></returns>
         public static BitmapImage DecodeImage(byte[] array)
         {
             Stream stream = new MemoryStream(array);
@@ -47,5 +63,7 @@ namespace TaqNShare.Donnees
 
             return image;
         }
+
+        #endregion
     }
 }

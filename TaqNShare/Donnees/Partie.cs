@@ -9,6 +9,10 @@ using System.Windows.Threading;
 
 namespace TaqNShare.Donnees
 {
+    /// <summary>
+    /// Permet de gérer les propriétés d'une partie ou d'un défi
+    /// Est aussi utilisée pour binder le chrono et le nombre de déplacement sur la page de jeu
+    /// </summary>
     sealed class Partie : INotifyPropertyChanged
     {
         #region propriétés
@@ -51,21 +55,22 @@ namespace TaqNShare.Donnees
 
         #endregion propriétés
 
+        #region Constructeurs
         /// <summary>
-        /// Contructeur
+        /// Contructeur dans le cas d'une partie normale
         /// </summary>
         public Partie(int tailleGrille, int nombreFiltre)
         {
             _timer = new DispatcherTimer();
             _timer.Tick += new EventHandler(delegate
             {
-                TimeElapsed = StopWatch.Elapsed.ToString("mm\\:ss"); // Format as you wish
+                TimeElapsed = StopWatch.Elapsed.ToString("mm\\:ss"); // Formatage du chrono
                 PropertyChanged(this, new PropertyChangedEventArgs("TimeElapsed"));
             });
             _timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
             StopWatch = new Stopwatch();
 
-            
+
             TailleGrille = tailleGrille;
 
             NombreFiltre = nombreFiltre;
@@ -73,6 +78,10 @@ namespace TaqNShare.Donnees
             ListePieces = new List<Piece>();
         }
 
+        /// <summary>
+        /// Constructeur dans le cas d'un défi
+        /// </summary>
+        /// <param name="nombreFiltre"></param>
         public Partie(int nombreFiltre)
         {
             _timer = new DispatcherTimer();
@@ -88,15 +97,9 @@ namespace TaqNShare.Donnees
             NombreFiltre = nombreFiltre;
         }
 
+        #endregion
 
-        //Permet le binding des propriétés de la classe
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
+        #region Méthodes
 
         /// <summary>
         /// Méthode permettant de détecter la fin du jeu
@@ -110,12 +113,11 @@ namespace TaqNShare.Donnees
 
         /// <summary>
         /// Méthode permettant de calculer le score de l'utilisateur
+        /// Score = temps de résolution * 0,6 + nombre de déplacements + Malus facilité 
+        /// (Le score le plus faible est le meilleur)
         /// </summary>
         public void CalculerScore()
         {
-            //Score = temps de résolution * 0,6 + nombre de déplacements + Malus facilité 
-            //(Le score le plus faible est le meilleur)
-
             int malusFacilite = 0;
             switch (TailleGrille)
             {
@@ -141,5 +143,16 @@ namespace TaqNShare.Donnees
 
             Score = Convert.ToInt32(Math.Round(((StopWatch.ElapsedMilliseconds / 1000.0) * 0.6) + NombreDeplacement + malusFacilite));
         }
+
+        //Permet le binding des propriétés de la classe
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
     }
 }

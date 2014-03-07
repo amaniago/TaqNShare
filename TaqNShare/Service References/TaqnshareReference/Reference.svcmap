@@ -20,14 +20,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://192.168.1.15:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="http://192.168.1.20:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service11.wsdl" MetadataType="Wsdl" ID="60d4904c-9eea-4517-86df-d05df9f50186" SourceId="1" SourceUrl="http://192.168.1.15:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" />
-    <MetadataFile FileName="service2.xsd" MetadataType="Schema" ID="d2c2bd8b-2e89-4b30-9c7a-62576c194bdc" SourceId="1" SourceUrl="http://192.168.1.15:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" />
-    <MetadataFile FileName="service21.xsd" MetadataType="Schema" ID="ef0457ed-bf30-4c58-b1b7-79d624a4dfc8" SourceId="1" SourceUrl="http://192.168.1.15:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" />
-    <MetadataFile FileName="ServeurTaqnshare1.xsd" MetadataType="Schema" ID="af60cda3-9105-4e99-b4ba-fecf0e1d25d8" SourceId="1" SourceUrl="http://192.168.1.15:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" />
-    <MetadataFile FileName="ServeurTaqnshare.ClasseDeService1.xsd" MetadataType="Schema" ID="a35575f4-0913-4c2d-8b20-d42ca7681b8e" SourceId="1" SourceUrl="http://192.168.1.15:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="9b10d382-bea9-45eb-b2bb-43b344300fa6" SourceId="1" SourceUrl="http://192.168.1.20:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="cb930519-bdb2-480b-8059-5bab7f513e49" SourceId="1" SourceUrl="http://192.168.1.20:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="a7935ca5-5d44-41aa-a564-a5b6782c84c4" SourceId="1" SourceUrl="http://192.168.1.20:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" />
+    <MetadataFile FileName="ServeurTaqnshare.xsd" MetadataType="Schema" ID="168ec08a-f8bb-4255-84da-205b2c560e66" SourceId="1" SourceUrl="http://192.168.1.20:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" />
+    <MetadataFile FileName="ServeurTaqnshare.ClasseDeService.xsd" MetadataType="Schema" ID="cb554e4d-b1cc-4cbe-a141-249452485794" SourceId="1" SourceUrl="http://192.168.1.20:8010/SERVER/ServicesWCF/ServiceTaqnshare.svc/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
