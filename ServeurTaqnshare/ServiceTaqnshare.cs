@@ -120,7 +120,11 @@ namespace ServeurTaqnshare
 
             byte[] imageDefi = File.ReadAllBytes(defi.chemin_image_defi);
 
-            DefiService retour = new DefiService(defi, imageDefi, nombreFiltre);
+            var utilisateur = (from u in db.Utilisateurs
+                               where u.id_utilisateur == defi.id_utilisateur
+                               select u).SingleOrDefault();
+
+            DefiService retour = new DefiService(defi, imageDefi, nombreFiltre, utilisateur);
 
             return retour;
         }
@@ -131,7 +135,7 @@ namespace ServeurTaqnshare
         /// <param name="defiTermine"></param>
         /// <param name="utilisateurCourant"></param>
         /// <returns></returns>
-        public string ModifierDefi(Defi defiTermine, Utilisateur utilisateurCourant)
+        public bool ModifierDefi(Defi defiTermine, Utilisateur utilisateurCourant)
         {
             try
             {
@@ -170,11 +174,11 @@ namespace ServeurTaqnshare
                 }
                 db.SaveChanges();
 
-                return "OK";
+                return true;
             }
             catch (Exception e)
             {
-                return e.InnerException.ToString();
+                return false;
             }
         }
 
@@ -183,7 +187,7 @@ namespace ServeurTaqnshare
         /// </summary>
         /// <param name="idDefiDecline"></param>
         /// <returns></returns>
-        public string DeclinerDefi(int idDefiDecline)
+        public bool DeclinerDefi(int idDefiDecline)
         {
             try
             {
@@ -199,11 +203,11 @@ namespace ServeurTaqnshare
                 db.Defis.AddOrUpdate(defi);
                 db.SaveChanges();
 
-                return "OK";
+                return true;
             }
             catch (Exception e)
             {
-                return e.InnerException.ToString();
+                return false;
             }
         }
 

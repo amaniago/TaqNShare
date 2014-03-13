@@ -29,7 +29,7 @@ namespace ServeurTaqnshare
         float RecupererScoreJoueur(string idJoueur);
 
         [OperationContract]
-        string ModifierDefi(Defi defiTermine, Utilisateur utilisateurCourant);
+        bool ModifierDefi(Defi defiTermine, Utilisateur utilisateurCourant);
 
         [OperationContract]
         List<DefiService> RecupererDefisEnAttente(string idUtilisateur);
@@ -38,7 +38,7 @@ namespace ServeurTaqnshare
         List<DefiService> RecupererDefisUtilisateur(string idUtilisateur);
 
         [OperationContract]
-        string DeclinerDefi(int idDefiDecline);
+        bool DeclinerDefi(int idDefiDecline);
     }
 
     

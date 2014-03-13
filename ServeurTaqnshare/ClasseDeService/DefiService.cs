@@ -11,13 +11,15 @@ namespace ServeurTaqnshare.ClasseDeService
     public sealed class DefiService
     {
         #region Constructeurs
+
         /// <summary>
         /// Constructeur utilisé dans le cas de la récupération d'un défi pour pouvoir le résoudre
         /// </summary>
         /// <param name="defi"></param>
         /// <param name="imageDefi"></param>
         /// <param name="nombreFiltre"></param>
-        public DefiService(Defi defi, byte[] imageDefi, int nombreFiltre)
+        /// <param name="utilisateur"></param>
+        public DefiService(Defi defi, byte[] imageDefi, int nombreFiltre, Utilisateur utilisateur)
         {
             IdDefi = defi.id_defi;
             IdUtilisateur = defi.id_utilisateur;
@@ -26,6 +28,8 @@ namespace ServeurTaqnshare.ClasseDeService
             ScoreUtilisateurDefi = Convert.ToInt32(defi.score_utilisateur_defi);
             ImageDefi = imageDefi;
             NombreFiltre = nombreFiltre;
+            NomUtilisateur = utilisateur.nom_utilisateur;
+            PrenomUtilisateur = utilisateur.prenom_utilisateur;
 
             Composition = new List<CompositionService>();
 
