@@ -9,6 +9,9 @@ using TaqNShare.TaqnshareReference;
 
 namespace TaqNShare.Pages
 {
+    /// <summary>
+    /// Classe permettant de spécifier à l'utilisateur qu'il a termine le défi
+    /// </summary>
     public partial class DefiTerminePage
     {
         public DefiTerminePage()
@@ -16,6 +19,10 @@ namespace TaqNShare.Pages
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Permet d'enregistrer le score de l'adversaire en base
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             RetourAccueilBouton.IsEnabled = false;

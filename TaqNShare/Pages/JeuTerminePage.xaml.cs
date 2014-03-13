@@ -8,6 +8,9 @@ using TaqNShare.TaqnshareReference;
 
 namespace TaqNShare.Pages
 {
+    /// <summary>
+    /// Classe permettant d'afficher le score de l'utilisateur
+    /// </summary>
     public partial class JeuTerminePage
     {
         readonly ServiceTaqnshareClient _serviceTaqnshareClient = new ServiceTaqnshareClient();

@@ -32,22 +32,20 @@ namespace TaqNShare.Pages
                                             new Filtre(1, new AntiqueFilter()),
                                             new Filtre(2, new CartoonFilter()),
                                             new Filtre(3, new MagicPenFilter()),
-                                            //new Filtre(4, new FogFilter()),
-                                            //new Filtre(5, new GrayscaleFilter()),
-                                            //new Filtre(6, new NegativeFilter()),
-                                            //new Filtre(7, new AutoLevelsFilter()),
-                                            //new Filtre(8, new GrayscaleNegativeFilter()),
-                                            //new Filtre(9, new LomoFilter()),
-                                            //new Filtre(10, new MilkyFilter()),
-                                            //new Filtre(11, new OilyFilter()),
-                                            //new Filtre(12, new PaintFilter()),
-                                            //new Filtre(13, new PosterizeFilter()),
-                                            //new Filtre(14, new SepiaFilter()),
-                                            //new Filtre(15, new SharpnessFilter()),
-                                            //new Filtre(16, new SolarizeFilter()),
-                                            //new Filtre(17, new WhiteBalanceFilter())
-
-                                            
+                                            new Filtre(4, new FogFilter()),
+                                            new Filtre(5, new GrayscaleFilter()),
+                                            new Filtre(6, new NegativeFilter()),
+                                            new Filtre(7, new AutoLevelsFilter()),
+                                            new Filtre(8, new GrayscaleNegativeFilter()),
+                                            new Filtre(9, new LomoFilter()),
+                                            new Filtre(10, new MilkyFilter()),
+                                            new Filtre(11, new OilyFilter()),
+                                            new Filtre(12, new PaintFilter()),
+                                            new Filtre(13, new PosterizeFilter()),
+                                            new Filtre(14, new SepiaFilter()),
+                                            new Filtre(15, new SharpnessFilter()),
+                                            new Filtre(16, new SolarizeFilter()),
+                                            new Filtre(17, new WhiteBalanceFilter())                                           
                                         };
         int _hauteurPiece = 244;
         int _largeurPiece = 150;
@@ -187,6 +185,9 @@ namespace TaqNShare.Pages
             }
         }
 
+        /// <summary>
+        /// Permet de préparer l'image pour un défi
+        /// </summary>
         private async void PreparerImageDefi()
         {
             //Récupération du défi
@@ -318,7 +319,7 @@ namespace TaqNShare.Pages
         }
 
         /// <summary>
-        /// Méthode permettant le mélange des pièces*
+        /// Méthode permettant le mélange des pièces
         /// </summary>
         private void Melange()
         {

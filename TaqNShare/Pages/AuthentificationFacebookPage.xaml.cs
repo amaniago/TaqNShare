@@ -10,6 +10,9 @@ using TaqNShare.TaqnshareReference;
 
 namespace TaqNShare.Pages
 {
+    /// <summary>
+    /// Classe permettant la communication avec l'API FACEBOOK
+    /// </summary>
     public partial class FacebookLoginPage
     {
         private string _pageAvant; //Contient le nom de la page sur laquelle on va rediriger après que l'authentification ait réussi.
@@ -44,6 +47,10 @@ namespace TaqNShare.Pages
             }
         }
 
+        /// <summary>
+        /// Permet l'authentification via Facebook
+        /// </summary>
+        /// <returns></returns>
         private async Task Authentification()
         {
             //La variable FacebookSessionClient affiche automatique un élément de type WebBrowser pour la connection Facebook.
@@ -96,6 +103,13 @@ namespace TaqNShare.Pages
             }
         }
 
+        /// <summary>
+        /// Permet de gérer de façon synchrone l'authentification
+        /// </summary>
+        /// <param name="facebookClient"></param>
+        /// <param name="uri"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         private async static Task<JsonObject> GetAsyncEx(FacebookClient facebookClient, string uri, object parameters)
         {
             TaskCompletionSource<JsonObject> taskCompletionSource = new TaskCompletionSource<JsonObject>();

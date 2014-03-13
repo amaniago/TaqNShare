@@ -15,6 +15,9 @@ using TaqNShare.TaqnshareReference;
 
 namespace TaqNShare.Pages
 {
+    /// <summary>
+    /// Page principale : contient le panorama d'accueil avec ses quatres items.
+    /// </summary>
     public partial class MainPage
     {
         #region propriétés
@@ -95,16 +98,31 @@ namespace TaqNShare.Pages
             base.OnNavigatedTo(e);
         }
 
+        /// <summary>
+        /// Permet de prendre une nouvelle photo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BoutonPrendrePhotoTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             _camera.Show();
         }
 
+        /// <summary>
+        /// Permet de sélectionner une photo dans la galerie
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BoutonSelectPhotoTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             _galerie.Show();
         }
 
+        /// <summary>
+        /// Permet de récupérer la photo prise ou sélectionnée par l'utilisateur
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChoixPhotoCompleted(object sender, PhotoResult e)
         {
             if (e.TaskResult == TaskResult.OK)
@@ -116,17 +134,33 @@ namespace TaqNShare.Pages
             }
         }
 
+        /// <summary>
+        /// Permet de gérer la liste des découpages
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListPickerDecoupageChange(object sender, SelectionChangedEventArgs e)
         {
             SaveSettings("TailleGrille", ListPickerDecoupage, false);
             SaveSettings("IndexDecoupage", ListPickerDecoupage, true);
         }
 
+        /// <summary>
+        /// Permet de gérer la liste des filtres
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListPickerFiltreChange(object sender, SelectionChangedEventArgs e)
         {
             SaveSettings("IndexFiltre", ListPickerFiltre, true);
         }
 
+        /// <summary>
+        /// Permet de faire persister les paramètres dans le téléphone
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="liste"></param>
+        /// <param name="casStock"></param>
         private static void SaveSettings(String key, ListPicker liste, bool casStock)
         {
             Parametre p = (Parametre) liste.SelectedItem;
@@ -147,11 +181,19 @@ namespace TaqNShare.Pages
             settings.Save();
         }
 
+        /// <summary>
+        /// Permet de lancer la connexion à Facebook
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ConnexionFacebookBoutonTap(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Pages/AuthentificationFacebookPage.xaml?pageAvant=MainPage", UriKind.Relative));
         }
 
+        /// <summary>
+        /// Permet de gérer l'interface lors de la connexion/deconnexion de l'utilisateur
+        /// </summary>
         private void FacebookConnexion()
         {
             if (App.EstAuthentifie)
@@ -171,6 +213,9 @@ namespace TaqNShare.Pages
             }
         }
 
+        /// <summary>
+        /// Permet de récupérer les infos de l'utilisateur actuel
+        /// </summary>
         private void RecupererInformationsUtilisateur()
         {
             UtilisateurImage.Source = App.PhotoUtilisateur;
@@ -193,6 +238,11 @@ namespace TaqNShare.Pages
 
         }
 
+        /// <summary>
+        /// Permet d'afficher les défis en attente de l'utilisateur
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AfficherDefisEnAttente(object sender, RecupererDefisEnAttenteCompletedEventArgs e)
         {
             List<DefiService> listeDefiServices = e.Result;
@@ -208,6 +258,11 @@ namespace TaqNShare.Pages
             DefisListBox.ItemsSource = _defisAAfficher;
         }
 
+        /// <summary>
+        /// Permet d'afficher les détails d'un défi avant de pouvoir l'accepter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AfficherDetailDefiBoutonTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             Button bouton = (Button) sender;
@@ -220,6 +275,11 @@ namespace TaqNShare.Pages
 
         }
 
+        /// <summary>
+        /// Permet à l'utilisateur de se déconnecter de Facebook
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void DeconnexionFacebookBoutonTap(object sender, RoutedEventArgs e)
         {
             App.EstAuthentifie = false;
@@ -246,6 +306,11 @@ namespace TaqNShare.Pages
             AffichageRangScore();
         }
 
+        /// <summary>
+        /// Permet de récupérer le classement
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RecupererClassement(object sender, RecupererClassementCompletedEventArgs e)
         {
             List<UtilisateurService> utilisateurs = e.Result;
@@ -260,16 +325,29 @@ namespace TaqNShare.Pages
             ClassementListBox.ItemsSource = _classement;
         }
 
+        /// <summary>
+        /// Affichage du score actuel de l'utilisateur
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RecupererScore(object sender, RecupererScoreJoueurCompletedEventArgs e)
         {
             ScoreUtilisateurTextBlock.Text = "Score : " + e.Result;
         }
 
+        /// <summary>
+        /// Affichage du rang de l'utilisateur
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RecupererRang(object sender, RecupererRangJoueurCompletedEventArgs e)
         {
             RangUtilisateurTextBlock.Text = "Rang : " + e.Result;
         }
 
+        /// <summary>
+        /// Gestion de l'interface
+        /// </summary>
         private void AffichageRangScore()
         {
             if (App.EstAuthentifie)
@@ -297,7 +375,10 @@ namespace TaqNShare.Pages
             ClassementListBox.SelectedItem = null;
         }
 
-        //Permet de bloquer le bouton retour du téléphone
+        /// <summary>
+        /// Permet de bloquer le bouton retour du téléphone
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = true;

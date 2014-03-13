@@ -4,6 +4,9 @@ using Microsoft.Phone.Shell;
 
 namespace TaqNShare.Pages
 {
+    /// <summary>
+    /// Classe permettant de valider le choix de l'utilisateur de défier ou non un ami
+    /// </summary>
     public partial class DemandeDefiPage
     {
         public DemandeDefiPage()

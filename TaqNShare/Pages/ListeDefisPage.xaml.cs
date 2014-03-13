@@ -9,6 +9,9 @@ using TaqNShare.Donnees;
 
 namespace TaqNShare.Pages
 {
+    /// <summary>
+    /// Classe permettant de lister les défis terminés par l'utilisateur
+    /// </summary>
     public partial class ListeDefisPage : PhoneApplicationPage
     {
         private ServiceTaqnshareClient service = new ServiceTaqnshareClient();//WebService permettant de récupérer le classement dans la base de données

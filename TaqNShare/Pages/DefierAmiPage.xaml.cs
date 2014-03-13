@@ -10,6 +10,9 @@ using TaqNShare.TaqnshareReference;
 
 namespace TaqNShare.Pages
 {
+    /// <summary>
+    /// Classe permettant de défier un ami
+    /// </summary>
     public partial class DefierAmiPage
     {
         //Ces deux variables sont des listes de type AmisFacebook qui permettent de stocker les informations des amis et le binding
@@ -27,6 +30,9 @@ namespace TaqNShare.Pages
             DataContext = this;
         }
 
+        /// <summary>
+        /// Permet de récupérer la liste des amis
+        /// </summary>
         private void RecupererListeAmis()
         {
             //On se connecte à la session Facebook de l'utilisateur à partir du token

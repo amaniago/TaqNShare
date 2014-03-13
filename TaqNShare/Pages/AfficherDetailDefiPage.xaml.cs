@@ -8,6 +8,9 @@ using TaqNShare.TaqnshareReference;
 
 namespace TaqNShare.Pages
 {
+    /// <summary>
+    /// Classe permettant d'afficher un défi avant de le lancer
+    /// </summary>
     public partial class AfficherDetailDefiPage
     {
         private readonly ServiceTaqnshareClient _webServiceTaqnshareClient = new ServiceTaqnshareClient();
@@ -18,6 +21,10 @@ namespace TaqNShare.Pages
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Permet de récupérer le défi au moment de la navigation
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             AccepterDefiBouton.IsEnabled = false;
@@ -35,6 +42,11 @@ namespace TaqNShare.Pages
             base.OnNavigatedTo(e);
         }
 
+        /// <summary>
+        /// Permet d'afficher le défi
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AfficherDefi(object sender, RecupererDefiCompletedEventArgs e)
         {
             if (e.Result != null)
