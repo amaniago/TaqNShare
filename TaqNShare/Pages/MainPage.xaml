@@ -76,6 +76,7 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
+                    <TextBlock x:Name="AucunDefiEnAttenteTextBlock" Text="Vous n'avez aucun défi en attente" Margin="17,8,-17,393"></TextBlock>
                 </Grid>
             </phone:PanoramaItem>
             <phone:PanoramaItem CacheMode="{x:Null}" VerticalAlignment="Top" Header="Classement" Height="559" FontSize="18.667" Width="445" Margin="20,0,0,0" FontWeight="Normal">
@@ -119,7 +120,7 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <Button x:Name="defisUtilisateurs" Content="Vos Défis" HorizontalAlignment="Left" Margin="129,312,0,0" VerticalAlignment="Top" Click="DefisUtilisateursClick" RenderTransformOrigin="0.482,0.936" BorderThickness="0">
+                    <Button x:Name="defisUtilisateurs" Content="Vos Défis" HorizontalAlignment="Left" Margin="218,312,0,0" VerticalAlignment="Top" Click="DefisUtilisateursClick" RenderTransformOrigin="0.482,0.936" BorderThickness="0">
                         <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF1B414F" Offset="0.466"/>

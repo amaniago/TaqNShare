@@ -18,7 +18,8 @@ namespace TaqNShare.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //Récupération de la UtilisateurImage
+            RetourAccueilBouton.IsEnabled = false;
+            //Récupération de la photo
             DefiService defi = (DefiService)PhoneApplicationService.Current.State["defi"];
             TaquinTermineImage.Source = new WriteableBitmap(Photo.DecodeImage(defi.ImageDefi));
 
@@ -40,7 +41,15 @@ namespace TaqNShare.Pages
 
         private void DefiModifie(object sender, ModifierDefiCompletedEventArgs e)
         {
-            MessageBox.Show(e.Result);
+            if (e.Result)
+            {
+                RetourAccueilBouton.IsEnabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Une erreur s'est produite lors de l'enregistrement!");
+                RetourAccueilBouton.IsEnabled = true;
+            }
         }
 
         /// <summary>

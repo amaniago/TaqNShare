@@ -98,7 +98,7 @@
   <xs:element name="ModifierDefiResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="ModifierDefiResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ModifierDefiResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -140,7 +140,7 @@
   <xs:element name="DeclinerDefiResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="DeclinerDefiResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="DeclinerDefiResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

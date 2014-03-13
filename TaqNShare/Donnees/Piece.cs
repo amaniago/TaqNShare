@@ -5,6 +5,9 @@ using System.Windows.Controls;
 
 namespace TaqNShare.Donnees
 {
+    /// <summary>
+    /// Permet de gérer les pièces des parties ou des défis
+    /// </summary>
     class Piece
     {
         #region propriétés
@@ -24,8 +27,10 @@ namespace TaqNShare.Donnees
 
         #endregion propriétés
 
+        #region Constructeurs
+
         /// <summary>
-        /// Constructeur par défault
+        /// Constructeur par défaut
         /// </summary>
         public Piece()
         {
@@ -57,6 +62,10 @@ namespace TaqNShare.Donnees
             IsolatedStorageSettings.ApplicationSettings.TryGetValue("TailleGrille", out _tailleGrille);
             Ajuster();
         }
+
+        #endregion
+
+        #region Méthodes
 
         /// <summary>
         /// Méthode permettant d'ajuster les attributs d'une pièce suivant sa position dans la grille
@@ -142,7 +151,7 @@ namespace TaqNShare.Donnees
         }
 
         /// <summary>
-        /// Méthode permettant de déterminer la position d'une pièce dans la grille
+        /// Méthode générale permettant de déterminer la position d'une pièce dans la grille
         /// </summary>
         /// <param name="coordonneePiece"></param>
         /// <returns></returns>
@@ -160,7 +169,7 @@ namespace TaqNShare.Donnees
             return "Milieu";
         }
 
-
+        /** Ensemble des méthodes pour déterminer la position d'une pièce - DEBUT **/
         private bool EstSurBordHaut(CoordonneePiece coordonneeImageCliquee)
         {
             return (coordonneeImageCliquee.Ligne == 0) && (coordonneeImageCliquee.Colonne != 0) &&
@@ -208,23 +217,15 @@ namespace TaqNShare.Donnees
             return (coordonneeImageCliquee.Colonne == _tailleGrille - 1) &&
                    (coordonneeImageCliquee.Ligne == _tailleGrille - 1);
         }
+        /** Ensemble des méthodes pour déterminer la position d'une pièce - FIN **/
 
         /// <summary>
-        /// Structure permettant de stocker les cooordonnées d'une pièce
+        /// Méthode permettant de calculer les coordonnées en fonction de l'index de position et de la taille de la grille
+        /// Utilisée dans le cas des défis
         /// </summary>
-        internal struct CoordonneePiece
-        {
-            public int Ligne { get; set; }
-            public int Colonne { get; set; }
-
-            public CoordonneePiece(FrameworkElement imageCliquee)
-                : this()
-            {
-                Ligne = Grid.GetRow(imageCliquee);
-                Colonne = Grid.GetColumn(imageCliquee);
-            }
-        }
-
+        /// <param name="indexPosition"></param>
+        /// <param name="tailleGrille"></param>
+        /// <returns></returns>
         public static int[] CalculerCoordonnees(int indexPosition, int tailleGrille)
         {
             int[] coordonnees = new int[2];
@@ -271,23 +272,202 @@ namespace TaqNShare.Donnees
                         break;
                 }
             }
-            /*
-        else if (tailleGrille == 4)
-        {
-            switch (indexPosition)
+            else if (tailleGrille == 4)
             {
-
+                switch (indexPosition)
+                {
+                    case 0:
+                        coordonnees[0] = 0;
+                        coordonnees[1] = 0;
+                        break;
+                    case 1:
+                        coordonnees[0] = 0;
+                        coordonnees[1] = 1;
+                        break;
+                    case 2:
+                        coordonnees[0] = 0;
+                        coordonnees[1] = 2;
+                        break;
+                    case 3:
+                        coordonnees[0] = 0;
+                        coordonnees[1] = 3;
+                        break;
+                    case 4:
+                        coordonnees[0] = 1;
+                        coordonnees[1] = 0;
+                        break;
+                    case 5:
+                        coordonnees[0] = 1;
+                        coordonnees[1] = 1;
+                        break;
+                    case 6:
+                        coordonnees[0] = 1;
+                        coordonnees[1] = 2;
+                        break;
+                    case 7:
+                        coordonnees[0] = 1;
+                        coordonnees[1] = 3;
+                        break;
+                    case 8:
+                        coordonnees[0] = 2;
+                        coordonnees[1] = 0;
+                        break;
+                    case 9:
+                        coordonnees[0] = 2;
+                        coordonnees[1] = 1;
+                        break;
+                    case 10:
+                        coordonnees[0] = 2;
+                        coordonnees[1] = 2;
+                        break;
+                    case 11:
+                        coordonnees[0] = 2;
+                        coordonnees[1] = 3;
+                        break;
+                    case 12:
+                        coordonnees[0] = 3;
+                        coordonnees[1] = 0;
+                        break;
+                    case 13:
+                        coordonnees[0] = 3;
+                        coordonnees[1] = 1;
+                        break;
+                    case 14:
+                        coordonnees[0] = 3;
+                        coordonnees[1] = 2;
+                        break;
+                    case 15:
+                        coordonnees[0] = 3;
+                        coordonnees[1] = 3;
+                        break;
+                }
             }
-        }
-        else if (tailleGrille == 5)
-        {
-            switch (indexPosition)
+            else if (tailleGrille == 5)
             {
-
+                switch (indexPosition)
+                {
+                    case 0:
+                        coordonnees[0] = 0;
+                        coordonnees[1] = 0;
+                        break;
+                    case 1:
+                        coordonnees[0] = 0;
+                        coordonnees[1] = 1;
+                        break;
+                    case 2:
+                        coordonnees[0] = 0;
+                        coordonnees[1] = 2;
+                        break;
+                    case 3:
+                        coordonnees[0] = 0;
+                        coordonnees[1] = 3;
+                        break;
+                    case 4:
+                        coordonnees[0] = 0;
+                        coordonnees[1] = 4;
+                        break;
+                    case 5:
+                        coordonnees[0] = 1;
+                        coordonnees[1] = 0;
+                        break;
+                    case 6:
+                        coordonnees[0] = 1;
+                        coordonnees[1] = 1;
+                        break;
+                    case 7:
+                        coordonnees[0] = 1;
+                        coordonnees[1] = 2;
+                        break;
+                    case 8:
+                        coordonnees[0] = 1;
+                        coordonnees[1] = 3;
+                        break;
+                    case 9:
+                        coordonnees[0] = 1;
+                        coordonnees[1] = 4;
+                        break;
+                    case 10:
+                        coordonnees[0] = 2;
+                        coordonnees[1] = 0;
+                        break;
+                    case 11:
+                        coordonnees[0] = 2;
+                        coordonnees[1] = 1;
+                        break;
+                    case 12:
+                        coordonnees[0] = 2;
+                        coordonnees[1] = 2;
+                        break;
+                    case 13:
+                        coordonnees[0] = 2;
+                        coordonnees[1] = 3;
+                        break;
+                    case 14:
+                        coordonnees[0] = 2;
+                        coordonnees[1] = 4;
+                        break;
+                    case 15:
+                        coordonnees[0] = 3;
+                        coordonnees[1] = 0;
+                        break;
+                    case 16:
+                        coordonnees[0] = 3;
+                        coordonnees[1] = 1;
+                        break;
+                    case 17:
+                        coordonnees[0] = 3;
+                        coordonnees[1] = 2;
+                        break;
+                    case 18:
+                        coordonnees[0] = 3;
+                        coordonnees[1] = 3;
+                        break;
+                    case 19:
+                        coordonnees[0] = 3;
+                        coordonnees[1] = 4;
+                        break;
+                    case 20:
+                        coordonnees[0] = 4;
+                        coordonnees[1] = 0;
+                        break;
+                    case 21:
+                        coordonnees[0] = 4;
+                        coordonnees[1] = 1;
+                        break;
+                    case 22:
+                        coordonnees[0] = 4;
+                        coordonnees[1] = 2;
+                        break;
+                    case 23:
+                        coordonnees[0] = 4;
+                        coordonnees[1] = 3;
+                        break;
+                    case 24:
+                        coordonnees[0] = 4;
+                        coordonnees[1] = 4;
+                        break;
+                }
             }
-        }*/
 
             return coordonnees;
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Structure permettant de stocker les cooordonnées d'une pièce
+        /// </summary>
+        internal struct CoordonneePiece
+        {
+            public int Ligne { get; set; }
+            public int Colonne { get; set; }
+
+            public CoordonneePiece(FrameworkElement imageCliquee)
+                : this()
+            {
+                Ligne = Grid.GetRow(imageCliquee);
+                Colonne = Grid.GetColumn(imageCliquee);
+            }
         }
     }
 }

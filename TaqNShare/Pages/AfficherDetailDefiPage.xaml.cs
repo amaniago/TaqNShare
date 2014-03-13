@@ -20,6 +20,9 @@ namespace TaqNShare.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            AccepterDefiBouton.IsEnabled = false;
+            RetourAccueilBouton.IsEnabled = false;
+            DeclinerDefiBouton.IsEnabled = false;
             string idDefiQuery;
             int idDefi = 0;
             if (NavigationContext.QueryString.TryGetValue("idDefi", out idDefiQuery))
@@ -34,9 +37,25 @@ namespace TaqNShare.Pages
 
         private void AfficherDefi(object sender, RecupererDefiCompletedEventArgs e)
         {
-            _defi = e.Result;
-            PhoneApplicationService.Current.State["defi"] = _defi;
-            DefiImage.Source = new WriteableBitmap(Photo.DecodeImage(_defi.ImageDefi));
+            if (e.Result != null)
+            {
+                AccepterDefiBouton.IsEnabled = true;
+                RetourAccueilBouton.IsEnabled = true;
+                DeclinerDefiBouton.IsEnabled = true;
+                _defi = e.Result;
+                PhoneApplicationService.Current.State["defi"] = _defi;
+                DefiImage.Source = new WriteableBitmap(Photo.DecodeImage(_defi.ImageDefi));
+                CreateurDefiTextBlock.Text = "Votre ami " + _defi.PrenomUtilisateur + " " + _defi.NomUtilisateur +
+                                             " vous a défié !";
+                NombreDecoupageDefiTextBlock.Text = "Découpages : " + (_defi.Composition.Count + 1);
+                NombreFiltreDefiTextBlock.Text = "Filtres : " + _defi.NombreFiltre;
+            }
+            else
+            {
+                MessageBox.Show("Une erreur s'est produite lors de la récupération du défi!");
+                RetourAccueilBouton.IsEnabled = true;
+            }
+
         }
 
         private void AccepterDefiBoutonTap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -58,7 +77,16 @@ namespace TaqNShare.Pages
 
         private void DelinerDefi(object sender, DeclinerDefiCompletedEventArgs e)
         {
-            MessageBox.Show(e.Result);
+            if (e.Result)
+            {
+                PhoneApplicationService.Current.State.Clear();
+                NavigationService.Navigate(new Uri("/Pages/MainPage.xaml", UriKind.Relative));
+            }
+            else
+            {
+                MessageBox.Show("Une erreur s'est produite lors de la déclinaison du défi!");
+                RetourAccueilBouton.IsEnabled = true;
+            }
         }
     }
 }
