@@ -95,7 +95,7 @@
                     	<Run Text="    Score"/>
                     </TextBlock>
 
-                    <ListBox x:Name="ClassementListBox" Margin="28,40,-18,60" RenderTransformOrigin="0.615,0.509" >
+                    <ListBox x:Name="ClassementListBox" Margin="28,40,-18,60" RenderTransformOrigin="0.615,0.509" SelectionChanged="ClassementListBox_OnSelectionChanged">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid>

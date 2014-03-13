@@ -19,11 +19,11 @@ namespace TaqNShare.Pages
     {
         #region propriétés
 
-        ServiceTaqnshareClient _serviceTaqnshareClient = new ServiceTaqnshareClient();
-        readonly ObservableCollection<Classement> _classement = new ObservableCollection<Classement>();
+        private ServiceTaqnshareClient _serviceTaqnshareClient = new ServiceTaqnshareClient();
+        private readonly ObservableCollection<Classement> _classement = new ObservableCollection<Classement>();
 
-        readonly CameraCaptureTask _camera;
-        readonly PhotoChooserTask _galerie;
+        private readonly CameraCaptureTask _camera;
+        private readonly PhotoChooserTask _galerie;
 
         public List<Parametre> Decoupages { get; set; }
         public List<Parametre> Filtres { get; set; }
@@ -31,7 +31,8 @@ namespace TaqNShare.Pages
         public int UserDecoupage { get; set; }
         public int UserFiltre { get; set; }
 
-        ObservableCollection<DefiAffiche> _defisAAfficher = new ObservableCollection<DefiAffiche>();
+        private ObservableCollection<DefiAffiche> _defisAAfficher = new ObservableCollection<DefiAffiche>();
+
         #endregion propriétés
 
         /// <summary>
@@ -50,11 +51,11 @@ namespace TaqNShare.Pages
             DataContext = this;
 
             List<Parametre> p = new List<Parametre>
-            {
-                new Parametre(0, 9, 3),
-                new Parametre(1, 16, 4),
-                new Parametre(2, 25, 5)
-            };
+                                    {
+                                        new Parametre(0, 9, 3),
+                                        new Parametre(1, 16, 4),
+                                        new Parametre(2, 25, 5)
+                                    };
 
             Decoupages = p;
 
@@ -64,11 +65,11 @@ namespace TaqNShare.Pages
 
 
             Filtres = new List<Parametre>
-            {
-                new Parametre(0, 0, 0),
-                new Parametre(1, 1, 0),
-                new Parametre(2, 2, 0)
-            };
+                          {
+                              new Parametre(0, 0, 0),
+                              new Parametre(1, 1, 0),
+                              new Parametre(2, 2, 0)
+                          };
 
             int userFiltre;
             IsolatedStorageSettings.ApplicationSettings.TryGetValue("IndexFiltre", out userFiltre);
@@ -101,8 +102,7 @@ namespace TaqNShare.Pages
 
         private void BoutonSelectPhotoTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            //_galerie.Show();
-            NavigationService.Navigate(new Uri("/Pages/DefierAmiPage.xaml", UriKind.Relative));
+            _galerie.Show();
         }
 
         private void ChoixPhotoCompleted(object sender, PhotoResult e)
@@ -129,7 +129,7 @@ namespace TaqNShare.Pages
 
         private static void SaveSettings(String key, ListPicker liste, bool casStock)
         {
-            Parametre p = (Parametre)liste.SelectedItem;
+            Parametre p = (Parametre) liste.SelectedItem;
             IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
 
             if (!settings.Contains(key))
@@ -149,7 +149,8 @@ namespace TaqNShare.Pages
 
         private void ConnexionFacebookBoutonTap(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Pages/AuthentificationFacebookPage.xaml?pageAvant=MainPage", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Pages/AuthentificationFacebookPage.xaml?pageAvant=MainPage",
+                                               UriKind.Relative));
         }
 
         private void FacebookConnexion()
@@ -177,7 +178,8 @@ namespace TaqNShare.Pages
             Utilisateur utilisateurCourant = App.UtilisateurCourant;
 
             if (NomUtilisateurTextBlock != null)
-                NomUtilisateurTextBlock.Text = String.Format("{0} {1}", utilisateurCourant.prenom_utilisateur, utilisateurCourant.nom_utilisateur);
+                NomUtilisateurTextBlock.Text = String.Format("{0} {1}", utilisateurCourant.prenom_utilisateur,
+                                                             utilisateurCourant.nom_utilisateur);
 
             //Récupération des défis en attente de l'utilisateur
             _serviceTaqnshareClient.RecupererDefisEnAttenteCompleted += AfficherDefis;
@@ -209,11 +211,12 @@ namespace TaqNShare.Pages
 
         private void AfficherDetailDefiBoutonTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            Button bouton = (Button)sender;
+            Button bouton = (Button) sender;
             if (bouton.DataContext is DefiAffiche)
             {
-                DefiAffiche defiAffiche = (DefiAffiche)bouton.DataContext;
-                NavigationService.Navigate(new Uri("/Pages/AfficherDetailDefiPage.xaml?idDefi=" + defiAffiche.IdDefi, UriKind.Relative));
+                DefiAffiche defiAffiche = (DefiAffiche) bouton.DataContext;
+                NavigationService.Navigate(new Uri("/Pages/AfficherDetailDefiPage.xaml?idDefi=" + defiAffiche.IdDefi,
+                                                   UriKind.Relative));
             }
 
         }
@@ -224,7 +227,9 @@ namespace TaqNShare.Pages
 
             var facebookWebBrowser = new WebBrowser();
 
-            facebookWebBrowser.Navigate(new Uri(String.Format("https://www.facebook.com/logout.php?next={0}&access_token={1}", "http://www.facebook.com", App.AccessToken)));
+            facebookWebBrowser.Navigate(
+                new Uri(String.Format("https://www.facebook.com/logout.php?next={0}&access_token={1}",
+                                      "http://www.facebook.com", App.AccessToken)));
             await facebookWebBrowser.ClearCookiesAsync();
 
             IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
@@ -251,7 +256,13 @@ namespace TaqNShare.Pages
 
             foreach (UtilisateurService u in utilisateurs)
             {
-                _classement.Add(new Classement { Position = position, Nom = u.NomUtilisateur, Prenom = u.PrenomUtilisateur, ScoreTotal = (float)(u.ScoreTotalUtilisateur / u.NombrePartieUtilisateur) });
+                _classement.Add(new Classement
+                                    {
+                                        Position = position,
+                                        Nom = u.NomUtilisateur,
+                                        Prenom = u.PrenomUtilisateur,
+                                        ScoreTotal = (float) (u.ScoreTotalUtilisateur/u.NombrePartieUtilisateur)
+                                    });
                 position++;
             }
 
@@ -288,6 +299,18 @@ namespace TaqNShare.Pages
         private void DefisUtilisateursClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Pages/ListeDefisPage.xaml", UriKind.Relative));
-        }    
+        }
+
+        private void ClassementListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ClassementListBox.SelectedItem = null;
+        }
+
+        //Permet de bloquer le bouton retour du téléphone
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            base.OnBackKeyPress(e);
+        }
     }
 }

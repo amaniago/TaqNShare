@@ -139,5 +139,12 @@ namespace TaqNShare.Pages
             else
                 MessageBox.Show(e.Result.ToString());
         }
+
+        //Permet de bloquer le bouton retour du téléphone
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            base.OnBackKeyPress(e);
+        }
     }
 }

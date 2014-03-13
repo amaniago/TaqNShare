@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using Microsoft.Phone.Controls;
 using System.Collections.ObjectModel;
 using TaqNShare.TaqnshareReference;
@@ -49,6 +50,12 @@ namespace TaqNShare.Pages
         private void AccueilTap(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Pages/MainPage.xaml", UriKind.Relative));
+        }
+
+        //Permet de bloquer le bouton retour du téléphone
+        private void DefisList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            defisList.SelectedItem = null;
         }
     }
 }

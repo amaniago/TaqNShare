@@ -96,7 +96,7 @@ namespace TaqNShare.Pages
             }
         }
 
-        public static Task<JsonObject> GetAsyncEx(FacebookClient facebookClient, string uri, object parameters)
+        private async static Task<JsonObject> GetAsyncEx(FacebookClient facebookClient, string uri, object parameters)
         {
             TaskCompletionSource<JsonObject> taskCompletionSource = new TaskCompletionSource<JsonObject>();
             EventHandler<FacebookApiEventArgs> getCompletedHandler = null;
@@ -110,9 +110,16 @@ namespace TaqNShare.Pages
             };
 
             facebookClient.GetCompleted += getCompletedHandler;
-            facebookClient.GetAsync(uri, parameters);
+            await facebookClient.GetTaskAsync(uri, parameters);
 
-            return taskCompletionSource.Task;
+            return await taskCompletionSource.Task;
+        }
+
+        //Permet de bloquer le bouton retour du téléphone
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            base.OnBackKeyPress(e);
         }
     }
 }
